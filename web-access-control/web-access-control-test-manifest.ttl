@@ -3,43 +3,42 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix td: <http://www.w3.org/2006/03/test-description#> .
+@prefix spec: <http://www.w3.org/ns/spec#> .
 
-@prefix manifest: <https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl#> .
+prefix manifest: <#>
 
-manifest:protected-operation
-  a td:SpecificationTestCase ;
-  dcterms:title "Protected Operations"@en ;
-  dcterms:description "The ability of a server to restrict different types of access to resources using ACLs"@en ;
-  td:specificationReference <https://github.com/solid/web-access-control-spec/#modes-of-access> ;
+manifest:protected-operation-not-read-resource-access-AWC
+  a td:TestCase ;
+  td:specificationReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
+  td:reviewStatus td:accepted ;
+  dcterms:title "Cannot read a resource for which read access is not granted" ;
   td:preCondition "authentication", "acl" ;
-  dcterms:hasPart
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature>,
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-default-AWC.feature>,
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-access-R.feature>,
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-default-R.feature>
-.
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
 
-<https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature>
+manifest:protected-operation-not-read-resource-default-AWC
   a td:TestCase ;
-  dcterms:subject "MUST" ;
+  td:specificationReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "Cannot read a resource for which read access is not granted" .
+  dcterms:title "Cannot read a resource for which default read access is not granted" ;
+  td:preCondition "authentication", "acl" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
 
-<https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-default-AWC.feature>
+manifest:protected-operation-read-resource-access-R
   a td:TestCase ;
-  dcterms:subject "MUST" ;
-  td:reviewStatus td:accepted ;
-  dcterms:title "Cannot read a resource for which default read access is not granted" .
-
-<https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-access-R.feature>
-  a td:TestCase ;
-  dcterms:subject "MUST" ;
+  td:specificationReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
   td:reviewStatus td:unreviewed ;
-  dcterms:title "Can only read a resource for which only read access is granted" .
+  dcterms:title "Can only read a resource for which only read access is granted" ;
+  td:preCondition "authentication", "acl" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-access-R.feature> .
 
-<https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-default-R.feature>
+manifest:protected-operation-read-resource-default-R
   a td:TestCase ;
-  dcterms:subject "MUST" ;
+  td:specificationReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
   td:reviewStatus td:unreviewed ;
-  dcterms:title "Can only read a resource for which only default read access is granted" .
-
+  dcterms:title "Can only read a resource for which only default read access is granted" ;
+  td:preCondition "authentication", "acl" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-default-R.feature> .

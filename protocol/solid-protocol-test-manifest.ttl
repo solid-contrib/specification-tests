@@ -1,83 +1,66 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix td: <http://www.w3.org/2006/03/test-description#> .
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix td: <http://www.w3.org/2006/03/test-description#>
+prefix spec: <http://www.w3.org/ns/spec#>
 
-@prefix manifest: <https://raw.githubusercontent.com/solid/specification-tests/main/protocol/solid-protocol-test-manifest.ttl> .
+prefix manifest: <#>
 
-manifest:content-negotiation
-  a td:SpecificationTestCase ;
-  dcterms:title "Content Negotiation"@en ;
-  dcterms:description "The ability of a server to support different content types in response to the Accept header"@en ;
-  td:specificationReference <https://solidproject.org/TR/protocol#resource-representations> ;
-  dcterms:hasPart
-    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature>,
-    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature>,
-    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-rdfa.feature>
-.
-
-<https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature>
+manifest:content-negotiation-jsonld
   a td:TestCase ;
-  dcterms:subject "MUST" ;
+  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "For a JSON-LD resource" .
+  dcterms:title "For a JSON-LD resource" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
-<https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature>
+manifest:content-negotiation-jsonld
   a td:TestCase ;
-  dcterms:subject "MUST" ;
+  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "For a Turtle resource" .
+  dcterms:title "For a Turtle resource" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
-<https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-rdfa.feature>
+manifest:content-negotiation-rdfa
   a td:TestCase ;
-  dcterms:subject "MAY" ;
   td:reviewStatus td:unreviewed ;
   dcterms:title "For a HTML+RDFa resource" .
 
-manifest:writing-resource
-  a td:SpecificationTestCase ;
-  dcterms:title "Writing to a resource"@en ;
-  dcterms:description "The ability create and amend resources"@en ;
-  td:specificationReference <https://solidproject.org/TR/protocol#writing-resources> ;
-  dcterms:hasPart
-    <https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature>
-.
-
-<https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature>
+manifest:writing-resource-containment
   a td:TestCase ;
-  dcterms:subject "MUST" ;
+  spec:requirementReference <https://solidproject.org/TR/protocol#writing-resources> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "Creating a resource using PUT and PATCH must create intermediate containers" .
+  dcterms:title "Creating a resource using PUT and PATCH must create intermediate containers" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature> .
 
-manifest:wac-allow
-  a td:SpecificationTestCase ;
-  dcterms:title "WAC-Allow header"@en ;
-  dcterms:description "The ability of a server to show the access allowed for the user and for public users"@en ;
-  td:specificationReference <https://solidproject.org/TR/protocol#web-access-control> ;
+manifest:wac-allow-access-Bob-W-public-RA
+  a td:TestCase ;
+  spec:requirementReference <https://solidproject.org/TR/protocol#web-access-control> ;
+  td:reviewStatus td:accepted ;
+  dcterms:title "Different access for user and public based on accedssTo ACL" ;
   td:preCondition "authentication", "acl", "wac-allow" ;
-  dcterms:hasPart
-    <https://github.com/solid/specification-tests/protocol/wac-allow/access-Bob-W-public-RA.feature>,
-    <https://github.com/solid/specification-tests/protocol/wac-allow/default-Bob-W-public-RA.feature>,
-    <https://github.com/solid/specification-tests/protocol/wac-allow/access-public-R.feature>
-.
+  spec:testScript
+     <https://github.com/solid/specification-tests/protocol/wac-allow/access-Bob-W-public-RA.feature> .
 
-<https://github.com/solid/specification-tests/protocol/wac-allow/access-Bob-W-public-RA.feature>
+manifest:wac-allow-default-Bob-W-public-RA
   a td:TestCase ;
-  dcterms:subject "MUST" ;
+  spec:requirementReference <https://solidproject.org/TR/protocol#web-access-control> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "Different access for user and public based on accedssTo ACL" .
+  dcterms:title "Different access for user and public based on default ACL" ;
+  td:preCondition "authentication", "acl", "wac-allow" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/wac-allow/default-Bob-W-public-RA.feature> .
 
-<https://github.com/solid/specification-tests/protocol/wac-allow/default-Bob-W-public-RA.feature>
+manifest:wac-allow-access-public-R
   a td:TestCase ;
-  dcterms:subject "MUST" ;
-  td:reviewStatus td:accepted ;
-  dcterms:title "Different access for user and public based on default ACL" .
-
-<https://github.com/solid/specification-tests/protocol/wac-allow/access-public-R.feature>
-  a td:TestCase ;
-  dcterms:subject "MUST" ;
+  spec:requirementReference <https://solidproject.org/TR/protocol#web-access-control> ;
   td:reviewStatus td:unreviewed ;
-  dcterms:title "Same access for user and public based on accedssTo ACL" .
+  dcterms:title "Same access for user and public based on accedssTo ACL" ;
+  td:preCondition "authentication", "acl", "wac-allow" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/wac-allow/access-public-R.feature> .
 
 

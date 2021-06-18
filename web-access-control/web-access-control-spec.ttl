@@ -5,12 +5,9 @@
 
 <https://github.com/solid/web-access-control-spec>
   a spec:Specification ;
-  spec:requirement <https://github.com/solid/web-access-control-spec/#modes-of-access> ;
-  rdfs:seeAlso <https://raw.githubusercontent.com/solid/specification-tests/main/web-access-control/web-access-control-test-manifest.ttl>
-.
+  spec:requirement <https://github.com/solid/web-access-control-spec#modes-of-access> .
 
-<https://github.com/solid/web-access-control-spec/#modes-of-access>
+<https://github.com/solid/web-access-control-spec#modes-of-access>
   a spec:NormativeRequirement ;
   spec:conformanceRole spec:ServerConformanceClass ;
-  spec:normativeConformanceLevel spec:ConformanceMust
-.
+  spec:normativeConformanceLevel spec:ConformanceMust .
