@@ -15,13 +15,13 @@ manifest:content-negotiation-jsonld
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
-manifest:content-negotiation-jsonld
+manifest:content-negotiation-turtle
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
   td:reviewStatus td:accepted ;
   dcterms:title "For a Turtle resource" ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
+    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature> .
 
 manifest:content-negotiation-rdfa
   a td:TestCase ;
