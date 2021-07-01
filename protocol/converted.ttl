@@ -1,0 +1,16 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix td: <http://www.w3.org/2006/03/test-description#>
+prefix spec: <http://www.w3.org/ns/spec#>
+
+prefix manifest: <#>
+
+manifest:converted-test1
+  a td:TestCase ;
+#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+  td:reviewStatus td:unreviewed ;
+  dcterms:title "Test1" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/converted/test1.feature> .
