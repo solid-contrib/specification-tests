@@ -1,5 +1,9 @@
 @ignore
 Feature: Create: PUT Turtle resources to container with If-None-Match: * headers.
+Background: Setup
+  * def testContainer = createTestContainer()
+  * testContainer.createChildResource('.txt', '', 'text/plain');
+
 
 
 Scenario: Test 2.1 on URL /dahut-no.ttl

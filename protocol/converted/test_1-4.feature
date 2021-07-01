@@ -1,5 +1,9 @@
 @ignore
 Feature: Create: PUT Turtle resources to into a deep hierarchy.
+Background: Setup
+  * def testContainer = createTestContainer()
+  * testContainer.createChildResource('.txt', '', 'text/plain');
+
 
 
 Scenario: Test 4.1 on URL /dahut-bc.ttl

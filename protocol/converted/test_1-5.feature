@@ -1,5 +1,9 @@
 @ignore
 Feature: Delete resources that were set up in these tests
+Background: Setup
+  * def testContainer = createTestContainer()
+  * testContainer.createChildResource('.txt', '', 'text/plain');
+
 
 
 Scenario: Test 5.1 on URL /dahut-bc.ttl
