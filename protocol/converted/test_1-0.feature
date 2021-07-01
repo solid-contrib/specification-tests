@@ -5,7 +5,7 @@ Background: Setup
   * testContainer.createChildResource('.txt', '', 'text/plain');
 
 # Background: Setup on URL /
-#   * def requestUri = testContainer.getUrl()
+#   * def requestUri = testContainer.getUrl() + ''
 #   Given url requestUri
 #   And configure headers = clients.alice.getAuthHeaders('POST', requestUri)
 #   And header Content-Type = 'text/turtle'

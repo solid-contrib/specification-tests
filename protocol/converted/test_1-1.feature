@@ -2,8 +2,8 @@
 Feature: Create: PUT Turtle resources to container with varying LDP Interaction Models.
 
 
-Scenario: Test 1.1 on URL /test-put-bc/dahut-bc.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 1.1 on URL /dahut-bc.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-bc.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header Content-Type = 'text/turtle'
@@ -14,8 +14,8 @@ Scenario: Test 1.1 on URL /test-put-bc/dahut-bc.ttl
 
 
 
-Scenario: Test 1.2 on URL /test-put-bc/dahut-nr.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 1.2 on URL /dahut-nr.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-nr.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header Content-Type = 'text/turtle'
@@ -26,8 +26,8 @@ Scenario: Test 1.2 on URL /test-put-bc/dahut-nr.ttl
 
 
 
-Scenario: Test 1.3 on URL /test-put-bc/dahut-rs.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 1.3 on URL /dahut-rs.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-rs.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header Content-Type = 'text/turtle'
@@ -38,8 +38,8 @@ Scenario: Test 1.3 on URL /test-put-bc/dahut-rs.ttl
 
 
 
-Scenario: Test 1.4 on URL /test-put-bc/dahut-rs.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 1.4 on URL /dahut-rs.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-rs.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
   When method GET
@@ -47,8 +47,8 @@ Scenario: Test 1.4 on URL /test-put-bc/dahut-rs.ttl
 
 
 
-Scenario: Test 1.5 on URL /test-put-bc/dahut-no.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 1.5 on URL /dahut-no.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-no.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header Content-Type = 'text/turtle'
@@ -58,8 +58,8 @@ Scenario: Test 1.5 on URL /test-put-bc/dahut-no.ttl
 
 
 
-Scenario: Test 1.6 on URL /test-put-bc/dahut-no.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 1.6 on URL /dahut-no.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-no.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
   When method GET

@@ -2,8 +2,8 @@
 Feature: Create: PUT Turtle resources to container with If-None-Match: * headers.
 
 
-Scenario: Test 2.1 on URL /test-put-bc/dahut-no.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 2.1 on URL /dahut-no.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-no.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header If-None-Match = '*'
@@ -14,8 +14,8 @@ Scenario: Test 2.1 on URL /test-put-bc/dahut-no.ttl
 
 
 
-Scenario: Test 2.2 on URL /test-put-bc/dahut-no-nr.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 2.2 on URL /dahut-no-nr.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-no-nr.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header If-None-Match = '*'
@@ -26,8 +26,8 @@ Scenario: Test 2.2 on URL /test-put-bc/dahut-no-nr.ttl
 
 
 
-Scenario: Test 2.3 on URL /test-put-bc/dahut-no-nr.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 2.3 on URL /dahut-no-nr.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-no-nr.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
   When method GET
@@ -35,8 +35,8 @@ Scenario: Test 2.3 on URL /test-put-bc/dahut-no-nr.ttl
 
 
 
-Scenario: Test 2.4 on URL /test-put-bc/dahut-bc.ttl
-  * def requestUri = testContainer.getUrl()
+Scenario: Test 2.4 on URL /dahut-bc.ttl
+  * def requestUri = testContainer.getUrl() + 'dahut-bc.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header If-None-Match = '*'
