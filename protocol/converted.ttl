@@ -1,0 +1,57 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix td: <http://www.w3.org/2006/03/test-description#>
+prefix spec: <http://www.w3.org/ns/spec#>
+
+prefix manifest: <#>
+
+manifest:converted-test1
+  a td:TestCase ;
+#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-1.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-2.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-3.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-4.feature> .
+
+manifest:converted-test2
+  a td:TestCase ;
+#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/converted/test_2-1.feature> .
+
+manifest:converted-test3
+  a td:TestCase ;
+#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-1.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-3.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-5.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-7.feature> .
+
+manifest:converted-test4
+  a td:TestCase ;
+#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-1.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-3.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-5.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-7.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-9.feature> .
+
+manifest:converted-test5
+  a td:TestCase ;
+#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-1.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-3.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-5.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-7.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-9.feature> .
