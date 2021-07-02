@@ -6,8 +6,8 @@ Background: Setup
 
 
 
-Scenario: Test 4.1 on URL /dahut-bc.ttl
-  * def requestUri = testContainer.getUrl() + 'dahut-bc.ttl'
+Scenario: Test 4.1 on URL /foo/bar/dahut-bc.ttl
+  * def requestUri = testContainer.getUrl() + 'foo/bar/dahut-bc.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header Content-Type = 'text/turtle'
@@ -18,8 +18,8 @@ Scenario: Test 4.1 on URL /dahut-bc.ttl
 
 
 
-Scenario: Test 4.2 on URL /dahut-bc.ttl
-  * def requestUri = testContainer.getUrl() + 'dahut-bc.ttl'
+Scenario: Test 4.2 on URL /foo/bar/dahut-bc.ttl
+  * def requestUri = testContainer.getUrl() + 'foo/bar/dahut-bc.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
   When method GET
@@ -36,8 +36,8 @@ Scenario: Test 4.3 on URL /foo
 
 
 
-Scenario: Test 4.4 on URL /dahut-rs.ttl
-  * def requestUri = testContainer.getUrl() + 'dahut-rs.ttl'
+Scenario: Test 4.4 on URL /foo/baz/dahut-rs.ttl
+  * def requestUri = testContainer.getUrl() + 'foo/baz/dahut-rs.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header Content-Type = 'text/turtle'
@@ -48,8 +48,8 @@ Scenario: Test 4.4 on URL /dahut-rs.ttl
 
 
 
-Scenario: Test 4.5 on URL /dahut-rs.ttl
-  * def requestUri = testContainer.getUrl() + 'dahut-rs.ttl'
+Scenario: Test 4.5 on URL /foo/baz/dahut-rs.ttl
+  * def requestUri = testContainer.getUrl() + 'foo/baz/dahut-rs.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
   When method GET
@@ -66,8 +66,8 @@ Scenario: Test 4.6 on URL /foo
 
 
 
-Scenario: Test 4.7 on URL /dahut-no.ttl
-  * def requestUri = testContainer.getUrl() + 'dahut-no.ttl'
+Scenario: Test 4.7 on URL /foobar/baz/dahut-no.ttl
+  * def requestUri = testContainer.getUrl() + 'foobar/baz/dahut-no.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   And header Content-Type = 'text/turtle'
@@ -77,8 +77,8 @@ Scenario: Test 4.7 on URL /dahut-no.ttl
 
 
 
-Scenario: Test 4.8 on URL /dahut-no.ttl
-  * def requestUri = testContainer.getUrl() + 'dahut-no.ttl'
+Scenario: Test 4.8 on URL /foobar/baz/dahut-no.ttl
+  * def requestUri = testContainer.getUrl() + 'foobar/baz/dahut-no.ttl'
   Given url requestUri
   And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
   When method GET
