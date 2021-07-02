@@ -4,7 +4,7 @@ Feature: Create: PUT Turtle resources to into a deep hierarchy.
     * def testContainer = createTestContainer()
     * testContainer.createChildResource('.txt', '', 'text/plain');
 
-  Scenario: Test 4.1 on URL /foo/bar/dahut-bc.ttl
+  Scenario: Test 4.1 Conflict creating /foo/bar/dahut-bc.ttl as a container
     * def requestUri = testContainer.getUrl() + 'foo/bar/dahut-bc.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
@@ -14,21 +14,21 @@ Feature: Create: PUT Turtle resources to into a deep hierarchy.
     When method PUT
     Then status 409
 
-  Scenario: Test 4.2 on URL /foo/bar/dahut-bc.ttl
+    # Test 4.2 Resource should not have been creaed
     * def requestUri = testContainer.getUrl() + 'foo/bar/dahut-bc.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 404
 
-  Scenario: Test 4.3 on URL /foo
+    # Test 4.3 No container created: /foo
     * def requestUri = testContainer.getUrl() + 'foo'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 404
 
-  Scenario: Test 4.4 on URL /foo/baz/dahut-rs.ttl
+  Scenario: Test 4.4 Create RDFSource at /foo/baz/dahut-rs.ttl
     * def requestUri = testContainer.getUrl() + 'foo/baz/dahut-rs.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
@@ -38,20 +38,20 @@ Feature: Create: PUT Turtle resources to into a deep hierarchy.
     When method PUT
     Then status 201
 
-  # Test 4.5 on URL /foo/baz/dahut-rs.ttl
+    # Test 4.5 Check resource exists: /foo/baz/dahut-rs.ttl
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
 
-  # Test 4.6 on URL /foo
+    # Test 4.6 Check container exists: /foo/
     * def requestUri = testContainer.getUrl() + 'foo/'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
 
-  Scenario: Test 4.7 on URL /foobar/baz/dahut-no.ttl
+  Scenario: Test 4.7 Create No Interaction model resource at /foobar/baz/dahut-no.ttl
     * def requestUri = testContainer.getUrl() + 'foobar/baz/dahut-no.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
@@ -60,14 +60,15 @@ Feature: Create: PUT Turtle resources to into a deep hierarchy.
     When method PUT
     Then status 201
 
-  Scenario: Test 4.8 on URL /foobar/baz/dahut-no.ttl
+    # Test 4.8 Check resource exists /foobar/baz/dahut-no.ttl
     * def requestUri = testContainer.getUrl() + 'foobar/baz/dahut-no.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
+    # TODO Would the link header show RDFSource
 
-  # Test 4.9 on URL /foobar
+  # Test 4.9 Check container exists: /foobar/
     * def requestUri = testContainer.getUrl() + 'foobar/'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)

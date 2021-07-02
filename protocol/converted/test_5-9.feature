@@ -13,7 +13,7 @@ Feature: Check that Bob can delete Non-RDF resource when he is authorized read-w
     * assert testContainer.setAcl(acl)
     * def requestUri = resource.getUrl()
 
-  Scenario: Test 9.1 on URL /alice_share_bob.txt
+  Scenario: Test 9.1 Delete resource allowed
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('DELETE', requestUri)
     When method DELETE

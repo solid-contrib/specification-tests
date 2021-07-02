@@ -3,9 +3,10 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
   Background: Setup
     * def testContainer = createTestContainer()
     * def resource = testContainer.createChildResource('.ttl', '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "data"@en .', 'text/turtle');
+    * assert resource.exists()
     * def requestUri = resource.getUrl()
 
-  Scenario: Test 3.1 on URL /dahut-rs.ttl
+  Scenario: Test 3.1 Conflict when updating RDFSource with a NonRDFSource containing RDF
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -14,7 +15,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     When method PUT
     Then status 409
 
-  Scenario: Test 3.2 on URL /dahut-rs.ttl
+  Scenario: Test 3.2 Conflict when updating RDFSource with a Container
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -23,7 +24,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     When method PUT
     Then status 409
 
-  Scenario: Test 3.3 on URL /dahut-rs.ttl
+  Scenario: Test 3.3 Conflict when updating RDFSource with a NonRDFSource
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/plain'
@@ -32,7 +33,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     When method PUT
     Then status 409
 
-  Scenario: Test 3.4 on URL /dahut-rs.ttl
+  Scenario: Test 3.4 Conflict when updating RDFSource no interaction model
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/plain'
@@ -40,7 +41,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     When method PUT
     Then status 409
 
-  Scenario: Test 3.5 on URL /dahut-rs.ttl
+  Scenario: Test 3.5 Update RDFSource with PUT
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -49,9 +50,9 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     When method PUT
     Then assert responseStatus == 200 || responseStatus == 204
 
-  Scenario: Test 3.6 on URL /dahut-no.ttl
-    * testContainer.createChildResource('dahut-no.ttl', 'No interaction model', 'text/plain');
-    * def requestUri = testContainer.getUrl() + 'dahut-no.ttl'
+  Scenario: Test 3.6 Update plain text with Turtle without Interaction model
+    * def resource2 = testContainer.createChildResource('.ttl', 'No interaction model', 'text/plain');
+    * def requestUri = resource2.getUrl()
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -64,3 +65,4 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     When method GET
     Then status 200
     And response '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update with no Interaction Model"@en .'
+    # TODO - if we check the headers here will it now have RDFSource interaction model?

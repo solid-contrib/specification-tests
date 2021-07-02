@@ -3,8 +3,9 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
   Background: Setup
     * def testContainer = createTestContainer()
     * def resource = testContainer.createChildResource('.ttl', '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "data"@en .', 'text/turtle');
+    * assert resource.exists()
 
-  Scenario: Test 2.1 on URL /dahut-no.ttl
+  Scenario: Test 2.1 Precondition Fails not met when putting a resource over an existing one
     * def requestUri = resource.getUrl()
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
@@ -14,7 +15,7 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
     When method PUT
     Then status 412
 
-  Scenario: Test 2.2 on URL /dahut-no-nr.ttl
+  Scenario: Test 2.2 Precondition OK when creating new resource
     * def requestUri = testContainer.getUrl() + 'dahut-no-nr.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
@@ -30,7 +31,7 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
     When method GET
     Then status 200
 
-  Scenario: Test 2.4 on URL /dahut-bc.ttl
+  Scenario: Test 2.4 Conflict when putting a container as a non-container
     * def requestUri = testContainer.getUrl() + 'dahut-bc.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)

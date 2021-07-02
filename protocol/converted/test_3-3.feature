@@ -10,30 +10,27 @@ Feature: Check that Bob can only append to Basic Container when he is authorized
        + createBobAccessToAuthorization(webIds.bob, testContainer.getPath(), 'acl:Append')
     """
     * assert testContainer.setAcl(acl)
+    * def requestUri = testContainer.getUrl()
 
-  Scenario: Test 3.1 on URL /
-    * def requestUri = testContainer.getUrl() + ''
+  Scenario: Test 3.1 Read container (GET) denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 403
 
-  Scenario: Test 3.2 on URL /
-    * def requestUri = testContainer.getUrl() + ''
+  Scenario: Test 3.2 Read container (HEAD) denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('HEAD', requestUri)
     When method HEAD
     Then status 403
 
-  Scenario: Test 3.3 on URL /
-    * def requestUri = testContainer.getUrl() + ''
+  Scenario: Test 3.3 Read container (OPTIONS) allowed
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('OPTIONS', requestUri)
     When method OPTIONS
     Then status 204
 
-  Scenario: Test 3.4 on URL /
-    * def requestUri = testContainer.getUrl() + ''
+  Scenario: Test 3.4 Write to container (PUT) denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -41,8 +38,7 @@ Feature: Check that Bob can only append to Basic Container when he is authorized
     When method PUT
     Then status 403
 
-  Scenario: Test 3.5 on URL /
-    * def requestUri = testContainer.getUrl() + ''
+  Scenario: Test 3.5 Write to container (PATCH) allowed
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('PATCH', requestUri)
     And header Content-Type = 'application/sparql-update'
@@ -50,8 +46,7 @@ Feature: Check that Bob can only append to Basic Container when he is authorized
     When method PATCH
     Then status 200
 
-  Scenario: Test 3.6 on URL /
-    * def requestUri = testContainer.getUrl() + ''
+  Scenario: Test 3.6 Write to container (PATCH) with delete denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('PATCH', requestUri)
     And header Content-Type = 'application/sparql-update'
@@ -59,8 +54,7 @@ Feature: Check that Bob can only append to Basic Container when he is authorized
     When method PATCH
     Then status 403
 
-  Scenario: Test 3.7 on URL /
-    * def requestUri = testContainer.getUrl() + ''
+  Scenario: Test 3.7 Append to container (POST) allowed
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('POST', requestUri)
     And header Content-Type = 'text/turtle'
@@ -69,8 +63,7 @@ Feature: Check that Bob can only append to Basic Container when he is authorized
     When method POST
     Then status 201
 
-  Scenario: Test 3.8 on URL /
-    * def requestUri = testContainer.getUrl() + ''
+  Scenario: Test 3.8 Delete container denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('DELETE', requestUri)
     When method DELETE

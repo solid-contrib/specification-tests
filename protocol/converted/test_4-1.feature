@@ -13,25 +13,25 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     * assert resource.setAcl(acl)
     * def requestUri = resource.getUrl()
 
-  Scenario: Test 1.1 on URL /alice_share_bob.ttl
+  Scenario: Test 1.1 Read resource (GET) allowed
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
 
-  Scenario: Test 1.2 on URL /alice_share_bob.ttl
+  Scenario: Test 1.2 Read resource (HEAD) allowed
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('HEAD', requestUri)
     When method HEAD
     Then status 200
 
-  Scenario: Test 1.3 on URL /alice_share_bob.ttl
+  Scenario: Test 1.3 Read resource (OPTIONS) allowed
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('OPTIONS', requestUri)
     When method OPTIONS
     Then status 204
 
-  Scenario: Test 1.4 on URL /alice_share_bob.ttl
+  Scenario: Test 1.4 Write resource (PUT) denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -39,7 +39,7 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     When method PUT
     Then status 403
 
-  Scenario: Test 1.5 on URL /alice_share_bob.ttl
+  Scenario: Test 1.5 Write resource (PATCH) denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('PATCH', requestUri)
     And header Content-Type = 'application/sparql-update'
@@ -47,7 +47,7 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     When method PATCH
     Then status 403
 
-  Scenario: Test 1.6 on URL /alice_share_bob.ttl
+  Scenario: Test 1.6 Write resource (PUT) with delete denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('PATCH', requestUri)
     And header Content-Type = 'application/sparql-update'
@@ -55,7 +55,7 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     When method PATCH
     Then status 403
 
-  Scenario: Test 1.7 on URL /alice_share_bob.ttl
+  Scenario: Test 1.7 Write resource (POST) denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('POST', requestUri)
     And header Content-Type = 'text/turtle'
@@ -63,7 +63,7 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     When method POST
     Then status 403
 
-  Scenario: Test 1.8 on URL /alice_share_bob.ttl
+  Scenario: Test 1.8 Delete resource denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('DELETE', requestUri)
     When method DELETE

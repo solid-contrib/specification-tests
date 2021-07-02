@@ -11,29 +11,33 @@ manifest:converted-test1
   a td:TestCase ;
 #  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
   td:reviewStatus td:unreviewed ;
-#  dcterms:title "Test 1" ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/converted/test_1-1.feature> ,
     <https://github.com/solid/specification-tests/protocol/converted/test_1-2.feature> ,
     <https://github.com/solid/specification-tests/protocol/converted/test_1-3.feature> ,
     <https://github.com/solid/specification-tests/protocol/converted/test_1-4.feature> .
 
-#manifest:converted-test3
-#  a td:TestCase ;
-##  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
-#  td:reviewStatus td:unreviewed ;
-#  dcterms:title "Test 3" ;
-#  spec:testScript
-#    <https://github.com/solid/specification-tests/protocol/converted/test_3-1.feature> ,
-#    <https://github.com/solid/specification-tests/protocol/converted/test_3-3.feature> ,
-#    <https://github.com/solid/specification-tests/protocol/converted/test_3-5.feature> ,
-#    <https://github.com/solid/specification-tests/protocol/converted/test_3-7.feature> .
+manifest:converted-test2
+  a td:TestCase ;
+#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/converted/test_2-1.feature> .
+
+manifest:converted-test3
+  a td:TestCase ;
+#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-1.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-3.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-5.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-7.feature> .
 
 manifest:converted-test4
   a td:TestCase ;
 #  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
   td:reviewStatus td:unreviewed ;
-#  dcterms:title "Test 4" ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/converted/test_4-1.feature> ,
     <https://github.com/solid/specification-tests/protocol/converted/test_4-3.feature> ,
@@ -45,7 +49,6 @@ manifest:converted-test5
   a td:TestCase ;
 #  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
   td:reviewStatus td:unreviewed ;
-#  dcterms:title "Test 5" ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/converted/test_5-1.feature> ,
     <https://github.com/solid/specification-tests/protocol/converted/test_5-3.feature> ,
