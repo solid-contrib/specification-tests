@@ -59,5 +59,3 @@ Background: Setup
 #   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
 #   When method PUT
 #   Then status 201
-
-
