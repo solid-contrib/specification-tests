@@ -56,8 +56,7 @@
     doap:programming-language "TypeScript" ;
     solid-test:origin <https://tester> ;
     solid-test:maxThreads 8 ;
-    solid-test:features "authentication", "acl", "wac-allow" ;
-    solid-test:setupRootAcl true .
+    solid-test:features "authentication", "acl", "wac-allow" .
 
 <nss>
     a earl:Software, earl:TestSubject ;
