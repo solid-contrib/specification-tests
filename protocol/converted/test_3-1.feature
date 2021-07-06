@@ -1,8 +1,7 @@
 Feature: Check that Bob can only read Basic Container when he is authorized read only.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * testContainer.createChildResource('.txt', '', 'text/plain');
+    * def testContainer = createTestContainerImmediate()
     * def acl =
     """
       aclPrefix

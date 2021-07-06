@@ -1,8 +1,7 @@
 Feature: Check that Bob can read and append to Basic Container when he is authorized read-append.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * testContainer.createChildResource('.txt', '', 'text/plain');
+    * def testContainer = createTestContainerImmediate()
     * def acl =
     """
       aclPrefix
@@ -70,7 +69,6 @@ Feature: Check that Bob can read and append to Basic Container when he is author
     Then status 403
 
 #Scenario: Test 5.9 on URL /
-#  * def requestUri = testContainer.getUrl() + ''
 #  Given url requestUri
 #  And configure headers = clients.bob.getAuthHeaders('DAHU', requestUri)
 #  When method DAHU

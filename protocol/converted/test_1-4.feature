@@ -1,8 +1,7 @@
 Feature: Create: PUT Turtle resources to into a deep hierarchy.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * testContainer.createChildResource('.txt', '', 'text/plain');
+    * def testContainer = createTestContainerImmediate()
 
   Scenario: Test 4.1 Conflict creating /foo/bar/dahut-bc.ttl as a container
     * def requestUri = testContainer.getUrl() + 'foo/bar/dahut-bc.ttl'

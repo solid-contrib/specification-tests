@@ -1,8 +1,7 @@
 Feature: Create: PUT Turtle resources to container with varying LDP Interaction Models.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * testContainer.createChildResource('.txt', '', 'text/plain');
+    * def testContainer = createTestContainerImmediate()
 
   Scenario: Test 1.1 Conflict when creating a container at a resource URI
     * def requestUri = testContainer.getUrl() + 'dahut-bc.ttl'

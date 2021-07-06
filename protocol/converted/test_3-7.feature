@@ -1,8 +1,7 @@
 Feature: Check that Bob can read and write to Basic Container when he is authorized read-write.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * testContainer.createChildResource('.txt', '', 'text/plain');
+    * def testContainer = createTestContainerImmediate()
     * def acl =
     """
       aclPrefix
