@@ -2,7 +2,7 @@ Feature: Check that Bob can delete Non-RDF resource when he is authorized read-w
 
   Background: Setup
     * def testContainer = createTestContainer()
-    * def resource = testContainer.createChildResource('.ttl', 'protected contents, where Alice gives Bob Read/Write to container.', 'text/plain');
+    * def resource = testContainer.createChildResource('.txt', 'protected contents, where Alice gives Bob Read/Write to container.', 'text/plain');
     * assert resource.exists()
     * def acl =
     """

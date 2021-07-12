@@ -2,7 +2,7 @@ Feature: Check that Bob can only read Non-RDF resource when he is authorized rea
 
   Background: Setup
     * def testContainer = createTestContainer()
-    * def resource = testContainer.createChildResource('.ttl', 'protected contents, that Alice gives Bob Read to.', 'text/plain');
+    * def resource = testContainer.createChildResource('.txt', 'protected contents, that Alice gives Bob Read to.', 'text/plain');
     * assert resource.exists()
     * def acl =
     """

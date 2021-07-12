@@ -2,7 +2,7 @@ Feature: Check that Bob can only append to Non-RDF resource when he is authorize
 
   Background: Setup
     * def testContainer = createTestContainer()
-    * def resource = testContainer.createChildResource('.ttl', 'protected contents, that Alice gives Bob Append to.', 'text/plain');
+    * def resource = testContainer.createChildResource('.txt', 'protected contents, that Alice gives Bob Append to.', 'text/plain');
     * assert resource.exists()
     * def acl =
     """
