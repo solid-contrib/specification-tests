@@ -48,7 +48,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     And header Link = '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update RDF source Interaction Model"@en .'
     When method PUT
-    Then assert responseStatus == 200 || responseStatus == 204
+    Then match [200, 201, 204, 205] contains responseStatus
 
   Scenario: Test 3.6 Update plain text with Turtle without Interaction model
     * def resource2 = testContainer.createChildResource('.ttl', 'No interaction model', 'text/plain');
@@ -58,7 +58,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     And header Content-Type = 'text/turtle'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update with no Interaction Model"@en .'
     When method PUT
-    Then assert responseStatus == 200 || responseStatus == 204
+    Then match [200, 201, 204, 205] contains responseStatus
 
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)

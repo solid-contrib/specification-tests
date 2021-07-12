@@ -45,7 +45,7 @@ Feature: Check that Bob can only append to RDF resource when he is authorized ap
     And header Content-Type = 'application/sparql-update'
     And request 'INSERT DATA { <> a <http://example.org/Foo> . }'
     When method PATCH
-    Then status 200
+    Then match [200, 204, 205] contains responseStatus
 
   Scenario: Test 3.6 Write resource (PUT) with delete denied
     Given url requestUri

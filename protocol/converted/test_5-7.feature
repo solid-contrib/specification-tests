@@ -37,7 +37,7 @@ Feature: Check that Bob can read and write to Non-RDF resource when he is author
     And header Content-Type = 'text/plain'
     And request "Bob's replacement"
     When method PUT
-    Then assert responseStatus == 200 || responseStatus == 204
+    Then match [200, 201, 204, 205] contains responseStatus
 
   Scenario: Test 7.5 Write resource (PATCH) denied
     Given url requestUri

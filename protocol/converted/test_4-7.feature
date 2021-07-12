@@ -37,7 +37,7 @@ Feature: Check that Bob can read and write to RDF resource when he is authorized
     And header Content-Type = 'text/turtle'
     And request '@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. <> rdfs:comment "Bob replaced it." .     '
     When method PUT
-    Then assert responseStatus == 200 || responseStatus == 204
+    Then match [200, 201, 204, 205] contains responseStatus
 
   Scenario: Test 7.5 Write resource (PATCH) allowed
     Given url requestUri
@@ -45,15 +45,15 @@ Feature: Check that Bob can read and write to RDF resource when he is authorized
     And header Content-Type = 'application/sparql-update'
     And request 'INSERT DATA { <> a <http://example.org/Foo> . }'
     When method PATCH
-    Then status 200
+    Then match [200, 204, 205] contains responseStatus
 
-  Scenario: Test 7.6 Write resource (PUT) with delete allowed
+  Scenario: Test 7.6 Write resource (PATCH) with delete allowed
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('PATCH', requestUri)
     And header Content-Type = 'application/sparql-update'
     And request 'DELETE { ?s a ?o . } INSERT { <> a <http://example.org/Bar> . } WHERE  { ?s a ?o . }'
     When method PATCH
-    Then status 200
+    Then match [200, 204, 205] contains responseStatus
 
   Scenario: Test 7.7 Write resource (POST) allowed
     Given url requestUri

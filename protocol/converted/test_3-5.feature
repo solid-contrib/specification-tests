@@ -43,7 +43,7 @@ Feature: Check that Bob can read and append to Basic Container when he is author
     And header Content-Type = 'application/sparql-update'
     And request 'INSERT DATA { <> a <http://example.org/Foo> . }'
     When method PATCH
-    Then status 200
+    Then match [200, 204, 205] contains responseStatus
 
   Scenario: Test 5.6 Write to container (PATCH) with delete denied
     Given url requestUri
@@ -60,7 +60,7 @@ Feature: Check that Bob can read and append to Basic Container when he is author
     And header Slug = 'bobsdata'
     And request '@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. <> rdfs:comment "Bob added this."     '
     When method POST
-    Then status 201
+    Then match [200, 201, 204, 205] contains responseStatus
 
   Scenario: Test 5.8 Delete container denied
     Given url requestUri

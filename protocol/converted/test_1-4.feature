@@ -35,7 +35,7 @@ Feature: Create: PUT Turtle resources to into a deep hierarchy.
     And header Link = '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "RDF source Interaction Model"@en .'
     When method PUT
-    Then status 201
+    Then match [200, 201, 204, 205] contains responseStatus
 
     # Test 4.5 Check resource exists: /foo/baz/dahut-rs.ttl
     Given url requestUri
@@ -57,7 +57,7 @@ Feature: Create: PUT Turtle resources to into a deep hierarchy.
     And header Content-Type = 'text/turtle'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "No Interaction Model"@en .'
     When method PUT
-    Then status 201
+    Then match [200, 201, 204, 205] contains responseStatus
 
     # Test 4.8 Check resource exists /foobar/baz/dahut-no.ttl
     * def requestUri = testContainer.getUrl() + 'foobar/baz/dahut-no.ttl'

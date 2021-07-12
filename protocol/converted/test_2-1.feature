@@ -11,7 +11,7 @@ Feature: Create containers
     And header Link = '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Container Interaction Model"@en .'
     When method PUT
-    Then status 201
+    Then match [200, 201, 204, 205] contains responseStatus
 
   Scenario: Test 1.2 Create container with no interaction model
     * def requestUri = testContainer.getUrl() + 'no-interaction/'
@@ -20,7 +20,7 @@ Feature: Create containers
     And header Content-Type = 'text/turtle'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "No Interaction Model"@en .'
     When method PUT
-    Then status 201
+    Then match [200, 201, 204, 205] contains responseStatus
 
     # Test 1.5 Create container with no interaction model if doesn't exist
     * def requestUri = testContainer.getUrl() + 'no-interaction/'
@@ -57,4 +57,5 @@ Feature: Create containers
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     When method PUT
-    Then status 201
+    Then match [200, 201, 204, 205] contains responseStatus
+

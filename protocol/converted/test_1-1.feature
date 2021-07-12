@@ -31,7 +31,7 @@ Feature: Create: PUT Turtle resources to container with varying LDP Interaction 
     And header Link = '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "RDF source Interaction Model"@en .'
     When method PUT
-    Then status 201
+    Then match [200, 201, 204, 205] contains responseStatus
 
   # Test 1.4 on URL /dahut-rs.ttl
     Given url requestUri
@@ -46,7 +46,7 @@ Feature: Create: PUT Turtle resources to container with varying LDP Interaction 
     And header Content-Type = 'text/turtle'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "No Interaction Model"@en .'
     When method PUT
-    Then status 201
+    Then match [200, 201, 204, 205] contains responseStatus
 
   # Test 1.6 on URL /dahut-no.ttl
     Given url requestUri
