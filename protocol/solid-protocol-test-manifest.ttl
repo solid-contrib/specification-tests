@@ -11,7 +11,6 @@ manifest:content-negotiation-jsonld
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "For a JSON-LD resource" ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
@@ -19,20 +18,17 @@ manifest:content-negotiation-turtle
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "For a Turtle resource" ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature> .
 
 manifest:content-negotiation-rdfa
   a td:TestCase ;
-  td:reviewStatus td:unreviewed ;
-  dcterms:title "For a HTML+RDFa resource" .
+  td:reviewStatus td:unreviewed .
 
 manifest:writing-resource-containment
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#writing-resources> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "Creating a resource using PUT and PATCH must create intermediate containers" ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature> .
 
@@ -40,7 +36,6 @@ manifest:wac-allow-access-Bob-W-public-RA
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#web-access-control> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "Different access for user and public based on accedssTo ACL" ;
   td:preCondition "authentication", "acl", "wac-allow" ;
   spec:testScript
      <https://github.com/solid/specification-tests/protocol/wac-allow/access-Bob-W-public-RA.feature> .
@@ -49,7 +44,6 @@ manifest:wac-allow-default-Bob-W-public-RA
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#web-access-control> ;
   td:reviewStatus td:accepted ;
-  dcterms:title "Different access for user and public based on default ACL" ;
   td:preCondition "authentication", "acl", "wac-allow" ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/wac-allow/default-Bob-W-public-RA.feature> .
@@ -58,9 +52,6 @@ manifest:wac-allow-access-public-R
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#web-access-control> ;
   td:reviewStatus td:unreviewed ;
-  dcterms:title "Same access for user and public based on accedssTo ACL" ;
   td:preCondition "authentication", "acl", "wac-allow" ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/wac-allow/access-public-R.feature> .
-
-
