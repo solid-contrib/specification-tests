@@ -8,7 +8,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
 
   Scenario: Test 3.1 Conflict when updating RDFSource with a NonRDFSource containing RDF
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
     And header Link = '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Updating Non-RDF source Interaction Model"@en .'
@@ -17,7 +17,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
 
   Scenario: Test 3.2 Conflict when updating RDFSource with a Container
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
     And header Link = '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Container Interaction Model"@en .'
@@ -26,7 +26,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
 
   Scenario: Test 3.3 Conflict when updating RDFSource with a NonRDFSource
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/plain'
     And header Link = '<http://www.w3.org/ns/ldp#NonRDFSource>; rel="type"'
     And request 'Non RDF Interaction Model'
@@ -35,7 +35,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
 
   Scenario: Test 3.4 Conflict when updating RDFSource no interaction model
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/plain'
     And request 'No source Interaction Model'
     When method PUT

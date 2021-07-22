@@ -7,8 +7,8 @@ Feature: Check that Bob can read and append to Non-RDF resource when he is autho
     * def acl =
     """
       aclPrefix
-       + createOwnerAuthorization(webIds.alice, resource.getPath())
-       + createBobAccessToAuthorization(webIds.bob, resource.getPath(), 'acl:Read, acl:Append')
+       + createOwnerAuthorization(webIds.alice, resource.getUrl())
+       + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Read, acl:Append')
     """
     * assert resource.setAcl(acl)
     * def requestUri = resource.getUrl()

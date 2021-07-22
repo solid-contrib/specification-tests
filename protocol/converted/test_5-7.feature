@@ -7,33 +7,33 @@ Feature: Check that Bob can read and write to Non-RDF resource when he is author
     * def acl =
     """
       aclPrefix
-       + createOwnerAuthorization(webIds.alice, resource.getPath())
-       + createBobAccessToAuthorization(webIds.bob, resource.getPath(), 'acl:Read, acl:Write')
+       + createOwnerAuthorization(webIds.alice, resource.getUrl())
+       + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Read, acl:Write')
     """
     * assert resource.setAcl(acl)
     * def requestUri = resource.getUrl()
 
   Scenario: Test 7.1 Read resource (GET) allowed
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('GET', requestUri)
+    And headers clients.bob.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
 
   Scenario: Test 7.2 Read resource (HEAD) allowed
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('HEAD', requestUri)
+    And headers clients.bob.getAuthHeaders('HEAD', requestUri)
     When method HEAD
     Then status 200
 
   Scenario: Test 7.3 Read resource (OPTIONS) allowed
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('OPTIONS', requestUri)
+    And headers clients.bob.getAuthHeaders('OPTIONS', requestUri)
     When method OPTIONS
     Then status 204
 
   Scenario: Test 7.4 Write resource (PUT) allowed
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('PUT', requestUri)
+    And headers clients.bob.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/plain'
     And request "Bob's replacement"
     When method PUT

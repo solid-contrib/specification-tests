@@ -9,7 +9,7 @@ prefix manifest: <#>
 
 manifest:protected-operation-not-read-resource-access-AWC
   a td:TestCase ;
-  td:specificationReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
+  spec:requirementReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
   td:reviewStatus td:accepted ;
   dcterms:title "Cannot read a resource for which read access is not granted" ;
   td:preCondition "authentication", "acl" ;
@@ -18,7 +18,7 @@ manifest:protected-operation-not-read-resource-access-AWC
 
 manifest:protected-operation-not-read-resource-default-AWC
   a td:TestCase ;
-  td:specificationReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
+  spec:requirementReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
   td:reviewStatus td:accepted ;
   dcterms:title "Cannot read a resource for which default read access is not granted" ;
   td:preCondition "authentication", "acl" ;
@@ -27,7 +27,7 @@ manifest:protected-operation-not-read-resource-default-AWC
 
 manifest:protected-operation-read-resource-access-R
   a td:TestCase ;
-  td:specificationReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
+  spec:requirementReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
   td:reviewStatus td:unreviewed ;
   dcterms:title "Can only read a resource for which only read access is granted" ;
   td:preCondition "authentication", "acl" ;
@@ -36,7 +36,7 @@ manifest:protected-operation-read-resource-access-R
 
 manifest:protected-operation-read-resource-default-R
   a td:TestCase ;
-  td:specificationReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
+  spec:requirementReference <https://github.com/solid/web-access-control-spec#modes-of-access> ;
   td:reviewStatus td:unreviewed ;
   dcterms:title "Can only read a resource for which only default read access is granted" ;
   td:preCondition "authentication", "acl" ;

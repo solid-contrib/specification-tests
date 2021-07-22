@@ -6,7 +6,7 @@ Feature: Create containers
   Scenario: Test 1.1 Create container: /
     * def requestUri = testContainer.getUrl()
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
     And header Link = '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Container Interaction Model"@en .'
@@ -16,7 +16,7 @@ Feature: Create containers
   Scenario: Test 1.2 Create container with no interaction model
     * def requestUri = testContainer.getUrl() + 'no-interaction/'
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "No Interaction Model"@en .'
     When method PUT
@@ -25,7 +25,7 @@ Feature: Create containers
     # Test 1.5 Create container with no interaction model if doesn't exist
     * def requestUri = testContainer.getUrl() + 'no-interaction/'
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header If-None-Match = '*'
     And header Content-Type = 'text/turtle'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "No Interaction Model, but if-none-match"@en .'

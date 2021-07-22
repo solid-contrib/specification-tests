@@ -8,8 +8,9 @@ Feature: The WAC-Allow header shows user and public access modes with public rea
         const resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
         if (resource.exists()) {
           const acl = aclPrefix
-            + createOwnerAuthorization(webIds.alice, resource.getPath())
-            + createPublicAccessToAuthorization(resource.getPath(), 'acl:Read');
+            + createOwnerAuthorization(webIds.alice, resource.getUrl())
+            + createPublicAccessToAuthorization(resource.getUrl(), 'acl:Read');
+          karate.log('ACL: ' + acl);
           resource.setAcl(acl);
         }
         return resource;
@@ -22,7 +23,7 @@ Feature: The WAC-Allow header shows user and public access modes with public rea
 
   Scenario: There is an acl on the resource containing #publicAccessTo
     Given url resource.getAclUrl()
-    And configure headers = clients.alice.getAuthHeaders('GET', resource.getAclUrl())
+    And headers clients.alice.getAuthHeaders('GET', resource.getAclUrl())
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
@@ -31,13 +32,13 @@ Feature: The WAC-Allow header shows user and public access modes with public rea
 
   Scenario: There is no acl on the parent
     Given url resource.getContainer().getAclUrl()
-    And configure headers = clients.alice.getAuthHeaders('HEAD', resource.getContainer().getAclUrl())
+    And headers clients.alice.getAuthHeaders('HEAD', resource.getContainer().getAclUrl())
     And header Accept = 'text/turtle'
     When method HEAD
     Then status 404
 
   Scenario: Bob calls GET and the header shows R access for user, R for public
-    Given configure headers = clients.bob.getAuthHeaders('GET', resourceUrl)
+    Given headers clients.bob.getAuthHeaders('GET', resourceUrl)
     When method GET
     Then status 200
     And match header WAC-Allow != null
@@ -46,7 +47,7 @@ Feature: The WAC-Allow header shows user and public access modes with public rea
     And match result.public contains only ['read']
 
   Scenario: Bob calls HEAD and the header shows R access for user, R for public
-    Given configure headers = clients.bob.getAuthHeaders('HEAD', resourceUrl)
+    Given headers clients.bob.getAuthHeaders('HEAD', resourceUrl)
     When method HEAD
     Then status 200
     And match header WAC-Allow != null
