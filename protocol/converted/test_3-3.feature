@@ -43,7 +43,7 @@ Feature: Check that Bob can only append to Basic Container when he is authorized
     And header Content-Type = 'application/sparql-update'
     And request 'INSERT DATA { <> a <http://example.org/Foo> . }'
     When method PATCH
-    Then match [200, 204, 205] contains responseStatus
+    Then match [200, 201, 204, 205] contains responseStatus
 
   Scenario: Test 3.6 Write to container (PATCH) with delete denied
     Given url requestUri
