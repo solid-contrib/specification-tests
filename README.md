@@ -98,7 +98,7 @@ The first scenario represents a single HTTP interaction with the server. It has 
 1. The `When` keyword represents the action, but remember it has the same meaning as `*`. The request is actually
   triggered by the use of `method`.
 1. Next you can begin to make assertions about the response starting with the `Then` keyword. Often the
-  status first checked.
+  status is checked first.
 1. Finally you can use `And` to describe additional assertions. You could use `*` if you need to create variables and
   analyze the response as this allows you to reserve `And` for assertions. It is a style choice since the keywords have no
   meaning to the test harness as already stated.
@@ -295,7 +295,7 @@ Using the `responseStatus` variable as an alternative to `status` was mentioned 
 ## Karate object
 Within a test case, you have access to the Karate object which has a number of useful methods described
 [here](https://intuit.github.io/karate/#the-karate-object). This includes methods to manipulate data, call functions
-with a lock so they only run once, read from files, create loops, and handle async calling,   
+with a lock so they only run once, read from files, create loops, and handle async calling.
 
 ## Calling functions
 See https://intuit.github.io/karate/#code-reuse--common-routines
