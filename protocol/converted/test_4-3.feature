@@ -61,7 +61,7 @@ Feature: Check that Bob can only append to RDF resource when he is authorized ap
     And header Content-Type = 'text/turtle'
     And request '@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. <> rdfs:comment "Bob added this."     '
     When method POST
-    Then status 204
+    Then match [200, 204, 205] contains responseStatus
 
   Scenario: Test 3.8 Delete resource denied
     Given url requestUri

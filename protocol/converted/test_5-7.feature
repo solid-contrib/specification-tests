@@ -53,7 +53,7 @@ Feature: Check that Bob can read and write to Non-RDF resource when he is author
     And header Content-Type = 'text/plain'
     And request "Bob's addition"
     When method POST
-    Then status 204
+    Then match [200, 204, 205] contains responseStatus
 
 #  Scenario: Test 7.7 on URL /alice_share_bob.txt
 #    Given url requestUri
