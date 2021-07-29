@@ -53,7 +53,7 @@ Feature: Check that Bob can read and append to Non-RDF resource when he is autho
     And header Content-Type = 'text/plain'
     And request "Bob's addition"
     When method POST
-    Then status 204
+    Then match [200, 204, 205] contains responseStatus
 
   Scenario: Test 5.7 Delete resource denied
     Given url requestUri

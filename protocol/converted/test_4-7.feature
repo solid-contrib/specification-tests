@@ -61,7 +61,7 @@ Feature: Check that Bob can read and write to RDF resource when he is authorized
     And header Content-Type = 'text/turtle'
     And request '@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. <> rdfs:comment "Bob added this."     '
     When method POST
-    Then status 204
+    Then match [200, 204, 205] contains responseStatus
 
 #  Scenario: Test 7.8 on URL /alice_share_bob.ttl
 ##    Given url requestUri
