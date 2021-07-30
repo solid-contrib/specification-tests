@@ -415,7 +415,7 @@ A static method that can create a resource on the server.
 Was this resource actually created?
 * Returns a boolean.
 
-#### `setAcl(acl)`
+#### `setAccessDataset(acl)`
 Create an ACL for this resource.
 * Parameters:
   * acl - The ACL document.
@@ -480,7 +480,7 @@ Create this container on the server.
 Create a container as a child of this container using a UUID as the name but do not instantiate it on the server.
 * Returns an instance of `SolidContainer` to allow call chaining.
 
-#### `generateChildContainer(suffix)`
+#### `generateChildResource(suffix)`
 Create a `SolidResource` as a child of this container using a UUID as the name with the provided suffix, but do not
   instantiate it on the server.
 * Parameters:
@@ -597,7 +597,7 @@ Feature: The WAC-Allow header shows user and public access modes with Bob write 
             + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Write')
             + createPublicAccessToAuthorization(resource.getUrl(), 'acl:Read, acl:Append')
           karate.log('ACL: ' + acl);
-          resource.setAcl(acl);
+          resource.setAccessDataset(acl);
         }
         return resource;
       }
@@ -777,7 +777,7 @@ Feature: Bob can only read an RDF resource to which he is only granted read acce
             + createOwnerAuthorization(webIds.alice, resource.getUrl())
             + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Read')
           karate.log('ACL: ' + acl);
-          resource.setAcl(acl);
+          resource.setAccessDataset(acl);
         }
         return resource;
       }

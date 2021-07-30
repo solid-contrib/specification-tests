@@ -23,7 +23,6 @@ Feature: Create containers
     Then match [200, 201, 204, 205] contains responseStatus
 
     # Test 1.5 Create container with no interaction model if doesn't exist
-    * def requestUri = testContainer.getUrl() + 'no-interaction/'
     Given url requestUri
     And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header If-None-Match = '*'

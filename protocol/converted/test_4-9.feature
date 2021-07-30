@@ -10,7 +10,7 @@ Feature: Check that Bob can delete RDF resource when he is authorized read-write
        + createOwnerAuthorization(webIds.alice, testContainer.getUrl())
        + createBobAccessToAuthorization(webIds.bob, testContainer.getUrl(), 'acl:Read, acl:Write')
     """
-    * assert testContainer.setAcl(acl)
+    * assert testContainer.setAccessDataset(acl)
     * def requestUri = resource.getUrl()
 
   Scenario: Test 9.1 Delete resource allowed

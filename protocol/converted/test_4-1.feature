@@ -10,7 +10,7 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
        + createOwnerAuthorization(webIds.alice, resource.getUrl())
        + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Read')
     """
-    * assert resource.setAcl(acl)
+    * assert resource.setAccessDataset(acl)
     * def requestUri = resource.getUrl()
 
   Scenario: Test 1.1 Read resource (GET) allowed

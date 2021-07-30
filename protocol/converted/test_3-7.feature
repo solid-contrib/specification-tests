@@ -8,7 +8,7 @@ Feature: Check that Bob can read and write to Basic Container when he is authori
        + createOwnerAuthorization(webIds.alice, testContainer.getUrl())
        + createBobAccessToAuthorization(webIds.bob, testContainer.getUrl(), 'acl:Read, acl:Write')
     """
-    * assert testContainer.setAcl(acl)
+    * assert testContainer.setAccessDataset(acl)
     * def requestUri = testContainer.getUrl()
 
   Scenario: Test 7.1 Read container (GET) allowed

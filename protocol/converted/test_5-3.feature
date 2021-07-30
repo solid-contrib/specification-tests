@@ -10,7 +10,7 @@ Feature: Check that Bob can only append to Non-RDF resource when he is authorize
        + createOwnerAuthorization(webIds.alice, resource.getUrl())
        + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Append')
     """
-    * assert resource.setAcl(acl)
+    * assert resource.setAccessDataset(acl)
     * def requestUri = resource.getUrl()
 
   Scenario: Test 3.1 Read resource (GET) denied

@@ -10,7 +10,7 @@ Feature: Check that Bob can read and write to RDF resource when he is authorized
        + createOwnerAuthorization(webIds.alice, resource.getUrl())
        + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Read, acl:Write')
     """
-    * assert resource.setAcl(acl)
+    * assert resource.setAccessDataset(acl)
     * def requestUri = resource.getUrl()
 
   Scenario: Test 7.1 Read resource (GET) allowed
