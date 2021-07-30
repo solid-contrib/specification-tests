@@ -13,7 +13,7 @@ manifest:protected-operation-not-read-resource-access-AWC
   td:reviewStatus td:accepted ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
-    <https://github.com/solid/conformance-test-harness/example/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
 
 manifest:protected-operation-not-read-resource-default-AWC
   a td:TestCase ;
@@ -21,7 +21,7 @@ manifest:protected-operation-not-read-resource-default-AWC
   td:reviewStatus td:accepted ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
-    <https://github.com/solid/conformance-test-harness/example/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
 
 manifest:protected-operation-read-resource-access-R
   a td:TestCase ;
@@ -29,7 +29,7 @@ manifest:protected-operation-read-resource-access-R
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
-    <https://github.com/solid/conformance-test-harness/example/web-access-control/protected-operation/read-resource-access-R.feature> .
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-access-R.feature> .
 
 manifest:protected-operation-read-resource-default-R
   a td:TestCase ;
@@ -37,7 +37,7 @@ manifest:protected-operation-read-resource-default-R
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
-    <https://github.com/solid/conformance-test-harness/example/web-access-control/protected-operation/read-resource-default-R.feature> .
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-default-R.feature> .
 
 manifest:acl-object-none
   a td:TestCase ;
@@ -45,7 +45,7 @@ manifest:acl-object-none
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
-    <https://github.com/solid/conformance-test-harness/example/web-access-control/acl-object/container-none.feature> .
+    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-none.feature> .
 
 manifest:acl-object-access-to
   a td:TestCase ;
@@ -53,7 +53,7 @@ manifest:acl-object-access-to
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
-    <https://github.com/solid/conformance-test-harness/example/web-access-control/acl-object/container-access-to.feature> .
+    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-access-to.feature> .
 
 manifest:acl-object-default
   a td:TestCase ;
@@ -61,7 +61,7 @@ manifest:acl-object-default
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
-    <https://github.com/solid/conformance-test-harness/example/web-access-control/acl-object/container-default.feature> .
+    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-default.feature> .
 
 manifest:acl-object-access-to-default
   a td:TestCase ;
@@ -69,5 +69,5 @@ manifest:acl-object-access-to-default
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
-    <https://github.com/solid/conformance-test-harness/example/web-access-control/acl-object/container-access-to-default.feature> .
+    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-access-to-default.feature> .
 
