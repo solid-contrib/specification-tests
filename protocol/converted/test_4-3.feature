@@ -55,7 +55,7 @@ Feature: Check that Bob can only append to RDF resource when he is authorized ap
     When method PATCH
     Then status 403
 
-  @ignore
+  @ignore # POST-to-Append isn't specified.
   Scenario: Test 3.7 Append resource (POST) allowed
     Given url requestUri
     And headers clients.bob.getAuthHeaders('POST', requestUri)
