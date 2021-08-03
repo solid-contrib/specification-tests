@@ -45,7 +45,7 @@ Feature: Check that Bob can read and append to Non-RDF resource when he is autho
     And header Content-Type = 'text/plain'
     And request "+Bob's patch"
     When method PATCH
-    Then status 415
+    Then match [400, 403, 405, 415] contains responseStatus
 
   Scenario: Test 5.6 Append resource (POST) allowed
     Given url requestUri
