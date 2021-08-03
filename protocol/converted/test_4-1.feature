@@ -47,7 +47,7 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     When method PATCH
     Then status 403
 
-  Scenario: Test 1.6 Write resource (PUT) with delete denied
+  Scenario: Test 1.6 Write resource (PATCH) with delete denied
     Given url requestUri
     And headers clients.bob.getAuthHeaders('PATCH', requestUri)
     And header Content-Type = 'application/sparql-update'
@@ -55,7 +55,7 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     When method PATCH
     Then status 403
 
-  Scenario: Test 1.7 Write resource (POST) denied
+  Scenario: Test 1.7 Append resource (POST) denied
     Given url requestUri
     And headers clients.bob.getAuthHeaders('POST', requestUri)
     And header Content-Type = 'text/turtle'
