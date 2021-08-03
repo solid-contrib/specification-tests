@@ -1,4 +1,4 @@
-Feature: Check that Bob can delete Non-RDF resource when he is authorized read-write on the container.
+Feature: Check that Bob cannot delete Non-RDF resource when he is only authorized read-write on the container.
 
   Background: Setup
     * def testContainer = createTestContainer()
@@ -13,9 +13,9 @@ Feature: Check that Bob can delete Non-RDF resource when he is authorized read-w
     * assert testContainer.setAccessDataset(acl)
     * def requestUri = resource.getUrl()
 
-  Scenario: Test 9.1 Delete resource allowed
+  Scenario: Test 9.1 Delete resource denied
     Given url requestUri
     And headers clients.bob.getAuthHeaders('DELETE', requestUri)
     When method DELETE
-    Then assert responseStatus == 200 || responseStatus == 204
+    Then assert 403
 
