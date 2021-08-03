@@ -47,7 +47,7 @@ Feature: Check that Bob can only read Non-RDF resource when he is authorized rea
     When method PATCH
     Then status 403
 
-  Scenario: Test 1.6 Write resource (POST) denied
+  Scenario: Test 1.6 Append resource (POST) denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('POST', requestUri)
     And header Content-Type = 'text/plain'
