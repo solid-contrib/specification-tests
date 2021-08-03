@@ -17,5 +17,5 @@ Feature: Check that Bob cannot delete Non-RDF resource when he is only authorize
     Given url requestUri
     And headers clients.bob.getAuthHeaders('DELETE', requestUri)
     When method DELETE
-    Then assert 403
+    Then status 403
 
