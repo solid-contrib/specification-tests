@@ -47,7 +47,7 @@ Feature: Check that Bob can read and append to RDF resource when he is authorize
     When method PATCH
     Then match [200, 204, 205] contains responseStatus
 
-  Scenario: Test 5.6 Write resource (PUT) with delete denied
+  Scenario: Test 5.6 Write resource (PATCH) with delete denied
     Given url requestUri
     And headers clients.bob.getAuthHeaders('PATCH', requestUri)
     And header Content-Type = 'application/sparql-update'
@@ -55,13 +55,13 @@ Feature: Check that Bob can read and append to RDF resource when he is authorize
     When method PATCH
     Then status 403
 
-  Scenario: Test 5.7 Write resource (POST) denied
+  Scenario: Test 5.7 Append resource (POST) denied
     Given url requestUri
     And headers clients.bob.getAuthHeaders('POST', requestUri)
     And header Content-Type = 'text/turtle'
     And request '@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. <> rdfs:comment "Bob added this."     '
     When method POST
-    Then status 403
+    Then match [400, 405, 415] contains responseStatus
 
   Scenario: Test 5.8 Delete resource denied
     Given url requestUri
