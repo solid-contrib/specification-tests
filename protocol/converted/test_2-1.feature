@@ -39,7 +39,7 @@ Feature: Create containers
     And header Link = '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "RDF Source Interaction Model"@en .'
     When method PUT
-    Then status 409
+    Then match [200, 201, 204, 205] contains responseStatus
 
   Scenario: Test 1.4 Create container as NonRDFSource but no BasicContainer
     * def requestUri = testContainer.getUrl() + 'nr-interaction/'
