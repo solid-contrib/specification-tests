@@ -50,9 +50,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     When method PUT
     Then match [200, 201, 204, 205] contains responseStatus
 
-  Scenario: Test 3.6 Update plain text with Turtle without Interaction model
-    * def resource2 = testContainer.createChildResource('.ttl', 'No interaction model', 'text/plain');
-    * def requestUri = resource2.getUrl()
+  Scenario: Test 3.6 Update with Turtle without Interaction model
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -64,5 +62,5 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
-    And response '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update with no Interaction Model"@en .'
-    # TODO - if we check the headers here will it now have RDFSource interaction model?
+    And match response == '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update with no Interaction Model"@en .'
+    And match header Content-Type contains 'text/turtle'
