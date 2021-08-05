@@ -51,10 +51,17 @@ Feature: Create containers
     When method PUT
     Then status 409
 
-  Scenario: Test 1.6 Create empty container with no interaction model
+  Scenario: Test 1.6 Create empty container with no interaction model, no content-type
     * def requestUri = testContainer.getUrl() + 'empty-container/'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     When method PUT
-    Then match [200, 201, 204, 205] contains responseStatus
+    Then status 400
 
+  Scenario: Test 1.7 Create empty container with no interaction model
+    * def requestUri = testContainer.getUrl() + 'empty-container/'
+    Given url requestUri
+    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And header Content-Type = 'text/turtle'
+    When method PUT
+    Then match [200, 201, 204, 205] contains responseStatus
