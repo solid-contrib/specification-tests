@@ -62,5 +62,5 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
-    And response '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update with no Interaction Model"@en .'
-
+    And match response == '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update with no Interaction Model"@en .'
+    And match header Content-Type contains 'text/turtle'
