@@ -15,7 +15,8 @@ manifest:converted-test1
     <https://github.com/solid/specification-tests/protocol/converted/test_1-1.feature> ,
     <https://github.com/solid/specification-tests/protocol/converted/test_1-2.feature> ,
     <https://github.com/solid/specification-tests/protocol/converted/test_1-3.feature> ,
-    <https://github.com/solid/specification-tests/protocol/converted/test_1-4.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-4.feature> ,
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-5.feature> .
 
 manifest:converted-test2
   a td:TestCase ;
