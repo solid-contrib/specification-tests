@@ -10,7 +10,7 @@ sources:
   - /data/protocol/solid-protocol-spec.ttl
   - /data/web-access-control/web-access-control-spec.ttl
   - /data/protocol/converted.ttl
-target: https://github.com/solid/conformance-test-harness/ess-compat
+target: https://github.com/solid/conformance-test-harness/css
 mappings:
   - prefix: https://github.com/solid/specification-tests
     path: /data
@@ -22,4 +22,4 @@ docker run -i --rm \
   -v "$(pwd)"/config:/app/config \
   -v "$(pwd)"/reports:/reports \
   --env-file=.env solidconformancetestbeta/conformance-test-harness \
-  --output=/reports --target=ess-compat "$@"
+  --output=/reports --target=css "$@"
