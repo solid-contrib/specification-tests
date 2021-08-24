@@ -2,13 +2,10 @@ Feature: Check that Bob can read and append to Basic Container when he is author
 
   Background: Setup
     * def testContainer = createTestContainerImmediate()
-    * def acl =
-    """
-      aclPrefix
-       + createOwnerAuthorization(webIds.alice, testContainer.getUrl())
-       + createBobAccessToAuthorization(webIds.bob, testContainer.getUrl(), 'acl:Read, acl:Append')
-    """
-    * assert testContainer.setAccessDataset(acl)
+    * def aclBuilder = testContainer.getAccessDatasetBuilder(webIds.alice)
+    * def access = aclBuilder.setAgentAccess(testContainer.getUrl(), webIds.bob, ['read', 'append']).build()
+    * print 'ACL:\n' + access.asTurtle()
+    * assert testContainer.setAccessDataset(access)
     * def requestUri = testContainer.getUrl()
 
   Scenario: Test 5.1 Read container (GET) allowed
@@ -23,11 +20,11 @@ Feature: Check that Bob can read and append to Basic Container when he is author
     When method HEAD
     Then status 200
 
-  Scenario: Test 5.3 Read container (OPTIONS) allowed
-    Given url requestUri
-    And headers clients.bob.getAuthHeaders('OPTIONS', requestUri)
-    When method OPTIONS
-    Then status 204
+#  Scenario: Test 5.3 Read container (OPTIONS) allowed
+#    Given url requestUri
+#    And headers clients.bob.getAuthHeaders('OPTIONS', requestUri)
+#    When method OPTIONS
+#    Then status 204
 
   Scenario: Test 5.4 Write to container (PUT) denied
     Given url requestUri

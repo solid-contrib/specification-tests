@@ -4,13 +4,10 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     * def testContainer = createTestContainer()
     * def resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
     * assert resource.exists()
-    * def acl =
-    """
-      aclPrefix
-       + createOwnerAuthorization(webIds.alice, resource.getUrl())
-       + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Read')
-    """
-    * assert resource.setAccessDataset(acl)
+    * def aclBuilder = resource.getAccessDatasetBuilder(webIds.alice)
+    * def access = aclBuilder.setAgentAccess(resource.getUrl(), webIds.bob, ['read']).build()
+    * print 'ACL:\n' + access.asTurtle()
+    * assert resource.setAccessDataset(access)
     * def requestUri = resource.getUrl()
 
   Scenario: Test 1.1 Read resource (GET) allowed
@@ -25,11 +22,11 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     When method HEAD
     Then status 200
 
-  Scenario: Test 1.3 Read resource (OPTIONS) allowed
-    Given url requestUri
-    And headers clients.bob.getAuthHeaders('OPTIONS', requestUri)
-    When method OPTIONS
-    Then status 204
+#  Scenario: Test 1.3 Read resource (OPTIONS) allowed
+#    Given url requestUri
+#    And headers clients.bob.getAuthHeaders('OPTIONS', requestUri)
+#    When method OPTIONS
+#    Then status 204
 
   Scenario: Test 1.4 Write resource (PUT) denied
     Given url requestUri

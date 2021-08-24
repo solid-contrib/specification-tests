@@ -4,13 +4,10 @@ Feature: Check that Bob can only append to Non-RDF resource when he is authorize
     * def testContainer = createTestContainer()
     * def resource = testContainer.createChildResource('.txt', 'protected contents, that Alice gives Bob Append to.', 'text/plain');
     * assert resource.exists()
-    * def acl =
-    """
-      aclPrefix
-       + createOwnerAuthorization(webIds.alice, resource.getUrl())
-       + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Append')
-    """
-    * assert resource.setAccessDataset(acl)
+    * def aclBuilder = resource.getAccessDatasetBuilder(webIds.alice)
+    * def access = aclBuilder.setAgentAccess(resource.getUrl(), webIds.bob, ['append']).build()
+    * print 'ACL:\n' + access.asTurtle()
+    * assert resource.setAccessDataset(access)
     * def requestUri = resource.getUrl()
 
   Scenario: Test 3.1 Read resource (GET) denied
