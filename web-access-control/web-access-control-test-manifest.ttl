@@ -10,7 +10,7 @@ prefix manifest: <#>
 manifest:protected-operation-not-read-resource-access-AWC
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
-  td:reviewStatus td:accepted ;
+  td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
@@ -18,7 +18,7 @@ manifest:protected-operation-not-read-resource-access-AWC
 manifest:protected-operation-not-read-resource-default-AWC
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
-  td:reviewStatus td:accepted ;
+  td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
