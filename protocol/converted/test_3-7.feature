@@ -20,11 +20,11 @@ Feature: Check that Bob can read and write to Basic Container when he is authori
     When method HEAD
     Then status 200
 
-#  Scenario: Test 7.3 Read container (OPTIONS) allowed
-#    Given url requestUri
-#    And configure headers = clients.bob.getAuthHeaders('OPTIONS', requestUri)
-#    When method OPTIONS
-#    Then status 204
+  Scenario: Test 7.3 Read container (OPTIONS) allowed
+    Given url requestUri
+    And configure headers = clients.bob.getAuthHeaders('OPTIONS', requestUri)
+    When method OPTIONS
+    Then status 204
 
   Scenario: Test 7.4 Write to container (PUT) allowed
     Given url requestUri

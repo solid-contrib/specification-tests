@@ -20,11 +20,11 @@ Feature: Check that Bob can only append to Basic Container when he is authorized
     When method HEAD
     Then status 403
 
-#  Scenario: Test 3.3 Read container (OPTIONS) allowed
-#    Given url requestUri
-#    And headers clients.bob.getAuthHeaders('OPTIONS', requestUri)
-#    When method OPTIONS
-#    Then status 204
+  Scenario: Test 3.3 Read container (OPTIONS) allowed
+    Given url requestUri
+    And headers clients.bob.getAuthHeaders('OPTIONS', requestUri)
+    When method OPTIONS
+    Then status 204
 
   Scenario: Test 3.4 Write to container (PUT) denied
     Given url requestUri

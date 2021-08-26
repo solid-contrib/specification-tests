@@ -22,11 +22,11 @@ Feature: Check that Bob can only read RDF resource when he is authorized read on
     When method HEAD
     Then status 200
 
-#  Scenario: Test 1.3 Read resource (OPTIONS) allowed
-#    Given url requestUri
-#    And headers clients.bob.getAuthHeaders('OPTIONS', requestUri)
-#    When method OPTIONS
-#    Then status 204
+  Scenario: Test 1.3 Read resource (OPTIONS) allowed
+    Given url requestUri
+    And headers clients.bob.getAuthHeaders('OPTIONS', requestUri)
+    When method OPTIONS
+    Then status 204
 
   Scenario: Test 1.4 Write resource (PUT) denied
     Given url requestUri
