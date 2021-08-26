@@ -58,8 +58,6 @@ tests. For more detail please go to:
 * [KarateDSL](https://intuit.github.io/karate/)
 * [Syntax Guide](https://intuit.github.io/karate/#syntax-guide)
 
-This gherkin ???
-
 ## Structure of a test case
 The basic structure of a KarateDSL test file is:
 ```gherkin
@@ -81,13 +79,14 @@ Feature: The title of the test case
 ```
 
 The keywords `Given`, `And`, `When`, and `Then` in the `Scenario` are for the benefit of human readers of the script. To 
-the test harness they simply denote steps in the procedure and have the same meaning as `*`. They make it easier to gain an understanding of the test.
+the test harness they simply denote steps in the procedure and have the same meaning as `*`. They make it easier to gain
+an understanding of the test.
 
 The `Background` steps are executed before every `Scenario` in the file. This is important to understand as it allows
 the scenarios to be run in parallel but can also cause confusion if you expect a scenario to depend on something done
-in a previous scenario (i.e., chained together). If you need to perform a sequence of interactions in a single test then they should all be added
-to the same scenario. It is important to think of each scenario as a *Test* and the background as a *BeforeEach* method
-as you might see in other testing frameworks.
+in a previous scenario (i.e., chained together). If you need to perform a sequence of interactions in a single test then
+they should all be added to the same scenario. It is important to think of each scenario as a *Test* and the background
+as a *BeforeEach* method as you might see in other testing frameworks.
 
 The first scenario represents a single HTTP interaction with the server. It has the following conceptual structure:
 
@@ -232,8 +231,8 @@ In their simplest forms, `match` and `assert` simply take a JavaScript expressio
 * match foo == bar && foo2 != 10
 ```
 The left-hand side can be a variable name, a JSON/XML path, a function call, or anything in parentheses which evaluates as
-JavaScript. The right-hand side can be any [Karate expression](https://intuit.github.io/karate/#karate-expressions). Some of
-the important operators are outlined below.
+JavaScript. The right-hand side can be any [Karate expression](https://intuit.github.io/karate/#karate-expressions).
+Some of the important operators are outlined below.
 
 #### `contains`
 This can be a simple text comparison:
@@ -269,8 +268,8 @@ If you want to match deeper into an object, you need `contains deep`:
 You can access various parts of the HTTP response using special variables such as `response`, `responseHeaders`, and
 `responseStatus`.
 
-The response body is saved into `response` after a request. Depending on the content type, the returned value will be a string,
-JSON, or XML object. You can apply matches to this or perform other logic on it:
+The response body is saved into `response` after a request. Depending on the content type, the returned value will be a
+string, JSON, or XML object. You can apply matches to this or perform other logic on it:
 ```gherkin
 * match response contains 'Billie'
 * match response.name == 'Billie' # if the response is JSON
@@ -301,8 +300,8 @@ with a lock so they only run once, read from files, create loops, and handle asy
 See https://intuit.github.io/karate/#code-reuse--common-routines
 
 Sometimes you may want to set up something in the `Background` section that is only done once for all scenarios whereas
-typically these steps are run for every `Scenario`. This can be achieved using `callonce`. This would be similar to the difference between *BeforeEach* and
-*BeforeAll* in other testing frameworks. You can set up a function in the 
+typically these steps are run for every `Scenario`. This can be achieved using `callonce`. This would be similar to the
+difference between *BeforeEach* and *BeforeAll* in other testing frameworks. You can set up a function in the 
 `Background` section (or even in another feature file), and on calling it receive a single object back:
 ```gherkin
   Background: Setup (effectively BeforeAll)
@@ -329,7 +328,6 @@ The test harness makes some variables available to all tests:
   these clients will need to be passed to any newly created `SolidContainer` or `SolidResource` - The user names are the
   key (e.g., `clients.alice`).
 * `webIds` - An object containing the webIds of the 2 users. These are needed when setting up ACLs (e.g., `webIds.alice`).
-* `aclPrefix` - The turtle prefixes to be prepended to generated ACL documents.
 
 ## Helper functions
 ### Setting up test containers
@@ -342,42 +340,12 @@ Create a SolidContainer object referencing a unique sub-container of the `rootTe
 Create a SolidContainer object referencing a unique sub-container of the
   `rootTestContainer`, but ensure that it is actually created at this point.
 
-### Generating ACL documents
-The following functions are used in various combinations to generate ACL documents.
-
-#### `createOwnerAuthorization(ownerAgent, targetUri)`
-Returns an owner's `acl:Authorization` fragment with full access to the target resource
-
-#### `createAuthorization(config)`
-Returns an `acl:Authorization` fragment using whichever parts of the `config` are supplied.
-
-`config = { authUri, agents, groups, publicAccess, authenticatedAccess, accessToTargets, defaultTargets, modes }`
-
-#### `createBobAccessToAuthorization(webID, resourceUri, modes)`
-Returns an `acl:Authorization` for `bob` with `acl:accessTo` and the specified `modes`.
-
-#### `createBobDefaultAuthorization(webID, resourceUri, modes)`
-Returns an `acl:Authorization` for `bob` with `acl:default` and the specified `modes`.
-
-#### `createPublicAccessToAuthorization(resourceUri, modes)`
-Returns an `acl:Authorization` for any unauthenticated user with `acl:accessTo` and the specified `modes`.
-
-#### `createPublicDefaultAuthorization(resourceUri, modes)`
-Returns an `acl:Authorization` for any unauthenticated user with `acl:default` and the specified `modes`.
-
-For example:
-```js
-const acl = aclPrefix
-  + createOwnerAuthorization(webIds.alice, resource.getContainer().getUrl())
-  + createBobDefaultAuthorization(webIds.bob, resource.getContainer().getUrl(), 'acl:Write')
-  + createPublicDefaultAuthorization(resource.getContainer().getUrl(), 'acl:Read, acl:Append')
-```  
-
 ### Parsing functions
 ##### WAC-Allow header
-This `parseWacAllowHeader(headers)` function accepts the response headers, locates the `WAC-Allow` header, and parses it into a map object. This object
-will contain `user` and `public` keys plus any additional groups defined within the header. It extracts all the acccess
-modes, and adds them as a list to the relevant group. The result can be treated as a JSON object such as:
+This `parseWacAllowHeader(headers)` function accepts the response headers, locates the `WAC-Allow` header, and parses
+it into a map object. This object will contain `user` and `public` keys plus any additional groups defined within the
+header. It extracts all the acccess modes, and adds them as a list to the relevant group. The result can be treated as
+a JSON object such as:
 ```json5
 {
   user: ['read', 'write', 'append'],
@@ -394,8 +362,9 @@ And match result.public contains only ['read', 'append']
 ## Libraries
 
 Most tests will deal with resources and containers (which is a subclass of a resource). These objects are represented
-by 2 classes in the test harness: `SolidResouce` and `SolidContainer`. There is also a library, `RDFUtils`, for parsing RDF of 
-various formats.
+by 2 classes in the test harness: `SolidResouce` and `SolidContainer`. For handling access controls in a universal way
+there are 2 classes: `AccessDatasetBuilder` and `AccessDataset`. Finally, there is also a library, `RDFUtils`, for
+parsing RDF of various formats.
 
 ### SolidResource
 The `SolidResource` class represents a resource or container on the server. Since this is also the base class for
@@ -415,18 +384,16 @@ A static method that can create a resource on the server.
 Was this resource actually created?
 * Returns a boolean.
 
-#### `setAccessDataset(acl)`
-Create an ACL for this resource.
-* Parameters:
-  * acl - The ACL document.
-* Returns boolean showing success or failure.
-
 #### `getUrl()`
 Get the URL of this resource.
 * Returns a string.
 
 #### `getPath()`
 Get the path of this resource relative to the server root.
+* Returns a string.
+
+#### `getContentAsTurtle()`
+Get the contents of this URL as a Turtle document.
 * Returns a string.
 
 #### `isContainer()`
@@ -439,19 +406,36 @@ container.
 * Returns a `SolidContainer`.
 
 #### `getAclUrl()`
-* Get the ACL URL for this resource.
+Get the ACL URL for this resource.
 * Returns a string.
 
-#### `getContentAsTurtle()`
-* Get the contents of this URL as a Turtle document.
-* Returns a string.
+#### `getAccessDatasetBuilder(owner)`
+There are currently 2 access control implementations supported by the test harness:
+* [Web Access Control (WAC)](https://solid.github.io/web-access-control-spec)
+* [Access Control Policies (ACP)](https://github.com/solid/authorization-panel/tree/main/proposals/acp) - emerging
 
-#### `getAccessControls()`
-Get the access control document/policy.
-* Returns a string.
+Get an object that can build a set of access control statements in a WAC/ACP agnostic way. The object is initialized
+by adding owner access for the specified owner (in WAC mode only).
+* Parameters:
+  * owner - the WebID of the resource owner.
+* Returns an [AccessDatasetBuilder](#accessdatasetbuilder). 
+
+#### `getAccessDataset()`
+Get an object representing the access control document/policy.
+* Returns an [AccessDataset](#accessdataset).
+
+#### `getAccessControlMode()`
+Which access control implementations does the test subject implement?
+* Returns "WAC" or "ACP".
+
+#### `setAccessDataset(accessDataset)`
+Applies the access controls to the resource.
+* Parameters:
+  * accessDataset - an [AccessDataset](#accessdataset).
+* Returns boolean showing success or failure.
 
 #### `delete()`
-Delete this resource and if it is a container, recursively its members.
+Delete this resource and if it is a container, recursively delete its members.
 
 ### SolidContainer
 
@@ -498,6 +482,73 @@ Create a `SolidResource` as a child of this container using a UUID as the name w
 
 #### `deleteContents()`
 Recursively delete the contents of this container but not the container itself.
+
+### AccessDatasetBuilder
+This universal access dataset builder can be used to build up a set of rules which are then built into a WAC or ACP
+specific [AccessDataset](#accessdataset). Many of the methods below take an access parameter which is a list of access
+modes to be granted. This list can contain any of `read`, `write`, `append`, `control`, `controlRead`, `controlWrite` or
+an IRI representing an access mode not known to the test harness. The known modes are translated to the appropriate IRI
+for WAC or ACP. There are special conditions relating to the `control` modes. In WAC you can only set `control` however
+in ACP it is possible to add `read` and/or `write` access to the ACL resource. When you use the mode `control` is used
+for ACP it is translated to `read` and `write` but it is possible to set only one of these using the `controlRead` and
+`controlWrite` variants.
+
+For example:
+```js
+const access = testContainer.getAccessDatasetBuilder(webIds.alice)
+        .setAgentAccess(testContainer.getUrl(), webIds.bob, ['write'])
+        .setInheritableAgentAccess(testContainer.getUrl(), webIds.bob, ['append', 'write', 'control'])
+        .build();
+testContainer.setAccessDataset(access);
+```  
+
+
+#### `setOwnerAccess(target, owner)`
+Add a rule granting the `owner` full access to the `target` resource. If the target is a container then this access is
+made inheritable by current and future child resources.
+
+#### `setBaseUri(uri)`
+Set the base URI of the ACL document.
+
+#### `setAgentAccess(target, webId, access)`
+Add a rule granting access to the `target` for an agent, specified by their `webId`, with the specified `access` modes.
+
+#### `setGroupAccess(target, members, access)`
+Add a rule granting access to the `target`for a group, specified as a list (`members`) of their web IDs, with the
+specified `access` modes.
+
+#### `setPublicAccess(target, access)`
+Add a rule granting access to the `target` for an unauthenticated user, with the specified `access` modes.
+
+#### `setAuthenticatedAccess(target, access)`
+Add a rule granting access to the `target`for any authenticated user, with the specified `access` modes.
+
+#### `setInheritableAgentAccess(target, webId, access)`
+Add a rule granting access to any child resources of `target` for an agent, specified by their `webId`, with the
+specified `access` modes.
+
+#### `setInheritableGroupAccess(target, members, access)`
+Add a rule granting access to any child resources of `target` for a group, specified as a list (`members`) of their
+web IDs, with the specified `access` modes.
+
+#### `setInheritablePublicAccess(target, access)`
+Add a rule granting access to any child resources of `target` for an unauthenticated user, with the specified `access`
+modes.
+
+#### `setInheritableAuthenticatedAccess(target, access)`
+Add a rule granting access to any child resources of `target` for any authenticated user, with the specified `access`
+modes.
+
+#### `build()`
+Returns an [AccessDataset](#accessdataset) constructed in WAC or ACP format using the rules added to the builder.
+
+### AccessDataset
+#### `asTurtle()`
+Returns a string with the turtle representation of the set of rules in the WAC or ACP format.
+
+#### `parseTurtle(data, baseUri)`
+In the rare case where you want to manually construct an ACL document you may use this function to replace the content
+of an `AccessDataset` object and then apply it to a resource.
 
 ### RDFUtils
 KarateDSL 'natively' supports JSON and XML but sadly it does not yet support RDF. As a result you will need a library
@@ -592,12 +643,12 @@ Feature: The WAC-Allow header shows user and public access modes with Bob write 
         const testContainer = createTestContainer();
         const resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
         if (resource.exists()) {
-          const acl = aclPrefix
-            + createOwnerAuthorization(webIds.alice, resource.getUrl())
-            + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Write')
-            + createPublicAccessToAuthorization(resource.getUrl(), 'acl:Read, acl:Append')
-          karate.log('ACL: ' + acl);
-          resource.setAccessDataset(acl);
+          const access = resource.getAccessDatasetBuilder(webIds.alice)
+            .setAgentAccess(resource.getUrl(), webIds.bob, ['write'])
+            .setPublicAccess(resource.getUrl(), ['read', 'append'])
+            .build();
+          karate.log('ACL:\n' + access.asTurtle());
+          resource.setAccessDataset(access);
         }
         return resource;
       }
@@ -607,15 +658,18 @@ Feature: The WAC-Allow header shows user and public access modes with Bob write 
     * def resourceUrl = resource.getUrl()
     * url resourceUrl
 
-  Scenario: There is an acl on the resource containing #bobAccessTo
+  Scenario: There is an acl on the resource containing Bob's WebID
     Given url resource.getAclUrl()
     And headers clients.alice.getAuthHeaders('GET', resource.getAclUrl())
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
     And match header Content-Type contains 'text/turtle'
-    And match response contains 'bobAccessTo'
+    And match response contains webIds.bob
 
+  # Note this test is not applicable to a server using ACP as the WAC-Allow header is not supported currently.
+  # In ACP mode, the following step would fail as there will be an ACL on the parent - this step needs to change
+  # to ask the test harness to confirm there is no inherited access.
   Scenario: There is no acl on the parent
     Given url resource.getContainer().getAclUrl()
     And headers clients.alice.getAuthHeaders('HEAD', resource.getContainer().getAclUrl())
@@ -773,11 +827,11 @@ Feature: Bob can only read an RDF resource to which he is only granted read acce
         const testContainer = createTestContainer();
         const resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
         if (resource.exists()) {
-          const acl = aclPrefix
-            + createOwnerAuthorization(webIds.alice, resource.getUrl())
-            + createBobAccessToAuthorization(webIds.bob, resource.getUrl(), 'acl:Read')
-          karate.log('ACL: ' + acl);
-          resource.setAccessDataset(acl);
+          const access = resource.getAccessDatasetBuilder(webIds.alice)
+            .setAgentAccess(resource.getUrl(), webIds.bob, ['read'])
+            .build();
+          karate.log('ACL:\n' + access.asTurtle());
+          resource.setAccessDataset(access);
         }
         return resource;
       }
@@ -796,11 +850,6 @@ Feature: Bob can only read an RDF resource to which he is only granted read acce
     Given headers clients.bob.getAuthHeaders('HEAD', resourceUrl)
     When method HEAD
     Then status 200
-
-  Scenario: Bob can read the resource with OPTIONS
-    Given headers clients.bob.getAuthHeaders('OPTIONS', resourceUrl)
-    When method OPTIONS
-    Then status 204
 
   Scenario: Bob cannot PUT to the resource
     Given request '<> <http://www.w3.org/2000/01/rdf-schema#comment> "Bob replaced it." .'
@@ -841,7 +890,7 @@ The `Background` for this test:
 The scenarios then:
 1. Set up the authorization headers for Bob to make each request.
 1. Send a request using each type of HTTP method.
-1. Confirm that the status codes for the `GET`, `HEAD` and `OPTIONS` requests are all `200`.
+1. Confirm that the status codes for the `GET` and `HEAD` requests are all `200`.
 1. Confirm that the status codes for `PUT`, `PATCH`, `POST` and `DELETE` requests are all `403`.
 
 # Specification annotations

@@ -4,13 +4,10 @@ Feature: Check that Bob cannot delete Non-RDF resource when he is only authorize
     * def testContainer = createTestContainer()
     * def resource = testContainer.createChildResource('.txt', 'protected contents, where Alice gives Bob Read/Write to container.', 'text/plain');
     * assert resource.exists()
-    * def acl =
-    """
-      aclPrefix
-       + createOwnerAuthorization(webIds.alice, testContainer.getUrl())
-       + createBobAccessToAuthorization(webIds.bob, testContainer.getUrl(), 'acl:Read, acl:Write')
-    """
-    * assert testContainer.setAccessDataset(acl)
+    * def aclBuilder = testContainer.getAccessDatasetBuilder(webIds.alice)
+    * def access = aclBuilder.setAgentAccess(testContainer.getUrl(), webIds.bob, ['read', 'write']).build()
+    * print 'ACL:\n' + access.asTurtle()
+    * assert testContainer.setAccessDataset(access)
     * def requestUri = resource.getUrl()
 
   Scenario: Test 9.1 Delete resource denied

@@ -71,3 +71,10 @@ manifest:acl-object-access-to-default
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/acl-object/container-access-to-default.feature> .
 
+manifest:protected-operation-acl-propagation
+  a td:TestCase ;
+  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#authorization-evaluation-context> ;
+  td:reviewStatus td:unreviewed ;
+  td:preCondition "authentication", "acl" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/acl-propagation.feature> .

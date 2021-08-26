@@ -2,13 +2,10 @@ Feature: Check that Bob can only read Basic Container when he is authorized read
 
   Background: Setup
     * def testContainer = createTestContainerImmediate()
-    * def acl =
-    """
-      aclPrefix
-       + createOwnerAuthorization(webIds.alice, testContainer.getUrl())
-       + createBobAccessToAuthorization(webIds.bob, testContainer.getUrl(), 'acl:Read')
-    """
-    * assert testContainer.setAccessDataset(acl)
+    * def aclBuilder = testContainer.getAccessDatasetBuilder(webIds.alice)
+    * def access = aclBuilder.setAgentAccess(testContainer.getUrl(), webIds.bob, ['read']).build()
+    * print 'ACL:\n' + access.asTurtle()
+    * assert testContainer.setAccessDataset(access)
     * def requestUri = testContainer.getUrl()
 
   Scenario: Test 1.1 Read container (GET) allowed
