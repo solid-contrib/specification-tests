@@ -34,4 +34,4 @@ Feature: Bob cannot read an RDF resource to which he is not granted default read
     And headers clients.bob.getAuthHeaders('PUT', resourceUrl)
     And header Content-Type = 'text/turtle'
     When method PUT
-    Then status 204
+    Then match [204, 205] contains responseStatus

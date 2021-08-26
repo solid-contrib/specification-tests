@@ -40,7 +40,8 @@ Feature: Inheritable ACL controls child resources
     And headers clients.bob.getAuthHeaders('PUT', resource2.getUrl())
     And header Content-Type = 'text/plain'
     When method PUT
-    Then status 201
+    Then match [200, 201, 204, 205] contains responseStatus
+
 
     # Bob can read the new resource
     * print resource2.getAccessDataset().asTurtle()
