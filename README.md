@@ -58,8 +58,6 @@ tests. For more detail please go to:
 * [KarateDSL](https://intuit.github.io/karate/)
 * [Syntax Guide](https://intuit.github.io/karate/#syntax-guide)
 
-This gherkin ???
-
 ## Structure of a test case
 The basic structure of a KarateDSL test file is:
 ```gherkin
