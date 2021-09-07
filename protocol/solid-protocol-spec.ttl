@@ -10,9 +10,19 @@
 
 <https://solidproject.org/TR/protocol>
   a spec:Specification ;
-  spec:requirement <https://solidproject.org/TR/protocol#resource-representations>,
+    spec:requirement <https://solidproject.org/TR/protocol#sr-http-content-type>,
+                   <https://solidproject.org/TR/protocol#resource-representations>,
                    <https://solidproject.org/TR/protocol#writing-resources>,
                    <https://solidproject.org/TR/protocol#web-access-control>
+.
+
+<https://solidproject.org/TR/protocol#sr-http-content-type>
+  a spec:NormativeRequirement ;
+  spec:conformanceRole spec:ServerConformanceClass ;
+  spec:normativeConformanceLevel spec:ConformanceMust ;
+  schema:name "Content-Type on Writes" ;
+  schema:description "Full text of the specification section" ;
+  spec:excerpt "A Solid server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400."
 .
 
 <https://solidproject.org/TR/protocol#resource-representations>
