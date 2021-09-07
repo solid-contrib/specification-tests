@@ -18,8 +18,8 @@
 
 <https://solidproject.org/TR/protocol#sr-http-content-type>
   a spec:NormativeRequirement ;
-  spec:conformanceRole spec:ServerConformanceClass ;
-  spec:normativeConformanceLevel spec:ConformanceMust ;
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST ;
   schema:name "Content-Type on Writes" ;
   schema:description "Full text of the specification section" ;
   spec:statement "A Solid server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400."
@@ -27,8 +27,6 @@
 
 <https://solidproject.org/TR/protocol#resource-representations>
   a spec:NormativeRequirement ;
-  spec:requirementSubject spec:Server ;
-  spec:requirementLevel spec:MUST ;
   schema:name "Resource Representations" ;
   schema:description "Full text of the specification section" ;
   spec:statement "the server MUST accept GET requests on this resource when the value of the Accept header requests a representation in text/turtle or application/ld+json"
