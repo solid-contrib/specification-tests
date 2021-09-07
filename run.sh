@@ -22,4 +22,4 @@ docker run -i --rm \
   -v "$(pwd)"/reports:/reports \
   -v "$(pwd)"/target:/app/target \
   --env-file=.env solidconformancetestbeta/conformance-test-harness \
-  --output=/reports --target=ess "$@"
+  --output=/reports --target=https://github.com/solid/conformance-test-harness/ess "$@"
