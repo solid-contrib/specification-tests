@@ -13,15 +13,15 @@ prefix spec: <http://www.w3.org/ns/spec#>
 
 <https://solidproject.org/TR/2021/wac-20210711#access-modes>
   a spec:NormativeRequirement ;
-  spec:conformanceRole spec:ServerConformanceClass ;
-  spec:normativeConformanceLevel spec:ConformanceMust .
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST .
 
 <https://solidproject.org/TR/2021/wac-20210711#access-objects>
   a spec:NormativeRequirement ;
-  spec:conformanceRole spec:ServerConformanceClass ;
-  spec:normativeConformanceLevel spec:ConformanceMust .
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST .
 
 <https://solidproject.org/TR/2021/wac-20210711#authorization-evaluation-context>
   a spec:NormativeRequirement ;
-  spec:conformanceRole spec:ServerConformanceClass ;
-  spec:normativeConformanceLevel spec:ConformanceMust .
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST .
