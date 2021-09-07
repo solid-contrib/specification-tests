@@ -7,6 +7,13 @@ prefix spec: <http://www.w3.org/ns/spec#>
 
 prefix manifest: <#>
 
+manifest:content-type-reject
+  a td:TestCase ;
+  spec:requirementReference <https://solidproject.org/TR/protocol#sr-http-content-type> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/writing-resource/content-type-reject.feature> .
+
 manifest:content-negotiation-jsonld
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
