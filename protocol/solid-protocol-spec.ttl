@@ -25,6 +25,16 @@
   spec:statement "A Solid server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400."
 .
 
+<https://solidproject.org/TR/protocol#sr-uri-trailing-slash-distinct>
+  a spec:NormativeRequirement ;
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST ;
+  schema:name "No two resources differing only by trailing slash" ;
+  schema:description "Full text of the specification section" ;
+    spec:statement "If two URIs differ only in the trailing slash, and the server has associated a resource with one of them, then the other URI MUST NOT correspond to another resource"
+.
+
+
 <https://solidproject.org/TR/protocol#resource-representations>
   a spec:NormativeRequirement ;
   schema:name "Resource Representations" ;
