@@ -18,8 +18,8 @@ Feature: Test that unauthenticated users get the correct response
 
   Scenario: Unauthenticated user gets an appropriate response on PUT
     Given url requestUri
-    When method PUT
     And header Content-Type = 'text/turtle'
     And request "<> a <#Something> ."
+    When method PUT
     Then status 401
     And match header WWW-Authenticate != null
