@@ -25,6 +25,15 @@
   spec:statement "A Solid server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400."
 .
 
+<https://solidproject.org/TR/protocol#sr-http-authen-spec>
+  a spec:NormativeRequirement ;
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST ;
+  schema:name "RFC 7235" ;
+  schema:description "Full text of the specification section" ;
+  spec:statement "A data pod MUST implement the server part of HTTP/1.1 Authentication."
+.
+
 <https://solidproject.org/TR/protocol#resource-representations>
   a spec:NormativeRequirement ;
   schema:name "Resource Representations" ;

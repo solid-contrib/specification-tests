@@ -14,6 +14,14 @@ manifest:content-type-reject
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/content-type-reject.feature> .
 
+manifest:authentication-header
+  a td:TestCase ;
+  spec:requirementReference <https://solidproject.org/TR/protocol#sr-http-authen-spec>,
+    <https://solidproject.org/TR/protocol#sr-http-unauthenticated> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/authentication/header.feature> .
+
 manifest:content-negotiation-jsonld
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
