@@ -894,9 +894,94 @@ The scenarios then:
 1. Confirm that the status codes for `PUT`, `PATCH`, `POST` and `DELETE` requests are all `403`.
 
 # Specification annotations
-**TODO**
-How to annotate the spec, or use temporary data as alternative.
+All test cases should be linked to the related requirements in one of the Solid specifications. This depends on the
+specifications being annotated:
+* Provide each requirement with an identifier which should also be a valid URL in the specification
+* Identify the subject of the requirement (e.g. client or server)
+* Define the requirement level (e.g. SHOULD, MUST, MAY)
+
+The intention is that this will be done as RDFa annotations in the specification documents but it is understood that
+this will take some time. As a workaround, the same data may be provided in Turtle format separate to the specification.
+
+For example:
+```turtle
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix spec: <http://www.w3.org/ns/spec#>
+
+<https://solidproject.org/TR/2021/wac-20210711>
+  a spec:Specification ;
+  spec:requirement
+        <https://solidproject.org/TR/2021/wac-20210711#access-modes> ,
+        <https://solidproject.org/TR/2021/wac-20210711#access-objects>
+.
+
+<https://solidproject.org/TR/2021/wac-20210711#access-modes>
+  a spec:NormativeRequirement ;
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST .
+
+<https://solidproject.org/TR/2021/wac-20210711#access-objects>
+  a spec:NormativeRequirement ;
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST .
+```
+
+The specification vocab used above is under development, but the latest version is at
+https://github.com/solid/vocab/blob/specification-terms/spec.ttl.
 
 # Test manifest
-**TODO**
-How to create the manifest files that link the spec requirements to the test cases.
+The test cases themselves need to be described in a manifest file. For each test case, this provides:
+* A link to the specification requirement `spec:requirementReference`
+* The review status of this test case `td:reviewStatus` which can be one of:
+  * td:unreviewed
+  * td:accepted
+  * td:assigned
+  * td:approved
+  * td:rejected
+  * td:onhold
+* The capabilities the test subject needs to support to be able to run the test case `td:preCondition`. The intention is
+  to encode this information properly, but at present it is a simple list of keywords which are matched against the
+  values of `solid-test:features` in the subject description found in `test-subjects.ttl`:
+  * `authentication`
+  * `acl` - either WAC or ACP supported
+  * `wac-allow` - supports the `WAC-Allow` header
+* A link to the script that defines the test case `spec:testScript` - note that the URL provided is normally mapped to 
+  the local file system in the test harness configuration file.
+
+Note that there may be more than one test case linked to a requirement as shown in the example below:
+```turtle
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix td: <http://www.w3.org/2006/03/test-description#>
+prefix spec: <http://www.w3.org/ns/spec#>
+
+prefix manifest: <#>
+
+manifest:protected-operation-not-read-resource-access-AWC
+  a td:TestCase ;
+  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
+  td:reviewStatus td:unreviewed ;
+  td:preCondition "authentication", "acl" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
+
+manifest:protected-operation-not-read-resource-default-AWC
+  a td:TestCase ;
+  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
+  td:reviewStatus td:unreviewed ;
+  td:preCondition "authentication", "acl" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
+
+manifest:acl-object-none
+  a td:TestCase ;
+  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-objects> ;
+  td:reviewStatus td:unreviewed ;
+  td:preCondition "authentication", "acl" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-none.feature> .
+```
