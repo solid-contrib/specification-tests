@@ -14,16 +14,27 @@
                    <https://solidproject.org/TR/protocol#resource-representations>,
                    <https://solidproject.org/TR/protocol#writing-resources>,
                    <https://solidproject.org/TR/protocol#web-access-control>,
-                       <https://solidproject.org/TR/protocol#sr-uri-trailing-slash-distinct>
+                   <https://solidproject.org/TR/protocol#sr-uri-trailing-slash-distinct>,
+                   <https://solidproject.org/TR/protocol#sr-http-authen-spec>
 .
 
 <https://solidproject.org/TR/protocol#sr-http-content-type>
-  a spec:NormativeRequirement ;
-  spec:requirementSubject spec:Server ;
-  spec:requirementLevel spec:MUST ;
-  schema:name "Content-Type on Writes" ;
-  schema:description "Full text of the specification section" ;
-  spec:statement "A Solid server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400."
+    a spec:NormativeRequirement ;
+    spec:requirementSubject spec:Server ;
+    spec:requirementLevel spec:MUST ;
+    schema:name "Content-Type on Writes" ;
+    schema:description "Full text of the specification section" ;
+    spec:statement
+        "A Solid server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400."
+.
+
+<https://solidproject.org/TR/protocol#sr-http-authen-spec>
+    a spec:NormativeRequirement ;
+    spec:requirementSubject spec:Server ;
+    spec:requirementLevel spec:MUST ;
+    schema:name "RFC 7235" ;
+    schema:description "Full text of the specification section" ;
+    spec:statement "A data pod MUST implement the server part of HTTP/1.1 Authentication."
 .
 
 <https://solidproject.org/TR/protocol#sr-uri-trailing-slash-distinct>
@@ -37,24 +48,27 @@
 
 
 <https://solidproject.org/TR/protocol#resource-representations>
-  a spec:NormativeRequirement ;
-  schema:name "Resource Representations" ;
-  schema:description "Full text of the specification section" ;
-  spec:statement "the server MUST accept GET requests on this resource when the value of the Accept header requests a representation in text/turtle or application/ld+json"
+    a spec:NormativeRequirement ;
+    schema:name "Resource Representations" ;
+    schema:description "Full text of the specification section" ;
+    spec:statement
+        "the server MUST accept GET requests on this resource when the value of the Accept header requests a representation in text/turtle or application/ld+json"
 .
 
 <https://solidproject.org/TR/protocol#writing-resources>
-  a spec:NormativeRequirement ;
-  spec:requirementSubject spec:Server ;
-  spec:requirementLevel spec:MUST ;
-  spec:statement "Servers MUST create intermediate containers and include corresponding containment triples in container representations derived from the URI path component of PUT and PATCH requests"
+    a spec:NormativeRequirement ;
+    spec:requirementSubject spec:Server ;
+    spec:requirementLevel spec:MUST ;
+    spec:statement
+        "Servers MUST create intermediate containers and include corresponding containment triples in container representations derived from the URI path component of PUT and PATCH requests"
 .
 
 <https://solidproject.org/TR/protocol#web-access-control>
-  a spec:NormativeRequirement ;
-  spec:requirementSubject spec:Server ;
-  spec:requirementLevel spec:MUST ;
-  spec:statement "Servers exposing client’s access privileges on a resource URL MUST advertise by including the WAC-Allow HTTP header in the response of HTTP HEAD and GET requests"
+    a spec:NormativeRequirement ;
+    spec:requirementSubject spec:Server ;
+    spec:requirementLevel spec:MUST ;
+    spec:statement
+        "Servers exposing client’s access privileges on a resource URL MUST advertise by including the WAC-Allow HTTP header in the response of HTTP HEAD and GET requests"
 .
 
 #<https://solidproject.org/TR/protocol#test-server-header-put-content-type>
