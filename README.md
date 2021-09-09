@@ -928,7 +928,7 @@ prefix spec: <http://www.w3.org/ns/spec#>
   spec:requirementLevel spec:MUST .
 ```
 
-The specification vocab used above is under development but the latest version is 
+The specification vocab used above is under development, but the latest version is at
 https://github.com/solid/vocab/blob/specification-terms/spec.ttl.
 
 # Test manifest
