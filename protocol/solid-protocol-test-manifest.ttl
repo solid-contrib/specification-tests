@@ -14,6 +14,14 @@ manifest:content-type-reject
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/content-type-reject.feature> .
 
+manifest:slash-semantics-exclude
+  a td:TestCase ;
+    spec:requirementReference <https://solidproject.org/TR/protocol#sr-uri-trailing-slash-distinct> ,
+    <https://solidproject.org/TR/protocol#sr-uri-redirect-differing> ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/writing-resource/slash-semantics-exclude.feature> .
+
 manifest:authentication-header
   a td:TestCase ;
   spec:requirementReference <https://solidproject.org/TR/protocol#sr-http-authen-spec>,

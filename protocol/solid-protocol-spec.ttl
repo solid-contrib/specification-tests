@@ -9,13 +9,13 @@
 @prefix spec: <http://www.w3.org/ns/spec#> .
 
 <https://solidproject.org/TR/protocol>
-    a spec:Specification ;
-    spec:requirement
-        <https://solidproject.org/TR/protocol#sr-http-content-type>,
-        <https://solidproject.org/TR/protocol#resource-representations>,
-        <https://solidproject.org/TR/protocol#writing-resources>,
-        <https://solidproject.org/TR/protocol#web-access-control>,
-        <https://solidproject.org/TR/protocol#sr-http-authen-spec>
+  a spec:Specification ;
+    spec:requirement <https://solidproject.org/TR/protocol#sr-http-content-type>,
+                   <https://solidproject.org/TR/protocol#resource-representations>,
+                   <https://solidproject.org/TR/protocol#writing-resources>,
+                   <https://solidproject.org/TR/protocol#web-access-control>,
+                   <https://solidproject.org/TR/protocol#sr-uri-trailing-slash-distinct>,
+                   <https://solidproject.org/TR/protocol#sr-http-authen-spec>
 .
 
 <https://solidproject.org/TR/protocol#sr-http-content-type>
@@ -36,6 +36,16 @@
     schema:description "Full text of the specification section" ;
     spec:statement "A data pod MUST implement the server part of HTTP/1.1 Authentication."
 .
+
+<https://solidproject.org/TR/protocol#sr-uri-trailing-slash-distinct>
+  a spec:NormativeRequirement ;
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST ;
+  schema:name "No two resources differing only by trailing slash" ;
+  schema:description "Full text of the specification section" ;
+    spec:statement "If two URIs differ only in the trailing slash, and the server has associated a resource with one of them, then the other URI MUST NOT correspond to another resource"
+.
+
 
 <https://solidproject.org/TR/protocol#resource-representations>
     a spec:NormativeRequirement ;
