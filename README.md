@@ -903,7 +903,7 @@ specifications being annotated:
 The intention is that this will be done as RDFa annotations in the specification documents but it is understood that
 this will take some time. As a workaround, the same data may be provided in Turtle format separate to the specification.
 
-For example,
+For example:
 ```turtle
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -932,7 +932,7 @@ The specification vocab used above is under development but the latest version i
 https://github.com/solid/vocab/blob/specification-terms/spec.ttl.
 
 # Test manifest
-The test cases themselves need to be described in a manifest file. For each test case this provides:
+The test cases themselves need to be described in a manifest file. For each test case, this provides:
 * A link to the specification requirement `spec:requirementReference`
 * The review status of this test case `td:reviewStatus` which can be one of:
   * td:unreviewed
@@ -942,7 +942,7 @@ The test cases themselves need to be described in a manifest file. For each test
   * td:rejected
   * td:onhold
 * The capabilities the test subject needs to support to be able to run the test case `td:preCondition`. The intention is
-  to encode this information properly but at present it is a simple list of keywords which are matched against the
+  to encode this information properly, but at present it is a simple list of keywords which are matched against the
   values of `solid-test:features` in the subject description found in `test-subjects.ttl`:
   * `authentication`
   * `acl` - either WAC or ACP supported
@@ -950,7 +950,7 @@ The test cases themselves need to be described in a manifest file. For each test
 * A link to the script that defines the test case `spec:testScript` - note that the URL provided is normally mapped to 
   the local file system in the test harness configuration file.
 
-Note that there may be more than one test case linked to a requirement as shown in the example below.
+Note that there may be more than one test case linked to a requirement as shown in the example below:
 ```turtle
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
