@@ -7,19 +7,19 @@
 @prefix httpm: <http://www.w3.org/2011/http-methods#> .
 @prefix httph: <http://www.w3.org/2011/http-headers#> .
 @prefix spec: <http://www.w3.org/ns/spec#> .
-@prefix protocol: <https://solidproject.org/TR/protocol#> .
+@prefix sopr: <https://solidproject.org/TR/protocol#> .
 
 <https://solidproject.org/TR/protocol>
   a spec:Specification ;
-    spec:requirement protocol:sr-http-content-type,
-                   protocol:resource-representations,
-                   protocol:writing-resources,
-                   protocol:web-access-control,
-                   protocol:sr-uri-trailing-slash-distinct,
-                   protocol:sr-http-authen-spec
+    spec:requirement sopr:sr-http-content-type,
+                   sopr:resource-representations,
+                   sopr:writing-resources,
+                   sopr:web-access-control,
+                   sopr:sr-uri-trailing-slash-distinct,
+                   sopr:sr-http-authen-spec
 .
 
-protocol:sr-http-content-type
+sopr:sr-http-content-type
     a spec:NormativeRequirement ;
     spec:requirementSubject spec:Server ;
     spec:requirementLevel spec:MUST ;
@@ -29,7 +29,7 @@ protocol:sr-http-content-type
         "A Solid server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400."
 .
 
-protocol:sr-http-authen-spec
+sopr:sr-http-authen-spec
     a spec:NormativeRequirement ;
     spec:requirementSubject spec:Server ;
     spec:requirementLevel spec:MUST ;
@@ -38,7 +38,7 @@ protocol:sr-http-authen-spec
     spec:statement "A data pod MUST implement the server part of HTTP/1.1 Authentication."
 .
 
-protocol:sr-uri-trailing-slash-distinct
+sopr:sr-uri-trailing-slash-distinct
   a spec:NormativeRequirement ;
   spec:requirementSubject spec:Server ;
   spec:requirementLevel spec:MUST ;
@@ -48,7 +48,7 @@ protocol:sr-uri-trailing-slash-distinct
 .
 
 
-protocol:resource-representations
+sopr:resource-representations
     a spec:NormativeRequirement ;
     schema:name "Resource Representations" ;
     schema:description "Full text of the specification section" ;
@@ -56,7 +56,7 @@ protocol:resource-representations
         "the server MUST accept GET requests on this resource when the value of the Accept header requests a representation in text/turtle or application/ld+json"
 .
 
-protocol:writing-resources
+sopr:writing-resources
     a spec:NormativeRequirement ;
     spec:requirementSubject spec:Server ;
     spec:requirementLevel spec:MUST ;
@@ -64,7 +64,7 @@ protocol:writing-resources
         "Servers MUST create intermediate containers and include corresponding containment triples in container representations derived from the URI path component of PUT and PATCH requests"
 .
 
-protocol:web-access-control
+sopr:web-access-control
     a spec:NormativeRequirement ;
     spec:requirementSubject spec:Server ;
     spec:requirementLevel spec:MUST ;
@@ -72,7 +72,7 @@ protocol:web-access-control
         "Servers exposing client’s access privileges on a resource URL MUST advertise by including the WAC-Allow HTTP header in the response of HTTP HEAD and GET requests"
 .
 
-#protocol:test-server-header-put-content-type
+#sopr:test-server-header-put-content-type
 #  a spec:NormativeRequirement ;
 #  spec:requirementSubject spec:Server ;
 #  spec:requirementLevel spec:MUST ;

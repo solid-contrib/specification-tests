@@ -4,43 +4,43 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix dcterms: <http://purl.org/dc/terms/>
 prefix td: <http://www.w3.org/2006/03/test-description#>
 prefix spec: <http://www.w3.org/ns/spec#>
-    prefix protocol: <https://solidproject.org/TR/protocol#>
+    prefix sopr: <https://solidproject.org/TR/protocol#>
 
 prefix manifest: <#>
 
 manifest:content-type-reject
   a td:TestCase ;
-  spec:requirementReference protocol:sr-http-content-type ;
+  spec:requirementReference sopr:sr-http-content-type ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/content-type-reject.feature> .
 
 manifest:slash-semantics-exclude
   a td:TestCase ;
-    spec:requirementReference protocol:sr-uri-trailing-slash-distinct ,
-    protocol:sr-uri-redirect-differing ;
+    spec:requirementReference sopr:sr-uri-trailing-slash-distinct ,
+    sopr:sr-uri-redirect-differing ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/slash-semantics-exclude.feature> .
 
 manifest:authentication-header
   a td:TestCase ;
-  spec:requirementReference protocol:sr-http-authen-spec,
-    protocol:sr-http-unauthenticated ;
+  spec:requirementReference sopr:sr-http-authen-spec,
+    sopr:sr-http-unauthenticated ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/authentication/header.feature> .
 
 manifest:content-negotiation-jsonld
   a td:TestCase ;
-  spec:requirementReference protocol:resource-representations ;
+  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
 manifest:content-negotiation-turtle
   a td:TestCase ;
-  spec:requirementReference protocol:resource-representations ;
+  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature> .
@@ -51,14 +51,14 @@ manifest:content-negotiation-rdfa
 
 manifest:writing-resource-containment
   a td:TestCase ;
-  spec:requirementReference protocol:writing-resources ;
+  spec:requirementReference sopr:writing-resources ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature> .
 
 manifest:wac-allow-access-Bob-W-public-RA
   a td:TestCase ;
-  spec:requirementReference protocol:web-access-control ;
+  spec:requirementReference sopr:web-access-control ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl", "wac-allow" ;
   spec:testScript
@@ -66,7 +66,7 @@ manifest:wac-allow-access-Bob-W-public-RA
 
 manifest:wac-allow-default-Bob-W-public-RA
   a td:TestCase ;
-  spec:requirementReference protocol:web-access-control ;
+  spec:requirementReference sopr:web-access-control ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl", "wac-allow" ;
   spec:testScript
@@ -74,7 +74,7 @@ manifest:wac-allow-default-Bob-W-public-RA
 
 manifest:wac-allow-access-public-R
   a td:TestCase ;
-  spec:requirementReference protocol:web-access-control ;
+  spec:requirementReference sopr:web-access-control ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl", "wac-allow" ;
   spec:testScript
