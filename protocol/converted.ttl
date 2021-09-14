@@ -4,12 +4,13 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix dcterms: <http://purl.org/dc/terms/>
 prefix td: <http://www.w3.org/2006/03/test-description#>
 prefix spec: <http://www.w3.org/ns/spec#>
+prefix sopr: <https://solidproject.org/TR/protocol#>
 
 prefix manifest: <#>
 
 manifest:converted-test1
   a td:TestCase ;
-#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+#  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/converted/test_1-1.feature> ,
@@ -20,14 +21,14 @@ manifest:converted-test1
 
 manifest:converted-test2
   a td:TestCase ;
-#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+#  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/converted/test_2-1.feature> .
 
 manifest:converted-test3
   a td:TestCase ;
-#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+#  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/converted/test_3-1.feature> ,
@@ -37,7 +38,7 @@ manifest:converted-test3
 
 manifest:converted-test4
   a td:TestCase ;
-#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+#  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/converted/test_4-1.feature> ,
@@ -48,7 +49,7 @@ manifest:converted-test4
 
 manifest:converted-test5
   a td:TestCase ;
-#  spec:requirementReference <https://solidproject.org/TR/protocol#resource-representations> ;
+#  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/converted/test_5-1.feature> ,
