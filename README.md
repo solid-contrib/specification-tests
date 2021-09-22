@@ -4,18 +4,18 @@
 
 - [Running these tests locally](#running-these-tests-locally)
 - [KarateDSL](#karatedsl)
-  - [Structure of a test case](#structure-of-a-test-case)
+  - [Structure of a Test Case](#structure-of-a-test-case)
   - [Data related keywords](#data-related-keywords)
   - [HTTP related keywords](#http-related-keywords)
-  - [Karate object](#karate-object)
-  - [Calling functions](#calling-functions)
-- [Test harness capabilities](#test-harness-capabilities)
-  - [Global variables](#global-variables)
-  - [Helper functions](#helper-functions)
+  - [Karate Object](#karate-object)
+  - [Calling Functions](#calling-functions)
+- [Test Harness Capabilities](#test-harness-capabilities)
+  - [Global Variables](#global-variables)
+  - [Helper Functions](#helper-functions)
   - [Libraries](#libraries)
-- [Example test cases](#example-test-cases)
-- [Specification annotations](#specification-annotations)
-- [Test manifest](#test-manifest)
+- [Example Test Cases](#example-test-cases)
+- [Specification Annotations](#specification-annotations)
+- [Test Manifest](#test-manifest)
 
 <!-- /MarkdownTOC -->
 
@@ -58,7 +58,7 @@ tests. For more detail please go to:
 * [KarateDSL](https://intuit.github.io/karate/)
 * [Syntax Guide](https://intuit.github.io/karate/#syntax-guide)
 
-## Structure of a test case
+## Structure of a Test Case
 The basic structure of a KarateDSL test file is:
 ```gherkin
 Feature: The title of the test case
@@ -291,12 +291,12 @@ element such as `; charset=UTF-8`.
 
 Using the `responseStatus` variable as an alternative to `status` was mentioned earlier.
 
-## Karate object
+## Karate Object
 Within a test case, you have access to the Karate object which has a number of useful methods described
 [here](https://intuit.github.io/karate/#the-karate-object). This includes methods to manipulate data, call functions
 with a lock so they only run once, read from files, create loops, and handle async calling.
 
-## Calling functions
+## Calling Functions
 See https://intuit.github.io/karate/#code-reuse--common-routines
 
 Sometimes you may want to set up something in the `Background` section that is only done once for all scenarios whereas
@@ -316,9 +316,9 @@ difference between *BeforeEach* and *BeforeAll* in other testing frameworks. You
 ```
 Although the `Background` is run for every `Scenario`, the function will only be called once.
 
-# Test harness capabilities
+# Test Harness Capabilities
 
-## Global variables
+## Global Variables
 The test harness makes some variables available to all tests:
 
 * `rootTestContainer` - An instance of `SolidContainer` pointing to the container in which all test files will be created
@@ -329,7 +329,7 @@ The test harness makes some variables available to all tests:
   key (e.g., `clients.alice`).
 * `webIds` - An object containing the webIds of the 2 users. These are needed when setting up ACLs (e.g., `webIds.alice`).
 
-## Helper functions
+## Helper Functions
 ### Setting up test containers
 
 #### `createTestContainer()`
@@ -340,7 +340,7 @@ Create a SolidContainer object referencing a unique sub-container of the `rootTe
 Create a SolidContainer object referencing a unique sub-container of the
   `rootTestContainer`, but ensure that it is actually created at this point.
 
-### Parsing functions
+### Parsing Functions
 ##### WAC-Allow header
 This `parseWacAllowHeader(headers)` function accepts the response headers, locates the `WAC-Allow` header, and parses
 it into a map object. This object will contain `user` and `public` keys plus any additional groups defined within the
@@ -575,7 +575,7 @@ Parses a RDFa document into an array of triples.
   * baseUri - The base URI used for any relative IRIs.
 * Returns an array of strings in the form `<subject> <predicate> <object> .`
 
-# Example test cases
+# Example Test Cases
 The following are a selection of example tests that demonstrate different features of the test harness, and show 
 various approaches to writing tests.
 
@@ -893,7 +893,7 @@ The scenarios then:
 1. Confirm that the status codes for the `GET` and `HEAD` requests are all `200`.
 1. Confirm that the status codes for `PUT`, `PATCH`, `POST` and `DELETE` requests are all `403`.
 
-# Specification annotations
+# Specification Annotations
 All test cases should be linked to the related requirements in one of the Solid specifications. This depends on the
 specifications being annotated:
 * Provide each requirement with an identifier which should also be a valid URL in the specification
@@ -931,16 +931,16 @@ prefix spec: <http://www.w3.org/ns/spec#>
 The specification vocab used above is under development, but the latest version is at
 https://github.com/solid/vocab/blob/specification-terms/spec.ttl.
 
-# Test manifest
+# Test Manifest
 The test cases themselves need to be described in a manifest file. For each test case, this provides:
 * A link to the specification requirement `spec:requirementReference`
 * The review status of this test case `td:reviewStatus` which can be one of:
-  * td:unreviewed
-  * td:accepted
-  * td:assigned
-  * td:approved
-  * td:rejected
-  * td:onhold
+  * `td:unreviewed` - test has been proposed, but hasn't been reviewed (e.g. for completeness) yet.
+  * `td:accepted` - test has gone through a first review, which shows it as valid for further processing.
+  * `td:assigned` - a more specific review of the test has been assigned to someone.
+  * `td:approved` - test has gone through the review process and was approved.
+  * `td:rejected` - test has gone through the review process and was rejected.
+  * `td:onhold` - test had already gone through the review process, but the results of the review need to be re-assessed due to new input.
 * The capabilities the test subject needs to support to be able to run the test case `td:preCondition`. The intention is
   to encode this information properly, but at present it is a simple list of keywords which are matched against the
   values of `solid-test:features` in the subject description found in `test-subjects.ttl`:
