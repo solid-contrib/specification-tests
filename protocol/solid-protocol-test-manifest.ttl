@@ -4,29 +4,29 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix dcterms: <http://purl.org/dc/terms/>
 prefix td: <http://www.w3.org/2006/03/test-description#>
 prefix spec: <http://www.w3.org/ns/spec#>
-    prefix sopr: <https://solidproject.org/TR/protocol#>
+prefix sopr: <https://solidproject.org/TR/protocol#>
 
 prefix manifest: <#>
 
 manifest:content-type-reject
   a td:TestCase ;
-  spec:requirementReference sopr:sr-http-content-type ;
+    spec:requirementReference sopr:server-content-type ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/content-type-reject.feature> .
 
 manifest:slash-semantics-exclude
   a td:TestCase ;
-    spec:requirementReference sopr:sr-uri-trailing-slash-distinct ,
-    sopr:sr-uri-redirect-differing ;
+    spec:requirementReference sopr:server-uri-trailing-slash-distinct ,
+    sopr:server-uri-redirect-differing ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/slash-semantics-exclude.feature> .
 
 manifest:authentication-header
   a td:TestCase ;
-  spec:requirementReference sopr:sr-http-authen-spec,
-    sopr:sr-http-unauthenticated ;
+    spec:requirementReference sopr:server-authentication ,
+    sopr:server-unauthenticated ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/authentication/header.feature> .
