@@ -20,7 +20,6 @@
 .
 
 sopr:sr-http-content-type
-    a spec:NormativeRequirement ;
     spec:requirementSubject spec:Server ;
     spec:requirementLevel spec:MUST ;
     schema:name "Content-Type on Writes" ;
@@ -30,7 +29,6 @@ sopr:sr-http-content-type
 .
 
 sopr:sr-http-authen-spec
-    a spec:NormativeRequirement ;
     spec:requirementSubject spec:Server ;
     spec:requirementLevel spec:MUST ;
     schema:name "RFC 7235" ;
@@ -39,7 +37,6 @@ sopr:sr-http-authen-spec
 .
 
 sopr:sr-uri-trailing-slash-distinct
-  a spec:NormativeRequirement ;
   spec:requirementSubject spec:Server ;
   spec:requirementLevel spec:MUST ;
   schema:name "No two resources differing only by trailing slash" ;
@@ -49,7 +46,6 @@ sopr:sr-uri-trailing-slash-distinct
 
 
 sopr:resource-representations
-    a spec:NormativeRequirement ;
     schema:name "Resource Representations" ;
     schema:description "Full text of the specification section" ;
     spec:statement
@@ -57,7 +53,6 @@ sopr:resource-representations
 .
 
 sopr:writing-resources
-    a spec:NormativeRequirement ;
     spec:requirementSubject spec:Server ;
     spec:requirementLevel spec:MUST ;
     spec:statement
@@ -65,7 +60,6 @@ sopr:writing-resources
 .
 
 sopr:web-access-control
-    a spec:NormativeRequirement ;
     spec:requirementSubject spec:Server ;
     spec:requirementLevel spec:MUST ;
     spec:statement
@@ -73,7 +67,6 @@ sopr:web-access-control
 .
 
 #sopr:test-server-header-put-content-type
-#  a spec:NormativeRequirement ;
 #  spec:requirementSubject spec:Server ;
 #  spec:requirementLevel spec:MUST ;
 #  spec:httpRequest [
