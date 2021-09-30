@@ -1,10 +1,11 @@
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix doap: <http://usefulinc.com/ns/doap#>
 prefix spec: <http://www.w3.org/ns/spec#>
 
 <https://solidproject.org/TR/2021/wac-20210711>
-  a spec:Specification ;
+  a doap:Specification ;
   spec:requirement
         <https://solidproject.org/TR/2021/wac-20210711#access-modes> ,
         <https://solidproject.org/TR/2021/wac-20210711#access-objects>,
@@ -12,16 +13,13 @@ prefix spec: <http://www.w3.org/ns/spec#>
 .
 
 <https://solidproject.org/TR/2021/wac-20210711#access-modes>
-  a spec:NormativeRequirement ;
   spec:requirementSubject spec:Server ;
   spec:requirementLevel spec:MUST .
 
 <https://solidproject.org/TR/2021/wac-20210711#access-objects>
-  a spec:NormativeRequirement ;
   spec:requirementSubject spec:Server ;
   spec:requirementLevel spec:MUST .
 
 <https://solidproject.org/TR/2021/wac-20210711#authorization-evaluation-context>
-  a spec:NormativeRequirement ;
   spec:requirementSubject spec:Server ;
   spec:requirementLevel spec:MUST .
