@@ -34,7 +34,7 @@ Feature: Test that unauthenticated users get the correct response
 
   Scenario: Unauthenticated user gets an appropriate response on PATCH
     Given url requestUri
-    And header Content-Type = 'application/sparql-query'
+    And header Content-Type = 'application/sparql-update'
     And request "INSERT DATA { <> a <#Something> .}"
     When method PATCH
     Then status 401
