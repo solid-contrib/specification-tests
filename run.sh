@@ -5,11 +5,11 @@ mkdir -p config reports
 cat > ./config/application.yaml <<EOF
 subjects: /data/test-subjects.ttl
 sources:
-  - /data/protocol/solid-protocol-test-manifest.ttl
-  - /data/web-access-control/web-access-control-test-manifest.ttl
+  - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
+  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl
   - https://solidproject.org/TR/protocol
-  - /data/web-access-control/web-access-control-spec.ttl
-  - /data/protocol/converted.ttl
+  - https://github.com/solid/specification-tests/web-access-control/web-access-control-spec.ttl
+  - https://github.com/solid/specification-tests/protocol/converted.ttl
 mappings:
   - prefix: https://github.com/solid/specification-tests
     path: /data
