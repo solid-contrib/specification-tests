@@ -7,7 +7,7 @@ subjects: /data/test-subjects.ttl
 sources:
   - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
   - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl
-  - https://github.com/solid/specification-tests/protocol/solid-protocol-spec.ttl
+  - https://solidproject.org/TR/protocol
   - https://github.com/solid/specification-tests/web-access-control/web-access-control-spec.ttl
   - https://github.com/solid/specification-tests/protocol/converted.ttl
 mappings:
