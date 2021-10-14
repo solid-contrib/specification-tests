@@ -9,7 +9,8 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     * def resourceUrl = resource.getUrl()
     Given url resourceUrl
     And configure headers = clients.alice.getAuthHeaders('PUT', resourceUrl)
-    And request "Hello"
+    And header Content-Type = 'text/plain'
+    And request 'Hello'
     When method PUT
     Then assert responseStatus >= 200 && responseStatus < 300
 
@@ -33,7 +34,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     * def resourceUrl = resource.getUrl()
     Given url resourceUrl
     And configure headers = clients.alice.getAuthHeaders('PATCH', resourceUrl)
-    And header Content-Type = "application/sparql-update"
+    And header Content-Type = 'application/sparql-update'
     And request 'INSERT DATA { <#hello> <#linked> <#world> . }'
     When method PATCH
     Then assert responseStatus >= 200 && responseStatus < 300
