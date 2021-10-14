@@ -647,7 +647,6 @@ Feature: The WAC-Allow header shows user and public access modes with Bob write 
             .setAgentAccess(resource.getUrl(), webIds.bob, ['write'])
             .setPublicAccess(resource.getUrl(), ['read', 'append'])
             .build();
-          karate.log('ACL:\n' + access.asTurtle());
           resource.setAccessDataset(access);
         }
         return resource;
@@ -830,7 +829,6 @@ Feature: Bob can only read an RDF resource to which he is only granted read acce
           const access = resource.getAccessDatasetBuilder(webIds.alice)
             .setAgentAccess(resource.getUrl(), webIds.bob, ['read'])
             .build();
-          karate.log('ACL:\n' + access.asTurtle());
           resource.setAccessDataset(access);
         }
         return resource;
