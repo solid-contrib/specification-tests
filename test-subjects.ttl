@@ -21,9 +21,9 @@
     solid-test:features "authentication", "acl", "acp-legacy" .
 
 <ess#test-subject-release>
-    doap:name "ESS 1.1.4";
-    doap:revision "1.1.4";
-    doap:created "2021-08-06"^^xsd:date .
+    doap:name "ESS 1.1.6";
+    doap:revision "1.1.6";
+    doap:created "2021-09-11"^^xsd:date .
 
 <ess-next>
     a earl:Software, earl:TestSubject ;
@@ -37,8 +37,8 @@
 
 <ess-next#test-subject-release>
     doap:name "ESS 1.2";
-    doap:revision "1.2";
-    doap:created "2021-10-05"^^xsd:date .
+    doap:revision "dev-next";
+    doap:created "2021-10-14"^^xsd:date .
 
 <ess-wac>
     a earl:Software, earl:TestSubject ;
@@ -51,9 +51,9 @@
     solid-test:features "authentication", "acl", "wac-allow", "wac" .
 
 <ess-wac#test-subject-release>
-    doap:name "ESS 1.1.4";
-    doap:revision "1.1.4";
-    doap:created "2021-08-06"^^xsd:date .
+    doap:name "ESS 1.1.6";
+    doap:revision "1.1.6";
+    doap:created "2021-09-11"^^xsd:date .
 
 <css>
     a earl:Software, earl:TestSubject ;
@@ -66,9 +66,9 @@
     solid-test:features "authentication", "acl", "wac-allow", "wac" .
 
 <css#test-subject-release>
-    doap:name "CSS 1.0.0" ;
-    doap:revision "1.0.0" ;
-    doap:created "2021-08-05"^^xsd:date .
+    doap:name "CSS 1.1.0" ;
+    doap:revision "1.1.0" ;
+    doap:created "2021-09-03"^^xsd:date .
 
 <nss>
     a earl:Software, earl:TestSubject ;
@@ -81,9 +81,9 @@
     solid-test:features "authentication", "acl", "wac-allow", "wac" .
 
 <nss#test-subject-release>
-    doap:name "NSS 5.6.6"@en ;
-    doap:revision "5.6.6"@en ;
-    doap:created "2021-03-12"^^xsd:date .
+    doap:name "NSS 5.6.8"@en ;
+    doap:revision "5.6.8"@en ;
+    doap:created "2021-07-22"^^xsd:date .
 
 <trinpod>
     a earl:Software, earl:TestSubject ;
@@ -98,5 +98,5 @@
 
 <trinpod#test-subject-release>
     doap:name "TrinPod-Server"@en ;
-    doap:revision "2.2.74"@en ;
-    doap:created "2021-07-19"^^xsd:date .
+    doap:revision "2.3.3"@en ;
+    doap:created "2021-10-14"^^xsd:date .
