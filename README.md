@@ -38,17 +38,17 @@ You can clone this repository, work on tests, and run them locally using the doc
 git clone git@github.com:solid/specification-tests.git
 cd specification-tests
 ````
-Create `.env` in this directory according to these instructions 
+Create `{subject}.env` files in this directory according to these instructions 
 [here](https://hub.docker.com/r/solidconformancetestbeta/conformance-test-harness).
-Modify the script `run.sh` to use the target subject you are testing and run it: 
+Use the script `run.sh` to run tests. To see the usage instructions: 
 ```shell
 ./run.sh
 ```
 The reports will be created in the `reports/` directory.
 
-If you want to only run specific test(s), you can add the filter option:
+If you want to only run specific test(s), you can add the filter option, such as:
 ```shell
-./run.sh --filter=content-negotiation
+./run.sh css --filter=content-negotiation
 ```
 
 # KarateDSL
