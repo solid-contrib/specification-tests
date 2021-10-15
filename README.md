@@ -20,8 +20,8 @@
 <!-- /MarkdownTOC -->
 
 This repository contains the tests that can be executed by the
-[Solid Conformance Test Harness](https://github.com/solid/conformance-test-harness). The best way to run the harness is
-by using the [Docker image](https://hub.docker.com/r/solidconformancetestbeta/conformance-test-harness).
+[Solid Conformance Test Harness (CTH)](https://github.com/solid/conformance-test-harness). The best way to run the 
+harness is by using the [Docker image](https://hub.docker.com/r/solidconformancetestbeta/conformance-test-harness).
 
 The tests are written in a language called [KarateDSL](https://intuit.github.io/karate/). This is a simple 
 Behaviour-Driven Development (BDD) testing language based on 
@@ -32,15 +32,16 @@ has an embedded JavaScript engine supporting ES6 syntax and provides the ability
 tests are expected to be written in KarateDSL and JavaScript. Additional capabilities added to the test harness as Java
 libraries will be called from these without the need for the test implementer to know Java.
 
-# Running these tests locally
-You can clone this repository, work on tests, and run them locally using the docker image:
-```shell
-git clone git@github.com:solid/specification-tests.git
-cd specification-tests
-````
-Create `{subject}.env` files in this directory according to these instructions 
+# Run script
+
+There is a handy script `run.sh` that you can use to run tests. It has options to specify the target server, to choose
+whether to use the published CTH image or a locally built one, and whether to use the tests embedded in that image or
+tests available locally.
+
+For each test subject you want to test, create a `{subject}.env` file in this directory according to the instructions
 [here](https://hub.docker.com/r/solidconformancetestbeta/conformance-test-harness).
-Use the script `run.sh` to run tests. To see the usage instructions: 
+
+To see the usage instructions:
 ```shell
 ./run.sh
 ```
@@ -50,6 +51,49 @@ If you want to only run specific test(s), you can add the filter option, such as
 ```shell
 ./run.sh css --filter=content-negotiation
 ```
+
+## Running local tests
+You can clone this repository, work on tests, and run them locally.
+```shell
+git clone git@github.com:solid/specification-tests.git
+cd specification-tests
+````
+
+Use the script with the `-d` option to use the local tests: 
+```shell
+./run.sh -d . css
+```
+## Creating a script for a CI workflow
+If you just want to run tests against a single test subject, for examnple in a CI workflow, you can create a script such
+as this one which will run the tests embedded in the latest published CTH image:
+```shell
+#!/bin/bash
+
+mkdir -p config reports
+
+cat > ./config/application.yaml <<EOF
+subjects: /data/test-subjects.ttl
+sources:
+  - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
+  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl
+  - https://solidproject.org/TR/protocol
+  - https://github.com/solid/specification-tests/web-access-control/web-access-control-spec.ttl
+mappings:
+  - prefix: https://github.com/solid/specification-tests
+    path: /data
+EOF
+
+docker pull solidconformancetestbeta/conformance-test-harness
+docker run -i --rm \
+  -v "$(pwd)"/:/data \
+  -v "$(pwd)"/config:/app/config \
+  -v "$(pwd)"/reports:/reports \
+  -v "$(pwd)"/target:/app/target \
+  --env-file=.env solidconformancetestbeta/conformance-test-harness \
+  --output=/reports --target=https://github.com/solid/conformance-test-harness/css "$@"
+```
+
+Just change the `target` option and create a `.env` file for the server as mentioned above.
 
 # KarateDSL
 
