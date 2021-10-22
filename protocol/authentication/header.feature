@@ -7,13 +7,13 @@ Feature: Test that unauthenticated users get the correct response
   Scenario: Unauthenticated user gets an appropriate response on GET
     Given url requestUri
     When method GET
-    Then status 401
+    Then match [401, 404] contains responseStatus
     And match header WWW-Authenticate != null
 
   Scenario: Unauthenticated user gets an appropriate response on HEAD
     Given url requestUri
     When method HEAD
-    Then status 401
+    Then match [401, 404] contains responseStatus
     And match header WWW-Authenticate != null
 
   Scenario: Unauthenticated user gets an appropriate response on PUT
@@ -21,7 +21,7 @@ Feature: Test that unauthenticated users get the correct response
     And header Content-Type = 'text/turtle'
     And request "<> a <#Something> ."
     When method PUT
-    Then status 401
+    Then match [401, 404] contains responseStatus
     And match header WWW-Authenticate != null
 
   Scenario: Unauthenticated user gets an appropriate response on POST
@@ -29,7 +29,7 @@ Feature: Test that unauthenticated users get the correct response
     And header Content-Type = 'text/turtle'
     And request "<> a <#Something> ."
     When method POST
-    Then status 401
+    Then match [401, 404] contains responseStatus
     And match header WWW-Authenticate != null
 
   Scenario: Unauthenticated user gets an appropriate response on PATCH
@@ -37,11 +37,11 @@ Feature: Test that unauthenticated users get the correct response
     And header Content-Type = 'application/sparql-update'
     And request "INSERT DATA { <> a <#Something> .}"
     When method PATCH
-    Then status 401
+    Then match [401, 404] contains responseStatus
     And match header WWW-Authenticate != null
 
   Scenario: Unauthenticated user gets an appropriate response on DELETE
     Given url requestUri
     When method DELETE
-    Then status 401
+    Then match [401, 404] contains responseStatus
     And match header WWW-Authenticate != null
