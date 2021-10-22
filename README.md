@@ -404,7 +404,7 @@ And match result.public contains only ['read', 'append']
 ```
 
 ##### Parse link header
-The `parseLinkHeaders(headers)` processes teh response headers to extract all the `Link` headers and return them in the
+The `parseLinkHeaders(headers)` processes the response headers to extract all the `Link` headers and return them in the
 form of `List<Map<String, String>>`, where each item in the list is a map of the components of the link using the keys:
 `rel`, `uri`, `title`, `type`. The `rel` and `uri` values are mandatory. The returned object can be treated as a JSON
 object. For example:
@@ -488,7 +488,7 @@ Get the storage root for this resource by working up the path hierarchy looking 
   the user.
 
 #### `hasStorageType()`
-Does this resource have the `pim:Storage` link header identifying it as a storage-type container.
+Does this resource have the `pim:Storage` link header identifying it as a storage-type container?
 * Returns a boolean.
 
 #### `getAccessDatasetBuilder(owner)`
