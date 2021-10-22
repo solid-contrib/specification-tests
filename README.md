@@ -403,6 +403,35 @@ And match result.user contains only ['read', 'write', 'append']
 And match result.public contains only ['read', 'append']
 ```
 
+##### Parse link header
+The `parseLinkHeaders(headers)` processes teh response headers to extract all the `Link` headers and return them in the
+form of `List<Map<String, String>>`, where each item in the list is a map of the components of the link using the keys:
+`rel`, `uri`, `title`, `type`. The `rel` and `uri` values are mandatory. The returned object can be treated as a JSON
+object. For example:
+```json5
+[
+  {
+    rel: 'type',
+    uri: 'http://www.w3.org/ns/pim/space#Storage'
+  },
+  {
+    rel: 'acl',
+    uri: 'https://example.org/test/resource.acl'
+  }
+]
+```
+This could be used in a test like this:
+```gherkin
+* def hasStorageType = (ls) => ls.findIndex(l => l.rel == 'type' && l.uri == 'http://www.w3.org/ns/pim/space#Storage') != -1
+* def links = parseLinkHeaders(responseHeaders)
+And assert hasStorageType(links)
+```
+
+### Other useful functions
+#### `resolveUri(base, target)`
+Apply the target URI to the base URI to return a new URI. For example
+`resolveUri('https://example.org/test/resource', '/inbox/')` would return `https://example.org/inbox/`.
+
 ## Libraries
 
 Most tests will deal with resources and containers (which is a subclass of a resource). These objects are represented
@@ -452,6 +481,15 @@ container.
 #### `getAclUrl()`
 Get the ACL URL for this resource.
 * Returns a string.
+
+#### `findStorage()`
+Get the storage root for this resource by working up the path hierarchy looking for the `pim:Storage` link header.
+* Returns a new SolidResource representing the storage root or null if it could not be found or is not accessible to
+  the user.
+
+#### `hasStorageType()`
+Does this resource have the `pim:Storage` link header identifying it as a storage-type container.
+* Returns a boolean.
 
 #### `getAccessDatasetBuilder(owner)`
 There are currently 2 access control implementations supported by the test harness:
