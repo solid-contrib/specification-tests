@@ -52,7 +52,7 @@ Feature: Check that Bob can read and write to RDF resource when he is authorized
     When method PATCH
     Then match [200, 204, 205] contains responseStatus
 
-  Scenario: Test 7.7 Append resource (POST) allowed
+  Scenario: Test 7.7 Append resource (POST) denied
     Given url requestUri
     And headers clients.bob.getAuthHeaders('POST', requestUri)
     And header Content-Type = 'text/turtle'

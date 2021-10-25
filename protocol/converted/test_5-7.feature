@@ -44,7 +44,7 @@ Feature: Check that Bob can read and write to Non-RDF resource when he is author
     When method PATCH
     Then status 415
 
-  Scenario: Test 7.6 Append resource (POST) allowed
+  Scenario: Test 7.6 Append resource (POST) denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('POST', requestUri)
     And header Content-Type = 'text/plain'

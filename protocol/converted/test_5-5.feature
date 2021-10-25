@@ -44,7 +44,7 @@ Feature: Check that Bob can read and append to Non-RDF resource when he is autho
     When method PATCH
     Then match [400, 403, 405, 415] contains responseStatus
 
-  Scenario: Test 5.6 Append resource (POST) allowed
+  Scenario: Test 5.6 Append resource (POST) denied
     Given url requestUri
     And configure headers = clients.bob.getAuthHeaders('POST', requestUri)
     And header Content-Type = 'text/plain'
