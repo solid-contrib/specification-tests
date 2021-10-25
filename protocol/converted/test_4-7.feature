@@ -52,6 +52,19 @@ Feature: Check that Bob can read and write to RDF resource when he is authorized
     When method PATCH
     Then status 409
 
+  Scenario: Write resource (PATCH) and delete allowed
+    Given url requestUri
+    And headers clients.bob.getAuthHeaders('PATCH', requestUri)
+    And header Content-Type = 'application/sparql-update'
+    And request 'INSERT DATA { <> a <http://example.org/Foo> . }'
+    When method PATCH
+    Then match [200, 204, 205] contains responseStatus
+    And headers clients.bob.getAuthHeaders('PATCH', requestUri)
+    And header Content-Type = 'application/sparql-update'
+    And request 'DELETE { ?s a ?o . } INSERT { <> a <http://example.org/Bar> . } WHERE  { ?s a ?o . }'
+    When method PATCH
+    Then match [200, 204, 205] contains responseStatus
+
   Scenario: Test 7.7 Append resource (POST) allowed
     Given url requestUri
     And headers clients.bob.getAuthHeaders('POST', requestUri)
