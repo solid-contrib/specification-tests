@@ -59,6 +59,8 @@ Feature: Check that Bob can read and write to RDF resource when he is authorized
     And request 'INSERT DATA { <> a <http://example.org/Foo> . }'
     When method PATCH
     Then match [200, 204, 205] contains responseStatus
+
+    Given url requestUri
     And headers clients.bob.getAuthHeaders('PATCH', requestUri)
     And header Content-Type = 'application/sparql-update'
     And request 'DELETE { ?s a ?o . } INSERT { <> a <http://example.org/Bar> . } WHERE  { ?s a ?o . }'
