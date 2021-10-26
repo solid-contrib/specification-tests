@@ -44,13 +44,13 @@ Feature: Check that Bob can read and append to Non-RDF resource when he is autho
     When method PATCH
     Then match [400, 403, 405, 415] contains responseStatus
 
-  Scenario: Test 5.6 Append resource (POST) allowed
-    Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('POST', requestUri)
-    And header Content-Type = 'text/plain'
-    And request "Bob's addition"
-    When method POST
-    Then match [400, 405, 415] contains responseStatus
+  # Scenario: Test 5.6 Append resource (POST) allowed
+  #   Given url requestUri
+  #   And configure headers = clients.bob.getAuthHeaders('POST', requestUri)
+  #   And header Content-Type = 'text/plain'
+  #   And request "Bob's addition"
+  #   When method POST
+  #   Then match [400, 405, 415] contains responseStatus
 
   Scenario: Test 5.7 Delete resource denied
     Given url requestUri
