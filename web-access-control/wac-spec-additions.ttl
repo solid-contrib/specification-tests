@@ -1,0 +1,24 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix doap: <http://usefulinc.com/ns/doap#>
+prefix spec: <http://www.w3.org/ns/spec#>
+
+<https://solid.github.io/web-access-control-spec>
+  spec:requirement
+        <https://solid.github.io/web-access-control-spec#access-modes> ,
+        <https://solid.github.io/web-access-control-spec#access-objects>,
+        <https://solid.github.io/web-access-control-spec#authorization-evaluation-context>
+.
+
+<https://solid.github.io/web-access-control-spec/#access-modes>
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST .
+
+<https://solid.github.io/web-access-control-spec#access-objects>
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST .
+
+<https://solid.github.io/web-access-control-spec#authorization-evaluation-context>
+  spec:requirementSubject spec:Server ;
+  spec:requirementLevel spec:MUST .
