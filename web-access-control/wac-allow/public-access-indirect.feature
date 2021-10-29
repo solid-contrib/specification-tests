@@ -33,7 +33,7 @@ Feature: The WAC-Allow header shows public access modes for a public agent when 
     And headers clients.alice.getAuthHeaders('GET', resource.aclUrl)
     And header Accept = 'text/turtle'
     When method GET
-    Then assert responseStatus == 404
+    Then status 404
 
   Scenario: There is an acl on the parent containing a public agent
     Given url resource.container.aclUrl
