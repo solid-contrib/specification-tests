@@ -9,7 +9,7 @@ prefix manifest: <#>
 
 manifest:protected-operation-not-read-resource-access-AWC
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#access-modes> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -17,7 +17,7 @@ manifest:protected-operation-not-read-resource-access-AWC
 
 manifest:protected-operation-not-read-resource-default-AWC
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#access-modes> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -25,7 +25,7 @@ manifest:protected-operation-not-read-resource-default-AWC
 
 manifest:protected-operation-read-resource-access-R
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#access-modes> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -33,7 +33,7 @@ manifest:protected-operation-read-resource-access-R
 
 manifest:protected-operation-read-resource-default-R
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#access-modes> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -41,7 +41,7 @@ manifest:protected-operation-read-resource-default-R
 
 manifest:acl-object-none
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-objects> ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#access-objects> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -49,7 +49,7 @@ manifest:acl-object-none
 
 manifest:acl-object-access-to
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-objects> ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#access-objects> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -57,7 +57,7 @@ manifest:acl-object-access-to
 
 manifest:acl-object-default
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-objects> ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#access-objects> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -65,7 +65,7 @@ manifest:acl-object-default
 
 manifest:acl-object-access-to-default
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-objects> ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#access-objects> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -73,7 +73,7 @@ manifest:acl-object-access-to-default
 
 manifest:protected-operation-acl-propagation
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#authorization-evaluation-context> ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#authorization-evaluation-context> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
