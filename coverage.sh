@@ -18,6 +18,7 @@ EOF
 }
 
 setup_config() {
+  mkdir -p config
   cat > ./config/application.yaml <<EOF
 sources:
   - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
@@ -70,5 +71,5 @@ then
   docker pull solidconformancetestbeta/conformance-test-harness
 fi
 
-#echo "RUNNING: docker run ${dockerargs[@]} $dockerimage ${harnessargs[@]} $@"
+echo "RUNNING: docker run ${dockerargs[@]} $dockerimage ${harnessargs[@]} $@"
 docker run ${dockerargs[@]} $dockerimage ${harnessargs[@]} $@
