@@ -78,14 +78,14 @@
 </script>
 </head>
 
-<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/implementation-reports/64969099-9975-4001-9120-c6f7011e087a#">
+<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/implementation-reports/b2283104-15b8-4d09-a898-7c47cc5f5a03#">
 <main>
 <article>
 <h1 property="dcterms:title">Solid Specification - Conformance Test Suite Coverage Report</h1>
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd><a href="https://github.com/solid/implementation-reports/64969099-9975-4001-9120-c6f7011e087a#" rel="owl:sameAs">https://github.com/solid/implementation-reports/64969099-9975-4001-9120-c6f7011e087a#</a></dd>
+  <dd><a href="https://github.com/solid/implementation-reports/b2283104-15b8-4d09-a898-7c47cc5f5a03#" rel="owl:sameAs">https://github.com/solid/implementation-reports/b2283104-15b8-4d09-a898-7c47cc5f5a03#</a></dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -992,7 +992,36 @@ MUST
   </dl>
   <dl><dt>Excerpt</dt><dd property="spec:statement">Servers MUST create intermediate containers and include corresponding containment triples in container representations derived from the URI path component of PUT and PATCH requests.</dd></dl>
 </div>
-      <p>No test cases found.</p>
+      <table rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-put-patch-intermediate-containers">
+        <caption>Test cases</caption>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Details</th>
+          <th>Implemented</th>
+        </tr>
+        </thead>
+        <tbody>
+<tr id="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#writing-resource-containment" about="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#writing-resource-containment" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Creating a resource using PUT and PATCH must create intermediate containers</span>
+    [<a href="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#writing-resource-containment">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-put-patch-intermediate-containers" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
+Unreviewed
+              </a></dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+        </tbody>
+      </table>
 <div rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-post-container" typeof="">
   <dl><dt>Specification</dt><dd><a href="https://solidproject.org/TR/protocol">https://solidproject.org/TR/protocol</a></dd></dl>
   <dl><dt>Requirement</dt><dd><a href="https://solidproject.org/TR/protocol#server-post-container">https://solidproject.org/TR/protocol#server-post-container</a></dd></dl>
@@ -1261,7 +1290,36 @@ MUST
   </dl>
   <dl><dt>Excerpt</dt><dd property="spec:statement">When a server creates a resource on HTTP PUT, POST or PATCH requests such that the request’s representation data encodes an RDF document [RDF11-CONCEPTS] (as determined by the Content-Type header), the server MUST accept GET requests on this resource when the value of the Accept header requests a representation in text/turtle or application/ld+json [Turtle] [JSON-LD11].</dd></dl>
 </div>
-      <p>No test cases found.</p>
+      <table rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-representation-turtle-jsonld">
+        <caption>Test cases</caption>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Details</th>
+          <th>Implemented</th>
+        </tr>
+        </thead>
+        <tbody>
+<tr id="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#content-negotiation-jsonld-turtle" about="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#content-negotiation-jsonld-turtle" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Requests support content negotiation for JSON-LD resource</span>
+    [<a href="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#content-negotiation-jsonld-turtle">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-representation-turtle-jsonld" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
+Unreviewed
+              </a></dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+        </tbody>
+      </table>
 <div rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-representation-write-redirect" typeof="">
   <dl><dt>Specification</dt><dd><a href="https://solidproject.org/TR/protocol">https://solidproject.org/TR/protocol</a></dd></dl>
   <dl><dt>Requirement</dt><dd><a href="https://solidproject.org/TR/protocol#server-representation-write-redirect">https://solidproject.org/TR/protocol#server-representation-write-redirect</a></dd></dl>
@@ -1511,7 +1569,36 @@ MUST
   </dl>
   <dl><dt>Excerpt</dt><dd property="spec:statement">Servers exposing client’s access privileges on a resource URL MUST advertise by including the WAC-Allow HTTP header in the response of HTTP HEAD and GET requests.</dd></dl>
 </div>
-      <p>No test cases found.</p>
+      <table rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-wac-allow">
+        <caption>Test cases</caption>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Details</th>
+          <th>Implemented</th>
+        </tr>
+        </thead>
+        <tbody>
+<tr id="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#wac-allow" about="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#wac-allow" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">The WAC-Allow header shows user and public access modes with Bob write and public read, append</span>
+    [<a href="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#wac-allow">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/protocol/wac-allow/access-Bob-W-public-RA.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-wac-allow" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
+Unreviewed
+              </a></dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+        </tbody>
+      </table>
 <div rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-wac-allow" typeof="">
   <dl><dt>Specification</dt><dd><a href="https://solidproject.org/TR/protocol">https://solidproject.org/TR/protocol</a></dd></dl>
   <dl><dt>Requirement</dt><dd><a href="https://solidproject.org/TR/protocol#client-wac-allow">https://solidproject.org/TR/protocol#client-wac-allow</a></dd></dl>
@@ -1598,7 +1685,7 @@ Client
 MUST
           </dd>
   </dl>
-  <dl><dt>Excerpt</dt><dd property="spec:statement"> Clients MUST discover the ACL resource associated with a resource by making an HTTP request on the target URL, and checking the HTTP Link header with the rel parameter.</dd></dl>
+  <dl><dt>Excerpt</dt><dd property="spec:statement">Clients MUST discover the ACL resource associated with a resource by making an HTTP request on the target URL, and checking the HTTP Link header with the rel parameter.</dd></dl>
 </div>
       <p>No test cases found.</p>
 <div rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#client-acl-uri" typeof="">
@@ -1616,7 +1703,7 @@ Client
 MUST NOT
     </dd>
   </dl>
-  <dl><dt>Excerpt</dt><dd property="spec:statement"> Clients MUST NOT derive the URI of the ACL resource through string operations on the URI of the resource.</dd></dl>
+  <dl><dt>Excerpt</dt><dd property="spec:statement">Clients MUST NOT derive the URI of the ACL resource through string operations on the URI of the resource.</dd></dl>
 </div>
       <p>No test cases found.</p>
 <div rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#server-get-acl-turtle" typeof="">
@@ -1894,13 +1981,15 @@ MUST
   <dl><dt>Requirement</dt><dd><a href="https://solid.github.io/web-access-control-spec#access-modes">https://solid.github.io/web-access-control-spec#access-modes</a></dd></dl>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="">
-    </dd>
+    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
+Server
+          </dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="">
-    </dd>
+    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
+MUST
+          </dd>
   </dl>
 </div>
       <table rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec#access-modes">
