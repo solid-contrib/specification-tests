@@ -28,7 +28,7 @@ jobs:
       # Write index file
       - name: Create index.html
         run: |
-          cat << EOF > ./reports.index.html
+          cat << EOF > ./reports/index.html
           <html lang="en-US">
               <head>
                   <meta charset="UTF-8">
