@@ -78,14 +78,14 @@
 </script>
 </head>
 
-<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/implementation-reports/c66eabaa-75c8-47ee-915d-b0b74c16293b#">
+<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/implementation-reports/7006defe-a29e-4f32-873e-6356b82080f2#">
 <main>
 <article>
 <h1 property="dcterms:title">Solid Specification - Conformance Test Suite Coverage Report</h1>
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd><a href="https://github.com/solid/implementation-reports/c66eabaa-75c8-47ee-915d-b0b74c16293b#" rel="owl:sameAs">https://github.com/solid/implementation-reports/c66eabaa-75c8-47ee-915d-b0b74c16293b#</a></dd>
+  <dd><a href="https://github.com/solid/implementation-reports/7006defe-a29e-4f32-873e-6356b82080f2#" rel="owl:sameAs">https://github.com/solid/implementation-reports/7006defe-a29e-4f32-873e-6356b82080f2#</a></dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -1300,11 +1300,11 @@ MUST
         </tr>
         </thead>
         <tbody>
-<tr id="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#content-negotiation-jsonld-turtle" about="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#content-negotiation-jsonld-turtle" typeof="td:TestCase">
+<tr id="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#content-negotiation-turtle-jsonld" about="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#content-negotiation-turtle-jsonld" typeof="td:TestCase">
   <td>
-    <span property="dcterms:title">Requests support content negotiation for JSON-LD resource</span>
-    [<a href="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#content-negotiation-jsonld-turtle">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature" rel="spec:testScript">source</a>]
+    <span property="dcterms:title">Requests support content negotiation for Turtle resource</span>
+    [<a href="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#content-negotiation-turtle-jsonld">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature" rel="spec:testScript">source</a>]
     [<a href="https://solidproject.org/TR/protocol#server-representation-turtle-jsonld" rel="spec:requirementReference">requirement</a>]
   </td>
   <td>
@@ -1569,36 +1569,7 @@ MUST
   </dl>
   <dl><dt>Excerpt</dt><dd property="spec:statement">Servers exposing client’s access privileges on a resource URL MUST advertise by including the WAC-Allow HTTP header in the response of HTTP HEAD and GET requests.</dd></dl>
 </div>
-      <table rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-wac-allow">
-        <caption>Test cases</caption>
-        <thead>
-        <tr>
-          <th>Title</th>
-          <th>Details</th>
-          <th>Implemented</th>
-        </tr>
-        </thead>
-        <tbody>
-<tr id="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#wac-allow" about="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#wac-allow" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">The WAC-Allow header shows user and public access modes with Bob write and public read, append</span>
-    [<a href="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#wac-allow">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/protocol/wac-allow/access-Bob-W-public-RA.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solidproject.org/TR/protocol#server-wac-allow" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-        </tbody>
-      </table>
+      <p>No test cases found.</p>
 <div rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-wac-allow" typeof="">
   <dl><dt>Specification</dt><dd><a href="https://solidproject.org/TR/protocol">https://solidproject.org/TR/protocol</a></dd></dl>
   <dl><dt>Requirement</dt><dd><a href="https://solidproject.org/TR/protocol#client-wac-allow">https://solidproject.org/TR/protocol#client-wac-allow</a></dd></dl>
@@ -1921,7 +1892,54 @@ MUST
   </dl>
   <dl><dt>Excerpt</dt><dd property="spec:statement">Servers MUST advertise client’s access privileges on a resource by including the WAC-Allow HTTP header (WAC-Allow) in the response of HTTP GET and HEAD requests.</dd></dl>
 </div>
-      <p>No test cases found.</p>
+      <table rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec#server-wac-allow">
+        <caption>Test cases</caption>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Details</th>
+          <th>Implemented</th>
+        </tr>
+        </thead>
+        <tbody>
+<tr id="https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow" about="https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">The WAC-Allow header is advertised</span>
+    [<a href="https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/web-access-control/wac-allow/header-exists.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec#server-wac-allow" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
+Unreviewed
+              </a></dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public" about="https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">The WAC-Allow header shows public access modes for a public agent when given direct access</span>
+    [<a href="https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/web-access-control/wac-allow/public-access-direct.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec#server-wac-allow" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
+Unreviewed
+              </a></dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+        </tbody>
+      </table>
 <div rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#client-wac-allow" typeof="">
   <dl><dt>Specification</dt><dd><a href="https://solid.github.io/web-access-control-spec">https://solid.github.io/web-access-control-spec</a></dd></dl>
   <dl><dt>Requirement</dt><dd><a href="https://solid.github.io/web-access-control-spec#client-wac-allow">https://solid.github.io/web-access-control-spec#client-wac-allow</a></dd></dl>
