@@ -79,23 +79,43 @@ manifest:protected-operation-acl-propagation
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/acl-propagation.feature> .
 
-manifest:server-wac-allow
+manifest:server-wac-allow-header-exists
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl";
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/wac-allow/header-exists.feature> ,
-    <https://github.com/solid/specification-tests/web-access-control/wac-allow/user-access-direct.feature> ,
-    <https://github.com/solid/specification-tests/web-access-control/wac-allow/user-access-indirect.feature>
-.
+    <https://github.com/solid/specification-tests/web-access-control/wac-allow/header-exists.feature> .
 
-manifest:server-wac-allow-public
+manifest:server-wac-allow-user-access-direct
+  a td:TestCase ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
+  td:reviewStatus td:unreviewed ;
+  td:preCondition "authentication", "acl";
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/wac-allow/user-access-direct.feature> .
+
+manifest:server-wac-allow-user-access-indirect
+  a td:TestCase ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
+  td:reviewStatus td:unreviewed ;
+  td:preCondition "authentication", "acl";
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/wac-allow/user-access-indirect.feature> .
+
+manifest:server-wac-allow-public-access-direct
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl", "wac-allow-public";
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/wac-allow/public-access-direct.feature> ,
+    <https://github.com/solid/specification-tests/web-access-control/wac-allow/public-access-direct.feature> .
+
+manifest:server-wac-allow-public-access-indirect
+  a td:TestCase ;
+  spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
+  td:reviewStatus td:unreviewed ;
+  td:preCondition "authentication", "acl", "wac-allow-public";
+  spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/wac-allow/public-access-indirect.feature> .
 
