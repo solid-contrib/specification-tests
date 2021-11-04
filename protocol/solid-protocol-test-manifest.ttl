@@ -31,12 +31,18 @@ manifest:authentication-header
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/authentication/header.feature> .
 
-manifest:content-negotiation-turtle-jsonld
+manifest:content-negotiation-turtle
   a td:TestCase ;
   spec:requirementReference sopr:server-representation-turtle-jsonld ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature> ,
+    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature> .
+
+manifest:content-negotiation-jsonld
+  a td:TestCase ;
+  spec:requirementReference sopr:server-representation-turtle-jsonld ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
     <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
 manifest:writing-resource-containment
