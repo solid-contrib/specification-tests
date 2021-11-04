@@ -15,9 +15,10 @@
 
 display_usage() {
   cat << EOF
-Usage: ./run.sh [-d testdir] [-l] <subject> [args]
+Usage: ./run.sh [-d testdir] [-l] [-e <envfile>] <subject> [args]
   -d <testdir> Use local development version of tests in specified location
   -l           Use local docker image of test harness (called testharness)
+  -e <envfile> Use this env file instead of <subject>.env
   <subject>    The short name of the test subject
   [args]       Other arguments passed to the test harness
 EOF
@@ -133,7 +134,7 @@ sources:
   - https://github.com/solid/specification-tests/web-access-control/wac-spec-additions.ttl
 
   # Include unlinked additional tests
-  - https://github.com/solid/specification-tests/protocol/converted.ttl
+  # - https://github.com/solid/specification-tests/protocol/converted.ttl
 
 mappings:
   - prefix: https://github.com/solid/specification-tests
@@ -154,7 +155,7 @@ cwd=$(pwd)
 
 # parse options
 # the 'target' directory is used by Karate for it's own format reports which can be helpful in development
-while getopts ":lhd:" arg; do
+while getopts "lhd:e:" arg; do
   case $arg in
     d)
       testDir="$(cd "${OPTARG}" && pwd)"
@@ -166,6 +167,9 @@ while getopts ":lhd:" arg; do
       outdir='local'
       dockerargs+=('-v' "$cwd/target:/app/target")
       dockerimage='testharness'
+      ;;
+    e)
+      envfile="${OPTARG}"
       ;;
   esac
 done
@@ -182,11 +186,15 @@ fi
 # extract subject
 subject=$1
 outdir=$subject
+if [ -z ${envfile+x} ]
+then
+  envfile="${subject}.env"
+fi
 shift
 
 echo "Running tests on $subject and reporting to $cwd/reports/$subject"
 
-dockerargs+=('-v' "$cwd/reports/$outdir:/reports" "--env-file=$subject.env")
+dockerargs+=('-v' "$cwd/reports/$outdir:/reports" "--env-file=$envfile")
 harnessargs=('--output=/reports' "--target=https://github.com/solid/conformance-test-harness/$subject")
 
 # ensure report directory exists

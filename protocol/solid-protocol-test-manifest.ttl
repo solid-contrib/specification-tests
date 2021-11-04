@@ -31,13 +31,13 @@ manifest:authentication-header
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/authentication/header.feature> .
 
-manifest:content-negotiation-jsonld-turtle
+manifest:content-negotiation-turtle-jsonld
   a td:TestCase ;
   spec:requirementReference sopr:server-representation-turtle-jsonld ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> ,
-    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature> .
+    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature> ,
+    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
 manifest:writing-resource-containment
   a td:TestCase ;
@@ -46,12 +46,3 @@ manifest:writing-resource-containment
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature> .
 
-manifest:wac-allow
-  a td:TestCase ;
-  spec:requirementReference sopr:server-wac-allow ;
-  td:reviewStatus td:unreviewed ;
-  td:preCondition "authentication", "acl", "wac-allow" ;
-  spec:testScript
-    <https://github.com/solid/specification-tests/protocol/wac-allow/access-Bob-W-public-RA.feature> ,
-    <https://github.com/solid/specification-tests/protocol/wac-allow/default-Bob-W-public-RA.feature> ,
-    <https://github.com/solid/specification-tests/protocol/wac-allow/access-public-R.feature> .
