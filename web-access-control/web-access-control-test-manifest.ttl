@@ -10,7 +10,7 @@ prefix manifest: <#>
 manifest:protected-operation-not-read-resource-access-AWC
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#access-modes> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
@@ -26,7 +26,7 @@ manifest:protected-operation-not-read-resource-default-AWC
 manifest:protected-operation-read-resource-access-R
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#access-modes> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-access-R.feature> .
@@ -34,7 +34,7 @@ manifest:protected-operation-read-resource-access-R
 manifest:protected-operation-read-resource-default-R
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#access-modes> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-default-R.feature> .
@@ -42,7 +42,7 @@ manifest:protected-operation-read-resource-default-R
 manifest:acl-object-none
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#access-objects> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/acl-object/container-none.feature> .
@@ -50,7 +50,7 @@ manifest:acl-object-none
 manifest:acl-object-access-to
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#access-objects> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/acl-object/container-access-to.feature> .
@@ -66,7 +66,7 @@ manifest:acl-object-default
 manifest:acl-object-access-to-default
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#access-objects> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/acl-object/container-access-to-default.feature> .
@@ -74,7 +74,7 @@ manifest:acl-object-access-to-default
 manifest:protected-operation-acl-propagation
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#authorization-evaluation-context> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/acl-propagation.feature> .
@@ -82,7 +82,7 @@ manifest:protected-operation-acl-propagation
 manifest:server-wac-allow-header-exists
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl";
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/wac-allow/header-exists.feature> .
@@ -90,7 +90,7 @@ manifest:server-wac-allow-header-exists
 manifest:server-wac-allow-user-access-direct
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl";
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/wac-allow/user-access-direct.feature> .
@@ -98,7 +98,7 @@ manifest:server-wac-allow-user-access-direct
 manifest:server-wac-allow-user-access-indirect
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl";
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/wac-allow/user-access-indirect.feature> .
@@ -106,7 +106,7 @@ manifest:server-wac-allow-user-access-indirect
 manifest:server-wac-allow-public-access-direct
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl", "wac-allow-public";
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/wac-allow/public-access-direct.feature> .
@@ -114,7 +114,7 @@ manifest:server-wac-allow-public-access-direct
 manifest:server-wac-allow-public-access-indirect
   a td:TestCase ;
   spec:requirementReference <https://solid.github.io/web-access-control-spec#server-wac-allow> ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   td:preCondition "authentication", "acl", "wac-allow-public";
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/wac-allow/public-access-indirect.feature> .

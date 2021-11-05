@@ -27,28 +27,28 @@ manifest:authentication-header
   a td:TestCase ;
     spec:requirementReference sopr:server-authentication,
     sopr:server-unauthenticated ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/authentication/header.feature> .
 
 manifest:content-negotiation-turtle
   a td:TestCase ;
   spec:requirementReference sopr:server-representation-turtle-jsonld ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature> .
 
 manifest:content-negotiation-jsonld
   a td:TestCase ;
   spec:requirementReference sopr:server-representation-turtle-jsonld ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
 manifest:writing-resource-containment
   a td:TestCase ;
   spec:requirementReference sopr:server-put-patch-intermediate-containers ;
-  td:reviewStatus td:unreviewed ;
+  td:reviewStatus td:approved ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature> .
 
