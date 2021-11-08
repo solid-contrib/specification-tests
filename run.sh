@@ -119,27 +119,8 @@ stop_css() {
 }
 
 setup_config() {
-  cat > ./config/application.yaml <<EOF
-subjects: /data/test-subjects.ttl
-sources:
-  # Protocol spec & manifest
-  - https://solidproject.org/TR/protocol
-  - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
-
-  # WAC spec & manifest
-  - https://solid.github.io/web-access-control-spec
-  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl
-
-  # Link old tests to new spec temporarily
-  - https://github.com/solid/specification-tests/web-access-control/wac-spec-additions.ttl
-
-  # Include unlinked additional tests
-  # - https://github.com/solid/specification-tests/protocol/converted.ttl
-
-mappings:
-  - prefix: https://github.com/solid/specification-tests
-    path: /data
-EOF
+  mkdir -p config
+  cp ./application.yaml ./config/application.yaml
 }
 
 # if no arguments supplied, display usage
