@@ -51,9 +51,9 @@
     solid-test:features "authentication", "acl", "wac-allow-public" .
 
 <css#test-subject-release>
-    doap:name "CSS 2.0.0" ;
-    doap:revision "2.0.0" ;
-    doap:created "2021-10-15"^^xsd:date .
+    doap:name "CSS 2.0.1" ;
+    doap:revision "2.0.1" ;
+    doap:created "2021-11-02"^^xsd:date .
 
 <nss>
     a earl:Software, earl:TestSubject ;
