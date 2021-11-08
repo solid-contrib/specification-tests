@@ -16,7 +16,7 @@ Feature: Requests support content negotiation for JSON-LD resource
     And match header Content-Type contains 'application/ld+json'
     And match RDFUtils.jsonLdToTripleArray(JSON.stringify(response), resource.getUrl()) contains expected
 
-  Scenario: Alice can read the JSON-LD example as TTL
+  Scenario: Alice can read the JSON-LD example as Turtle
     Given header Accept = 'text/turtle'
     When method GET
     Then status 200
