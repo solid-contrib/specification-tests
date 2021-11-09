@@ -979,6 +979,7 @@ specifications being annotated:
 * Provide each requirement with an identifier which should also be a valid URL in the specification
 * Identify the subject of the requirement (e.g. client or server)
 * Define the requirement level (e.g. SHOULD, MUST, MAY)
+* Provide access to the text of the requirement
 
 The intention is that this will be done as RDFa annotations in the specification documents but it is understood that
 this will take some time. As a workaround, the same data may be provided in Turtle format separate to the specification.
@@ -1000,11 +1001,13 @@ prefix spec: <http://www.w3.org/ns/spec#>
 
 <https://solidproject.org/TR/2021/wac-20210711#access-modes>
   spec:requirementSubject spec:Server ;
-  spec:requirementLevel spec:MUST .
+  spec:requirementLevel spec:MUST ;
+  spec:statement "text of the requirement"@en .
 
 <https://solidproject.org/TR/2021/wac-20210711#access-objects>
   spec:requirementSubject spec:Server ;
-  spec:requirementLevel spec:MUST .
+  spec:requirementLevel spec:MUST ;
+  spec:statement "text of the requirement"@en .
 ```
 
 The specification vocab used above is under development, but the latest version is at
@@ -1025,7 +1028,7 @@ The test cases themselves need to be described in a manifest file. For each test
   values of `solid-test:features` in the subject description found in `test-subjects.ttl`:
   * `authentication`
   * `acl` - either WAC or ACP supported
-  * `wac-allow` - supports the `WAC-Allow` header
+  * `wac-allow-public` - supports the public permission group in the `WAC-Allow` header
 * A link to the script that defines the test case `spec:testScript` - note that the URL provided is normally mapped to 
   the local file system in the test harness configuration file.
 
