@@ -2,7 +2,7 @@
 
 <!-- MarkdownTOC -->
 
-- [Running these tests locally](#running-these-tests-locally)
+- [Running these tests locally](#run-script)
 - [KarateDSL](#karatedsl)
   - [Structure of a Test Case](#structure-of-a-test-case)
   - [Data related keywords](#data-related-keywords)
@@ -16,6 +16,7 @@
 - [Example Test Cases](#example-test-cases)
 - [Specification Annotations](#specification-annotations)
 - [Test Manifest](#test-manifest)
+- [Versioning](#versioning)
 
 <!-- /MarkdownTOC -->
 
@@ -1067,3 +1068,24 @@ manifest:acl-object-none
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/acl-object/container-none.feature> .
 ```
+
+# Versioning
+This repository will tag releases to make it possible to track report results to the specific versions of tests that were
+run. Changes to the tests for each version will be described in the [CHANGELOG.md](CHANGELOG.md).
+
+The release process is:
+* Check that any relevant PRs have been merged and pulled locally.
+* Update CHANGELOG.md to describe changes since the last release.
+* Tag the repository (the message is optional):
+  ```shell
+  git tag -a v1.0.0 -m "Releasing version v1.0.0"
+  ```
+* Commit the CHANGELOG and push it with the tags:
+  ```shell
+  git push origin --tags
+  ```
+* Create the release in GitHub - [Create a new release](https://github.com/solid/specification-tests/releases/new):
+  * Choose the tag that was just created.
+  * Add a title, e.g. `Release 1.0.0`.
+  * Add some content describing notable changes.
+  * Publish the release.
