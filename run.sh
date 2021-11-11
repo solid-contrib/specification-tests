@@ -196,9 +196,13 @@ fi
 
 echo "RUNNING: docker run ${dockerargs[@]} $dockerimage ${harnessargs[@]} $@"
 docker run ${dockerargs[@]} $dockerimage ${harnessargs[@]} $@
+exit_code=$?
+echo "Exit code: $exit_code"
 
 # optionally stop CSS
 if [ $subject == "css" ]
 then
 	stop_css
 fi
+
+exit "$exit_code"
