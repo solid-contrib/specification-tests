@@ -1076,13 +1076,9 @@ run. Changes to the tests for each version will be described in the [CHANGELOG.m
 The release process is:
 * Check that any relevant PRs have been merged and pulled locally.
 * Update CHANGELOG.md to describe changes since the last release.
-* Tag the repository (the message is optional):
+* Set up the release (updates version.txt and pushes a tag):
   ```shell
-  git tag -a v1.0.0 -m "Releasing version v1.0.0"
-  ```
-* Commit the CHANGELOG and push it with the tags:
-  ```shell
-  git push origin --tags
+  ./release.sh v1.0.0
   ```
 * Create the release in GitHub - [Create a new release](https://github.com/solid/specification-tests/releases/new):
   * Choose the tag that was just created.

@@ -29,7 +29,7 @@ echo "Updating version to $versionLabel for $projectName"
 git pull
 
 # update version file
-echo "$versionLabel" > version.txt
+echo "$versionLabel $(date '+%Y-%m-%d')" > version.txt
 
 # commit this change
 git commit version.txt -m "Update to version $versionLabel"
