@@ -1,5 +1,8 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.2
+* Fix manifest for converted tests to ensure one manifest entry per test case.
+
 ## Release 0.0.1
 Initial release of tests in the following areas:
 
