@@ -98,31 +98,33 @@
 </style>
 <script>
   //<![CDATA[
-  document.addEventListener("DOMContentLoaded", function (event) {
-    const anchors = document.querySelectorAll("a");
-    anchors.forEach(anchor => {
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("a").forEach(anchor => {
       anchor.href = anchor.href
               .replace('github.com/solid/specification-tests/', 'github.com/solid/specification-tests/blob/main/')
               .replace('github.com/solid/conformance-test-harness/', 'github.com/solid/conformance-test-harness/blob/main/')
-    })
+    });
 
-    function openTarget() {
-      const hash = location.hash.substring(1);
-      if (hash) {
-        const details = document.getElementById(hash);
-        if (details && details.tagName.toLowerCase() === 'details') {
-          details.open = true;
-          const parentDetails = details.parentElement.closest('details')
-          if (parentDetails) {
-            parentDetails.open = true;
-          }
-          details.scrollIntoView();
-        }
-      }
-    }
+    fetchLatestTestsVersion();
+
     window.addEventListener('hashchange', openTarget);
     openTarget();
   });
+
+  function openTarget() {
+    const hash = location.hash.substring(1);
+    if (hash) {
+      const details = document.getElementById(hash);
+      if (details && details.tagName.toLowerCase() === 'details') {
+        details.open = true;
+        const parentDetails = details.parentElement.closest('details')
+        if (parentDetails) {
+          parentDetails.open = true;
+        }
+        details.scrollIntoView();
+      }
+    }
+  }
 
   function openAll(elem) {
     elem.parentElement.querySelectorAll('details').forEach(d => d.open = true);
@@ -143,18 +145,35 @@
     elem.parentElement.querySelectorAll('details').forEach(d => d.open = false);
   }
 
+  function fetchLatestTestsVersion() {
+    const warning = document.querySelector('#version-warning');
+    if (!warning) return;
+    fetch('https://api.github.com/repos/solid/specification-tests/tags').then((response) => {
+      return response.json();
+    }).then((data) => {
+      if (data && data.length && data[0].name) {
+        const latestVersion = data[0].name.replace('v', '');
+        if (warning.dataset.revision !== latestVersion) {
+          warning.style.display = 'inline';
+          document.querySelector('#latest-version').innerHTML = latestVersion;
+        }
+      }
+    }).catch((err) => {
+      console.warn('Failed to get release versions from https://github.com/solid/specification-tests.', err);
+    });
+  }
   //]]>
 </script>
 </head>
 
-<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/specification-tests/6cf198a7-15ef-48e8-b2df-3dced71deff5#">
+<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/specification-tests/f9378057-1f1b-490c-b80c-b6c4d688436b#">
 <main>
 <article>
 <h1 property="dcterms:title">Solid Specification - Conformance Test Suite Coverage Report</h1>
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd resource="https://github.com/solid/specification-tests/6cf198a7-15ef-48e8-b2df-3dced71deff5" rel="owl:sameAs">https://github.com/solid/specification-tests/6cf198a7-15ef-48e8-b2df-3dced71deff5</dd>
+  <dd resource="https://github.com/solid/specification-tests/f9378057-1f1b-490c-b80c-b6c4d688436b" rel="owl:sameAs">https://github.com/solid/specification-tests/f9378057-1f1b-490c-b80c-b6c4d688436b</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -165,6 +184,23 @@
     <li><a href="https://solid.github.io/web-access-control-spec" typeof="http://schema.org/CreativeWork prov:Entity https://www.w3.org/ns/activitystreams#Article http://schema.org/Article doap:Specification" title="Specification link">https://solid.github.io/web-access-control-spec</a></li>
   </ul>
 </section>
+<section about="https://github.com/solid/specification-tests/f9378057-1f1b-490c-b80c-b6c4d688436b#tests" id="tests" typeof="doap:Project">
+  <h2>Test suite</h2>
+  <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
+  <dl><dt>Description</dt><dd property="doap:description">Solid Specification Conformance Tests</dd></dl>
+  <dl><dt>Created</dt><dd><time datatype="xsd:dateTime" datetime="2021-11-12T00:00:00.000Z" content="2021-11-12T00:00:00.000Z" property="doap:created">2021-11-12</time></dd></dl>
+  <dl><dt>Developer</dt><dd><a href="https://solidproject.org" rel="doap:developer">https://solidproject.org</a></dd></dl>
+  <dl><dt>Homepage</dt><dd><a href="https://github.com/solid/specification-tests/" rel="doap:homepage">https://github.com/solid/specification-tests/</a></dd></dl>
+  <dl><dt>Programming Language</dt><dd property="doap:programming-language" lang="" xml:lang="">KarateDSL</dd></dl>
+  <dl>
+    <dt>Version</dt>
+    <dd rel="doap:release" resource="#tests-release">
+      <span property="doap:revision" lang="" xml:lang="">0.0.1</span>
+      <span id="version-warning" style="display:none" data-revision="0.0.1">(there is a newer release of the tests available: <span id="latest-version"></span>)</span>
+    </dd>
+  </dl>
+</section>
+
 <section id="test-coverage-by-specification-requirement" rel="dcterms:hasPart" resource="#test-coverage-by-specification-requirement">
   <h2 property="dcterms:title">Test coverage by specification requirement</h2>
 <button type="button" onclick="openAll(this)">Open all</button>
