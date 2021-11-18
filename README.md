@@ -1078,7 +1078,7 @@ The release process is:
 * Update CHANGELOG.md to describe changes since the last release.
 * Set up the release (updates version.txt and pushes a tag):
   ```shell
-  ./release.sh v1.0.0
+  ./release.sh 1.0.0
   ```
 * Create the release in GitHub - [Create a new release](https://github.com/solid/specification-tests/releases/new):
   * Choose the tag that was just created.
