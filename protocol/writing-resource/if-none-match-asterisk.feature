@@ -23,7 +23,8 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
     And header Content-Type = 'text/turtle'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "No Interaction Model, but if-none-match"@en .'
     When method PUT
-    Then match [200, 201, 204, 205] contains responseStatus
+    # Required by https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.4
+    Then status 201
 
   # Test 2.3 on URL /dahut-no-nr.ttl
     Given url requestUri
