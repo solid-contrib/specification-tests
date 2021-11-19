@@ -6,7 +6,7 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
     * assert resource.exists()
 
   Scenario: Precondition Fails not met when putting a resource over an existing one
-    * def requestUri = resource.getUrl()
+    * def requestUri = resource.url
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header If-None-Match = '*'
