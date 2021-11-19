@@ -31,6 +31,7 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
+    * match response contains 'if-none-match'
 
   # Scenario: Test 2.4 Conflict when putting a container as a non-container
   #   * def requestUri = testContainer.getUrl() + 'dahut-bc.ttl'
