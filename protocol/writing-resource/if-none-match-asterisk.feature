@@ -15,6 +15,12 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
     When method PUT
     Then status 412
 
+    Given url requestUri
+    And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
+    When method GET
+    Then status 200
+    * match response !contains 'if-none-match'
+
   Scenario: Precondition OK when creating new resource
     * def requestUri = testContainer.getUrl() + 'dahut-no-nr.ttl'
     Given url requestUri
@@ -26,7 +32,6 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
     # Required by https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.4
     Then status 201
 
-  # Test 2.3 on URL /dahut-no-nr.ttl
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
