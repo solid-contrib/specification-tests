@@ -22,7 +22,7 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
     * match response !contains 'if-none-match'
 
   Scenario: Precondition OK when creating new resource
-    * def requestUri = testContainer.getUrl() + 'dahut-no-nr.ttl'
+    * def requestUri = testContainer.url + 'dahut-no-nr.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header If-None-Match = '*'
@@ -39,7 +39,7 @@ Feature: Create: PUT Turtle resources to container with If-None-Match: * headers
     * match response contains 'if-none-match'
 
   # Scenario: Test 2.4 Conflict when putting a container as a non-container
-  #   * def requestUri = testContainer.getUrl() + 'dahut-bc.ttl'
+  #   * def requestUri = testContainer.url + 'dahut-bc.ttl'
   #   Given url requestUri
   #   And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
   #   And header If-None-Match = '*'
