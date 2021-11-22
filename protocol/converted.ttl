@@ -13,137 +13,157 @@ manifest:converted-test1-1
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_1-1.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-1.feature> ;
+  dcterms:description "Create: PUT Turtle resources to container with varying LDP Interaction Models."@en .
 
 manifest:converted-test1-2
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_1-2.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-2.feature> ;
+  dcterms:description "Create: PUT Turtle resources to container with If-None-Match: * headers."@en .
 
 manifest:converted-test1-3
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_1-3.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-3.feature> ;
+  dcterms:description "Update: PUT Turtle resources to container with varying LDP Interaction Models."@en .
 
 manifest:converted-test1-4
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_1-4.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-4.feature> ;
+  dcterms:description "Create: PUT Turtle resources to into a deep hierarchy."@en .
 
 manifest:converted-test1-5
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_1-5.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_1-5.feature> ;
+  dcterms:description "Update: PUT text resources to container with no Interaction Model."@en .
 
 manifest:converted-test2-1
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_2-1.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_2-1.feature> ;
+  dcterms:description "Create containers"@en .
 
 manifest:converted-test3-1
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_3-1.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-1.feature> ;
+  dcterms:description "Check that Bob can only read Basic Container when he is authorized read only."@en .
 
 manifest:converted-test3-3
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_3-3.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-3.feature> ;
+  dcterms:description "Check that Bob can only append to Basic Container when he is authorized append only."@en .
 
 manifest:converted-test3-5
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_3-5.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-5.feature> ;
+  dcterms:description "Check that Bob can read and append to Basic Container when he is authorized read-append."@en .
 
 manifest:converted-test3-7
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_3-7.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_3-7.feature> ;
+  dcterms:description "Check that Bob can read and write to Basic Container when he is authorized read-write."@en .
 
 manifest:converted-test4-1
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_4-1.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-1.feature> ;
+  dcterms:description "Check that Bob can only read RDF resource when he is authorized read only."@en .
 
 manifest:converted-test4-3
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_4-3.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-3.feature> ;
+  dcterms:description "Check that Bob can only append to RDF resource when he is authorized append only."@en .
 
 manifest:converted-test4-5
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_4-5.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-5.feature> ;
+  dcterms:description "Check that Bob can read and append to RDF resource when he is authorized read-append."@en .
 
 manifest:converted-test4-7
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_4-7.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-7.feature> ;
+  dcterms:description "Check that Bob can read and write to RDF resource when he is authorized read-write."@en .
 
 manifest:converted-test4-9
   a td:TestCase ;
   #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_4-9.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_4-9.feature> ;
+  dcterms:description "Check that Bob can't delete RDF resource when he is only authorized read-write on the container."@en .
 
 manifest:converted-test5-1
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_5-1.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-1.feature> ;
+  dcterms:description "Check that Bob can only read Non-RDF resource when he is authorized read only."@en .
 
 manifest:converted-test5-3
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_5-3.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-3.feature> ;
+  dcterms:description "Check that Bob can only append to Non-RDF resource when he is authorized append only."@en .
 
 manifest:converted-test5-5
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_5-5.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-5.feature> ;
+  dcterms:description "Check that Bob can read and append to Non-RDF resource when he is authorized read-append."@en .
 
 manifest:converted-test5-7
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_5-7.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-7.feature> ;
+  dcterms:description "Check that Bob can read and write to Non-RDF resource when he is authorized read-write."@en .
 
 manifest:converted-test5-9
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_5-9.feature> .
+    <https://github.com/solid/specification-tests/protocol/converted/test_5-9.feature> ;
+  dcterms:description "Check that Bob cannot delete Non-RDF resource when he is only authorized read-write on the container."@en .
