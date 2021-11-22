@@ -166,14 +166,14 @@
 </script>
 </head>
 
-<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/specification-tests/03309dab-ae53-43ef-8e88-824b3c7b6de2#">
+<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/specification-tests/e6858e79-87ce-4d1b-826b-a5a817ae2a5b#">
 <main>
 <article>
 <h1 property="dcterms:title">Solid Specification - Conformance Test Suite Coverage Report</h1>
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd resource="https://github.com/solid/specification-tests/03309dab-ae53-43ef-8e88-824b3c7b6de2" rel="owl:sameAs">https://github.com/solid/specification-tests/03309dab-ae53-43ef-8e88-824b3c7b6de2</dd>
+  <dd resource="https://github.com/solid/specification-tests/e6858e79-87ce-4d1b-826b-a5a817ae2a5b" rel="owl:sameAs">https://github.com/solid/specification-tests/e6858e79-87ce-4d1b-826b-a5a817ae2a5b</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -184,7 +184,7 @@
     <li><a href="https://solid.github.io/web-access-control-spec" typeof="http://schema.org/CreativeWork prov:Entity https://www.w3.org/ns/activitystreams#Article http://schema.org/Article doap:Specification" title="Specification link">https://solid.github.io/web-access-control-spec</a></li>
   </ul>
 </section>
-<section about="https://github.com/solid/specification-tests/03309dab-ae53-43ef-8e88-824b3c7b6de2#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid/specification-tests/e6858e79-87ce-4d1b-826b-a5a817ae2a5b#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
   <dl><dt>Description</dt><dd property="doap:description">Solid Specification Conformance Tests</dd></dl>
@@ -302,7 +302,7 @@ MUST
         <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-conditional-requests" class="spec">
 <details id="server-conditional-requests" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-conditional-requests" typeof="" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-conditional-requests <a href="https://solidproject.org/TR/protocol#server-conditional-requests" class="ext"></a>
-    <span class="count">0</span>
+    <span class="count">1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -317,7 +317,36 @@ MUST
           </dd>
   </dl>
   <dl><dt>Statement</dt><dd property="spec:statement">A data pod MUST implement the server part of HTTP/1.1 Conditional Requests [RFC7232] to ensure that updates requested by clients will only be applied if given preconditions are met.</dd></dl>
-          <p>No test cases found.</p>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#if-none-match-asterisk" about="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#if-none-match-asterisk" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Create: PUT Turtle resources to container with If-None-Match: * headers.</span>
+    [<a href="https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl#if-none-match-asterisk">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/protocol/writing-resource/if-none-match-asterisk.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-conditional-requests" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
+Unreviewed
+              </a></dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
 </details>
 
         </li>
