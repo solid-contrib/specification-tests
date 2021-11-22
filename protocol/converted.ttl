@@ -15,13 +15,6 @@ manifest:converted-test1-1
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/converted/test_1-1.feature> .
 
-manifest:converted-test1-2
-  a td:TestCase ;
-#  spec:requirementReference sopr:resource-representations ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_1-2.feature> .
-
 manifest:converted-test1-3
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
