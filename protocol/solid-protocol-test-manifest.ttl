@@ -62,7 +62,7 @@ manifest:writing-resource-containment
 
 manifest:deep-hierarchy
   a td:TestCase ;
-  spec:requirementReference sopr:server-hierarchical-containment ;
+  spec:requirementReference sopr:server-put-patch-intermediate-containers ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/deep-hierarchy.feature> .
+    <https://github.com/solid/specification-tests/protocol/writing-resource/deep-hierarchy.feature> .
