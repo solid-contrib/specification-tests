@@ -59,3 +59,10 @@ manifest:writing-resource-containment
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature> .
 
+
+manifest:deep-hierarchy
+  a td:TestCase ;
+  spec:requirementReference sopr:server-hierarchical-containment ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/converted/deep-hierarchy.feature> .

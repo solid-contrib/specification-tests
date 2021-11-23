@@ -24,14 +24,6 @@ manifest:converted-test1-3
     <https://github.com/solid/specification-tests/protocol/converted/test_1-3.feature> ;
   dcterms:description "Update: PUT Turtle resources to container with varying LDP Interaction Models."@en .
 
-manifest:converted-test1-4
-  a td:TestCase ;
-#  spec:requirementReference sopr:resource-representations ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid/specification-tests/protocol/converted/test_1-4.feature> ;
-  dcterms:description "Create: PUT Turtle resources to into a deep hierarchy."@en .
-
 manifest:converted-test1-5
   a td:TestCase ;
 #  spec:requirementReference sopr:resource-representations ;
