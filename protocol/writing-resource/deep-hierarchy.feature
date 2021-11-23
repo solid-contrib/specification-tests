@@ -13,18 +13,21 @@ Feature: Create: PUT Turtle resources to into a deep hierarchy.
     When method PUT
     Then status 201
 
-    # Test 4.5 Check resource exists: /foo/baz/dahut-rs.ttl
+    # Check resource exists: /foo/baz/dahut-rs.ttl
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
+    * match response contains 'source Interaction'
 
-    # Test 4.6 Check container exists: /foo/
+    # Check container exists: /foo/
     * def requestUri = testContainer.url + 'foo/'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
+    # TODO: We should be matching triples here
+    * match response contains 'contains'
 
   Scenario: Create No Interaction model resource at /foobar/baz/dahut-no.ttl
     * def requestUri = testContainer.url + 'foobar/baz/dahut-no.ttl'
@@ -35,16 +38,19 @@ Feature: Create: PUT Turtle resources to into a deep hierarchy.
     When method PUT
     Then status 201
 
-    # Test 4.8 Check resource exists /foobar/baz/dahut-no.ttl
+    # Check resource exists /foobar/baz/dahut-no.ttl
     * def requestUri = testContainer.url + 'foobar/baz/dahut-no.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
+    * match response contains 'No Interaction Model'
 
-  # Test 4.9 Check container exists: /foobar/
+    # Check container exists: /foobar/
     * def requestUri = testContainer.url + 'foobar/'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
+    # TODO: We should be matching triples here
+    * match response contains 'contains'
