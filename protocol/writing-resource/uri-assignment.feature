@@ -18,7 +18,7 @@ Feature: Server assigns URI based on effective request URI
     Then status 200
 
   @ignore  
-  Scenario: Create resource at /PATCH-dahut with PATCH
+  Scenario: Create resource at /patch-dahut with PATCH
     * def requestUri = testContainer.url + 'patch-dahut'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PATCH', requestUri)
