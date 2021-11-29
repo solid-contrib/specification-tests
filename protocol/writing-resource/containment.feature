@@ -86,3 +86,22 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     And request 'Hello'
     When method PATCH
     Then assert responseStatus >= 400 && responseStatus < 500
+
+  Scenario: POST should not create resource turning resource into container
+    * def requestUri = rootTestContainer.url + 'dahut3'
+    Given url requestUri
+    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And header Content-Type = 'text/turtle'
+    And request '<> a <http://example.org/Dahut> .'
+    When method PUT
+    Then assert responseStatus >= 200 && responseStatus < 300
+
+    * def childContainerRequestUri = rootTestContainer.url + 'dahut3/foo/'
+    Given url childContainerRequestUri
+    And configure headers = clients.alice.getAuthHeaders('POST', childContainerRequestUri)
+    And header Content-Type = 'text/turtle'
+    And request '<> a <http://example.org/Dahut-3> .'
+    When method POST
+    Then status 404
+
+    
