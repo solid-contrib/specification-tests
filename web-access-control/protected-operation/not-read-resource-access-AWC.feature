@@ -4,28 +4,24 @@ Feature: Bob cannot read an RDF resource to which he is not granted read access
     * def setup =
     """
       function() {
-        const testContainer = createTestContainer();
-        const resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
-        if (resource.exists()) {
-          const access = resource.getAccessDatasetBuilder(webIds.alice)
-            .setAgentAccess(resource.getUrl(), webIds.bob, ['append', 'write', 'control'])
-            .build();
-          resource.setAccessDataset(access);
-        }
+        const testContainer = rootTestContainer.reserveContainer();
+        const resource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
+        const access = resource.accessDatasetBuilder
+          .setAgentAccess(resource.url, webIds.bob, ['append', 'write', 'control'])
+          .build();
+        resource.accessDataset = access;
         return resource;
       }
     """
     * def resource = callonce setup
-    * assert resource.exists()
-    * def resourceUrl = resource.getUrl()
-    * url resourceUrl
+    * url resource.url
 
   Scenario: Bob cannot read the resource with GET
-    Given headers clients.bob.getAuthHeaders('GET', resourceUrl)
+    Given headers clients.bob.getAuthHeaders('GET', resource.url)
     When method GET
     Then status 403
 
   Scenario: Bob cannot read the resource with HEAD
-    Given headers clients.bob.getAuthHeaders('HEAD', resourceUrl)
+    Given headers clients.bob.getAuthHeaders('HEAD', resource.url)
     When method HEAD
     Then status 403

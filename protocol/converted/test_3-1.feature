@@ -1,12 +1,11 @@
 Feature: Check that Bob can only read Basic Container when he is authorized read only.
 
   Background: Setup
-    * def testContainer = createTestContainerImmediate()
-    * def aclBuilder = testContainer.getAccessDatasetBuilder(webIds.alice)
-    * def access = aclBuilder.setAgentAccess(testContainer.getUrl(), webIds.bob, ['read']).build()
-    * print 'ACL:\n' + access.asTurtle()
-    * assert testContainer.setAccessDataset(access)
-    * def requestUri = testContainer.getUrl()
+    * def testContainer = rootTestContainer.createContainer()
+    * def aclBuilder = testContainer.accessDatasetBuilder
+    * def access = aclBuilder.setAgentAccess(testContainer.url, webIds.bob, ['read']).build()
+    * testContainer.accessDataset = access
+    * def requestUri = testContainer.url
 
   Scenario: Test 1.1 Read container (GET) allowed
     Given url requestUri
@@ -59,7 +58,7 @@ Feature: Check that Bob can only read Basic Container when he is authorized read
     Then status 403
 
 #  Scenario: Test 1.9 on URL /
-#    * def requestUri = testContainer.getUrl()
+#    * def requestUri = testContainer.url
 #    Given url requestUri
 #    And configure headers = clients.bob.getAuthHeaders('DAHU', requestUri)
 #    When method DAHU

@@ -1,12 +1,11 @@
 Feature: Check that Bob can read and append to Basic Container when he is authorized read-append.
 
   Background: Setup
-    * def testContainer = createTestContainerImmediate()
-    * def aclBuilder = testContainer.getAccessDatasetBuilder(webIds.alice)
-    * def access = aclBuilder.setAgentAccess(testContainer.getUrl(), webIds.bob, ['read', 'append']).build()
-    * print 'ACL:\n' + access.asTurtle()
-    * assert testContainer.setAccessDataset(access)
-    * def requestUri = testContainer.getUrl()
+    * def testContainer = rootTestContainer.createContainer()
+    * def aclBuilder = testContainer.accessDatasetBuilder
+    * def access = aclBuilder.setAgentAccess(testContainer.url, webIds.bob, ['read', 'append']).build()
+    * testContainer.accessDataset = access
+    * def requestUri = testContainer.url
 
   Scenario: Test 5.1 Read container (GET) allowed
     Given url requestUri

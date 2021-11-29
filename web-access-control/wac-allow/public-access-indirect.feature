@@ -14,12 +14,12 @@ Feature: The WAC-Allow header shows public access modes for a public agent when 
       function() {
         const resources = {}
         for (const row of testModes) {
-          const testContainer = createTestContainer().instantiate();
-          const access = testContainer.getAccessDatasetBuilder(webIds.alice)
+          const testContainer = rootTestContainer.createContainer();
+          const access = testContainer.accessDatasetBuilder
                 .setInheritablePublicAccess(testContainer.url, row.modes)
                 .build();
-          testContainer.setAccessDataset(access);
-          const resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
+          testContainer.accessDataset = access;
+          const resource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
           resources[row.test] = resource;
         }
         return resources;
@@ -44,7 +44,7 @@ Feature: The WAC-Allow header shows public access modes for a public agent when 
     And match header Content-Type contains 'text/turtle'
     # check array of triples contains one with the given predicate-object
     # TODO: this would be better implemented as hasStatement(null, <http://www.w3.org/ns/auth/acl#agentClass> <http://xmlns.com/foaf/0.1/Agent>)
-    And match RDFUtils.turtleToTripleArray(response, resource.getUrl()) contains '#? _.includes("<http://www.w3.org/ns/auth/acl#agentClass> <http://xmlns.com/foaf/0.1/Agent>")'
+    And match RDFUtils.turtleToTripleArray(response, resource.url) contains '#? _.includes("<http://www.w3.org/ns/auth/acl#agentClass> <http://xmlns.com/foaf/0.1/Agent>")'
 
   Scenario: Alice calls GET and the header shows full access for user
     Given url resource.url

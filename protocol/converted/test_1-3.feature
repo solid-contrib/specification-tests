@@ -1,10 +1,9 @@
 Feature: Update: PUT Turtle resources to container with varying LDP Interaction Models.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * def resource = testContainer.createChildResource('.ttl', '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "data"@en .', 'text/turtle');
-    * assert resource.exists()
-    * def requestUri = resource.getUrl()
+    * def testContainer = rootTestContainer.reserveContainer()
+    * def resource = testContainer.createResource('.ttl', '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "data"@en .', 'text/turtle');
+    * def requestUri = resource.url
 
   Scenario: Test 3.1 Conflict when updating RDFSource with a NonRDFSource containing RDF
     Given url requestUri

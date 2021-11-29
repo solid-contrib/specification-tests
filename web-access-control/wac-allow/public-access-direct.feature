@@ -12,16 +12,14 @@ Feature: The WAC-Allow header shows public access modes for a public agent when 
     * def setup =
     """
       function() {
-        const testContainer = createTestContainer();
+        const testContainer = rootTestContainer.reserveContainer();
         const resources = {}
         for (const row of testModes) {
-          const resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
-          if (resource.exists()) {
-            const access = resource.getAccessDatasetBuilder(webIds.alice)
-                  .setPublicAccess(resource.getUrl(), row.modes)
-                  .build();
-            resource.setAccessDataset(access);
-          }
+          const resource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
+          const access = resource.accessDatasetBuilder
+                .setPublicAccess(resource.url, row.modes)
+                .build();
+          resource.accessDataset = access;
           resources[row.test] = resource;
         }
         return resources;
@@ -39,7 +37,7 @@ Feature: The WAC-Allow header shows public access modes for a public agent when 
     And match header Content-Type contains 'text/turtle'
     # check array of triples contains one with the given predicate-object
     # TODO: this would be better implemented as hasStatement(null, <http://www.w3.org/ns/auth/acl#agentClass> <http://xmlns.com/foaf/0.1/Agent>)
-    And match RDFUtils.turtleToTripleArray(response, resource.getUrl()) contains '#? _.includes("<http://www.w3.org/ns/auth/acl#agentClass> <http://xmlns.com/foaf/0.1/Agent>")'
+    And match RDFUtils.turtleToTripleArray(response, resource.url) contains '#? _.includes("<http://www.w3.org/ns/auth/acl#agentClass> <http://xmlns.com/foaf/0.1/Agent>")'
 
   Scenario: There is no acl on the parent that references a public agent
     Given url resource.container.aclUrl

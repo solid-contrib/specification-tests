@@ -1,10 +1,10 @@
 Feature: Create containers
 
   Background: Setup
-    * def testContainer = createTestContainer()
+    * def testContainer = rootTestContainer.reserveContainer()
 
   Scenario: Test 1.1 Create container: /
-    * def requestUri = testContainer.getUrl()
+    * def requestUri = testContainer.url
     Given url requestUri
     And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -14,7 +14,7 @@ Feature: Create containers
     Then match [200, 201, 204, 205] contains responseStatus
 
   Scenario: Test 1.2 Create container with no interaction model
-    * def requestUri = testContainer.getUrl() + 'no-interaction/'
+    * def requestUri = testContainer.url + 'no-interaction/'
     Given url requestUri
     And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -32,7 +32,7 @@ Feature: Create containers
     Then status 412
 
   Scenario: Test 1.3 Create container as RDFSource but no BasicContainer
-    * def requestUri = testContainer.getUrl() + 'rs-interaction/'
+    * def requestUri = testContainer.url + 'rs-interaction/'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -42,7 +42,7 @@ Feature: Create containers
     Then match [200, 201, 204, 205] contains responseStatus
 
   Scenario: Test 1.4 Create container as NonRDFSource but no BasicContainer
-    * def requestUri = testContainer.getUrl() + 'nr-interaction/'
+    * def requestUri = testContainer.url + 'nr-interaction/'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -52,14 +52,14 @@ Feature: Create containers
     Then status 409
 
   Scenario: Test 1.6 Create empty container with no interaction model, no content-type
-    * def requestUri = testContainer.getUrl() + 'empty-container/'
+    * def requestUri = testContainer.url + 'empty-container/'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     When method PUT
     Then status 400
 
   Scenario: Test 1.7 Create empty container with no interaction model
-    * def requestUri = testContainer.getUrl() + 'empty-container/'
+    * def requestUri = testContainer.url + 'empty-container/'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'

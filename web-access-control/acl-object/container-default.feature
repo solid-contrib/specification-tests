@@ -4,24 +4,21 @@ Feature: Bob can only read child containers/resources of a container to which he
     * def setup =
     """
       function() {
-        const testContainer = createTestContainerImmediate();
-        const access = testContainer.getAccessDatasetBuilder(webIds.alice)
-                .setInheritableAgentAccess(testContainer.getUrl(), webIds.bob, ['read'])
+        const testContainer = rootTestContainer.createContainer();
+        const access = testContainer.accessDatasetBuilder
+                .setInheritableAgentAccess(testContainer.url, webIds.bob, ['read'])
                 .build();
-        if (testContainer.setAccessDataset(access)) {
-          const intermediateContainer = testContainer.generateChildContainer();
-          const resource = intermediateContainer.createChildResource('.txt', 'hello', 'text/plain')
-          return {
-            containerUrl: testContainer.getUrl(),
-            intermediateContainerUrl: intermediateContainer.getUrl(),
-            resourceUrl: resource.getUrl()
-          }
+        testContainer.accessDataset = access;
+        const intermediateContainer = testContainer.reserveContainer();
+        const resource = intermediateContainer.createResource('.txt', 'hello', 'text/plain')
+        return {
+          containerUrl: testContainer.url,
+          intermediateContainerUrl: intermediateContainer.url,
+          resourceUrl: resource.url
         }
-        return null;
       }
     """
     * def test = callonce setup
-    * assert test != null
 
   Scenario: Bob can only read resources inside the container
     Given url test.containerUrl

@@ -4,22 +4,19 @@ Feature: Bob cannot read a container or children if he is not given any access
     * def setup =
     """
       function() {
-        const testContainer = createTestContainerImmediate();
-        const access = testContainer.getAccessDatasetBuilder(webIds.alice).build();
-        if (testContainer.setAccessDataset(access)) {
-          const intermediateContainer = testContainer.generateChildContainer();
-          const resource = intermediateContainer.createChildResource('.txt', 'hello', 'text/plain')
-          return {
-            containerUrl: testContainer.getUrl(),
-            intermediateContainerUrl: intermediateContainer.getUrl(),
-            resourceUrl: resource.getUrl()
-          }
+        const testContainer = rootTestContainer.createContainer();
+        const access = testContainer.accessDatasetBuilder.build();
+        testContainer.accessDataset = access;
+        const intermediateContainer = testContainer.reserveContainer();
+        const resource = intermediateContainer.createResource('.txt', 'hello', 'text/plain')
+        return {
+          containerUrl: testContainer.url,
+          intermediateContainerUrl: intermediateContainer.url,
+          resourceUrl: resource.url
         }
-        return null;
       }
     """
     * def test = callonce setup
-    * assert test != null
 
   Scenario: Bob cannot read the container or its children
     Given url test.containerUrl

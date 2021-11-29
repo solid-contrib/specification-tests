@@ -1,8 +1,8 @@
 Feature: Test that unauthenticated users get the correct response
 
   Background: Setup
-    * def testContainer = createTestContainerImmediate()
-    * def requestUri = testContainer.getUrl()
+    * def testContainer = rootTestContainer.createContainer()
+    * def requestUri = testContainer.url
 
   Scenario: Unauthenticated user gets an appropriate response on GET
     Given url requestUri

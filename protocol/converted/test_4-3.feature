@@ -1,14 +1,12 @@
 Feature: Check that Bob can only append to RDF resource when he is authorized append only.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * def resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
-    * assert resource.exists()
-    * def aclBuilder = resource.getAccessDatasetBuilder(webIds.alice)
-    * def access = aclBuilder.setAgentAccess(resource.getUrl(), webIds.bob, ['append']).build()
-    * print 'ACL:\n' + access.asTurtle()
-    * assert resource.setAccessDataset(access)
-    * def requestUri = resource.getUrl()
+    * def testContainer = rootTestContainer.reserveContainer()
+    * def resource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
+    * def aclBuilder = resource.accessDatasetBuilder
+    * def access = aclBuilder.setAgentAccess(resource.url, webIds.bob, ['append']).build()
+    * resource.accessDataset = access
+    * def requestUri = resource.url
 
   Scenario: Test 3.1 Read resource (GET) denied
     Given url requestUri

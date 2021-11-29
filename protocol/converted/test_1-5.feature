@@ -1,10 +1,9 @@
 Feature: Update: PUT text resources to container with no Interaction Model.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * def resource = testContainer.createChildResource('.ttl', 'just some text', 'text/plain');
-    * assert resource.exists()
-    * def requestUri = resource.getUrl()
+    * def testContainer = rootTestContainer.reserveContainer()
+    * def resource = testContainer.createResource('.ttl', 'just some text', 'text/plain');
+    * def requestUri = resource.url
 
   Scenario: Test 5.1 Update with something that looks like Turtle without Interaction model
     Given url requestUri
@@ -13,7 +12,7 @@ Feature: Update: PUT text resources to container with no Interaction Model.
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update with no Interaction Model"@en .'
     When method PUT
     Then match [200, 201, 204, 205] contains responseStatus
-    
+
   Scenario: Test 5.2 Update with real Turtle without Interaction model
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
@@ -41,4 +40,4 @@ Feature: Update: PUT text resources to container with no Interaction Model.
     Then status 409
 
 
-    
+

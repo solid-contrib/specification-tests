@@ -1,12 +1,11 @@
 Feature: Check that Bob can only append to Basic Container when he is authorized append only.
 
   Background: Setup
-    * def testContainer = createTestContainerImmediate()
-    * def aclBuilder = testContainer.getAccessDatasetBuilder(webIds.alice)
-    * def access = aclBuilder.setAgentAccess(testContainer.getUrl(), webIds.bob, ['append']).build()
-    * print 'ACL:\n' + access.asTurtle()
-    * assert testContainer.setAccessDataset(access)
-    * def requestUri = testContainer.getUrl()
+    * def testContainer = rootTestContainer.createContainer()
+    * def aclBuilder = testContainer.accessDatasetBuilder
+    * def access = aclBuilder.setAgentAccess(testContainer.url, webIds.bob, ['append']).build()
+    * testContainer.accessDataset = access
+    * def requestUri = testContainer.url
 
   Scenario: Test 3.1 Read container (GET) denied
     Given url requestUri

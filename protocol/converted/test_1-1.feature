@@ -1,10 +1,10 @@
 Feature: Create: PUT Turtle resources to container with varying LDP Interaction Models.
 
   Background: Setup
-    * def testContainer = createTestContainerImmediate()
+    * def testContainer = rootTestContainer.createContainer()
 
   Scenario: Test 1.1 Conflict when creating a container at a resource URI
-    * def requestUri = testContainer.getUrl() + 'dahut-bc.ttl'
+    * def requestUri = testContainer.url + 'dahut-bc.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -14,7 +14,7 @@ Feature: Create: PUT Turtle resources to container with varying LDP Interaction 
     Then status 409
 
   Scenario: Test 1.2 Conflict when creating a NonRDFSource with text/turtle?
-    * def requestUri = testContainer.getUrl() + 'dahut-nr.ttl'
+    * def requestUri = testContainer.url + 'dahut-nr.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -24,7 +24,7 @@ Feature: Create: PUT Turtle resources to container with varying LDP Interaction 
     Then status 409
 
   Scenario: Test 1.3 Create RDFSource with text/turtle
-    * def requestUri = testContainer.getUrl() + 'dahut-rs.ttl'
+    * def requestUri = testContainer.url + 'dahut-rs.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
@@ -40,7 +40,7 @@ Feature: Create: PUT Turtle resources to container with varying LDP Interaction 
     Then status 200
 
   Scenario: Test 1.5 Create resource without interaction model with text/turtle
-    * def requestUri = testContainer.getUrl() + 'dahut-no.ttl'
+    * def requestUri = testContainer.url + 'dahut-no.ttl'
     Given url requestUri
     And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
