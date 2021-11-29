@@ -375,15 +375,6 @@ The test harness makes some variables available to all tests:
 * `webIds` - An object containing the webIds of the 2 users. These are needed when setting up ACLs (e.g., `webIds.alice`).
 
 ## Helper Functions
-### Setting up test containers
-
-#### `createTestContainer()`
-Create a SolidContainer object referencing a unique sub-container of the `rootTestContainer`.
-  This container will not be created until a resource is created inside it.
-
-#### `createTestContainerImmediate()`
-Create a SolidContainer object referencing a unique sub-container of the
-  `rootTestContainer`, but ensure that it is actually created at this point.
 
 ### Parsing Functions
 ##### WAC-Allow header
@@ -440,10 +431,29 @@ by 2 classes in the test harness: `SolidResouce` and `SolidContainer`. For handl
 there are 2 classes: `AccessDatasetBuilder` and `AccessDataset`. Finally, there is also a library, `RDFUtils`, for
 parsing RDF of various formats.
 
+### TestHarnessException
+
+Any exceptions generated within the libraries below are wrapped as `TestHarnessException` errors and will be trapped
+and reported by the Karate test engine. If you need to trap these exceptions within a test you can use a JavaScript
+try/catch mechanism:
+```gherkin
+    * eval
+    """
+    try {
+      resource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
+    } catch(err) {
+      resource = null
+      karate.log(err.message);
+    }
+    """
+```
+
 ### SolidResource
 The `SolidResource` class represents a resource or container on the server. Since this is also the base class for
 `SolidContainer`, it includes methods that are related to containers. It is not common to need use this class directly
-in a test as most resources and containers are created from the starting point of the `rootTestContainer`.
+in a test as most resources and containers are created from the starting point of the `rootTestContainer`. Since this
+class conforms to the JavaBeans standard, getters and setters can be treated as properties when accessed from
+JavaScript. 
 
 #### `SolidResource.create(solidClient, url, body, contentType)`
 A static method that can create a resource on the server.
@@ -454,32 +464,16 @@ A static method that can create a resource on the server.
   * contentType - The content type of ths data.
 * Returns an instance of `SolidResource`.
 
-#### `exists()`
-Was this resource actually created?
-* Returns a boolean.
-
-#### `getUrl()`
+#### `getUrl()` or read-only property `url`
 Get the URL of this resource.
 * Returns a string.
 
-#### `getPath()`
-Get the path of this resource relative to the server root.
-* Returns a string.
-
-#### `getContentAsTurtle()`
-Get the contents of this URL as a Turtle document.
-* Returns a string.
-
-#### `isContainer()`
-Is this resource a container?
-* Returns a boolean. 
-
-#### `getContainer()`
-Gets the `SolidContainer` instance representing the parent container of this resource or ultimately returns the root 
+#### `getContainer()` or read-only property `container`
+Gets the `SolidContainer` instance representing the parent container of this resource or ultimately returns the root
 container.
 * Returns a `SolidContainer`.
 
-#### `getAclUrl()`
+#### `getAclUrl()` or read-only property `aclUrl`
 Get the ACL URL for this resource.
 * Returns a string.
 
@@ -488,80 +482,71 @@ Get the storage root for this resource by working up the path hierarchy looking 
 * Returns a new SolidResource representing the storage root or null if it could not be found or is not accessible to
   the user.
 
-#### `hasStorageType()`
+#### `isStorageType()` or read-only property `storageType`
 Does this resource have the `pim:Storage` link header identifying it as a storage-type container?
 * Returns a boolean.
 
-#### `getAccessDatasetBuilder(owner)`
+#### `getAccessDatasetBuilder()` or read-only property `accessDatasetBuilder`
 There are currently 2 access control implementations supported by the test harness:
 * [Web Access Control (WAC)](https://solid.github.io/web-access-control-spec)
 * [Access Control Policies (ACP)](https://github.com/solid/authorization-panel/tree/main/proposals/acp) - emerging
 
 Get an object that can build a set of access control statements in a WAC/ACP agnostic way. The object is initialized
-by adding owner access for the specified owner (in WAC mode only).
-* Parameters:
-  * owner - the WebID of the resource owner.
-* Returns an [AccessDatasetBuilder](#accessdatasetbuilder). 
+by adding owner access for the specified owner (not applicable in ACP mode).
+* Returns an [AccessDatasetBuilder](#accessdatasetbuilder).
 
-#### `getAccessDataset()`
-Get an object representing the access control document/policy.
-* Returns an [AccessDataset](#accessdataset).
-
-#### `getAccessControlMode()`
-Which access control implementations does the test subject implement?
-* Returns "WAC" or "ACP".
-
-#### `setAccessDataset(accessDataset)`
-Applies the access controls to the resource.
-* Parameters:
-  * accessDataset - an [AccessDataset](#accessdataset).
-* Returns boolean showing success or failure.
+#### `getAccessDataset()` and `setAccessDataset(accessDataset)` or read-write property `accessDataset`
+Get or set an object representing the access control document/policy.
+* Returns or accepts an [AccessDataset](#accessdataset).
 
 #### `delete()`
-Delete this resource and if it is a container, recursively delete its members.
+Delete this resource and, if it is a container, recursively delete its members.
 
 ### SolidContainer
+The `SolidContainer` class represents a container on the server and is a subcvlass of `SolidResource`. It is not common
+to need use this class directly in a test as most resources and containers are created from the starting point of the
+`rootTestContainer`. Since this class conforms to the JavaBeans standard, getters and setters can be treated as
+properties when accessed from JavaScript.
 
 #### `SolidContainer.create(solidClient, url)`
 A static method that can create a container on the server.
 * Parameters:
   * solidClient - The authenticated client to use for this request (e.g., `clients.alice`).
   * url - The absolute url of the container to create.
-* Returns an instance of `SolidResource`.
-
-#### `listMembers()`
-Get a list of all the members of this container.
-* Returns an array of URLs as strings.
-
-#### `parseMembers(data)`
-Parse the container content to get a list of all the members/
-* Parameters:
-  * data - The Turtle content of the container.
-* Returns an array of URLs as strings.
+* Returns an instance of `SolidContainer`.
 
 #### `instantiate()`
-Create this container on the server.
+Create this previously reserved container on the server.
 * Returns an instance of `SolidContainer` to allow call chaining.
 
-#### `generateChildContainer()`
-Create a container as a child of this container using a UUID as the name but do not instantiate it on the server.
+#### `reserveContainer()`
+Reserve a container as a child of this container using a UUID as the name but do not instantiate it on the server.
 * Returns an instance of `SolidContainer` to allow call chaining.
 
-#### `generateChildResource(suffix)`
-Create a `SolidResource` as a child of this container using a UUID as the name with the provided suffix, but do not
-  instantiate it on the server.
+#### `createContainer()`
+Create a container as a child of this container using a UUID as the name. This is the equivalent of reserving a
+container and then instantiating it.
+* Returns an instance of `SolidContainer` to allow call chaining.
+
+#### `reserveResource(suffix)`
+Reserve a `SolidResource` as a child of this container using a UUID as the name with the provided suffix, but do not
+instantiate it on the server.
 * Parameters:
   * suffix - The filename extension to use or a blank string if not needed (e.g., `'.ttl'`).
 * Returns an instance of `SolidResource` to allow call chaining.
 
-#### `createChildResource(suffix, body, contentType)`
+#### `createResource(suffix, body, contentType)`
 Create a `SolidResource` as a child of this container using a UUID as the name with the provided suffix, then put the
-  provided contents into it.
+provided contents into it.
 * Parameters:
   * suffix - The filename extension to use or a blank string if not needed (e.g., `'.ttl'`).
   * body - The data to be put in the resource.
   * contentType - The content type of ths data.
 * Returns an instance of `SolidResource`.
+
+#### `listMembers()`
+Get a list of all the members of this container.
+* Returns an array of URLs as strings.
 
 #### `deleteContents()`
 Recursively delete the contents of this container but not the container itself.
@@ -578,13 +563,15 @@ for ACP it is translated to `read` and `write` but it is possible to set only on
 
 For example:
 ```js
-const access = testContainer.getAccessDatasetBuilder(webIds.alice)
-        .setAgentAccess(testContainer.getUrl(), webIds.bob, ['write'])
-        .setInheritableAgentAccess(testContainer.getUrl(), webIds.bob, ['append', 'write', 'control'])
+const access = testContainer.accessDatasetBuilder
+        .setAgentAccess(testContainer.url, webIds.bob, ['write'])
+        .setInheritableAgentAccess(testContainer.url, webIds.bob, ['append', 'write', 'control'])
         .build();
-testContainer.setAccessDataset(access);
+testContainer.accessDataset = access;
 ```  
 
+When the `AccessDatasetBuilder` is first created for a resource, it is configured with full access for the owner of that
+resource and the base URI of the ACL is automatically set so there is no need to call `setOwnerAccess` or `setBaseUri`.
 
 #### `setOwnerAccess(target, owner)`
 Add a rule granting the `owner` full access to the `target` resource. If the target is a container then this access is
@@ -629,6 +616,10 @@ Returns an [AccessDataset](#accessdataset) constructed in WAC or ACP format usin
 #### `asTurtle()`
 Returns a string with the turtle representation of the set of rules in the WAC or ACP format.
 
+#### `asSparqlInsert()`
+Returns a string with the turtle representation of the set of rules in the WAC or ACP format wrapped as a SPARQL
+INSERT statement. This is only used for ACP.
+
 #### `parseTurtle(data, baseUri)`
 In the rare case where you want to manually construct an ACL document you may use this function to replace the content
 of an `AccessDataset` object and then apply it to a resource.
@@ -658,6 +649,13 @@ Parses a RDFa document into an array of triples.
   * baseUri - The base URI used for any relative IRIs.
 * Returns an array of strings in the form `<subject> <predicate> <object> .`
 
+#### `parseContainerContents(data, url)`
+Parses the body of a container to extract the list of members.
+* Parameters:
+  * data - The container data.
+  * url - The URL of the container.
+* Returns an array of strings representing the URLs of all members of the container. 
+
 # Example Test Cases
 The following are a selection of example tests that demonstrate different features of the test harness, and show 
 various approaches to writing tests.
@@ -670,36 +668,34 @@ negotiation.
 Feature: Requests support content negotiation for Turtle resource
 
   Background: Create a Turtle resource
-    * def testContainer = createTestContainer()
+    * def testContainer = rootTestContainer.reserveContainer()
     * def exampleTurtle = karate.readAsString('../fixtures/example.ttl')
-    * def resource = testContainer.createChildResource('.ttl', exampleTurtle, 'text/turtle');
-    * assert resource.exists()
-    * def expected = RDFUtils.turtleToTripleArray(exampleTurtle, resource.getUrl())
-    * configure headers = clients.alice.getAuthHeaders('GET', resource.getUrl())
-    * url resource.getUrl()
+    * def resource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
+    * def expected = RDFUtils.turtleToTripleArray(exampleTurtle, resource.url)
+    * configure headers = clients.alice.getAuthHeaders('GET', resource.url)
+    * url resource.url
 
   Scenario: Alice can read the Turtle example as JSON-LD
     Given header Accept = 'application/ld+json'
     When method GET
     Then status 200
     And match header Content-Type contains 'application/ld+json'
-    And match RDFUtils.jsonLdToTripleArray(JSON.stringify(response), resource.getUrl()) contains expected
+    And match RDFUtils.jsonLdToTripleArray(JSON.stringify(response), resource.url) contains expected
 
   Scenario: Alice can read the Turtle example as Turtle
     Given header Accept = 'text/turtle'
     When method GET
     Then status 200
     And match header Content-Type contains 'text/turtle'
-    And match RDFUtils.turtleToTripleArray(response, resource.getUrl()) contains expected
+    And match RDFUtils.turtleToTripleArray(response, resource.url) contains expected
 ```
 
 The `Background` for this test:
 1. Sets up a test container (which isn't yet instantiated).
-1. Loads example Turtle data into a variable from a file.
-1. Puts this data into a resource inside the test container.
-1. Asserts that this resource exists (if it doesn't the test will stop at this point).
-1. Convert the example data into an array of triples for later comparisons.
-1. Sets up the URL and authorization headers for the HTTP requests used in the scenarios. 
+2. Loads example Turtle data into a variable from a file.
+3. Puts this data into a resource inside the test container.
+4. Convert the example data into an array of triples for later comparisons.
+6. Sets up the URL and authorization headers for the HTTP requests used in the scenarios. 
   
 Note that this `Background` is run for each `Scenario` so in reality 2 test files are created. That may seem 
 inefficient, but it allows all scenarios to be run in parallel.
@@ -723,26 +719,22 @@ Feature: The WAC-Allow header shows user and public access modes with Bob write 
     * def setup =
     """
       function() {
-        const testContainer = createTestContainer();
-        const resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
-        if (resource.exists()) {
-          const access = resource.getAccessDatasetBuilder(webIds.alice)
-            .setAgentAccess(resource.getUrl(), webIds.bob, ['write'])
-            .setPublicAccess(resource.getUrl(), ['read', 'append'])
-            .build();
-          resource.setAccessDataset(access);
-        }
+        const testContainer = rootTestContainer.reserveContainer();
+        const resource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
+        const access = resource.accessDatasetBuilder
+          .setAgentAccess(resource.url, webIds.bob, ['write'])
+          .setPublicAccess(resource.url, ['read', 'append'])
+          .build();
+        resource.accessDataset = access;
         return resource;
       }
     """
     * def resource = callonce setup
-    * assert resource.exists()
-    * def resourceUrl = resource.getUrl()
-    * url resourceUrl
+    * url resource.url
 
   Scenario: There is an acl on the resource containing Bob's WebID
-    Given url resource.getAclUrl()
-    And headers clients.alice.getAuthHeaders('GET', resource.getAclUrl())
+    Given url resource.aclUrl
+    And headers clients.alice.getAuthHeaders('GET', resource.aclUrl)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
@@ -753,14 +745,14 @@ Feature: The WAC-Allow header shows user and public access modes with Bob write 
   # In ACP mode, the following step would fail as there will be an ACL on the parent - this step needs to change
   # to ask the test harness to confirm there is no inherited access.
   Scenario: There is no acl on the parent
-    Given url resource.getContainer().getAclUrl()
-    And headers clients.alice.getAuthHeaders('HEAD', resource.getContainer().getAclUrl())
+    Given url resource.container.aclUrl
+    And headers clients.alice.getAuthHeaders('HEAD', resource.container.aclUrl)
     And header Accept = 'text/turtle'
     When method HEAD
     Then status 404
 
   Scenario: Bob calls GET and the header shows RWA access for user, RA for public
-    Given headers clients.bob.getAuthHeaders('GET', resourceUrl)
+    Given headers clients.bob.getAuthHeaders('GET', resource.url)
     When method GET
     Then status 200
     And match header WAC-Allow != null
@@ -769,7 +761,7 @@ Feature: The WAC-Allow header shows user and public access modes with Bob write 
     And match result.public contains only ['read', 'append']
 
   Scenario: Bob calls HEAD and the header shows RWA access for user, RA for public
-    Given headers clients.bob.getAuthHeaders('HEAD', resourceUrl)
+    Given headers clients.bob.getAuthHeaders('HEAD', resource.url)
     When method HEAD
     Then status 200
     And match header WAC-Allow != null
@@ -799,10 +791,8 @@ The `Background` for this test:
 1. Sets up a function which will be called once for the whole set of scenarios:
     1. Creates a test container (which isn't yet instantiated).
     1. Creates a resource in this container using an example Turtle file.
-    1. Adds an ACL for the resource which grants Bob write access and the public read and append access. It logs this to
-  make it visible in the reports.
+    1. Adds an ACL for the resource which grants Bob write access and the public read and append access.
 1. Use `callonce` to run the setup process once for all scenarios.
-1. Asserts that this resource exists (if it doesn't the test will stop at this point).
 1. Sets up the URL for the HTTP requests used in most of the scenarios.
 
 The first 2 scenarios check the ACLs which could impact this test. The first fetches the resource's ACL and confirms
@@ -825,58 +815,52 @@ resource is created on a path that doesn't exist using PUT or PATCH.
 Feature: Creating a resource using PUT and PATCH must create intermediate containers
 
   Background: Set up clients and paths
-    * def testContainer = createTestContainer()
-    * def intermediateContainer = testContainer.generateChildContainer()
-    * def resource = intermediateContainer.generateChildResource('.txt')
+    * def testContainer = rootTestContainer.reserveContainer()
+    * def intermediateContainer = testContainer.reserveContainer()
+    * def resource = intermediateContainer.reserveResource('.txt')
 
   Scenario: PUT creates a grandchild resource and intermediate containers
-    * def resourceUrl = resource.getUrl()
-    Given url resourceUrl
-    And configure headers = clients.alice.getAuthHeaders('PUT', resourceUrl)
+    Given url resource.url
+    And configure headers = clients.alice.getAuthHeaders('PUT', resource.url)
     And request "Hello"
     When method PUT
     Then assert responseStatus >= 200 && responseStatus < 300
 
-    * def parentUrl = intermediateContainer.getUrl()
-    Given url parentUrl
-    And configure headers = clients.alice.getAuthHeaders('GET', parentUrl)
+    Given url intermediateContainer.url
+    And configure headers = clients.alice.getAuthHeaders('GET', intermediateContainer.url)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
-    And match intermediateContainer.parseMembers(response) contains resource.getUrl()
+    And match intermediateContainer.parseMembers(response) contains resource.url
 
-    * def grandParentUrl = testContainer.getUrl()
-    Given url grandParentUrl
-    And configure headers = clients.alice.getAuthHeaders('GET', grandParentUrl)
+    Given url testContainer.url
+    And configure headers = clients.alice.getAuthHeaders('GET', testContainer.url)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
-    And match testContainer.parseMembers(response) contains intermediateContainer.getUrl()
+    And match testContainer.parseMembers(response) contains intermediateContainer.url
 
   Scenario: PATCH creates a grandchild resource and intermediate containers
-    * def resourceUrl = resource.getUrl()
-    Given url resourceUrl
-    And configure headers = clients.alice.getAuthHeaders('PATCH', resourceUrl)
+    Given url resource.url
+    And configure headers = clients.alice.getAuthHeaders('PATCH', resource.url)
     And header Content-Type = "application/sparql-update"
     And request 'INSERT DATA { <#hello> <#linked> <#world> . }'
     When method PATCH
     Then assert responseStatus >= 200 && responseStatus < 300
 
-    * def parentUrl = intermediateContainer.getUrl()
-    Given url parentUrl
-    And configure headers = clients.alice.getAuthHeaders('GET', parentUrl)
+    Given url intermediateContainer.url
+    And configure headers = clients.alice.getAuthHeaders('GET', intermediateContainer.url)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
-    And match intermediateContainer.parseMembers(response) contains resource.getUrl()
+    And match intermediateContainer.parseMembers(response) contains resource.url
 
-    * def grandParentUrl = testContainer.getUrl()
-    Given url grandParentUrl
-    And configure headers = clients.alice.getAuthHeaders('GET', grandParentUrl)
+    Given url testContainer.url
+    And configure headers = clients.alice.getAuthHeaders('GET', testContainer.url)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
-    And match testContainer.parseMembers(response) contains intermediateContainer.getUrl()
+    And match testContainer.parseMembers(response) contains intermediateContainer.url
 ```
 
 The `Background` for this test:
@@ -906,55 +890,51 @@ Feature: Bob can only read an RDF resource to which he is only granted read acce
     * def setup =
     """
       function() {
-        const testContainer = createTestContainer();
-        const resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
-        if (resource.exists()) {
-          const access = resource.getAccessDatasetBuilder(webIds.alice)
-            .setAgentAccess(resource.getUrl(), webIds.bob, ['read'])
-            .build();
-          resource.setAccessDataset(access);
-        }
+        const testContainer = rootTestContainer.reserveContainer();
+        const resource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
+        const access = resource.accessDatasetBuilder
+          .setAgentAccess(resource.url, webIds.bob, ['read'])
+          .build();
+        resource.accessDataset = access;
         return resource;
       }
     """
     * def resource = callonce setup
-    * assert resource.exists()
-    * def resourceUrl = resource.getUrl()
-    * url resourceUrl
+    * url resource.url
 
   Scenario: Bob can read the resource with GET
-    Given headers clients.bob.getAuthHeaders('GET', resourceUrl)
+    Given headers clients.bob.getAuthHeaders('GET', resource.url)
     When method GET
     Then status 200
 
   Scenario: Bob can read the resource with HEAD
-    Given headers clients.bob.getAuthHeaders('HEAD', resourceUrl)
+    Given headers clients.bob.getAuthHeaders('HEAD', resource.url)
     When method HEAD
     Then status 200
 
   Scenario: Bob cannot PUT to the resource
     Given request '<> <http://www.w3.org/2000/01/rdf-schema#comment> "Bob replaced it." .'
-    And headers clients.bob.getAuthHeaders('PUT', resourceUrl)
+    And headers clients.bob.getAuthHeaders('PUT', resource.url)
     And header Content-Type = 'text/turtle'
     When method PUT
     Then status 403
 
   Scenario: Bob cannot PATCH the resource
     Given request 'INSERT DATA { <> a <http://example.org/Foo> . }'
-    And headers clients.bob.getAuthHeaders('PATCH', resourceUrl)
+    And headers clients.bob.getAuthHeaders('PATCH', resource.url)
     And header Content-Type = 'application/sparql-update'
     When method PATCH
     Then status 403
 
   Scenario: Bob cannot POST to the resource
     Given request '<> <http://www.w3.org/2000/01/rdf-schema#comment> "Bob replaced it." .'
-    And headers clients.bob.getAuthHeaders('POST', resourceUrl)
+    And headers clients.bob.getAuthHeaders('POST', resource.url)
     And header Content-Type = 'text/turtle'
     When method POST
     Then status 403
 
   Scenario: Bob cannot DELETE the resource
-    Given headers clients.bob.getAuthHeaders('DELETE', resourceUrl)
+    Given headers clients.bob.getAuthHeaders('DELETE', resource.url)
     When method DELETE
     Then status 403
 ```
@@ -965,8 +945,7 @@ The `Background` for this test:
     1. Creates a resource in this container using an example Turtle file.
     1. Adds an ACL for the resource which grants Bob read access. It logs this to make it visible in the reports.
 1. Use `callonce` to run the setup process once for all scenarios.
-1. Asserts that this resource exists (if it doesn't the test will stop at this point).
-1. Sets up the URL for the HTTP requests used in all of the scenarios.
+1. Sets up the URL for the HTTP requests used in each of the scenarios.
 
 The scenarios then:
 1. Set up the authorization headers for Bob to make each request.
@@ -982,7 +961,7 @@ specifications being annotated:
 * Define the requirement level (e.g. SHOULD, MUST, MAY)
 * Provide access to the text of the requirement
 
-The intention is that this will be done as RDFa annotations in the specification documents but it is understood that
+The intention is that this will be done as RDFa annotations in the specification documents, but it is understood that
 this will take some time. As a workaround, the same data may be provided in Turtle format separate to the specification.
 
 For example:

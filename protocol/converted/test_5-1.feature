@@ -1,14 +1,12 @@
 Feature: Check that Bob can only read Non-RDF resource when he is authorized read only.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * def resource = testContainer.createChildResource('.txt', 'protected contents, that Alice gives Bob Read to.', 'text/plain');
-    * assert resource.exists()
-    * def aclBuilder = resource.getAccessDatasetBuilder(webIds.alice)
-    * def access = aclBuilder.setAgentAccess(resource.getUrl(), webIds.bob, ['read']).build()
-    * print 'ACL:\n' + access.asTurtle()
-    * assert resource.setAccessDataset(access)
-    * def requestUri = resource.getUrl()
+    * def testContainer = rootTestContainer.reserveContainer()
+    * def resource = testContainer.createResource('.txt', 'protected contents, that Alice gives Bob Read to.', 'text/plain');
+    * def aclBuilder = resource.accessDatasetBuilder
+    * def access = aclBuilder.setAgentAccess(resource.url, webIds.bob, ['read']).build()
+    * resource.accessDataset = access
+    * def requestUri = resource.url
 
   Scenario: Test 1.1 Read resource (GET) allowed
     Given url requestUri

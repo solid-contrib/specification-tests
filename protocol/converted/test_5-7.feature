@@ -1,14 +1,12 @@
 Feature: Check that Bob can read and write to Non-RDF resource when he is authorized read-write.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * def resource = testContainer.createChildResource('.txt', 'protected contents, that Alice gives Bob Read/Write to.', 'text/plain');
-    * assert resource.exists()
-    * def aclBuilder = resource.getAccessDatasetBuilder(webIds.alice)
-    * def access = aclBuilder.setAgentAccess(resource.getUrl(), webIds.bob, ['read', 'write']).build()
-    * print 'ACL:\n' + access.asTurtle()
-    * assert resource.setAccessDataset(access)
-    * def requestUri = resource.getUrl()
+    * def testContainer = rootTestContainer.reserveContainer()
+    * def resource = testContainer.createResource('.txt', 'protected contents, that Alice gives Bob Read/Write to.', 'text/plain');
+    * def aclBuilder = resource.accessDatasetBuilder
+    * def access = aclBuilder.setAgentAccess(resource.url, webIds.bob, ['read', 'write']).build()
+    * resource.accessDataset = access
+    * def requestUri = resource.url
 
   Scenario: Test 7.1 Read resource (GET) allowed
     Given url requestUri

@@ -14,12 +14,12 @@ Feature: The WAC-Allow header shows user access modes for Bob when given indirec
       function() {
         const resources = {}
         for (const row of testModes) {
-          const testContainer = createTestContainer().instantiate();
-          const access = testContainer.getAccessDatasetBuilder(webIds.alice)
+          const testContainer = rootTestContainer.createContainer();
+          const access = testContainer.accessDatasetBuilder
                 .setInheritableAgentAccess(testContainer.url, webIds.bob, row.modes)
                 .build();
-          testContainer.setAccessDataset(access);
-          const resource = testContainer.createChildResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
+          testContainer.accessDataset = access;
+          const resource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
           resources[row.test] = resource;
         }
         return resources;

@@ -1,7 +1,7 @@
 Feature: Server assigns URI based on effective request URI
 
   Background: Setup
-    * def testContainer = createTestContainerImmediate()
+    * def testContainer = rootTestContainer.createContainer()
 
   Scenario: Create resource at /put-dahut with PUT
     * def requestUri = testContainer.url + 'put-dahut'
@@ -17,7 +17,7 @@ Feature: Server assigns URI based on effective request URI
     When method GET
     Then status 200
 
-  @ignore  
+  @ignore
   Scenario: Create resource at /patch-dahut with PATCH
     * def requestUri = testContainer.url + 'patch-dahut'
     Given url requestUri

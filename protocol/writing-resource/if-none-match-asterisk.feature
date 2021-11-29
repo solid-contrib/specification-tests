@@ -1,9 +1,8 @@
 Feature: Create: PUT Turtle resources to container with If-None-Match: * headers.
 
   Background: Setup
-    * def testContainer = createTestContainer()
-    * def resource = testContainer.createChildResource('.ttl', '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "data"@en .', 'text/turtle');
-    * assert resource.exists()
+    * def testContainer = rootTestContainer.reserveContainer()
+    * def resource = testContainer.createResource('.ttl', '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "data"@en .', 'text/turtle');
 
   Scenario: Precondition Fails not met when putting a resource over an existing one
     * def requestUri = resource.url

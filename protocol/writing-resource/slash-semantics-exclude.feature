@@ -2,18 +2,18 @@
 Feature: With and without trailing slash cannot co-exist
 
   Background: Set up clients and paths
-    * def testContainer = createTestContainer()
+    * def testContainer = rootTestContainer.reserveContainer()
     * configure followRedirects = false
 
   Scenario: PUT container, then try resource with same name
-    * def childContainerUrl = testContainer.getUrl() + 'foo/'
+    * def childContainerUrl = testContainer.url + 'foo/'
     Given url childContainerUrl
     And configure headers = clients.alice.getAuthHeaders('PUT', childContainerUrl)
     And header Content-Type = 'text/turtle'
     When method PUT
     Then assert responseStatus >= 200 && responseStatus < 300
 
-    * def resourceUrl = testContainer.getUrl() + 'foo'
+    * def resourceUrl = testContainer.url + 'foo'
     Given url resourceUrl
     And configure headers = clients.alice.getAuthHeaders('GET', resourceUrl)
     When method GET
@@ -30,7 +30,7 @@ Feature: With and without trailing slash cannot co-exist
 
 
   Scenario: PUT resource, then try container with same name
-    * def resourceUrl = testContainer.getUrl() + 'foo'
+    * def resourceUrl = testContainer.url + 'foo'
     Given url resourceUrl
     And configure headers = clients.alice.getAuthHeaders('PUT', resourceUrl)
     And header Content-Type = 'text/plain'
@@ -38,13 +38,13 @@ Feature: With and without trailing slash cannot co-exist
     When method PUT
     Then assert responseStatus >= 200 && responseStatus < 300
 
-    * def childContainerUrl = testContainer.getUrl() + 'foo/'
+    * def childContainerUrl = testContainer.url + 'foo/'
     Given url childContainerUrl
     And configure headers = clients.alice.getAuthHeaders('GET', childContainerUrl)
     When method GET
     Then match [301, 404, 410] contains responseStatus
 
-    * def childContainerUrl = testContainer.getUrl() + 'foo/'
+    * def childContainerUrl = testContainer.url + 'foo/'
     Given url childContainerUrl
     And configure headers = clients.alice.getAuthHeaders('PUT', childContainerUrl)
     And header Content-Type = 'text/turtle'
