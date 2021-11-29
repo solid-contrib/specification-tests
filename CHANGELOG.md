@@ -1,5 +1,8 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.3
+* Update tests to work with CTH v1.0.11 API.
+
 ## Release 0.0.2
 * Fix manifest for converted tests to ensure one manifest entry per test case.
 
