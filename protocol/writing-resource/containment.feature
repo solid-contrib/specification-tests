@@ -3,6 +3,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
   Background: Set up clients and paths
     * def testContainer = rootTestContainer.reserveContainer()
     * def intermediateContainer = testContainer.reserveContainer()
+    * def intermediateResource = testContainer.reserveResource('.ttl')
     * def resource = intermediateContainer.reserveResource('.txt')
 
   Scenario: PUT creates a grandchild resource and intermediate containers
@@ -52,3 +53,18 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     When method GET
     Then status 200
     And match testContainer.parseMembers(response) contains intermediateContainer.url
+
+  Scenario: PUT conflicts when creating resource turning resource into container
+    Given url intermediateResource.url
+    And configure headers = clients.alice.getAuthHeaders('PUT', intermediateResource.url)
+    And header Content-Type = 'text/turtle'
+    And request '<> a <http://example.org/Dahut> .'
+    When method PUT
+    Then assert responseStatus >= 200 && responseStatus < 300
+
+    Given url resource.url
+    And configure headers = clients.alice.getAuthHeaders('PUT', resource.url)
+    And header Content-Type = 'text/plain'
+    And request 'Hello'
+    When method PUT
+    Then status 409
