@@ -69,3 +69,20 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     And request 'Hello'
     When method PUT
     Then assert responseStatus >= 400 && responseStatus < 500
+
+  Scenario: PATCH conflicts when creating resource turning resource into container
+    * def requestUri = rootTestContainer.url + 'dahut2'
+    Given url requestUri
+    And configure headers = clients.alice.getAuthHeaders('PATCH', requestUri)
+    And header Content-Type = 'application/sparql-update'
+    And request 'INSERT DATA { <#hello> <#linked> <#world> . }'
+    When method PATCH
+    Then assert responseStatus >= 200 && responseStatus < 300
+
+    * def childrenRequestUri = rootTestContainer.url + 'dahut2/foo/bar.txt'
+    Given url childrenRequestUri
+    And configure headers = clients.alice.getAuthHeaders('PATCH', childrenRequestUri)
+    And header Content-Type = 'text/plain'
+    And request 'Hello'
+    When method PATCH
+    Then assert responseStatus >= 400 && responseStatus < 500
