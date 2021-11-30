@@ -112,6 +112,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     When method PUT
     Then status 201
 
+    # This is meant to test a possible mistake, where a resource is created under foo/
     * def childContainerRequestUri = testContainer.url + 'dahut3/foo/'
     Given url childContainerRequestUri
     And configure headers = clients.alice.getAuthHeaders('POST', childContainerRequestUri)
@@ -120,4 +121,3 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     When method POST
     Then status 404
 
-    
