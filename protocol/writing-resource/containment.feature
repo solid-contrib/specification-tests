@@ -11,7 +11,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     And header Content-Type = 'text/plain'
     And request 'Hello'
     When method PUT
-    Then assert responseStatus >= 200 && responseStatus < 300
+    Then status 201
 
     * def parentUrl = intermediateContainer.url
     Given url parentUrl
@@ -60,7 +60,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     And header Content-Type = 'text/turtle'
     And request '<> a <http://example.org/Dahut> .'
     When method PUT
-    Then assert responseStatus >= 200 && responseStatus < 300
+    Then status 201
 
     * def childrenRequestUri = testContainer.url + 'dahut/foo/bar.txt'
     Given url childrenRequestUri
@@ -94,7 +94,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
     And header Content-Type = 'text/turtle'
     And request '<> a <http://example.org/Dahut> .'
     When method PUT
-    Then assert responseStatus >= 200 && responseStatus < 300
+    Then status 201
 
     * def childContainerRequestUri = testContainer.url + 'dahut3/foo/'
     Given url childContainerRequestUri
