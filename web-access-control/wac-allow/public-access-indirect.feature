@@ -42,9 +42,7 @@ Feature: The WAC-Allow header shows public access modes for a public agent when 
     When method GET
     Then status 200
     And match header Content-Type contains 'text/turtle'
-    # check array of triples contains one with the given predicate-object
-    # TODO: this would be better implemented as hasStatement(null, <http://www.w3.org/ns/auth/acl#agentClass> <http://xmlns.com/foaf/0.1/Agent>)
-    And match RDFUtils.turtleToTripleArray(response, resource.url) contains '#? _.includes("<http://www.w3.org/ns/auth/acl#agentClass> <http://xmlns.com/foaf/0.1/Agent>")'
+    And assert parse(response, 'text/turtle', resource.url).contains(null, iri(ACL, 'agentClass'), iri(FOAF, 'Agent'))
 
   Scenario: Alice calls GET and the header shows full access for user
     Given url resource.url
