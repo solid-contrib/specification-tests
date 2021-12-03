@@ -368,20 +368,126 @@ The test harness makes some variables available to all tests:
 
 * `rootTestContainer` - An instance of `SolidContainer` pointing to the container in which all test files will be created
   for this run of the test suite. This is guaranteed to exist when the tests start and is a unique URL for every run of
-  the test suite.
+  the test suite. Each test should create its own test container from this container so that all resources created
+  within the test are isolated from other tests.
 * `clients` - An object containing the HTTP clients that are set up for authenticated access by `alice` and `bob`. One of
   these clients will need to be passed to any newly created `SolidContainer` or `SolidResource` - The user names are the
   key (e.g., `clients.alice`).
 * `webIds` - An object containing the webIds of the 2 users. These are needed when setting up ACLs (e.g., `webIds.alice`).
+* `RDF`, `XSD`, `LDP`, `ACL`, `FOAF`, `ACP` - Namespaces for use when constructing IRIs. 
 
 ## Helper Functions
 
+### RDF Model Support
+KarateDSL 'natively' supports JSON and XML but sadly it does not yet support RDF. As a result you will need a library
+to parse RDF documents and query them.
+
+#### `iri(iri)`
+This function returns an IRI object from the string version provided. The IRI can be used in functions querying RDF
+models.
+
+#### `iri(namespace, localName)`
+This function returns an IRI object by combining the namespace and localName strings provided. The IRI can be used in
+functions querying RDF models.
+
+#### `literal(value, option)`
+Returns a Literal value that can be used in functions querying RDF models. There are different variants of this function
+depending on the type of `value` and whether the `option` parameter is provided:
+type:
+* `literal(object)` - attempt to convert the object based upon its type. This supports Javascript strings, integers and
+  booleans, converting them to plain strings or `xsd:int` or `xsd:boolean` accordingly. If an unsupported type is
+  provided the function will throw an exception.
+  ```
+  literal('text')
+  literal(1234)
+  literal(true)
+  ```
+* `literal(java.math.BigDecimal)` - converts to `xsd:decimal`.
+  ```
+  literal(new java.math.BigDecimal('1.2'))
+  ```
+* `literal(java.math.BigInteger)` - converts to `xsd:integer`.
+  ```
+  literal(new java.math.BigInteger('1234567890'))
+  ```
+* `literal(string, languageTag)` - converts to a string with a language tag set.
+  ```
+  literal('text', 'en')
+  ```
+* `literal(string, dataTypeIRI)` - converts to the given data type.
+  ```
+  literal('1.2', iri(XSD, 'decimal'))
+  literal('1', iri(XSD, 'short'))
+  literal('1234567890', iri(XSD, 'integer'))
+  literal('1234', iri(XSD, 'int'))
+  literal('1234567890', iri(XSD, 'long'))
+  literal('1234567890.0', iri(XSD, 'float'))
+  literal('1234567890.0', iri(XSD, 'double'))
+  literal('2021-11-01', iri(XSD, 'date'))
+  literal('2021-11-01T15:14:13.000Z', iri(XSD, 'dateTime'))
+  literal('true', iri(XSD, 'boolean'))
+  ```
+
 ### Parsing Functions
-##### WAC-Allow header
-This `parseWacAllowHeader(headers)` function accepts the response headers, locates the `WAC-Allow` header, and parses
-it into a map object. This object will contain `user` and `public` keys plus any additional groups defined within the
-header. It extracts all the acccess modes, and adds them as a list to the relevant group. The result can be treated as
-a JSON object such as:
+#### `parse(data, contentType, baseUri?)` (static function)
+Parses an RDF document into a queryable model. The supported content types are: `text/turtle`, `application/ld+json`,
+`text/html`, `application/xhtml+xml`.
+* Parameters:
+  * data - The RDF data.
+  * contentType - The content type for this data.
+  * baseUri (optional) - The base URI used for any relative IRIs.
+* Returns a model array of strings in the form `<subject> <predicate> <object> .`
+
+#### `contains(model)`
+Returns true if the model passed in is a subset of the model the function is applied to. If it is not a subset it logs
+information highlighting the differences.
+* Parameters:
+  * model - The model to compare to this one.
+* Returns true or false.
+
+#### `getMembers()` or read-only property `members`
+Designed for use with container contents, this function extracts any objects that match the pattern
+`<url> ldp:contains <object>` where `<url> a ldp:BasicContainer` and returns them as a list of strings.
+* Returns a list of URLs.
+
+#### `subjects(predicate, object)`
+Returns a list of subjects matching the predicate and object.
+* Parameters:
+  * predicate - The iri of the predicate or null to match any.
+  * object - The object value (iri/literal) or null to match any.
+* Returns the list of subjects as strings.
+
+#### `predicates(subject, object)`
+Returns a list of predicates matching the subject and object.
+* Parameters:
+  * subject - The iri of the subject or null to match any.
+  * object - The object value (iri/literal) or null to match any.
+* Returns the list of predicates as strings.
+
+#### `objects(subject, predicate)`
+Returns a list of objects matching the subject and predicate.
+* Parameters:
+  * subject - The iri of the subject or null to match any.
+  * predicate - The iri of the predicate or null to match any.
+* Returns the list of objects as strings.
+
+#### `contains(subject, predicate, object)`
+Tests whether any statements exist that match the subject, predicate and object.
+* Parameters:
+  * subject - The iri of the subject or null to match any.
+  * predicate - The iri of the predicate or null to match any.
+  * object - The object value (iri/literal) or null to match any.
+* Returns true if any matching statements are found.
+
+### HTTP Header Support
+##### `parseWacAllowHeader(headers)`
+This function accepts the response headers, locates the `WAC-Allow` header, and parses it into a map object.
+* Parameters:
+  * headers - HTTP response headers. 
+* Returns an object which will contain `user` and `public` keys plus any additional groups defined within the header.
+
+It extracts all the access modes, and adds them as a list to the relevant group. The result can be treated as a JSON
+object such as:
 ```json5
 {
   user: ['read', 'write', 'append'],
@@ -395,11 +501,16 @@ And match result.user contains only ['read', 'write', 'append']
 And match result.public contains only ['read', 'append']
 ```
 
-##### Parse link header
-The `parseLinkHeaders(headers)` processes the response headers to extract all the `Link` headers and return them in the
-form of `List<Map<String, String>>`, where each item in the list is a map of the components of the link using the keys:
+##### `parseLinkHeaders(headers)`
+Ths processes the response headers to extract all the `Link` headers and return them in the form of
+`List<Map<String, String>>`, where each item in the list is a map of the components of the link using the keys:
 `rel`, `uri`, `title`, `type`. The `rel` and `uri` values are mandatory. The returned object can be treated as a JSON
-object. For example:
+object. 
+* Parameters:
+  * headers - HTTP response headers.
+* Returns an object representing all the link headers.
+
+For example:
 ```json5
 [
   {
@@ -421,32 +532,22 @@ And assert hasStorageType(links)
 
 ### Other useful functions
 #### `resolveUri(base, target)`
-Apply the target URI to the base URI to return a new URI. For example
+Apply the target URI to the base URI to return a new URI. 
+* Parameters:
+  * base - The base URI.
+  * target - The target URI or path to be resolved against the base URI.
+* Returns a new URI.
+
+For example
 `resolveUri('https://example.org/test/resource', '/inbox/')` would return `https://example.org/inbox/`.
 
 ## Libraries
 
 Most tests will deal with resources and containers (which is a subclass of a resource). These objects are represented
 by 2 classes in the test harness: `SolidResouce` and `SolidContainer`. For handling access controls in a universal way
-there are 2 classes: `AccessDatasetBuilder` and `AccessDataset`. Finally, there is also a library, `RDFUtils`, for
-parsing RDF of various formats.
-
-### TestHarnessException
-
-Any exceptions generated within the libraries below are wrapped as `TestHarnessException` errors and will be trapped
-and reported by the Karate test engine. If you need to trap these exceptions within a test you can use a JavaScript
-try/catch mechanism:
-```gherkin
-    * eval
-    """
-    try {
-      resource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
-    } catch(err) {
-      resource = null
-      karate.log(err.message);
-    }
-    """
-```
+there are two classes: `AccessDatasetBuilder` and `AccessDataset`. Finally, there are two libraries (`Utils` and
+`RDFModel`) providing parsing functions for headers and RDF respectively. Their functions are exposed globally within
+the Karate environment and have already been described above.
 
 ### SolidResource
 The `SolidResource` class represents a resource or container on the server. Since this is also the base class for
@@ -624,37 +725,22 @@ INSERT statement. This is only used for ACP.
 In the rare case where you want to manually construct an ACL document you may use this function to replace the content
 of an `AccessDataset` object and then apply it to a resource.
 
-### RDFUtils
-KarateDSL 'natively' supports JSON and XML but sadly it does not yet support RDF. As a result you will need a library
-to parse RDF documents into formats that are useful for comparisons.
+### TestHarnessException
 
-#### `turtleToTripleArray(data, baseUri)`
-Parses a Turtle document into an array of triples.
-* Parameters:
-  * data - The Turtle data.
-  * baseUri - The base URI used for any relative IRIs.
-* Returns an array of strings in the form `<subject> <predicate> <object> .`
-
-#### `jsonLdToTripleArray(data, baseUri)`
-Parses a JSON-LD document into an array of triples.
-* Parameters:
-  * data - The JSON-LD data.
-  * baseUri - The base URI used for any relative IRIs.
-* Returns an array of strings in the form `<subject> <predicate> <object> .`
-
-#### `rdfaToTripleArray(data, baseUri)`
-Parses a RDFa document into an array of triples.
-* Parameters:
-  * data - The RDFa data.
-  * baseUri - The base URI used for any relative IRIs.
-* Returns an array of strings in the form `<subject> <predicate> <object> .`
-
-#### `parseContainerContents(data, url)`
-Parses the body of a container to extract the list of members.
-* Parameters:
-  * data - The container data.
-  * url - The URL of the container.
-* Returns an array of strings representing the URLs of all members of the container. 
+Any exceptions generated within the libraries below are wrapped as `TestHarnessException` errors and will be trapped
+and reported by the Karate test engine. If you need to trap these exceptions within a test you can use a JavaScript
+try/catch mechanism:
+```gherkin
+    * eval
+    """
+    try {
+      resource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
+    } catch(err) {
+      resource = null
+      karate.log(err.message);
+    }
+    """
+```
 
 # Example Test Cases
 The following are a selection of example tests that demonstrate different features of the test harness, and show 
@@ -667,27 +753,27 @@ negotiation.
 ```gherkin
 Feature: Requests support content negotiation for Turtle resource
 
-  Background: Create a Turtle resource
+  Background: Create a turtle resource
     * def testContainer = rootTestContainer.reserveContainer()
     * def exampleTurtle = karate.readAsString('../fixtures/example.ttl')
     * def resource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
-    * def expected = RDFUtils.turtleToTripleArray(exampleTurtle, resource.url)
-    * configure headers = clients.alice.getAuthHeaders('GET', resource.url)
+    * def expected = parse(exampleTurtle, 'text/turtle')
+    * configure headers clients.alice.getAuthHeaders('GET', resource.url)
     * url resource.url
 
-  Scenario: Alice can read the Turtle example as JSON-LD
+  Scenario: Alice can GET the TTL example as JSON-LD
     Given header Accept = 'application/ld+json'
     When method GET
     Then status 200
     And match header Content-Type contains 'application/ld+json'
-    And match RDFUtils.jsonLdToTripleArray(JSON.stringify(response), resource.url) contains expected
+    And assert parse(response, 'application/ld+json', resource.url).contains(expected)
 
-  Scenario: Alice can read the Turtle example as Turtle
+  Scenario: Alice can GET the TTL example as TTL
     Given header Accept = 'text/turtle'
     When method GET
     Then status 200
     And match header Content-Type contains 'text/turtle'
-    And match RDFUtils.turtleToTripleArray(response, resource.url) contains expected
+    And assert parse(response, 'text/turtle', resource.url).contains(expected)
 ```
 
 The `Background` for this test:
@@ -822,45 +908,51 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
   Scenario: PUT creates a grandchild resource and intermediate containers
     Given url resource.url
     And configure headers = clients.alice.getAuthHeaders('PUT', resource.url)
-    And request "Hello"
+    And header Content-Type = 'text/plain'
+    And request 'Hello'
     When method PUT
-    Then assert responseStatus >= 200 && responseStatus < 300
+    Then status 201
 
-    Given url intermediateContainer.url
-    And configure headers = clients.alice.getAuthHeaders('GET', intermediateContainer.url)
+    * def parentUrl = intermediateContainer.url
+    Given url parentUrl
+    And configure headers = clients.alice.getAuthHeaders('GET', parentUrl)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
-    And match intermediateContainer.parseMembers(response) contains resource.url
+    And match parse(response, 'text/turtle', parentUrl).members contains resource.url
 
-    Given url testContainer.url
-    And configure headers = clients.alice.getAuthHeaders('GET', testContainer.url)
+    * def grandParentUrl = testContainer.url
+    Given url grandParentUrl
+    And configure headers = clients.alice.getAuthHeaders('GET', grandParentUrl)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
-    And match testContainer.parseMembers(response) contains intermediateContainer.url
+    And match parse(response, 'text/turtle', grandParentUrl).members contains intermediateContainer.url
 
   Scenario: PATCH creates a grandchild resource and intermediate containers
     Given url resource.url
     And configure headers = clients.alice.getAuthHeaders('PATCH', resource.url)
-    And header Content-Type = "application/sparql-update"
+    And header Content-Type = 'application/sparql-update'
     And request 'INSERT DATA { <#hello> <#linked> <#world> . }'
     When method PATCH
     Then assert responseStatus >= 200 && responseStatus < 300
 
-    Given url intermediateContainer.url
-    And configure headers = clients.alice.getAuthHeaders('GET', intermediateContainer.url)
+    * def parentUrl = intermediateContainer.url
+    Given url parentUrl
+    And configure headers = clients.alice.getAuthHeaders('GET', parentUrl)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
-    And match intermediateContainer.parseMembers(response) contains resource.url
+    And match parse(response, 'text/turtle', parentUrl).members contains resource.url
 
-    Given url testContainer.url
-    And configure headers = clients.alice.getAuthHeaders('GET', testContainer.url)
+    * def grandParentUrl = testContainer.url
+    Given url grandParentUrl
+    And configure headers = clients.alice.getAuthHeaders('GET', grandParentUrl)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
-    And match testContainer.parseMembers(response) contains intermediateContainer.url
+    And match parse(response, 'text/turtle', grandParentUrl).members contains intermediateContainer.url
+
 ```
 
 The `Background` for this test:
