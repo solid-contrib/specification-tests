@@ -42,7 +42,7 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
 
   Scenario: Test 3.5 Update RDFSource with PUT
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
     And header Link = '<http://www.w3.org/ns/ldp#RDFSource>; rel="type"'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update RDF source Interaction Model"@en .'
@@ -51,14 +51,14 @@ Feature: Update: PUT Turtle resources to container with varying LDP Interaction 
 
   Scenario: Test 3.6 Update with Turtle without Interaction model
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('PUT', requestUri)
+    And headers clients.alice.getAuthHeaders('PUT', requestUri)
     And header Content-Type = 'text/turtle'
     And request '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update with no Interaction Model"@en .'
     When method PUT
     Then match [200, 201, 204, 205] contains responseStatus
 
     Given url requestUri
-    And configure headers = clients.alice.getAuthHeaders('GET', requestUri)
+    And headers clients.alice.getAuthHeaders('GET', requestUri)
     When method GET
     Then status 200
     And match response == '@prefix dc: <http://purl.org/dc/terms/>. <> dc:title "Update with no Interaction Model"@en .'

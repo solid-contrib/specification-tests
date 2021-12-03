@@ -218,6 +218,9 @@ And cookie foo = 'bar'
 And form field username = 'john'
 ```
 You can set multiple values at the same time with JSON using `params`, `headers`, `cookies`, and `form fields`.
+```gherkin
+And headers { Accept: 'text/turtle', 'Accept-Charset': 'iso-8859-5' }
+```
 
 Note:
 * That these keywords can take expressions or functions which return a single value or a map for the multiple value
@@ -229,9 +232,13 @@ If you want to set up some headers to be used across multiple requests, you can 
 ```gherkin
 * configure headers = { 'Content-Type': 'application/json' }
 ```
-If you use this in the `Background`, it will apply to all scenarios. So if you need to replace these headers in one of 
-those scenarios, you will need to configure them again in the same way or configure the headers as null and set them as
-normal.
+If you use this in the `Background`, the headers will apply to all scenarios and cannot be overwritten with other 
+methods of adding headers. If you need to replace these headers in one of those scenarios, you will need to use
+`configure` again to either replace them or set them to `null` and then set them as normal using either `header` or 
+`headers`. The recommendation is to only use `configure headers` in the `Background` for any headers that should apply
+to requests in all scenarios and won't need to be overwritten. Use `header` or `headers` within `Scenarios` to add extra
+headers. Avoid using `configure headers` inside a `Scenario` unless you are setting up common headers for a series of 
+requests within the one `Scenario`.
 
 ### Setting the request body
 To set up the body of the request use the `request` keyword. Note that for methods that expect a body (e.g., PUT, POST),
@@ -758,7 +765,7 @@ Feature: Requests support content negotiation for Turtle resource
     * def exampleTurtle = karate.readAsString('../fixtures/example.ttl')
     * def resource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
     * def expected = parse(exampleTurtle, 'text/turtle')
-    * configure headers clients.alice.getAuthHeaders('GET', resource.url)
+    * configure headers = clients.alice.getAuthHeaders('GET', resource.url)
     * url resource.url
 
   Scenario: Alice can GET the TTL example as JSON-LD
@@ -907,7 +914,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
 
   Scenario: PUT creates a grandchild resource and intermediate containers
     Given url resource.url
-    And configure headers = clients.alice.getAuthHeaders('PUT', resource.url)
+    And headers clients.alice.getAuthHeaders('PUT', resource.url)
     And header Content-Type = 'text/plain'
     And request 'Hello'
     When method PUT
@@ -915,7 +922,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
 
     * def parentUrl = intermediateContainer.url
     Given url parentUrl
-    And configure headers = clients.alice.getAuthHeaders('GET', parentUrl)
+    And headers clients.alice.getAuthHeaders('GET', parentUrl)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
@@ -923,7 +930,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
 
     * def grandParentUrl = testContainer.url
     Given url grandParentUrl
-    And configure headers = clients.alice.getAuthHeaders('GET', grandParentUrl)
+    And headers clients.alice.getAuthHeaders('GET', grandParentUrl)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
@@ -931,7 +938,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
 
   Scenario: PATCH creates a grandchild resource and intermediate containers
     Given url resource.url
-    And configure headers = clients.alice.getAuthHeaders('PATCH', resource.url)
+    And headers clients.alice.getAuthHeaders('PATCH', resource.url)
     And header Content-Type = 'application/sparql-update'
     And request 'INSERT DATA { <#hello> <#linked> <#world> . }'
     When method PATCH
@@ -939,7 +946,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
 
     * def parentUrl = intermediateContainer.url
     Given url parentUrl
-    And configure headers = clients.alice.getAuthHeaders('GET', parentUrl)
+    And headers clients.alice.getAuthHeaders('GET', parentUrl)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200
@@ -947,7 +954,7 @@ Feature: Creating a resource using PUT and PATCH must create intermediate contai
 
     * def grandParentUrl = testContainer.url
     Given url grandParentUrl
-    And configure headers = clients.alice.getAuthHeaders('GET', grandParentUrl)
+    And headers clients.alice.getAuthHeaders('GET', grandParentUrl)
     And header Accept = 'text/turtle'
     When method GET
     Then status 200

@@ -1,5 +1,10 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.4
+* Update tests to work with new RDF library in CTH v1.0.12 API.
+* Clarify instructions on configuring request headers and make all tests consistent.
+* Test for intermediate containers overwriting a resource in `containment.feature`.
+
 ## Release 0.0.3
 * Update tests to work with CTH v1.0.11 API.
 

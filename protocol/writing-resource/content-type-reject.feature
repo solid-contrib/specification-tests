@@ -6,7 +6,7 @@ Feature: Server MUST reject write requests without Content-Type
 
   Scenario: Server rejects PUT requests without Content-Type
     Given url resource.url
-    And configure headers = clients.alice.getAuthHeaders('PUT', resource.url)
+    And headers clients.alice.getAuthHeaders('PUT', resource.url)
     And header Content-Type = ''
     And request "<> a <#Something> ."
     When method PUT
@@ -15,7 +15,7 @@ Feature: Server MUST reject write requests without Content-Type
   Scenario: Server rejects POST requests without Content-Type
     * def containerUrl = testContainer.url
     Given url containerUrl
-    And configure headers = clients.alice.getAuthHeaders('POST', containerUrl)
+    And headers clients.alice.getAuthHeaders('POST', containerUrl)
     And header Content-Type = ''
     And request "<> a <#Something> ."
     When method POST
@@ -23,7 +23,7 @@ Feature: Server MUST reject write requests without Content-Type
 
   Scenario: Server rejects PATCH requests without Content-Type
     Given url resource.url
-    And configure headers = clients.alice.getAuthHeaders('PATCH', resource.url)
+    And headers clients.alice.getAuthHeaders('PATCH', resource.url)
     And header Content-Type = ''
     And request "INSERT DATA { <> a <#Something> . }"
     When method PATCH
