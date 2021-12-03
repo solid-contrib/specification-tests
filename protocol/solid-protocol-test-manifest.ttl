@@ -4,6 +4,8 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix dcterms: <http://purl.org/dc/terms/>
 prefix td: <http://www.w3.org/2006/03/test-description#>
 prefix spec: <http://www.w3.org/ns/spec#>
+
+# Editor's draft (fully annotated)
 prefix sopr: <https://solidproject.org/TR/protocol#>
 
 prefix manifest: <#>

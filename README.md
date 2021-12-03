@@ -14,7 +14,9 @@
   - [Helper Functions](#helper-functions)
   - [Libraries](#libraries)
 - [Example Test Cases](#example-test-cases)
-- [Specification Annotations](#specification-annotations)
+- [Specifications](#specifications)
+  - [Annotations](#annotations)
+  - [Versions](#versions)
 - [Test Manifest](#test-manifest)
 - [Versioning](#versioning)
 
@@ -75,10 +77,21 @@ mkdir -p config reports
 cat > ./config/application.yaml <<EOF
 subjects: /data/test-subjects.ttl
 sources:
-  - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
-  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl
+  # Protocol spec & manifest
+  # Editor's draft (fully annotated)
   - https://solidproject.org/TR/protocol
-  - https://github.com/solid/specification-tests/web-access-control/web-access-control-spec.ttl
+  - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
+
+  # WAC spec & manifest
+  # Editor's draft (fully annotated)
+  - https://solid.github.io/web-access-control-spec
+  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl
+
+  # Published draft (not annotated)
+  # This is an example of how you could run tests for a specific version of the specification 
+#  - https://solidproject.org/TR/2021/wac-20210711
+#  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest-20210711.ttl
+
 mappings:
   - prefix: https://github.com/solid/specification-tests
     path: /data
@@ -1052,7 +1065,8 @@ The scenarios then:
 1. Confirm that the status codes for the `GET` and `HEAD` requests are all `200`.
 1. Confirm that the status codes for `PUT`, `PATCH`, `POST` and `DELETE` requests are all `403`.
 
-# Specification Annotations
+# Specifications
+## Annotations
 All test cases should be linked to the related requirements in one of the Solid specifications. This depends on the
 specifications being annotated:
 * Provide each requirement with an identifier which should also be a valid URL in the specification
@@ -1071,19 +1085,21 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix doap: <http://usefulinc.com/ns/doap#>
 prefix spec: <http://www.w3.org/ns/spec#>
 
+prefix wac: <https://solidproject.org/TR/2021/wac-20210711#>
+
 <https://solidproject.org/TR/2021/wac-20210711>
   a doap:Specification ;
   spec:requirement
-        <https://solidproject.org/TR/2021/wac-20210711#access-modes> ,
-        <https://solidproject.org/TR/2021/wac-20210711#access-objects>
+        wac:access-modes ,
+        wac:access-objects
 .
 
-<https://solidproject.org/TR/2021/wac-20210711#access-modes>
+wac:access-modes
   spec:requirementSubject spec:Server ;
   spec:requirementLevel spec:MUST ;
   spec:statement "text of the requirement"@en .
 
-<https://solidproject.org/TR/2021/wac-20210711#access-objects>
+wac:access-objects
   spec:requirementSubject spec:Server ;
   spec:requirementLevel spec:MUST ;
   spec:statement "text of the requirement"@en .
@@ -1091,6 +1107,34 @@ prefix spec: <http://www.w3.org/ns/spec#>
 
 The specification vocab used above is under development, but the latest version is at
 https://github.com/solid/vocab/blob/specification-terms/spec.ttl.
+
+## Versions
+It may be necessary to run tests against a specific version of a specification. This is simple to achieve by changing
+the files passed to CTH either via the `--source` option or in `application.yaml`. A specification must be paired with 
+a test manifest, for example:
+```yaml
+sources:
+  - https://solidproject.org/TR/2021/wac-20210711
+  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest-20210711.ttl
+```
+The manifest file might be a copy of the one used for the current version of a specification, however internal references
+must point to the right spec. This is easiest to do by modifying a namespace prefix and using that prefix for all such
+references.
+```turtle
+prefix wac: <https://solidproject.org/TR/2021/wac-20210711#>
+prefix manifest: <#>
+manifest:protected-operation-not-read-resource-access-AWC
+  a td:TestCase ;
+  spec:requirementReference wac:access-modes ;
+  td:reviewStatus td:approved ;
+  td:preCondition "authentication", "acl" ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
+```
+If the test implementation has changed between spec versions, then you could have an alternative version of the feature
+file and point to the relevant one in the manifest file.
+
+The test report header shows the link to the specification making it clear which version was used.
 
 # Test Manifest
 The test cases themselves need to be described in a manifest file. For each test case, this provides:
@@ -1120,11 +1164,13 @@ prefix dcterms: <http://purl.org/dc/terms/>
 prefix td: <http://www.w3.org/2006/03/test-description#>
 prefix spec: <http://www.w3.org/ns/spec#>
 
+prefix wac: <https://solidproject.org/TR/2021/wac-20210711#>
+
 prefix manifest: <#>
 
 manifest:protected-operation-not-read-resource-access-AWC
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
+  spec:requirementReference wac:access-modes ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -1132,7 +1178,7 @@ manifest:protected-operation-not-read-resource-access-AWC
 
 manifest:protected-operation-not-read-resource-default-AWC
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-modes> ;
+  spec:requirementReference wac:access-modes ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
@@ -1140,7 +1186,7 @@ manifest:protected-operation-not-read-resource-default-AWC
 
 manifest:acl-object-none
   a td:TestCase ;
-  spec:requirementReference <https://solidproject.org/TR/2021/wac-20210711#access-objects> ;
+  spec:requirementReference wac:access-objects ;
   td:reviewStatus td:unreviewed ;
   td:preCondition "authentication", "acl" ;
   spec:testScript
