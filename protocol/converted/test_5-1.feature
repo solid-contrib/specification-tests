@@ -44,7 +44,7 @@ Feature: Check that Bob can only read Non-RDF resource when he is authorized rea
 
   Scenario: Test 1.6 Append resource (POST) denied
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('POST', requestUri)
+    And headers clients.bob.getAuthHeaders('POST', requestUri)
     And header Content-Type = 'text/plain'
     And request "Bob's addition"
     When method POST
@@ -52,13 +52,13 @@ Feature: Check that Bob can only read Non-RDF resource when he is authorized rea
 
   Scenario: Test 1.7 Delete resource denied
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('DELETE', requestUri)
+    And headers clients.bob.getAuthHeaders('DELETE', requestUri)
     When method DELETE
     Then status 403
 
 #Scenario: Test 1.8 on URL /alice_share_bob.txt
 #  Given url requestUri
-#  And configure headers = clients.bob.getAuthHeaders('DAHU', requestUri)
+#  And headers clients.bob.getAuthHeaders('DAHU', requestUri)
 #  When method DAHU
 #  Then status 400
 

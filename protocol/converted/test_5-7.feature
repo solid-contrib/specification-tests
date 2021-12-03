@@ -36,7 +36,7 @@ Feature: Check that Bob can read and write to Non-RDF resource when he is author
 
   Scenario: Test 7.5 Write resource (PATCH) denied
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('PATCH', requestUri)
+    And headers clients.bob.getAuthHeaders('PATCH', requestUri)
     And header Content-Type = 'text/plain'
     And request "+Bob's patch"
     When method PATCH
@@ -44,7 +44,7 @@ Feature: Check that Bob can read and write to Non-RDF resource when he is author
 
   # Scenario: Test 7.6 Append resource (POST) allowed
   #   Given url requestUri
-  #   And configure headers = clients.bob.getAuthHeaders('POST', requestUri)
+  #   And headers clients.bob.getAuthHeaders('POST', requestUri)
   #   And header Content-Type = 'text/plain'
   #   And request "Bob's addition"
   #   When method POST
@@ -52,12 +52,12 @@ Feature: Check that Bob can read and write to Non-RDF resource when he is author
 
 #  Scenario: Test 7.7 on URL /alice_share_bob.txt
 #    Given url requestUri
-#    And configure headers = clients.bob.getAuthHeaders('DAHU', requestUri)
+#    And headers clients.bob.getAuthHeaders('DAHU', requestUri)
 #    When method DAHU
 #    Then status 400
 
   Scenario: Test 7.8 Delete resource denied
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('DELETE', requestUri)
+    And headers clients.bob.getAuthHeaders('DELETE', requestUri)
     When method DELETE
     Then status 403

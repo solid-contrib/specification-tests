@@ -10,7 +10,7 @@ Feature: Check that Bob can't delete RDF resource when he is only authorized rea
 
   Scenario: Test 9.1 Delete resource denied
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('DELETE', requestUri)
+    And headers clients.bob.getAuthHeaders('DELETE', requestUri)
     When method DELETE
     Then status 403
 

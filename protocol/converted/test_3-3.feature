@@ -60,12 +60,12 @@ Feature: Check that Bob can only append to Basic Container when he is authorized
 
   Scenario: Test 3.8 Delete container denied
     Given url requestUri
-    And configure headers = clients.bob.getAuthHeaders('DELETE', requestUri)
+    And headers clients.bob.getAuthHeaders('DELETE', requestUri)
     When method DELETE
     Then status 403
 
 #  Scenario: Test 3.9 on URL /
 #    Given url requestUri
-#    And configure headers = clients.bob.getAuthHeaders('DAHU', requestUri)
+#    And headers clients.bob.getAuthHeaders('DAHU', requestUri)
 #    When method DAHU
 #    Then status 400
