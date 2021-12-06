@@ -1,12 +1,18 @@
 subjects: /data/test-subjects.ttl
 sources:
   # Protocol spec & manifest
+  # Editor's draft (fully annotated)
   - https://solidproject.org/TR/protocol
   - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
 
   # WAC spec & manifest
+  # Editor's draft (fully annotated)
   - https://solid.github.io/web-access-control-spec
   - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl
+
+  # Published draft (not annotated)
+#  - https://solidproject.org/TR/2021/wac-20210711
+#  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest-20210711.ttl
 
   # Link old tests to new spec temporarily
   - https://github.com/solid/specification-tests/web-access-control/wac-spec-additions.ttl
