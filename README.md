@@ -77,12 +77,12 @@ mkdir -p config reports
 cat > ./config/application.yaml <<EOF
 subjects: /data/test-subjects.ttl
 sources:
-  # Protocol spec & manifest
+  # Protocol specification & manifest
   # Editor's draft (fully annotated)
   - https://solidproject.org/TR/protocol
   - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
 
-  # WAC spec & manifest
+  # WAC specification & manifest
   # Editor's draft (fully annotated)
   - https://solid.github.io/web-access-control-spec
   - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl
@@ -1118,8 +1118,8 @@ sources:
   - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest-20210711.ttl
 ```
 The manifest file might be a copy of the one used for the current version of a specification, however internal references
-must point to the right spec. This is easiest to do by modifying a namespace prefix and using that prefix for all such
-references.
+must point to the right specification. This is easiest to do by modifying a namespace prefix and using that prefix for
+all such references.
 ```turtle
 prefix wac: <https://solidproject.org/TR/2021/wac-20210711#>
 prefix manifest: <#>
@@ -1131,8 +1131,8 @@ manifest:protected-operation-not-read-resource-access-AWC
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
 ```
-If the test implementation has changed between spec versions, then you could have an alternative version of the feature
-file and point to the relevant one in the manifest file.
+If the test implementation has changed between specification versions, then you could have an alternative version of the
+feature file and point to the relevant one in the manifest file.
 
 The test report header shows the link to the specification making it clear which version was used.
 
