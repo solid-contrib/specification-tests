@@ -612,7 +612,8 @@ requests, whereas the second adds the correct authorization headers for the user
     body: "",    // the response body
   }
   ```
-  This allows you to make assertions about the response in the normal manner:
+  This allows you to make assertions about the `response` using `assert` or `match` keywords. Note that you cannot use
+  the shortcut style of `Then status 201` since the request has been made outside the Karate environment.
   ```gherkin
   Then assert response.status == 201
   And match response.header.location == someUrl
