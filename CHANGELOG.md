@@ -1,5 +1,8 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.5
+* Add information about the `send` methods of `SolidClient` for cases when you need to have more control over a request.
+
 ## Release 0.0.4
 * Update tests to work with new RDF library in CTH v1.0.12 API.
 * Clarify instructions on configuring request headers and make all tests consistent.

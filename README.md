@@ -240,6 +240,8 @@ Note:
 versions.
 * These commands are additive - the key-value pair(s) are added to the request.
 * The key is not in quotes in the single key-value variants.
+* Karate tries to help by working out the default `Content-Type` from the request body however, this presents a problem
+  if you need to test requests without the header. The `send` method of [SolidClient](#solidclient) provides a solution.
 
 If you want to set up some headers to be used across multiple requests, you can use the following command:
 ```gherkin
@@ -270,6 +272,10 @@ conjunction with the `When` keyword:
 ```gherkin
 When method PUT
 ```
+
+Note:
+* Karate will not allow you to set up request with unknown HTTP methods so in the rare cases when you need to test this,
+  the `send` method of [SolidClient](#solidclient) provides a solution.
 
 ### Checking the response code
 Finally, there is a shorthand for asserting the value of the response code if you are only matching one code:
@@ -390,9 +396,9 @@ The test harness makes some variables available to all tests:
   for this run of the test suite. This is guaranteed to exist when the tests start and is a unique URL for every run of
   the test suite. Each test should create its own test container from this container so that all resources created
   within the test are isolated from other tests.
-* `clients` - An object containing the HTTP clients that are set up for authenticated access by `alice` and `bob`. One of
-  these clients will need to be passed to any newly created `SolidContainer` or `SolidResource` - The user names are the
-  key (e.g., `clients.alice`).
+* `clients` - An object containing the `SolidClient` instances that are set up for authenticated access by `alice` and 
+  `bob`. One of these clients will need to be passed to any newly created `SolidContainer` or `SolidResource` - The user
+  names are the key (e.g., `clients.alice`).
 * `webIds` - An object containing the webIds of the 2 users. These are needed when setting up ACLs (e.g., `webIds.alice`).
 * `RDF`, `XSD`, `LDP`, `ACL`, `FOAF`, `ACP` - Namespaces for use when constructing IRIs. 
 
@@ -563,11 +569,72 @@ For example
 
 ## Libraries
 
-Most tests will deal with resources and containers (which is a subclass of a resource). These objects are represented
+As previously mentioned, the global variable `clients` holds instances of `SolidClient` which are set up to be able to
+access the test server as a specific user. There are some additional capabilities provided by this class. Most tests
+will deal with resources and containers (which is a subclass of a resource). These objects are represented
 by 2 classes in the test harness: `SolidResouce` and `SolidContainer`. For handling access controls in a universal way
 there are two classes: `AccessDatasetBuilder` and `AccessDataset`. Finally, there are two libraries (`Utils` and
 `RDFModel`) providing parsing functions for headers and RDF respectively. Their functions are exposed globally within
 the Karate environment and have already been described above.
+
+### SolidClient
+The `SolidClient` class provides access to the test server on behalf of a user. This is mostly used internally within
+`SolidResouce` and `SolidContainer` but there are three public API functions available.
+
+#### `getAuthHeaders(method, uri)`
+This returns a map of the authorization headers required for a request on behalf of the user registered in this instance
+of the `SolidClient`. The map can be applied to a request being prepared in Karate using the `headers` keyword: 
+```gherkin
+  And headers clients.alice.getAuthHeaders('GET', url)
+```
+* Parameters:
+  * method - The HTTP method of the request.
+  * url - The absolute url of the request.
+* Returns a map of headers.
+
+#### `send(method, uri, data, headers)` and `sendAuthorized(method, uri, data, headers)`
+This is an alternative way to send a request which allows testers to have full control over the HTTP method and request
+headers. Karate will not allow invalid HTTP methods and sets some headers by default so this method allows some
+additional edge case tests to be performed. The only request header these methods include by default is the `User-Agent`
+so that requests are still traceable to the CTH. There are two versions of this method, the first sends un-authenticated 
+requests, whereas the second adds the correct authorization headers for the user registered in this instance of the
+`SolidClient`.
+* Parameters:
+  * method - The HTTP method of the request.
+  * url - The absolute url of the request.
+  * data - The data to be sent in the request (or null). 
+  * headers - A map of key/value pairs to be send as request headers (or null). See the note below for additional tips.
+* Returns the response as a map with the following structure:
+  ```json5
+  {
+    status: 200, // integer
+    headers: {}, // map of all response headers
+    body: "",    // the response body
+  }
+  ```
+  This allows you to make assertions about the `response` using `assert` or `match` keywords. Note that you cannot use
+  the shortcut style of `Then status 201` since the request has been made outside the Karate environment.
+  ```gherkin
+  Then assert response.status == 201
+  And match response.header.location == someUrl
+  And match response.body contains 'data'
+  ```
+
+The header parameter must be set carefully due to limitations in the way Karate translates JSON objects to Java. For
+simple examples you can pass headers inline:
+```gherkin
+* def response = clients.alice.send('POST', resource.url, 'data', {'Content-Type': 'text/plain', Accept: 'text/plain'})
+```
+If a header has multiple values they must be set once using an array but this cannot be inline:
+```gherkin
+* def values = ['a', 'b', 'c']
+* def response = clients.alice.send('GET', resource.url, 'data', {'X-test': values})
+```
+Obviously you can set up the whole map as a variable:
+```gherkin
+* def headers = {'X-test1': '1', 'X-test2': ['a', 'b', 'c']}
+* def response = clients.alice.send('GET', resource.url, 'data', headers)
+```
 
 ### SolidResource
 The `SolidResource` class represents a resource or container on the server. Since this is also the base class for
