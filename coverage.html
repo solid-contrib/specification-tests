@@ -166,14 +166,14 @@
 </script>
 </head>
 
-<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/specification-tests/d10cd3fc-a335-4c4d-bd7c-354b196fc714#">
+<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/specification-tests/9c15e368-984f-4c49-9d16-18c1c479407e#">
 <main>
 <article>
 <h1 property="dcterms:title">Solid Specification - Conformance Test Suite Coverage Report</h1>
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd resource="https://github.com/solid/specification-tests/d10cd3fc-a335-4c4d-bd7c-354b196fc714" rel="owl:sameAs">https://github.com/solid/specification-tests/d10cd3fc-a335-4c4d-bd7c-354b196fc714</dd>
+  <dd resource="https://github.com/solid/specification-tests/9c15e368-984f-4c49-9d16-18c1c479407e" rel="owl:sameAs">https://github.com/solid/specification-tests/9c15e368-984f-4c49-9d16-18c1c479407e</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -184,7 +184,7 @@
     <li><a href="https://solid.github.io/web-access-control-spec" typeof="http://schema.org/CreativeWork prov:Entity https://www.w3.org/ns/activitystreams#Article http://schema.org/Article doap:Specification" title="Specification link">https://solid.github.io/web-access-control-spec</a></li>
   </ul>
 </section>
-<section about="https://github.com/solid/specification-tests/d10cd3fc-a335-4c4d-bd7c-354b196fc714#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid/specification-tests/9c15e368-984f-4c49-9d16-18c1c479407e#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
   <dl><dt>Description</dt><dd property="doap:description">Solid Specification Conformance Tests</dd></dl>
@@ -210,7 +210,7 @@
   <li rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol" class="spec">
     <details id="protocol">
       <summary><b>Specification:</b> https://solidproject.org/TR/protocol <a href="https://solidproject.org/TR/protocol" class="ext"></a>
-        <span class="count">79</span>
+        <span class="count">81</span>
       </summary>
       <ul>
         <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-http-11" class="spec">
@@ -230,7 +230,7 @@ Server
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">data pod MUST be an HTTP/1.1 server [RFC7230][RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST conform to HTTP/1.1 Message Syntax and Routing [RFC7230] and HTTP/1.1 Semantics and Content [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -251,7 +251,7 @@ Server
     <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
     </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">It SHOULD additionally be an HTTP/2  server [RFC7540]</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD conform to HTTP/2 [RFC7540].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -272,7 +272,7 @@ Server
     <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
     </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A data pod SHOULD use TLS connections through the https URI scheme in order to secure the communication between clients and server.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD use TLS connections through the https URI scheme in order to secure the communication with clients.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -294,7 +294,7 @@ Server
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When both http and https are supported, the server MUST redirect all http URIs to their https counterparts using a response with a 301 status code and a Location header.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">When both http and https URI schemes are supported, the server MUST redirect all http URIs to their https counterparts using a response with a 301 status code and a Location header.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -316,7 +316,7 @@ Server
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A data pod MUST implement the server part of HTTP/1.1 Conditional Requests [RFC7232] to ensure that updates requested by clients will only be applied if given preconditions are met.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST conform to HTTP/1.1 Conditional Requests [RFC7232].</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -366,7 +366,7 @@ Server
     <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
     </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">It SHOULD additionally implement the server part of HTTP/1.1 Caching [RFC7234] to improve performance.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD conform to HTTP/1.1 Caching [RFC7234].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -387,7 +387,7 @@ Server
     <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
     </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A data pod MAY implement the server part of HTTP/1.1 Range Requests [RFC7233] to further improve performance for large representations.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers MAY conform to HTTP/1.1 Range Requests [RFC7233].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -409,7 +409,7 @@ Server
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A data pod MUST implement the server part of HTTP/1.1 Authentication [RFC7235].</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST conform to HTTP/1.1 Authentication [RFC7235].</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -460,7 +460,7 @@ Server
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a client does not provide valid credentials when requesting a resource that requires it (see WebID), the server MUST send a response with a 401 status code (unless 404 is preferred for security reasons).</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">When a client does not provide valid credentials when requesting a resource that requires it (see WebID), servers MUST send a response with a 401 status code (unless 404 is preferred for security reasons).</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -511,7 +511,7 @@ Server
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A Solid server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -562,7 +562,7 @@ Client
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A Solid client MUST be an HTTP/1.1 client [RFC7230][RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST conform to HTTP/1.1 Message Syntax and Routing [RFC7230] and HTTP/1.1 Semantics and Content [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -583,7 +583,7 @@ Client
     <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
     </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY be an HTTP/2 client [RFC7540] to improve performance.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY conform to HTTP/2 [RFC7540].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -604,7 +604,7 @@ Client
     <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
     </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A Solid client MAY implement the client parts of HTTP/1.1 Conditional Requests [RFC7232] to only trigger updates when certain preconditions are met.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY conform to HTTP/1.1 Conditional Requests [RFC7232].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -625,7 +625,7 @@ Client
     <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
     </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY implement HTTP/1.1 Caching [RFC7234].</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY conform to HTTP/1.1 Caching [RFC7234].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -646,7 +646,7 @@ Client
     <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
     </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY implement HTTP/1.1 Range Requests [RFC7233] to improve performance.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY conform to HTTP/1.1 Range Requests [RFC7233].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -668,7 +668,7 @@ Client
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A Solid client MUST implement the client part of HTTP/1.1 Authentication [RFC7235] if it needs to access resources requiring authentication (see WebID).</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST conform to HTTP/1.1 Authentication [RFC7235] if it needs to access resources requiring authentication (see WebID).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -711,7 +711,7 @@ Client
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A Solid client MUST use the Content-Type HTTP header in PUT, POST and PATCH requests [RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST use the Content-Type HTTP header in PUT, POST and PATCH requests [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -856,7 +856,7 @@ Server
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a server supports a data pod, it MUST provide one or more storages (pim:Storage) – a space of URIs in which data can be accessed. A storage is the root container for all of its contained resources (see Resource Containment).</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST provide one or more storages (pim:Storage) – a space of URIs in which data can be accessed. A storage is the root container for all of its contained resources (see Resource Containment).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1775,7 +1775,7 @@ Server
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Server MUST exclude the DELETE method in the HTTP response header Allow in response to requests [RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Server MUST exclude the DELETE method in the HTTP response header Allow in response to requests to these resources [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -2003,6 +2003,48 @@ MUST
 </details>
 
         </li>
+        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-websockets-api" class="spec">
+<details id="server-websockets-api" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-websockets-api" typeof="" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-websockets-api <a href="https://solidproject.org/TR/protocol#server-websockets-api" class="ext"></a>
+    <span class="count">0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
+Server
+          </dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
+    </dd>
+  </dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD implement the Solid WebSockets API [SOLID-WEBSOCKETS-API].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-websockets-api" class="spec">
+<details id="client-websockets-api" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-websockets-api" typeof="" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-websockets-api <a href="https://solidproject.org/TR/protocol#client-websockets-api" class="ext"></a>
+    <span class="count">0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
+Client
+    </dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
+    </dd>
+  </dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients SHOULD implement the Solid WebSockets API [SOLID-WEBSOCKETS-API].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
         <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-cors" class="spec">
 <details id="server-cors" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-cors" typeof="" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors <a href="https://solidproject.org/TR/protocol#server-cors" class="ext"></a>
@@ -2020,7 +2062,7 @@ Server
 MUST
           </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A server MUST implement the CORS protocol [FETCH] such that, to the extent possible, the browser allows Solid apps to send any request and combination of request headers to the data pod, and the Solid app can read any response and response headers received from the data pod. If the data pod wishes to block access to a resource, this MUST NOT happen via CORS but MUST instead be communicated to the Solid app in the browser through HTTP status codes such as 401, 403, or 404 [RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">A server MUST implement the CORS protocol [FETCH] such that, to the extent possible, the browser allows Solid apps to send any request and combination of request headers to the server, and the Solid app can read any response and response headers received from the server. If the server wishes to block access to a resource, this MUST NOT happen via CORS but MUST instead be communicated to the Solid app in the browser through HTTP status codes such as 401, 403, or 404 [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
