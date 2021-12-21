@@ -9,6 +9,7 @@
   - [HTTP related keywords](#http-related-keywords)
   - [Karate Object](#karate-object)
   - [Calling Functions](#calling-functions)
+  - [Comments](#comments)
 - [Test Harness Capabilities](#test-harness-capabilities)
   - [Global Variables](#global-variables)
   - [Helper Functions](#helper-functions)
@@ -386,6 +387,42 @@ difference between *BeforeEach* and *BeforeAll* in other testing frameworks. You
     * def something = callonce setupFn
 ```
 Although the `Background` is run for every `Scenario`, the function will only be called once.
+
+## Comments
+Comments in Karate test files are handled according to their position in the file. When they are added to reports this
+is done with the `dcterms:description` predicate, applied as follows:
+* Feature comments: `td:TestCase`
+* Scenario or Step comments: `prov:Activity`
+ 
+The following example explains how comments in different positions are used. Note that in each case the comment could
+run over multiple lines and that any spaces before the `#` are stripped off.
+```gherkin
+# Feature level comments
+Feature: Feature title
+  # Comments here are treated as comments on the background and are prepended to scenario comments for each scenario
+  Background: Set up the test
+    # This applies to the variable declaration line below
+    * def myVar = 'variable'
+    # All comments between sections (Background or Scenario) are attached to the subsequent section
+
+  # This would be the second comment for this Scenario as noted above
+  Scenario: Run a test
+    # This applies to the Given step below
+    Given url '/test'
+    When method GET
+    Then Status 200
+
+  Scenario: Run a test without its own comment but it would still pick up the background comments
+    Given url '/test2'
+    When method GET
+    Then Status 200
+    # There are no further sections so this comment will not be attached to the report
+```
+
+### Change logs
+It would be good to keep a log of changes in a test case but we don't want to attach this to the report as it may make
+them unnecessarily long. The best place to put the change log is therefore the bottom of the file where, as explained
+above, comments are not included in the reports.
 
 # Test Harness Capabilities
 
