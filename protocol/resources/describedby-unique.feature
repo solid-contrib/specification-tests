@@ -16,4 +16,4 @@ Feature: Server may link to one description resource
     When method GET
     * def links = parseLinkHeaders(responseHeaders)
     * def test = links.filter(el => el.rel === 'describedBy')
-    And assert (test.length <= 1)
+    Then assert (test.length <= 1)
