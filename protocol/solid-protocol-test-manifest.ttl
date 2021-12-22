@@ -75,3 +75,10 @@ manifest:describedby-unique
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/resources/describedby-unique.feature> .
 
+manifest:method-not-allowed
+  a td:TestCase ;
+    spec:requirementReference sopr:server-method-not-allowed ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/read-write-resource/method-not-allowed.feature> .
+
