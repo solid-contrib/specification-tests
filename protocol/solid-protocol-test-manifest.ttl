@@ -82,3 +82,10 @@ manifest:method-not-allowed
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/read-write-resource/method-not-allowed.feature> .
 
+manifest:post-uri-assignment
+  a td:TestCase ;
+    spec:requirementReference sopr:server-post-uri-assignment ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/read-write-resource/post-uri-assignment.feature> .
+
