@@ -166,25 +166,25 @@
 </script>
 </head>
 
-<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/specification-tests/5d922dab-f247-48dc-8129-468a875b3a1f#">
+<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/specification-tests/9a8538ae-0863-4e09-a4ad-a5a7332a0fbb#">
 <main>
 <article>
 <h1 property="dcterms:title">Solid Specification - Conformance Test Suite Coverage Report</h1>
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd resource="https://github.com/solid/specification-tests/5d922dab-f247-48dc-8129-468a875b3a1f" rel="owl:sameAs">https://github.com/solid/specification-tests/5d922dab-f247-48dc-8129-468a875b3a1f</dd>
+  <dd resource="https://github.com/solid/specification-tests/9a8538ae-0863-4e09-a4ad-a5a7332a0fbb" rel="owl:sameAs">https://github.com/solid/specification-tests/9a8538ae-0863-4e09-a4ad-a5a7332a0fbb</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
 <section id="specifications-under-test">
   <h2>Specifications under test</h2>
   <ul>
-    <li><a href="https://solidproject.org/TR/protocol" typeof="http://schema.org/CreativeWork prov:Entity https://www.w3.org/ns/activitystreams#Article http://schema.org/Article doap:Specification" title="Specification link">https://solidproject.org/TR/protocol</a></li>
-    <li><a href="https://solid.github.io/web-access-control-spec" typeof="http://schema.org/CreativeWork prov:Entity https://www.w3.org/ns/activitystreams#Article http://schema.org/Article doap:Specification" title="Specification link">https://solid.github.io/web-access-control-spec</a></li>
+    <li><a href="https://solidproject.org/TR/protocol" typeof="doap:Specification" title="Specification link">https://solidproject.org/TR/protocol</a></li>
+    <li><a href="https://solid.github.io/web-access-control-spec" typeof="doap:Specification" title="Specification link">https://solid.github.io/web-access-control-spec</a></li>
   </ul>
 </section>
-<section about="https://github.com/solid/specification-tests/5d922dab-f247-48dc-8129-468a875b3a1f#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid/specification-tests/9a8538ae-0863-4e09-a4ad-a5a7332a0fbb#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
   <dl><dt>Description</dt><dd property="doap:description">Solid Specification Conformance Tests</dd></dl>
@@ -213,6 +213,28 @@
         <span class="count">81</span>
       </summary>
       <ul>
+        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-wac" class="spec">
+<details id="client-wac" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-wac" typeof="" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-wac <a href="https://solidproject.org/TR/protocol#client-wac" class="ext"></a>
+    <span class="count">0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
+Client
+    </dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
+MUST
+          </dd>
+  </dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST conform to the Web Access Control specification [WAC].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
         <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-http-11" class="spec">
 <details id="server-http-11" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-http-11" typeof="" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-http-11 <a href="https://solidproject.org/TR/protocol#server-http-11" class="ext"></a>
@@ -729,11 +751,11 @@ Server
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
+    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
+MUST NOT
+    </dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">If two URIs differ only in the trailing slash, and the server has associated a resource with one of them, then the other URI MUST-NOT correspond to another resource.</dd></dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">If two URIs differ only in the trailing slash, and the server has associated a resource with one of them, then the other URI MUST NOT correspond to another resource.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2248,28 +2270,6 @@ MUST
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-wac" class="spec">
-<details id="client-wac" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-wac" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-wac <a href="https://solidproject.org/TR/protocol#client-wac" class="ext"></a>
-    <span class="count">0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST conform to the Web Access Control specification [WAC].</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
       </ul>
     </details>
   </li>
@@ -2279,72 +2279,6 @@ MUST
         <span class="count">22</span>
       </summary>
       <ul>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec#server-link-acl" class="spec">
-<details id="server-link-acl" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#server-link-acl" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec#server-link-acl <a href="https://solid.github.io/web-access-control-spec#server-link-acl" class="ext"></a>
-    <span class="count">0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a server wants to enable applications to discover Authorizations associated with a given resource, the server MUST advertise the ACL resource that is associated with a resource by responding to an HTTP request including a Link header with the rel value of acl (acl Link Relation) and the ACL resource as link target [RFC8288].</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec#server-resource-acl-max" class="spec">
-<details id="server-resource-acl-max" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#server-resource-acl-max" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec#server-resource-acl-max <a href="https://solid.github.io/web-access-control-spec#server-resource-acl-max" class="ext"></a>
-    <span class="count">0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
-MUST NOT
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST NOT directly associate more than one ACL resource to a resource.</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec#client-link-acl" class="spec">
-<details id="client-link-acl" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#client-link-acl" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec#client-link-acl <a href="https://solid.github.io/web-access-control-spec#client-link-acl" class="ext"></a>
-    <span class="count">0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST discover the ACL resource associated with a resource by making an HTTP request on the target URL, and checking the HTTP Link header with the rel parameter.</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
         <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec#client-acl-uri" class="spec">
 <details id="client-acl-uri" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#client-acl-uri" typeof="" >
   <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec#client-acl-uri <a href="https://solid.github.io/web-access-control-spec#client-acl-uri" class="ext"></a>
@@ -2794,6 +2728,72 @@ MUST
           </dd>
   </dl>
   <dl><dt>Statement</dt><dd property="spec:statement">Client parsing algorithms for WAC-Allow header field-values MUST incorporate error handling. When the received message fails to match an allowed pattern, clients MUST ignore the received WAC-Allow header-field. When unrecognised access parameters (such as permission groups or access modes) are found, clients MUST continue processing the access parameters as if those properties were not present.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec#server-link-acl" class="spec">
+<details id="server-link-acl" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#server-link-acl" typeof="" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec#server-link-acl <a href="https://solid.github.io/web-access-control-spec#server-link-acl" class="ext"></a>
+    <span class="count">0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
+Server
+          </dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
+MUST
+          </dd>
+  </dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">When a server wants to enable applications to discover Authorizations associated with a given resource, the server MUST advertise the ACL resource that is associated with a resource by responding to an HTTP request including a Link header with the rel value of acl (acl Link Relation) and the ACL resource as link target [RFC8288].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec#server-resource-acl-max" class="spec">
+<details id="server-resource-acl-max" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#server-resource-acl-max" typeof="" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec#server-resource-acl-max <a href="https://solid.github.io/web-access-control-spec#server-resource-acl-max" class="ext"></a>
+    <span class="count">0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
+Server
+          </dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
+MUST NOT
+    </dd>
+  </dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST NOT directly associate more than one ACL resource to a resource.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec#client-link-acl" class="spec">
+<details id="client-link-acl" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec#client-link-acl" typeof="" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec#client-link-acl <a href="https://solid.github.io/web-access-control-spec#client-link-acl" class="ext"></a>
+    <span class="count">0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
+Client
+    </dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
+MUST
+          </dd>
+  </dl>
+  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST discover the ACL resource associated with a resource by making an HTTP request on the target URL, and checking the HTTP Link header with the rel parameter.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
