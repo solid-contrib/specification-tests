@@ -7,6 +7,7 @@ Feature: Respond with 405 for non-existent method
   Scenario: Check response for DAHU method on container
     * def response = clients.alice.sendAuthorized('DAHU', resource.url, null, null)
     Then assert response.status == 405
+    And assert response.headers.allow != null
 
 
     # TODO: Iterate over list of known and unknown methods, check Allow header, and test the resulting set.
