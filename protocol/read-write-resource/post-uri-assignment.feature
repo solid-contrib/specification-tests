@@ -12,3 +12,4 @@ Feature: Assignment of URIs for POST requests
     When method POST
     Then status 201
 
+    # TODO: Test Location header and that the container is updated.
