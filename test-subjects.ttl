@@ -18,7 +18,8 @@
     doap:homepage <https://inrupt.com/products/enterprise-solid-server> ;
     doap:description "A production-grade Solid server produced and supported by Inrupt."@en ;
     doap:programming-language "Java"@en ;
-    solid-test:features "authentication", "acl", "acp-legacy" .
+    solid-test:skip "wac", "wac-allow-public" ;
+    solid-test:features "acp-legacy" .
 
 <ess#test-subject-release>
     doap:name "ESS 1.1.6";
@@ -33,7 +34,7 @@
     doap:homepage <https://inrupt.com/products/enterprise-solid-server> ;
     doap:description "A production-grade Solid server produced and supported by Inrupt."@en ;
     doap:programming-language "Java"@en ;
-    solid-test:features "authentication", "acl", "wac-allow-public" .
+    solid-test:skip "acp", "wac-allow-public" .
 
 <ess-wac#test-subject-release>
     doap:name "ESS 1.1.6";
@@ -48,7 +49,7 @@
     doap:homepage <https://github.com/solid/community-server> ;
     doap:description "An open and modular implementation of the Solid specifications."@en ;
     doap:programming-language "TypeScript"@en ;
-    solid-test:features "authentication", "acl", "wac-allow-public" .
+    solid-test:skip "acp" .
 
 <css#test-subject-release>
     doap:name "CSS 2.0.1" ;
@@ -63,7 +64,7 @@
     doap:homepage <https://github.com/solid/node-solid-server> ;
     doap:description "Solid server on top of the file-system in NodeJS."@en ;
     doap:programming-language "JavaScript"@en ;
-    solid-test:features "authentication", "acl", "wac-allow-public".
+    solid-test:skip "acp" .
 
 <nss#test-subject-release>
     doap:name "NSS 5.6.16"@en ;
@@ -79,7 +80,7 @@
     doap:description
         "TrinPod™ is an Industrial strength Solid Pod with conceptual computing through Trinity AI Capable of handling a massive amount of data."@en ;
     doap:programming-language "Common Lisp"@en ;
-    solid-test:features "authentication", "acl", "wac-allow-public" .
+    solid-test:skip "acp" .
 
 <trinpod#test-subject-release>
     doap:name "TrinPod-Server"@en ;

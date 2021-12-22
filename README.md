@@ -120,11 +120,13 @@ tests. For more detail please go to:
 ## Structure of a Test Case
 The basic structure of a KarateDSL test file is:
 ```gherkin
+@tag1
 Feature: The title of the test case
 
   Background: Set up steps performed for each Scenario
     * def variable = 'something'
 
+  @tag2
   Scenario: The title of the scenario
     Given url 'https://example.org/test.ttl'
     And header Content-Type = 'text/turtle'
@@ -136,6 +138,10 @@ Feature: The title of the test case
   Scenario: The title of another scenario
     * another set of steps
 ```
+The example above shows the use of tags. If you tag a feature, the tag is applied to all scenarios and combined with any
+tags on individual scenarios. The tag names should describe functionality that is optional so that testers can choose to
+skip tests that are not appropriate to the server being tested. For example, you would tag any tests that only work for
+servers implementing ACP with `@acp`.
 
 The keywords `Given`, `And`, `When`, and `Then` in the `Scenario` are for the benefit of human readers of the script. To 
 the test harness they simply denote steps in the procedure and have the same meaning as `*`. They make it easier to gain
@@ -150,16 +156,16 @@ as a *BeforeEach* method as you might see in other testing frameworks.
 The first scenario represents a single HTTP interaction with the server. It has the following conceptual structure:
 
 1. Start with any variables you need to set up. Normally this is done with a `*` prefix.
-1. Then use `Given` to start describing the context for the test. Often this will be where you set up the URL or path for
+2. Then use `Given` to start describing the context for the test. Often this will be where you set up the URL or path for
   the interaction.
-1. Use `And` to provide more details for the context (e.g., setting up request headers).
-1. The `When` keyword represents the action, but remember it has the same meaning as `*`. The request is actually
+3. Use `And` to provide more details for the context (e.g., setting up request headers).
+4. The `When` keyword represents the action, but remember it has the same meaning as `*`. The request is actually
   triggered by the use of `method`.
-1. Next you can begin to make assertions about the response starting with the `Then` keyword. Often the
+5. Next you can begin to make assertions about the response starting with the `Then` keyword. Often the
   status is checked first.
-1. Finally you can use `And` to describe additional assertions. You could use `*` if you need to create variables and
-  analyze the response as this allows you to reserve `And` for assertions. It is a style choice since the keywords have no
-  meaning to the test harness as already stated.
+6. Finally, you can use `And` to describe additional assertions. You could use `*` if you need to create variables and
+  analyze the response as this allows you to reserve `And` for assertions. It is a style choice since the keywords have
+  no meaning to the test harness as already stated.
   
 ## Data related keywords
 
@@ -1233,7 +1239,6 @@ manifest:protected-operation-not-read-resource-access-AWC
   a td:TestCase ;
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:approved ;
-  td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
 ```
@@ -1252,12 +1257,6 @@ The test cases themselves need to be described in a manifest file. For each test
   * `td:approved` - test has gone through the review process and was approved.
   * `td:rejected` - test has gone through the review process and was rejected.
   * `td:onhold` - test had already gone through the review process, but the results of the review need to be re-assessed due to new input.
-* The capabilities the test subject needs to support to be able to run the test case `td:preCondition`. The intention is
-  to encode this information properly, but at present it is a simple list of keywords which are matched against the
-  values of `solid-test:features` in the subject description found in `test-subjects.ttl`:
-  * `authentication`
-  * `acl` - either WAC or ACP supported
-  * `wac-allow-public` - supports the public permission group in the `WAC-Allow` header
 * A link to the script that defines the test case `spec:testScript` - note that the URL provided is normally mapped to 
   the local file system in the test harness configuration file.
 
@@ -1278,7 +1277,6 @@ manifest:protected-operation-not-read-resource-access-AWC
   a td:TestCase ;
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:unreviewed ;
-  td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
 
@@ -1286,7 +1284,6 @@ manifest:protected-operation-not-read-resource-default-AWC
   a td:TestCase ;
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:unreviewed ;
-  td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
 
@@ -1294,7 +1291,6 @@ manifest:acl-object-none
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:unreviewed ;
-  td:preCondition "authentication", "acl" ;
   spec:testScript
     <https://github.com/solid/specification-tests/web-access-control/acl-object/container-none.feature> .
 ```

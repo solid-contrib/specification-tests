@@ -1,8 +1,8 @@
 subjects: /data/test-subjects.ttl
 sources:
   # Protocol spec & manifest
-  # Editor's draft (fully annotated)
-  - https://solidproject.org/TR/protocol
+  # Editor's draft (Version 0.9.0 - https://solidproject.org/TR/2021/protocol-20211217)
+  - https://solidproject.org/ED/protocol
   - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
 
   # WAC spec & manifest
