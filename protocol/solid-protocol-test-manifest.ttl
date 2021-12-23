@@ -96,10 +96,3 @@ manifest:slug-uri-assignment
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/read-write-resource/post-uri-assignment-slug.feature> .
 
-manifest:read-method-support
-  a td:TestCase ;
-    spec:requirementReference sopr:server-safe-methods ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid/specification-tests/protocol/read-write-resource/read-method-support.feature> .
-
