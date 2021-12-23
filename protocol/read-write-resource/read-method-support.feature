@@ -8,9 +8,15 @@ Feature: Servers MUST support GET, HEAD and OPTIONS
     * def expected = parse(exampleTurtle, 'text/turtle')
     
   Scenario: GET is supported for containers
-    * def containerUrl = testContainer.url
-    Given url containerUrl
-    And headers clients.alice.getAuthHeaders('GET', containerUrl)
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('GET', testContainer.url)
     When method GET
     Then assert responseStatus != 400 && responseStatus <= 403
 
+  Scenario: GET is supported for resources
+    Given url rdfResource.url
+    And headers clients.alice.getAuthHeaders('GET', rdfResource.url)
+    When method GET
+    Then assert responseStatus != 400 && responseStatus <= 403
+
+# TODO: What does requirement really mean? Since authn isn't required, should we test without authn and allow 40x, or should we always test with out and require a 200 response?
