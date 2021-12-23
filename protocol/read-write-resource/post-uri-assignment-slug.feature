@@ -4,9 +4,8 @@ Feature: Assignment of URIs for POST requests with Slug
     * def testContainer = rootTestContainer.createContainer()
     
   Scenario: Allow resource creation via POST with Slug
-    * def containerUrl = testContainer.url
-    Given url containerUrl
-    And headers clients.alice.getAuthHeaders('POST', containerUrl)
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('POST', testContainer.url)
     And header Content-Type = 'text/turtle'
     And header Slug = 'foobar'
     And request "<> a <#Something> ."
