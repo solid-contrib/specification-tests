@@ -4,9 +4,8 @@ Feature: Assignment of URIs for POST requests
     * def testContainer = rootTestContainer.createContainer()
     
   Scenario: Allow resource creation via POST
-    * def containerUrl = testContainer.url
-    Given url containerUrl
-    And headers clients.alice.getAuthHeaders('POST', containerUrl)
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('POST', testContainer.url)
     And header Content-Type = 'text/turtle'
     And request "<> a <#Something> ."
     When method POST
