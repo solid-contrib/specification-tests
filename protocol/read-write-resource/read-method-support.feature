@@ -19,4 +19,16 @@ Feature: Servers MUST support GET, HEAD and OPTIONS
     When method GET
     Then assert responseStatus != 400 && responseStatus <= 403
 
+  Scenario: HEAD is supported for containers
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('HEAD', testContainer.url)
+    When method HEAD
+    Then assert responseStatus != 400 && responseStatus <= 403
+
+  Scenario: HEAD is supported for resources
+    Given url rdfResource.url
+    And headers clients.alice.getAuthHeaders('HEAD', rdfResource.url)
+    When method HEAD
+    Then assert responseStatus != 400 && responseStatus <= 403
+
 # TODO: What does requirement really mean? Since authn isn't required, should we test without authn and allow 40x, or should we always test with out and require a 200 response?
