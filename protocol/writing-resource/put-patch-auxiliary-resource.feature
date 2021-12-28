@@ -14,6 +14,6 @@ Feature: PUT or PATCH on auxiliary resources
     Given url metaUrl
     And headers clients.alice.getAuthHeaders('PUT', metaUrl)
     And header Content-Type = 'text/turtle'
-    And request "<> a <#Something> ."
+    And request "<./> a <#Something> ."
     When method PUT
     Then status 201
