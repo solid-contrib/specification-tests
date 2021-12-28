@@ -13,7 +13,7 @@ Feature: PUT or PATCH on auxiliary resources
     * def metaUrl = resolveUri(container.url, describedby.uri)
     Given url metaUrl
     And headers clients.alice.getAuthHeaders('PUT', metaUrl)
-    And header Content-Type = ''
+    And header Content-Type = 'text/turtle'
     And request "<> a <#Something> ."
     When method PUT
     Then status 201
