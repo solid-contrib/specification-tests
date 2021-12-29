@@ -9,7 +9,7 @@ Feature: PUT or PATCH on auxiliary resources
   Scenario: PUT auxiliary resource to container
     * def response = clients.alice.sendAuthorized('GET', container.url, null, null)
     * def links = parseLinkHeaders(response.headers)
-    * def describedby = links.find(el => el.rel === 'describedBy')
+    * def describedby = links.find(el => el.rel.toLowerCase() === 'describedby')
     * def metaUrl = resolveUri(container.url, describedby.uri)
     Given url metaUrl
     And headers clients.alice.getAuthHeaders('PUT', metaUrl)
