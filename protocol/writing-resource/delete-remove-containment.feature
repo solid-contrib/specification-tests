@@ -2,11 +2,10 @@ Feature: Delete containment triple when resource is deleted
 
   Background: Set up container
     * def testContainer = rootTestContainer.createContainer()
-    * def container = testContainer.createContainer()  
-    * def exampleTurtle = karate.readAsString('../fixtures/example.ttl')
-    * def rdfResource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
     
   Scenario: Check that RDF resource is contained and deleted
+    * def exampleTurtle = karate.readAsString('../fixtures/example.ttl')
+    * def rdfResource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('GET', testContainer.url)
     And header Accept = 'text/turtle'
