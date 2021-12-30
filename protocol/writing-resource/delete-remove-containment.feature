@@ -46,4 +46,24 @@ Feature: Delete containment triple when resource is deleted
     Then status 200
     And match parse(response, 'text/turtle', testContainer.url).members !contains container.url
 
+  Scenario: Check that text resource is contained and deleted
+    * def textResource = testContainer.createResource('.txt', 'DAHUT', 'text/plain');
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('GET', testContainer.url)
+    And header Accept = 'text/turtle'
+    When method GET
+    Then status 200
+    And match parse(response, 'text/turtle', testContainer.url).members contains textResource.url
+
+    Given url textResource.url
+    And headers clients.alice.getAuthHeaders('DELETE', textResource.url)
+    When method DELETE
+    Then match [200, 202, 204, 205] contains responseStatus
+
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('GET', testContainer.url)
+    And header Accept = 'text/turtle'
+    When method GET
+    Then status 200
+    And match parse(response, 'text/turtle', testContainer.url).members !contains textResource.url
 
