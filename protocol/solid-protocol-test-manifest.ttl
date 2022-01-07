@@ -103,10 +103,18 @@ manifest:read-method-allow
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/read-write-resource/read-method-allow.feature> .
 
+manifest:delete-protect-nonempty-container
+  a td:TestCase ;
+  spec:requirementReference sopr:server-delete-protect-nonempty-container ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/writing-resource/delete-protect-nonempty-container.feature> .
+
 manifest:delete-remove-containment
   a td:TestCase ;
   spec:requirementReference sopr:server-delete-remove-containment ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/delete-remove-containment.feature> .
+
 
