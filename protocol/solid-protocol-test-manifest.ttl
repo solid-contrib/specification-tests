@@ -99,7 +99,7 @@ manifest:slug-uri-assignment
 
 manifest:read-method-support
   a td:TestCase ;
-    spec:requirementReference sopr:server-safe-methods ;
+  spec:requirementReference sopr:server-safe-methods ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/read-write-resource/read-method-support.feature> .
