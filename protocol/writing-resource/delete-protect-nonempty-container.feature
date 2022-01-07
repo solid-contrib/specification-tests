@@ -12,7 +12,7 @@ Feature: Server protects non-empty container
 
   Scenario: Check that container with child RDF resource is protected
     * def exampleTurtle = karate.readAsString('../fixtures/example.ttl')
-    * def resource1 = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
+    * testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('DELETE', testContainer.url)
     When method DELETE
