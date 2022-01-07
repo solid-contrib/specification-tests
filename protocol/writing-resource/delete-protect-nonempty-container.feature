@@ -4,7 +4,7 @@ Feature: Server protects non-empty container
     * def testContainer = rootTestContainer.createContainer()
   
   Scenario: Check that container with child container is protected
-    * def container1 = testContainer.createContainer()
+    * testContainer.createContainer()
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('DELETE', testContainer.url)
     When method DELETE
