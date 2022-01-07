@@ -20,7 +20,7 @@ Feature: Server protects non-empty container
 
 
   Scenario: Check that container with child text resource is protected
-    * def resource2 = testContainer.createResource('.txt', 'DAHUT', 'text/plain');
+    * testContainer.createResource('.txt', 'DAHUT', 'text/plain');
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('DELETE', testContainer.url)
     When method DELETE
