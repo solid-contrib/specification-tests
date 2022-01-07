@@ -2,7 +2,6 @@ Feature: Servers MUST return Allow for GET and HEAD
 
   Background: Set up container
     * def testContainer = rootTestContainer.createContainer()
-    * def container = testContainer.createContainer()  
     * def exampleTurtle = karate.readAsString('../fixtures/example.ttl')
     * def rdfResource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
     * def expected = parse(exampleTurtle, 'text/turtle')
