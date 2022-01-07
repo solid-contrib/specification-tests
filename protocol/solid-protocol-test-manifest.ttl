@@ -103,3 +103,11 @@ manifest:delete-protect-nonempty-container
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/delete-protect-nonempty-container.feature> .
 
+manifest:delete-remove-containment
+  a td:TestCase ;
+  spec:requirementReference sopr:server-delete-remove-containment ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/writing-resource/delete-remove-containment.feature> .
+
+
