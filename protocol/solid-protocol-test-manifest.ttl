@@ -98,7 +98,7 @@ manifest:slug-uri-assignment
 
 manifest:put-patch-auxiliary-resource
   a td:TestCase ;
-    spec:requirementReference sopr:server-put-patch-auxiliary-resource ;
+  spec:requirementReference sopr:server-put-patch-auxiliary-resource ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/put-patch-auxiliary-resource.feature> .
