@@ -98,7 +98,7 @@ manifest:slug-uri-assignment
 
 manifest:delete-remove-containment
   a td:TestCase ;
-    spec:requirementReference sopr:server-delete-remove-containment ;
+  spec:requirementReference sopr:server-delete-remove-containment ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/delete-remove-containment.feature> .
