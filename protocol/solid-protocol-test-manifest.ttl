@@ -96,6 +96,13 @@ manifest:slug-uri-assignment
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/read-write-resource/post-uri-assignment-slug.feature> .
 
+manifest:read-method-allow
+  a td:TestCase ;
+  spec:requirementReference sopr:server-allow-methods ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/read-write-resource/read-method-allow.feature> .
+
 manifest:delete-protect-nonempty-container
   a td:TestCase ;
   spec:requirementReference sopr:server-delete-protect-nonempty-container ;
