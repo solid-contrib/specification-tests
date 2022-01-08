@@ -8,6 +8,7 @@ Feature: POST to non-existing resource must result in 404
     Given url container.url
     And headers clients.alice.getAuthHeaders('POST', container.url)
     And header Content-Type = 'text/turtle'
+    And request "<> a <#Something> ."
     When method POST
     Then status 404
 
@@ -21,6 +22,7 @@ Feature: POST to non-existing resource must result in 404
     Given url rdfResource.url
     And headers clients.alice.getAuthHeaders('POST', rdfResource.url)
     And header Content-Type = 'text/turtle'
+    And request "<> a <#Something> ."
     When method POST
     Then status 404
 
@@ -34,6 +36,7 @@ Feature: POST to non-existing resource must result in 404
     Given url jsonResource.url
     And headers clients.alice.getAuthHeaders('POST', jsonResource.url)
     And header Content-Type = 'application/ld+json'
+    And request '{ "http://schema.org/name": "Thing" }'
     When method POST
     Then status 404
 
@@ -47,6 +50,7 @@ Feature: POST to non-existing resource must result in 404
     Given url fooResource.url
     And headers clients.alice.getAuthHeaders('POST', fooResource.url)
     And header Content-Type = 'foo/bar'
+    And request 'Foobar'    
     When method POST
     Then match [404, 415] contains responseStatus
 
