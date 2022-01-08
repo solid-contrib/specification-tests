@@ -22,7 +22,6 @@ Feature: POST to non-existing resource must result in 404
     When method POST
     Then status 404
 
-  Scenario: Reserved RDF resource still does not exist
     Given url rdfResource.url
     And headers clients.alice.getAuthHeaders('GET', rdfResource.url)
     When method GET
