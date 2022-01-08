@@ -10,6 +10,11 @@ Feature: POST to non-existing resource must result in 404
     And header Content-Type = 'text/turtle'
     When method POST
     Then status 404
+
+    Given url container.url
+    And headers clients.alice.getAuthHeaders('GET', container.url)
+    When method GET
+    Then status 404
     
   Scenario: Reserved RDF resource does not exist
     * def rdfResource = testContainer.reserveResource('.ttl');
@@ -32,6 +37,11 @@ Feature: POST to non-existing resource must result in 404
     When method POST
     Then status 404
 
+    Given url jsonResource.url
+    And headers clients.alice.getAuthHeaders('GET', jsonResource.url)
+    When method GET
+    Then status 404
+    
   Scenario: Reserved resource does not exist
     * def fooResource = testContainer.reserveResource('.foo');
     Given url fooResource.url
@@ -39,3 +49,8 @@ Feature: POST to non-existing resource must result in 404
     And header Content-Type = 'foo/bar'
     When method POST
     Then match [404, 415] contains responseStatus
+
+    Given url fooResource.url
+    And headers clients.alice.getAuthHeaders('GET', fooResource.url)
+    When method GET
+    Then status 404
