@@ -1,6 +1,6 @@
 Feature: Server protects non-empty container
   
-  Background: Set up container and a few child resources
+  Background: Set up container
     * def testContainer = rootTestContainer.createContainer()
   
   Scenario: Check that container with child container is protected
