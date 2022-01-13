@@ -629,7 +629,7 @@ of the `SolidClient`. The map can be applied to a request being prepared in Kara
   * url - The absolute url of the request.
 * Returns a map of headers.
 
-#### `send(method, uri, data, headers)` and `sendAuthorized(method, uri, data, headers)`
+#### `send(method, uri, data, headers, version)` and `sendAuthorized(method, uri, data, headers, version)`
 This is an alternative way to send a request which allows testers to have full control over the HTTP method and request
 headers. Karate will not allow invalid HTTP methods and sets some headers by default so this method allows some
 additional edge case tests to be performed. The only request header these methods include by default is the `User-Agent`
@@ -641,9 +641,11 @@ requests, whereas the second adds the correct authorization headers for the user
   * url - The absolute url of the request.
   * data - The data to be sent in the request (or null). 
   * headers - A map of key/value pairs to be send as request headers (or null). See the note below for additional tips.
+  * version - The version of HTTP to use for the request "HTTP_1_1" or "HTTP_2".
 * Returns the response as a map with the following structure:
   ```json5
   {
+    version: "HTTP_1_1", // string (or HTTP_2 depending on which the server responded with)
     status: 200, // integer
     headers: {}, // map of all response headers
     body: "",    // the response body
