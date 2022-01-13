@@ -7,7 +7,7 @@ Feature: PUT or PATCH on auxiliary resources
     * def rdfResource = testContainer.createResource('.ttl', exampleTurtle, 'text/turtle');
     * def textResource = testContainer.createResource('.txt', 'Some text', 'text/plain');
 
-  Scenario: PUT to create auxiliary resource to container
+  Scenario: PUT auxiliary resource to container
     * def response = clients.alice.sendAuthorized('GET', container.url, null, null)
     * def links = parseLinkHeaders(response.headers)
     * def describedby = links.find(el => el.rel.toLowerCase() === 'describedby')
@@ -19,7 +19,14 @@ Feature: PUT or PATCH on auxiliary resources
     When method PUT
     Then status 201
 
-  Scenario: PUT to create auxiliary resource to rdfResource
+    Given url metaUrl
+    And headers clients.alice.getAuthHeaders('PUT', metaUrl)
+    And header Content-Type = 'text/turtle'
+    And request "<./> a <#SomethingMore> ."
+    When method PUT
+    Then match [200, 204, 205] contains responseStatus
+
+  Scenario: PUT auxiliary resource to rdfResource
     * def response = clients.alice.sendAuthorized('GET', rdfResource.url, null, null)
     * def links = parseLinkHeaders(response.headers)
     * def describedby = links.find(el => el.rel.toLowerCase() === 'describedby')
@@ -30,8 +37,15 @@ Feature: PUT or PATCH on auxiliary resources
     And request "<.> a <#Something> ."
     When method PUT
     Then status 201
+    
+    Given url metaUrl
+    And headers clients.alice.getAuthHeaders('PUT', metaUrl)
+    And header Content-Type = 'text/turtle'
+    And request "<./> a <#SomethingMore> ."
+    When method PUT
+    Then match [200, 204, 205] contains responseStatus
 
-  Scenario: PUT to create auxiliary resource to textResource
+  Scenario: PUT auxiliary resource to textResource
     * def response = clients.alice.sendAuthorized('GET', textResource.url, null, null)
     * def links = parseLinkHeaders(response.headers)
     * def describedby = links.find(el => el.rel.toLowerCase() === 'describedby')
@@ -42,3 +56,10 @@ Feature: PUT or PATCH on auxiliary resources
     And request "<.> a <#Something> ."
     When method PUT
     Then status 201
+
+    Given url metaUrl
+    And headers clients.alice.getAuthHeaders('PUT', metaUrl)
+    And header Content-Type = 'text/turtle'
+    And request "<./> a <#SomethingMore> ."
+    When method PUT
+    Then match [200, 204, 205] contains responseStatus
