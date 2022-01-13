@@ -41,7 +41,7 @@ Feature: PUT or PATCH on auxiliary resources
     Given url metaUrl
     And headers clients.alice.getAuthHeaders('PUT', metaUrl)
     And header Content-Type = 'text/turtle'
-    And request "<./> a <#SomethingMore> ."
+    And request "<.> a <#SomethingMore> ."
     When method PUT
     Then match [200, 204, 205] contains responseStatus
 
@@ -60,6 +60,6 @@ Feature: PUT or PATCH on auxiliary resources
     Given url metaUrl
     And headers clients.alice.getAuthHeaders('PUT', metaUrl)
     And header Content-Type = 'text/turtle'
-    And request "<./> a <#SomethingMore> ."
+    And request "<.> a <#SomethingMore> ."
     When method PUT
     Then match [200, 204, 205] contains responseStatus
