@@ -63,3 +63,4 @@ Feature: PUT or PATCH on auxiliary resources
     And request "<.> a <#SomethingMore> ."
     When method PUT
     Then match [200, 204, 205] contains responseStatus
+

@@ -131,4 +131,3 @@ manifest:put-patch-auxiliary-resource
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/put-patch-auxiliary-resource.feature> .
 
-
