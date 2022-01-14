@@ -6,7 +6,7 @@ Feature: Error for unsupported method
 
   Scenario: Check response for TRACE method on resource
     * def response = clients.alice.sendAuthorized('TRACE', resource.url, null, null, null)
-    Then assert response.status == 400 || response.status == 405 || response.status == 501
+    Then match [400, 405, 501] contains response.status
 #    And assert response.headers.allow != null
 
   Scenario: Check response for TRACE method on container
