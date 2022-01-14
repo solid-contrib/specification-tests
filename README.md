@@ -25,7 +25,7 @@
 
 This repository contains the tests that can be executed by the
 [Solid Conformance Test Harness (CTH)](https://github.com/solid/conformance-test-harness). The best way to run the 
-harness is by using the [Docker image](https://hub.docker.com/r/solidconformancetestbeta/conformance-test-harness).
+harness is by using the [Docker image](https://hub.docker.com/r/solidproject/conformance-test-harness).
 
 The tests are written in a language called [KarateDSL](https://intuit.github.io/karate/). This is a simple 
 Behaviour-Driven Development (BDD) testing language based on 
@@ -43,7 +43,7 @@ whether to use the published CTH image or a locally built one, and whether to us
 tests available locally.
 
 For each test subject you want to test, create a `{subject}.env` file in this directory according to the instructions
-[here](https://hub.docker.com/r/solidconformancetestbeta/conformance-test-harness).
+[here](https://hub.docker.com/r/solidproject/conformance-test-harness).
 
 To see the usage instructions:
 ```shell
@@ -98,13 +98,13 @@ mappings:
     path: /data
 EOF
 
-docker pull solidconformancetestbeta/conformance-test-harness
+docker pull solidproject/conformance-test-harness
 docker run -i --rm \
   -v "$(pwd)"/:/data \
   -v "$(pwd)"/config:/app/config \
   -v "$(pwd)"/reports:/reports \
   -v "$(pwd)"/target:/app/target \
-  --env-file=.env solidconformancetestbeta/conformance-test-harness \
+  --env-file=.env solidproject/conformance-test-harness \
   --output=/reports --target=https://github.com/solid/conformance-test-harness/css "$@"
 ```
 

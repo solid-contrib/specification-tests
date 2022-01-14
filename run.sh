@@ -130,7 +130,7 @@ then
 	exit 1
 fi
 
-dockerimage='solidconformancetestbeta/conformance-test-harness'
+dockerimage='solidproject/conformance-test-harness'
 dockerargs=('-i' '--rm')
 cwd=$(pwd)
 
@@ -191,7 +191,7 @@ fi
 # optionally pull published CTH image
 if [[ ! $dockerimage == 'testharness' ]]
 then
-  docker pull solidconformancetestbeta/conformance-test-harness
+  docker pull solidproject/conformance-test-harness
 fi
 
 echo "RUNNING: docker run ${dockerargs[@]} $dockerimage ${harnessargs[@]} $@"

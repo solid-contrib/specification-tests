@@ -34,7 +34,7 @@
     doap:homepage <https://inrupt.com/products/enterprise-solid-server> ;
     doap:description "A production-grade Solid server produced and supported by Inrupt."@en ;
     doap:programming-language "Java"@en ;
-    solid-test:skip "acp", "wac-allow-public" .
+    solid-test:skip "acp" .
 
 <ess-wac#test-subject-release>
     doap:name "ESS 1.1.6";
