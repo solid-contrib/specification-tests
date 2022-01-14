@@ -1,7 +1,7 @@
 subjects: /data/test-subjects.ttl
 sources:
   # Protocol spec & manifest
-  # Editor's draft (fully annotated)
+  # Ecosystem Proposal (Version 0.9.0 - https://solidproject.org/TR/2021/protocol-20211217)
   - https://solidproject.org/TR/protocol
   - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
 

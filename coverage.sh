@@ -22,7 +22,7 @@ setup_config() {
   cp ./application.yaml ./config/application.yaml
 }
 
-dockerimage='solidconformancetestbeta/conformance-test-harness'
+dockerimage='solidproject/conformance-test-harness'
 dockerargs=('-i' '--rm')
 cwd=$(pwd)
 
@@ -58,7 +58,7 @@ mkdir -p reports
 # optionally pull published CTH image
 if [[ ! $dockerimage == 'testharness' ]]
 then
-  docker pull solidconformancetestbeta/conformance-test-harness
+  docker pull solidproject/conformance-test-harness
 fi
 
 echo "RUNNING: docker run ${dockerargs[@]} $dockerimage ${harnessargs[@]} $@"

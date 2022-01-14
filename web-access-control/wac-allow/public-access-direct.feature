@@ -1,3 +1,4 @@
+@wac-allow-public
 Feature: The WAC-Allow header shows public access modes for a public agent when given direct access
 
   Background: Create test resources giving a public agent different access modes

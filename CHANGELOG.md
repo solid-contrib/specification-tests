@@ -1,8 +1,13 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.6
+* Replace the test preconditions in the manifest files with tags in the test files and specify which tests to skip in
+ the test-subjects file.
+* Amend instructions to point to the new docker image location.
+
 ## Release 0.0.5
 * Add information about the `send` methods of `SolidClient` for cases when you need to have more control over a request.
-* Explain how comments should be used with test files. 
+* Explain how comments should be used with test files.
 
 ## Release 0.0.4
 * Update tests to work with new RDF library in CTH v1.0.12 API.
