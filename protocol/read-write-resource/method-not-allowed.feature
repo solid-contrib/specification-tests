@@ -1,4 +1,4 @@
-Feature: Error for undefined method
+Feature: Error for unsupported method
 
   Background: Set up clients and paths
     * def testContainer = rootTestContainer.createContainer()
