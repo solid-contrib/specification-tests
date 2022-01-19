@@ -32,3 +32,51 @@ Feature: Server protects containment triples
     * def contained = parse(response, 'text/turtle', testContainer.url).members
     And match contained contains only children
     And match children contains only contained
+
+  Scenario: PUT invalid subject and object to container
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('GET', testContainer.url)
+    When method GET
+    Then status 200
+    * def contained = parse(response, 'text/turtle', testContainer.url).members 
+    And match contained contains only children
+    And match children contains only contained
+
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('PUT', testContainer.url)
+    And header Content-Type = 'text/turtle'
+    And request '</dahut/> <http://www.w3.org/ns/ldp#contains> </foobar>.'
+    When method PUT
+    Then status 409
+
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('GET', testContainer.url)
+    When method GET
+    Then status 200
+    * def contained = parse(response, 'text/turtle', testContainer.url).members
+    And match contained contains only children
+    And match children contains only contained
+
+  Scenario: PUT invalid subject to container
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('GET', testContainer.url)
+    When method GET
+    Then status 200
+    * def contained = parse(response, 'text/turtle', testContainer.url).members 
+    And match contained contains only children
+    And match children contains only contained
+
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('PUT', testContainer.url)
+    And header Content-Type = 'text/turtle'
+    And request '</dahut/> <http://www.w3.org/ns/ldp#contains> <' + resource1.url + '> .'
+    When method PUT
+    Then status 409
+
+    Given url testContainer.url
+    And headers clients.alice.getAuthHeaders('GET', testContainer.url)
+    When method GET
+    Then status 200
+    * def contained = parse(response, 'text/turtle', testContainer.url).members
+    And match contained contains only children
+    And match children contains only contained
