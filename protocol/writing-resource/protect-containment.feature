@@ -9,7 +9,7 @@ Feature: Server protects containment triples
     * def container1 = testContainer.createContainer()   
     * def children = ([ resource1.url, resource2.url, resource3.url, container1.url ])
     
-  Scenario: Check that members are correct
+  Scenario: PUT invalid object to container
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('GET', testContainer.url)
     When method GET
