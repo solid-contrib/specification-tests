@@ -18,14 +18,14 @@ manifest:if-none-match-asterisk
   spec:requirementReference sopr:server-conditional-requests ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/writing-resource/if-none-match-asterisk.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/if-none-match-asterisk.feature> .
 
 manifest:content-type-reject
   a td:TestCase ;
   spec:requirementReference sopr:server-content-type ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/writing-resource/content-type-reject.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/content-type-reject.feature> .
 
 manifest:slash-semantics-exclude
   a td:TestCase ;
@@ -33,7 +33,7 @@ manifest:slash-semantics-exclude
     sopr:server-uri-redirect-differing ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/writing-resource/slash-semantics-exclude.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/slash-semantics-exclude.feature> .
 
 manifest:authentication-header
   a td:TestCase ;
@@ -41,90 +41,90 @@ manifest:authentication-header
     sopr:server-unauthenticated ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/authentication/header.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/authentication/header.feature> .
 
 manifest:content-negotiation-turtle
   a td:TestCase ;
   spec:requirementReference sopr:server-representation-turtle-jsonld ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-turtle.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/content-negotiation/content-negotiation-turtle.feature> .
 
 manifest:content-negotiation-jsonld
   a td:TestCase ;
   spec:requirementReference sopr:server-representation-turtle-jsonld ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/content-negotiation/content-negotiation-jsonld.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
 manifest:uri-assignment
   a td:TestCase ;
   spec:requirementReference sopr:server-put-patch-uri-assignment ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/writing-resource/uri-assignment.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/uri-assignment.feature> .
 
 manifest:writing-resource-containment
   a td:TestCase ;
   spec:requirementReference sopr:server-put-patch-intermediate-containers ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/writing-resource/containment.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/containment.feature> .
 
 manifest:describedby-unique
   a td:TestCase ;
     spec:requirementReference sopr:server-description-resource-max ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/resources/describedby-unique.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/resources/describedby-unique.feature> .
 
 manifest:method-not-allowed
   a td:TestCase ;
     spec:requirementReference sopr:server-method-not-allowed ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/read-write-resource/method-not-allowed.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/read-write-resource/method-not-allowed.feature> .
 
 manifest:post-uri-assignment
   a td:TestCase ;
     spec:requirementReference sopr:server-post-uri-assignment ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/read-write-resource/post-uri-assignment.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/read-write-resource/post-uri-assignment.feature> .
 
 manifest:slug-uri-assignment
   a td:TestCase ;
     spec:requirementReference sopr:server-slug-uri-assignment ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/read-write-resource/post-uri-assignment-slug.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/read-write-resource/post-uri-assignment-slug.feature> .
 
 manifest:read-method-allow
   a td:TestCase ;
   spec:requirementReference sopr:server-allow-methods ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/read-write-resource/read-method-allow.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/read-write-resource/read-method-allow.feature> .
 
 manifest:delete-protect-nonempty-container
   a td:TestCase ;
   spec:requirementReference sopr:server-delete-protect-nonempty-container ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/writing-resource/delete-protect-nonempty-container.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/delete-protect-nonempty-container.feature> .
 
 manifest:delete-remove-containment
   a td:TestCase ;
     spec:requirementReference sopr:server-delete-remove-containment ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/writing-resource/delete-remove-containment.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/delete-remove-containment.feature> .
 
 manifest:post-target-not-found
   a td:TestCase ;
     spec:requirementReference sopr:server-post-target-not-found ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/writing-resource/post-target-not-found.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/post-target-not-found.feature> .
 
 
