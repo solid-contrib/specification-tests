@@ -81,20 +81,20 @@ sources:
   # Protocol specification & manifest
   # Editor's draft (fully annotated)
   - https://solidproject.org/TR/protocol
-  - https://github.com/solid/specification-tests/protocol/solid-protocol-test-manifest.ttl
+  - https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl
 
   # WAC specification & manifest
   # Editor's draft (fully annotated)
   - https://solid.github.io/web-access-control-spec
-  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest.ttl
+  - https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl
 
   # Published draft (not annotated)
   # This is an example of how you could run tests for a specific version of the specification 
 #  - https://solidproject.org/TR/2021/wac-20210711
-#  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest-20210711.ttl
+#  - https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest-20210711.ttl
 
 mappings:
-  - prefix: https://github.com/solid/specification-tests
+  - prefix: https://github.com/solid/specification-tests/blob/main
     path: /data
 EOF
 
@@ -1227,7 +1227,7 @@ a test manifest, for example:
 ```yaml
 sources:
   - https://solidproject.org/TR/2021/wac-20210711
-  - https://github.com/solid/specification-tests/web-access-control/web-access-control-test-manifest-20210711.ttl
+  - https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest-20210711.ttl
 ```
 The manifest file might be a copy of the one used for the current version of a specification, however internal references
 must point to the right specification. This is easiest to do by modifying a namespace prefix and using that prefix for
@@ -1240,7 +1240,7 @@ manifest:protected-operation-not-read-resource-access-AWC
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
 ```
 If the test implementation has changed between specification versions, then you could have an alternative version of the
 feature file and point to the relevant one in the manifest file.
@@ -1278,21 +1278,21 @@ manifest:protected-operation-not-read-resource-access-AWC
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
 
 manifest:protected-operation-not-read-resource-default-AWC
   a td:TestCase ;
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
 
 manifest:acl-object-none
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-none.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-none.feature> .
 ```
 
 # Versioning
