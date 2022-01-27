@@ -5,7 +5,7 @@
   <title>Solid Specification - Conformance Test Suite Coverage Report</title>
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 <link href="https://dokie.li/media/css/basic.css" media="all" rel="stylesheet" title="Basic"/>
-<style type="text/css">
+<style>
   /*<![CDATA[*/
   /* More screen width */
   @media screen and (min-width: 100em) {
@@ -32,13 +32,17 @@
   }
 
   td dl {
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
-  /* Table styling */
-  tr.backgroundStep {
-    color: darkgrey;
+  th[colspan="4"] {
+      font-size: small;
+      font-weight: 400;
+      border-top: 1pt solid #000;
+      border-bottom: 1pt solid #000;
+      padding-top: 0;
+      padding-bottom: 0;
   }
 
   td, th {
@@ -48,16 +52,16 @@
     padding: 0.25em;
   }
 
-  th.title {
-    width: 40%
-  }
-
-  th.scenarios {
+  /* First and third columns in requirements */
+  li[class]>table th:nth-child(1),
+  li[class]>table th:nth-child(4) {
     width: 40%
   }
 
   /* hide marker for spec elements in list as this is a document structure not an actual list */
-  li.spec::marker {
+  li[class]::marker,
+  li[rel="dcterms:hasPart"]::marker,
+  li[about]::marker {
     content: none;
   }
 
@@ -86,11 +90,13 @@
     margin-bottom: .5em;
   }
 
-  a.ext::after {
+  /* Summary with external link */
+  summary>a:not([data-id])::after {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cg stroke-width='2.1' stroke='%2300e' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='17 13.5 17 19.5 5 19.5 5 7.5 11 7.5'%3E%3C/polyline%3E%3Cpath d='M14,4.5 L20,4.5 L20,10.5 M20,4.5 L11,13.5'%3E%3C/path%3E%3C/g%3E%3C/svg%3E");
   }
 
-  .count {
+  /* Summary with count */
+  summary>span:not([property]) {
     float: right;
   }
 
@@ -98,15 +104,10 @@
 </style>
 <script>
   //<![CDATA[
+  let clientShowing = true;
   document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("a:not([rel='doap:homepage'])").forEach(anchor => {
-      anchor.href = anchor.href
-              .replace('github.com/solid/specification-tests/', 'github.com/solid/specification-tests/blob/main/')
-              .replace('github.com/solid/conformance-test-harness/', 'github.com/solid/conformance-test-harness/blob/main/')
-    });
-
+    toggleClientRequirements();
     fetchLatestTestsVersion();
-
     window.addEventListener('hashchange', openTarget);
     openTarget();
   });
@@ -162,29 +163,37 @@
       console.warn('Failed to get release versions from https://github.com/solid/specification-tests.', err);
     });
   }
+
+  function toggleClientRequirements(elem) {
+      clientShowing = !clientShowing;
+      document.querySelectorAll('.client').forEach(e => e.style.display = clientShowing ? 'block': 'none');
+      if (elem) {
+          elem.innerText = clientShowing ? 'Hide client requirements' : 'Show client requirements';
+      }
+  }
   //]]>
 </script>
 </head>
 
-<body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# results: https://github.com/solid/specification-tests/c69b5dcf-a5da-48c7-8418-d72aff88bffd#">
+<body about="" typeof="schema:TechArticle" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# owl: http://www.w3.org/2002/07/owl# dcterms: http://purl.org/dc/terms/ doap: http://usefulinc.com/ns/doap# solid: http://www.w3.org/ns/solid/terms# solid-test: https://github.com/solid/conformance-test-harness/vocab# earl: http://www.w3.org/ns/earl# td: http://www.w3.org/2006/03/test-description# prov: http://www.w3.org/ns/prov# spec: http://www.w3.org/ns/spec# schema: http://schema.org/">
 <main>
 <article>
 <h1 property="dcterms:title">Solid Specification - Conformance Test Suite Coverage Report</h1>
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd resource="https://github.com/solid/specification-tests/c69b5dcf-a5da-48c7-8418-d72aff88bffd" rel="owl:sameAs">https://github.com/solid/specification-tests/c69b5dcf-a5da-48c7-8418-d72aff88bffd</dd>
+  <dd property="schema:identifier" lang="" xml:lang="">6abb82cf-8db8-48e8-9744-f05df20f7ca1</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
 <section id="specifications-under-test">
   <h2>Specifications under test</h2>
   <ul>
-    <li><a href="https://solidproject.org/TR/protocol" typeof="doap:Specification" title="Specification link">https://solidproject.org/TR/protocol</a></li>
-    <li><a href="https://solid.github.io/web-access-control-spec/" typeof="doap:Specification" title="Specification link">https://solid.github.io/web-access-control-spec/</a></li>
+    <li><a href="https://solidproject.org/TR/protocol" title="Specification link">https://solidproject.org/TR/protocol</a></li>
+    <li><a href="https://solid.github.io/web-access-control-spec/" title="Specification link">https://solid.github.io/web-access-control-spec/</a></li>
   </ul>
 </section>
-<section about="https://github.com/solid/specification-tests/c69b5dcf-a5da-48c7-8418-d72aff88bffd#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid/specification-tests/6abb82cf-8db8-48e8-9744-f05df20f7ca1#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
   <dl><dt>Description</dt><dd property="doap:description">Solid Specification Conformance Tests</dd></dl>
@@ -205,140 +214,119 @@
   <h2 property="dcterms:title">Test coverage by specification requirement</h2>
 <button type="button" onclick="openAll(this)">Open all</button>
 <button type="button" onclick="closeAll(this)">Close all</button>
+<button type="button" onclick="toggleClientRequirements(this)" style="margin-left: 16px">Show client requirements</button>
   <div datatype="rdf:HTML" property="dcterms:description">
   <ul>
-  <li rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol" class="spec">
+  <li rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol">
     <details id="protocol">
-      <summary><b>Specification:</b> https://solidproject.org/TR/protocol <a href="https://solidproject.org/TR/protocol" class="ext"></a>
-        <span class="count">81</span>
+      <summary><b>Specification:</b> https://solidproject.org/TR/protocol <a href="https://solidproject.org/TR/protocol"></a>
+        <span>81</span>
       </summary>
       <ul>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-wac" class="spec">
-<details id="client-wac" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-wac" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-wac <a href="https://solidproject.org/TR/protocol#client-wac" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-wac" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-wac <a href="https://solidproject.org/TR/protocol#client-wac"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST conform to the Web Access Control specification [WAC].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST conform to the Web Access Control specification [WAC].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-http-11" class="spec">
-<details id="server-http-11" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-http-11" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-http-11 <a href="https://solidproject.org/TR/protocol#server-http-11" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-http-11" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-http-11 <a href="https://solidproject.org/TR/protocol#server-http-11"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST conform to HTTP/1.1 Message Syntax and Routing [RFC7230] and HTTP/1.1 Semantics and Content [RFC7231].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to HTTP/1.1 Message Syntax and Routing [RFC7230] and HTTP/1.1 Semantics and Content [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-http-2" class="spec">
-<details id="server-http-2" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-http-2" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-http-2 <a href="https://solidproject.org/TR/protocol#server-http-2" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-http-2" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-http-2 <a href="https://solidproject.org/TR/protocol#server-http-2"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD conform to HTTP/2 [RFC7540].</dd></dl>
+<dd >SHOULD</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers SHOULD conform to HTTP/2 [RFC7540].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-tls-https" class="spec">
-<details id="server-tls-https" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-tls-https" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-tls-https <a href="https://solidproject.org/TR/protocol#server-tls-https" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-tls-https" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-tls-https <a href="https://solidproject.org/TR/protocol#server-tls-https"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD use TLS connections through the https URI scheme in order to secure the communication with clients.</dd></dl>
+<dd >SHOULD</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers SHOULD use TLS connections through the https URI scheme in order to secure the communication with clients.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-tls-https-redirect" class="spec">
-<details id="server-tls-https-redirect" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-tls-https-redirect" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-tls-https-redirect <a href="https://solidproject.org/TR/protocol#server-tls-https-redirect" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-tls-https-redirect" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-tls-https-redirect <a href="https://solidproject.org/TR/protocol#server-tls-https-redirect"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When both http and https URI schemes are supported, the server MUST redirect all http URIs to their https counterparts using a response with a 301 status code and a Location header.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When both http and https URI schemes are supported, the server MUST redirect all http URIs to their https counterparts using a response with a 301 status code and a Location header.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-conditional-requests" class="spec">
-<details id="server-conditional-requests" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-conditional-requests" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-conditional-requests <a href="https://solidproject.org/TR/protocol#server-conditional-requests" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-conditional-requests" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-conditional-requests <a href="https://solidproject.org/TR/protocol#server-conditional-requests"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST conform to HTTP/1.1 Conditional Requests [RFC7232].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to HTTP/1.1 Conditional Requests [RFC7232].</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -359,9 +347,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -372,66 +360,56 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-caching" class="spec">
-<details id="server-caching" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-caching" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-caching <a href="https://solidproject.org/TR/protocol#server-caching" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-caching" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-caching <a href="https://solidproject.org/TR/protocol#server-caching"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD conform to HTTP/1.1 Caching [RFC7234].</dd></dl>
+<dd >SHOULD</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers SHOULD conform to HTTP/1.1 Caching [RFC7234].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-range-requests" class="spec">
-<details id="server-range-requests" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-range-requests" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-range-requests <a href="https://solidproject.org/TR/protocol#server-range-requests" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-range-requests" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-range-requests <a href="https://solidproject.org/TR/protocol#server-range-requests"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MAY conform to HTTP/1.1 Range Requests [RFC7233].</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MAY conform to HTTP/1.1 Range Requests [RFC7233].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-authentication" class="spec">
-<details id="server-authentication" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-authentication" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-authentication <a href="https://solidproject.org/TR/protocol#server-authentication" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-authentication" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-authentication <a href="https://solidproject.org/TR/protocol#server-authentication"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST conform to HTTP/1.1 Authentication [RFC7235].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to HTTP/1.1 Authentication [RFC7235].</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -452,9 +430,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -465,24 +443,20 @@ Approved
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-unauthenticated" class="spec">
-<details id="server-unauthenticated" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-unauthenticated" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-unauthenticated <a href="https://solidproject.org/TR/protocol#server-unauthenticated" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-unauthenticated" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-unauthenticated <a href="https://solidproject.org/TR/protocol#server-unauthenticated"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a client does not provide valid credentials when requesting a resource that requires it (see WebID), servers MUST send a response with a 401 status code (unless 404 is preferred for security reasons).</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a client does not provide valid credentials when requesting a resource that requires it (see WebID), servers MUST send a response with a 401 status code (unless 404 is preferred for security reasons).</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -503,9 +477,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -516,24 +490,20 @@ Approved
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-content-type" class="spec">
-<details id="server-content-type" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-content-type" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-content-type <a href="https://solidproject.org/TR/protocol#server-content-type" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-content-type" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-content-type <a href="https://solidproject.org/TR/protocol#server-content-type"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -554,9 +524,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -567,195 +537,164 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-http-11" class="spec">
-<details id="client-http-11" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-http-11" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-http-11 <a href="https://solidproject.org/TR/protocol#client-http-11" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-http-11" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-http-11 <a href="https://solidproject.org/TR/protocol#client-http-11"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST conform to HTTP/1.1 Message Syntax and Routing [RFC7230] and HTTP/1.1 Semantics and Content [RFC7231].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST conform to HTTP/1.1 Message Syntax and Routing [RFC7230] and HTTP/1.1 Semantics and Content [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-http-2" class="spec">
-<details id="client-http-2" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-http-2" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-http-2 <a href="https://solidproject.org/TR/protocol#client-http-2" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-http-2" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-http-2 <a href="https://solidproject.org/TR/protocol#client-http-2"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY conform to HTTP/2 [RFC7540].</dd></dl>
+  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP/2 [RFC7540].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-conditional-requests" class="spec">
-<details id="client-conditional-requests" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-conditional-requests" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-conditional-requests <a href="https://solidproject.org/TR/protocol#client-conditional-requests" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-conditional-requests" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-conditional-requests <a href="https://solidproject.org/TR/protocol#client-conditional-requests"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY conform to HTTP/1.1 Conditional Requests [RFC7232].</dd></dl>
+  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP/1.1 Conditional Requests [RFC7232].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-caching" class="spec">
-<details id="client-caching" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-caching" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-caching <a href="https://solidproject.org/TR/protocol#client-caching" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-caching" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-caching <a href="https://solidproject.org/TR/protocol#client-caching"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY conform to HTTP/1.1 Caching [RFC7234].</dd></dl>
+  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP/1.1 Caching [RFC7234].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-range-requests" class="spec">
-<details id="client-range-requests" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-range-requests" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-range-requests <a href="https://solidproject.org/TR/protocol#client-range-requests" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-range-requests" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-range-requests <a href="https://solidproject.org/TR/protocol#client-range-requests"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MAY conform to HTTP/1.1 Range Requests [RFC7233].</dd></dl>
+  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP/1.1 Range Requests [RFC7233].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-authentication" class="spec">
-<details id="client-authentication" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-authentication" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-authentication <a href="https://solidproject.org/TR/protocol#client-authentication" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-authentication" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-authentication <a href="https://solidproject.org/TR/protocol#client-authentication"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST conform to HTTP/1.1 Authentication [RFC7235] if it needs to access resources requiring authentication (see WebID).</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST conform to HTTP/1.1 Authentication [RFC7235] if it needs to access resources requiring authentication (see WebID).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-authentication-different-credentials" class="spec">
-<details id="client-authentication-different-credentials" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-authentication-different-credentials" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-authentication-different-credentials <a href="https://solidproject.org/TR/protocol#client-authentication-different-credentials" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-authentication-different-credentials" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-authentication-different-credentials <a href="https://solidproject.org/TR/protocol#client-authentication-different-credentials"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a client receives a response with a 403 or 404 status code, the client MAY repeat the request with different credentials.</dd></dl>
+  <dl><dt>Statement</dt><dd>When a client receives a response with a 403 or 404 status code, the client MAY repeat the request with different credentials.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-content-type" class="spec">
-<details id="client-content-type" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-content-type" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-content-type <a href="https://solidproject.org/TR/protocol#client-content-type" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-content-type" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-content-type <a href="https://solidproject.org/TR/protocol#client-content-type"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST use the Content-Type HTTP header in PUT, POST and PATCH requests [RFC7231].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST use the Content-Type HTTP header in PUT, POST and PATCH requests [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-uri-trailing-slash-distinct" class="spec">
-<details id="server-uri-trailing-slash-distinct" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-uri-trailing-slash-distinct" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-uri-trailing-slash-distinct <a href="https://solidproject.org/TR/protocol#server-uri-trailing-slash-distinct" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-uri-trailing-slash-distinct" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-uri-trailing-slash-distinct <a href="https://solidproject.org/TR/protocol#server-uri-trailing-slash-distinct"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
-MUST NOT
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">If two URIs differ only in the trailing slash, and the server has associated a resource with one of them, then the other URI MUST NOT correspond to another resource.</dd></dl>
+<dd >MUST NOT</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>If two URIs differ only in the trailing slash, and the server has associated a resource with one of them, then the other URI MUST NOT correspond to another resource.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -776,9 +715,9 @@ MUST NOT
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -789,23 +728,20 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-uri-redirect-differing" class="spec">
-<details id="server-uri-redirect-differing" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-uri-redirect-differing" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-uri-redirect-differing <a href="https://solidproject.org/TR/protocol#server-uri-redirect-differing" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-uri-redirect-differing" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-uri-redirect-differing <a href="https://solidproject.org/TR/protocol#server-uri-redirect-differing"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Instead, the server MAY respond to requests for the latter URI with a 301 redirect to the former.</dd></dl>
+  <dl><dt>Statement</dt><dd>Instead, the server MAY respond to requests for the latter URI with a 301 redirect to the former.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -826,9 +762,9 @@ Server
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -839,275 +775,224 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-authorization-redirect" class="spec">
-<details id="server-authorization-redirect" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-authorization-redirect" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-authorization-redirect <a href="https://solidproject.org/TR/protocol#server-authorization-redirect" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-authorization-redirect" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-authorization-redirect <a href="https://solidproject.org/TR/protocol#server-authorization-redirect"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST authorize prior to this optional redirect.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST authorize prior to this optional redirect.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-storage" class="spec">
-<details id="server-storage" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-storage" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage <a href="https://solidproject.org/TR/protocol#server-storage" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-storage" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage <a href="https://solidproject.org/TR/protocol#server-storage"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST provide one or more storages (pim:Storage) – a space of URIs in which data can be accessed. A storage is the root container for all of its contained resources (see Resource Containment).</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST provide one or more storages (pim:Storage) – a space of URIs in which data can be accessed. A storage is the root container for all of its contained resources (see Resource Containment).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-storage-nonoverlapping" class="spec">
-<details id="server-storage-nonoverlapping" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-storage-nonoverlapping" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage-nonoverlapping <a href="https://solidproject.org/TR/protocol#server-storage-nonoverlapping" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-storage-nonoverlapping" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage-nonoverlapping <a href="https://solidproject.org/TR/protocol#server-storage-nonoverlapping"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a server supports multiple storages, the URIs MUST be allocated to non-overlapping space.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a server supports multiple storages, the URIs MUST be allocated to non-overlapping space.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-link-storage" class="spec">
-<details id="server-link-storage" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-link-storage" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-link-storage <a href="https://solidproject.org/TR/protocol#server-link-storage" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-link-storage" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-link-storage <a href="https://solidproject.org/TR/protocol#server-link-storage"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers exposing the storage resource MUST advertise by including the HTTP Link header with rel=&quot;type&quot; targeting http://www.w3.org/ns/pim/space#Storage when responding to storage’s request URI.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers exposing the storage resource MUST advertise by including the HTTP Link header with rel=&quot;type&quot; targeting http://www.w3.org/ns/pim/space#Storage when responding to storage’s request URI.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-link-storage" class="spec">
-<details id="client-link-storage" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-link-storage" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-link-storage <a href="https://solidproject.org/TR/protocol#client-link-storage" class="ext"></a>
-    <span class="count">0</span>
+        <li class="">
+<details id="spec0_client-link-storage" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-link-storage <a href="https://solidproject.org/TR/protocol#client-link-storage"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="">
-    </dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="">
-    </dd>
   </dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-storage-discovery" class="spec">
-<details id="client-storage-discovery" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-storage-discovery" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-storage-discovery <a href="https://solidproject.org/TR/protocol#client-storage-discovery" class="ext"></a>
-    <span class="count">0</span>
+        <li class="">
+<details id="spec0_client-storage-discovery" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-storage-discovery <a href="https://solidproject.org/TR/protocol#client-storage-discovery"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="">
-    </dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="">
-    </dd>
   </dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-rdf-storage" class="spec">
-<details id="client-rdf-storage" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-rdf-storage" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-rdf-storage <a href="https://solidproject.org/TR/protocol#client-rdf-storage" class="ext"></a>
-    <span class="count">0</span>
+        <li class="">
+<details id="spec0_client-rdf-storage" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-rdf-storage <a href="https://solidproject.org/TR/protocol#client-rdf-storage"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="">
-    </dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="">
-    </dd>
   </dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-storage-track-owner" class="spec">
-<details id="server-storage-track-owner" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-storage-track-owner" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage-track-owner <a href="https://solidproject.org/TR/protocol#server-storage-track-owner" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-storage-track-owner" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage-track-owner <a href="https://solidproject.org/TR/protocol#server-storage-track-owner"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST keep track of at least one owner of a storage in an implementation defined way.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST keep track of at least one owner of a storage in an implementation defined way.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-storage-link-owner" class="spec">
-<details id="server-storage-link-owner" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-storage-link-owner" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage-link-owner <a href="https://solidproject.org/TR/protocol#server-storage-link-owner" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-storage-link-owner" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage-link-owner <a href="https://solidproject.org/TR/protocol#server-storage-link-owner"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a server wants to advertise the owner of a storage, the server MUST include the Link header with rel=&quot;http://www.w3.org/ns/solid/terms#owner&quot; targeting the URI of the owner in the response of HTTP HEAD or GET requests targeting the root container.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a server wants to advertise the owner of a storage, the server MUST include the Link header with rel=&quot;http://www.w3.org/ns/solid/terms#owner&quot; targeting the URI of the owner in the response of HTTP HEAD or GET requests targeting the root container.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-basic-container" class="spec">
-<details id="server-basic-container" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-basic-container" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-basic-container <a href="https://solidproject.org/TR/protocol#server-basic-container" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-basic-container" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-basic-container <a href="https://solidproject.org/TR/protocol#server-basic-container"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">The representation and behaviour of containers in Solid corresponds to LDP Basic Container and MUST be supported by server.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>The representation and behaviour of containers in Solid corresponds to LDP Basic Container and MUST be supported by server.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-contained-resource-metadata" class="spec">
-<details id="server-contained-resource-metadata" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-contained-resource-metadata" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-contained-resource-metadata <a href="https://solidproject.org/TR/protocol#server-contained-resource-metadata" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-contained-resource-metadata" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-contained-resource-metadata <a href="https://solidproject.org/TR/protocol#server-contained-resource-metadata"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD include resource metadata about contained resources as part of the container description, unless that information is inapplicable to the server.</dd></dl>
+<dd >SHOULD</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers SHOULD include resource metadata about contained resources as part of the container description, unless that information is inapplicable to the server.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-link-auxiliary-type" class="spec">
-<details id="client-link-auxiliary-type" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-link-auxiliary-type" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-link-auxiliary-type <a href="https://solidproject.org/TR/protocol#client-link-auxiliary-type" class="ext"></a>
-    <span class="count">0</span>
+        <li class="">
+<details id="spec0_client-link-auxiliary-type" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-link-auxiliary-type <a href="https://solidproject.org/TR/protocol#client-link-auxiliary-type"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="">
-    </dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="">
-    </dd>
   </dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-description-resource-max" class="spec">
-<details id="server-description-resource-max" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-description-resource-max" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-description-resource-max <a href="https://solidproject.org/TR/protocol#server-description-resource-max" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-description-resource-max" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-description-resource-max <a href="https://solidproject.org/TR/protocol#server-description-resource-max"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
-MUST NOT
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST NOT directly associate more than one description resource to a subject resource.</dd></dl>
+<dd >MUST NOT</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST NOT directly associate more than one description resource to a subject resource.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1128,9 +1013,9 @@ MUST NOT
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -1141,65 +1026,53 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-description-resource-authorization" class="spec">
-<details id="server-description-resource-authorization" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-description-resource-authorization" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-description-resource-authorization <a href="https://solidproject.org/TR/protocol#server-description-resource-authorization" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-description-resource-authorization" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-description-resource-authorization <a href="https://solidproject.org/TR/protocol#server-description-resource-authorization"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When an HTTP request targets a description resource, the server MUST apply the authorization rule that is used for the subject resource with which the description resource is associated.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When an HTTP request targets a description resource, the server MUST apply the authorization rule that is used for the subject resource with which the description resource is associated.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-link-describes" class="spec">
-<details id="client-link-describes" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-link-describes" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-link-describes <a href="https://solidproject.org/TR/protocol#client-link-describes" class="ext"></a>
-    <span class="count">0</span>
+        <li class="">
+<details id="spec0_client-link-describes" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-link-describes <a href="https://solidproject.org/TR/protocol#client-link-describes"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="">
-    </dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="">
-    </dd>
   </dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-method-not-allowed" class="spec">
-<details id="server-method-not-allowed" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-method-not-allowed" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-method-not-allowed <a href="https://solidproject.org/TR/protocol#server-method-not-allowed" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-method-not-allowed" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-method-not-allowed <a href="https://solidproject.org/TR/protocol#server-method-not-allowed"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST respond with the 405 status code to requests using HTTP methods that are not supported by the target resource.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST respond with the 405 status code to requests using HTTP methods that are not supported by the target resource.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1220,9 +1093,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -1233,24 +1106,20 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-put-patch-uri-assignment" class="spec">
-<details id="server-put-patch-uri-assignment" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-put-patch-uri-assignment" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-put-patch-uri-assignment <a href="https://solidproject.org/TR/protocol#server-put-patch-uri-assignment" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-put-patch-uri-assignment" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-put-patch-uri-assignment <a href="https://solidproject.org/TR/protocol#server-put-patch-uri-assignment"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a successful PUT or PATCH request creates a resource, the server MUST use the effective request URI to assign the URI to that resource.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a successful PUT or PATCH request creates a resource, the server MUST use the effective request URI to assign the URI to that resource.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1271,9 +1140,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -1284,24 +1153,20 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-post-uri-assignment" class="spec">
-<details id="server-post-uri-assignment" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-post-uri-assignment" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-uri-assignment <a href="https://solidproject.org/TR/protocol#server-post-uri-assignment" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-post-uri-assignment" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-uri-assignment <a href="https://solidproject.org/TR/protocol#server-post-uri-assignment"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a successful POST request creates a resource, the server MUST assign a URI to that resource.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a successful POST request creates a resource, the server MUST assign a URI to that resource.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1322,9 +1187,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -1335,23 +1200,20 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-slug-uri-assignment" class="spec">
-<details id="server-slug-uri-assignment" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-slug-uri-assignment" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-slug-uri-assignment <a href="https://solidproject.org/TR/protocol#server-slug-uri-assignment" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-slug-uri-assignment" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-slug-uri-assignment <a href="https://solidproject.org/TR/protocol#server-slug-uri-assignment"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MAY allow clients to suggest the URI of a resource created through POST, using the HTTP Slug header as defined in [RFC5023].</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MAY allow clients to suggest the URI of a resource created through POST, using the HTTP Slug header as defined in [RFC5023].</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1372,9 +1234,9 @@ Server
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -1385,46 +1247,38 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-safe-methods" class="spec">
-<details id="server-safe-methods" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-safe-methods" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-safe-methods <a href="https://solidproject.org/TR/protocol#server-safe-methods" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-safe-methods" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-safe-methods <a href="https://solidproject.org/TR/protocol#server-safe-methods"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST support the HTTP GET, HEAD and OPTIONS methods [RFC7231] for clients to read resources or to determine communication options.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST support the HTTP GET, HEAD and OPTIONS methods [RFC7231] for clients to read resources or to determine communication options.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-allow-methods" class="spec">
-<details id="server-allow-methods" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-allow-methods" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-allow-methods <a href="https://solidproject.org/TR/protocol#server-allow-methods" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-allow-methods" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-allow-methods <a href="https://solidproject.org/TR/protocol#server-allow-methods"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST indicate their support for HTTP Methods by responding to HTTP GET and HEAD requests for the target resource with the HTTP Method tokens in the HTTP response header Allow.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST indicate their support for HTTP Methods by responding to HTTP GET and HEAD requests for the target resource with the HTTP Method tokens in the HTTP response header Allow.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1445,9 +1299,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -1458,67 +1312,56 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-accept-headers" class="spec">
-<details id="server-accept-headers" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-accept-headers" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-accept-headers <a href="https://solidproject.org/TR/protocol#server-accept-headers" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-accept-headers" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-accept-headers <a href="https://solidproject.org/TR/protocol#server-accept-headers"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST indicate supported media types in the HTTP Accept-Patch [RFC5789], Accept-Post [LDP] and Accept-Put [The Accept-Put Response Header] response headers that correspond to acceptable HTTP methods listed in Allow header value in response to HTTP GET and HEAD requests.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST indicate supported media types in the HTTP Accept-Patch [RFC5789], Accept-Post [LDP] and Accept-Put [The Accept-Put Response Header] response headers that correspond to acceptable HTTP methods listed in Allow header value in response to HTTP GET and HEAD requests.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-options-asterisk-accept-headers" class="spec">
-<details id="server-options-asterisk-accept-headers" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-options-asterisk-accept-headers" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-options-asterisk-accept-headers <a href="https://solidproject.org/TR/protocol#server-options-asterisk-accept-headers" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-options-asterisk-accept-headers" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-options-asterisk-accept-headers <a href="https://solidproject.org/TR/protocol#server-options-asterisk-accept-headers"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MAY include the HTTP Accept-Patch, Accept-Post and Accept-Put headers in the response of a OPTIONS * request.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MAY include the HTTP Accept-Patch, Accept-Post and Accept-Put headers in the response of a OPTIONS * request.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-put-patch-intermediate-containers" class="spec">
-<details id="server-put-patch-intermediate-containers" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-put-patch-intermediate-containers" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-put-patch-intermediate-containers <a href="https://solidproject.org/TR/protocol#server-put-patch-intermediate-containers" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-put-patch-intermediate-containers" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-put-patch-intermediate-containers <a href="https://solidproject.org/TR/protocol#server-put-patch-intermediate-containers"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST create intermediate containers and include corresponding containment triples in container representations derived from the URI path component of PUT and PATCH requests.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST create intermediate containers and include corresponding containment triples in container representations derived from the URI path component of PUT and PATCH requests.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1539,9 +1382,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -1552,90 +1395,74 @@ Approved
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-post-container" class="spec">
-<details id="server-post-container" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-post-container" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-container <a href="https://solidproject.org/TR/protocol#server-post-container" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-post-container" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-container <a href="https://solidproject.org/TR/protocol#server-post-container"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST allow creating new resources with a POST request to URI path ending /.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST allow creating new resources with a POST request to URI path ending /.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-post-container-create-resource" class="spec">
-<details id="server-post-container-create-resource" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-post-container-create-resource" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-container-create-resource <a href="https://solidproject.org/TR/protocol#server-post-container-create-resource" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-post-container-create-resource" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-container-create-resource <a href="https://solidproject.org/TR/protocol#server-post-container-create-resource"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST create a resource with URI path ending /{id} in container /.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST create a resource with URI path ending /{id} in container /.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-post-container-create-container" class="spec">
-<details id="server-post-container-create-container" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-post-container-create-container" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-container-create-container <a href="https://solidproject.org/TR/protocol#server-post-container-create-container" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-post-container-create-container" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-container-create-container <a href="https://solidproject.org/TR/protocol#server-post-container-create-container"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST create a container with URI path ending /{id}/ in container / for requests including the HTTP Link header with rel=&quot;type&quot; targeting a valid LDP container type.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST create a container with URI path ending /{id}/ in container / for requests including the HTTP Link header with rel=&quot;type&quot; targeting a valid LDP container type.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-post-target-not-found" class="spec">
-<details id="server-post-target-not-found" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-post-target-not-found" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-target-not-found <a href="https://solidproject.org/TR/protocol#server-post-target-not-found" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-post-target-not-found" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-target-not-found <a href="https://solidproject.org/TR/protocol#server-post-target-not-found"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a POST method request targets a resource without an existing representation, the server MUST respond with the 404 status code.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a POST method request targets a resource without an existing representation, the server MUST respond with the 404 status code.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1656,9 +1483,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -1669,331 +1496,272 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-put-patch-auxiliary-resource" class="spec">
-<details id="server-put-patch-auxiliary-resource" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-put-patch-auxiliary-resource" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-put-patch-auxiliary-resource <a href="https://solidproject.org/TR/protocol#server-put-patch-auxiliary-resource" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-put-patch-auxiliary-resource" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-put-patch-auxiliary-resource <a href="https://solidproject.org/TR/protocol#server-put-patch-auxiliary-resource"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a PUT or PATCH method request targets an auxiliary resource, the server MUST create or update it.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a PUT or PATCH method request targets an auxiliary resource, the server MUST create or update it.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-post-slug-auxiliary-resource" class="spec">
-<details id="server-post-slug-auxiliary-resource" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-post-slug-auxiliary-resource" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-slug-auxiliary-resource <a href="https://solidproject.org/TR/protocol#server-post-slug-auxiliary-resource" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-post-slug-auxiliary-resource" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-slug-auxiliary-resource <a href="https://solidproject.org/TR/protocol#server-post-slug-auxiliary-resource"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a POST method request with the Slug header targets an auxiliary resource, the server MUST respond with the 403 status code and response body describing the error.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a POST method request with the Slug header targets an auxiliary resource, the server MUST respond with the 403 status code and response body describing the error.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-protect-containment" class="spec">
-<details id="server-protect-containment" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-protect-containment" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-protect-containment <a href="https://solidproject.org/TR/protocol#server-protect-containment" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-protect-containment" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-protect-containment <a href="https://solidproject.org/TR/protocol#server-protect-containment"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
-MUST NOT
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST NOT allow HTTP PUT or PATCH on a container to update its containment triples; if the server receives such a request, it MUST respond with a 409 status code.</dd></dl>
+<dd >MUST NOT</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST NOT allow HTTP PUT or PATCH on a container to update its containment triples; if the server receives such a request, it MUST respond with a 409 status code.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-protect-contained-resource-metadata" class="spec">
-<details id="server-protect-contained-resource-metadata" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-protect-contained-resource-metadata" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-protect-contained-resource-metadata <a href="https://solidproject.org/TR/protocol#server-protect-contained-resource-metadata" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-protect-contained-resource-metadata" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-protect-contained-resource-metadata <a href="https://solidproject.org/TR/protocol#server-protect-contained-resource-metadata"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
-MUST NOT
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST NOT allow HTTP POST, PUT and PATCH to update a container’s resource metadata statements; if the server receives such a request, it MUST respond with a 409 status code.</dd></dl>
+<dd >MUST NOT</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST NOT allow HTTP POST, PUT and PATCH to update a container’s resource metadata statements; if the server receives such a request, it MUST respond with a 409 status code.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-etag" class="spec">
-<details id="server-etag" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-etag" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-etag <a href="https://solidproject.org/TR/protocol#server-etag" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-etag" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-etag <a href="https://solidproject.org/TR/protocol#server-etag"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MAY">
-    </dd>
+<dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MAY use the HTTP ETag header with a strong validator for RDF bearing representations in order to encourage clients to opt-in to using the If-Match header in their requests.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MAY use the HTTP ETag header with a strong validator for RDF bearing representations in order to encourage clients to opt-in to using the If-Match header in their requests.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-patch-n3-accept" class="spec">
-<details id="server-patch-n3-accept" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-patch-n3-accept" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-patch-n3-accept <a href="https://solidproject.org/TR/protocol#server-patch-n3-accept" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-patch-n3-accept" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-patch-n3-accept <a href="https://solidproject.org/TR/protocol#server-patch-n3-accept"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST accept a PATCH request with an N3 Patch body when the target of the request is an RDF document [RDF11-CONCEPTS].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST accept a PATCH request with an N3 Patch body when the target of the request is an RDF document [RDF11-CONCEPTS].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-patch-n3-advertise" class="spec">
-<details id="server-patch-n3-advertise" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-patch-n3-advertise" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-patch-n3-advertise <a href="https://solidproject.org/TR/protocol#server-patch-n3-advertise" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-patch-n3-advertise" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-patch-n3-advertise <a href="https://solidproject.org/TR/protocol#server-patch-n3-advertise"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST indicate support of N3 Patch by listing text/n3 as a value of the Accept-Patch header [RFC5789] of relevant responses.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST indicate support of N3 Patch by listing text/n3 as a value of the Accept-Patch header [RFC5789] of relevant responses.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-patch-n3-invalid" class="spec">
-<details id="server-patch-n3-invalid" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-patch-n3-invalid" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-patch-n3-invalid <a href="https://solidproject.org/TR/protocol#server-patch-n3-invalid" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-patch-n3-invalid" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-patch-n3-invalid <a href="https://solidproject.org/TR/protocol#server-patch-n3-invalid"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST respond with a 422 status code [RFC4918] if a patch document does not satisfy all of the above constraints.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST respond with a 422 status code [RFC4918] if a patch document does not satisfy all of the above constraints.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-n3-patch-where" class="spec">
-<details id="server-n3-patch-where" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-n3-patch-where" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-n3-patch-where <a href="https://solidproject.org/TR/protocol#server-n3-patch-where" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-n3-patch-where" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-n3-patch-where <a href="https://solidproject.org/TR/protocol#server-n3-patch-where"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When ?conditions is non-empty, servers MUST treat the request as a Read operation.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When ?conditions is non-empty, servers MUST treat the request as a Read operation.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-n3-patch-insert" class="spec">
-<details id="server-n3-patch-insert" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-n3-patch-insert" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-n3-patch-insert <a href="https://solidproject.org/TR/protocol#server-n3-patch-insert" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-n3-patch-insert" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-n3-patch-insert <a href="https://solidproject.org/TR/protocol#server-n3-patch-insert"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When ?insertions is non-empty, servers MUST (also) treat the request as an Append operation.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When ?insertions is non-empty, servers MUST (also) treat the request as an Append operation.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-n3-patch-delete" class="spec">
-<details id="server-n3-patch-delete" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-n3-patch-delete" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-n3-patch-delete <a href="https://solidproject.org/TR/protocol#server-n3-patch-delete" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-n3-patch-delete" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-n3-patch-delete <a href="https://solidproject.org/TR/protocol#server-n3-patch-delete"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When ?deletions is non-empty, servers MUST treat the request as a Read and Write operation.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When ?deletions is non-empty, servers MUST treat the request as a Read and Write operation.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-patch-n3-semantics" class="spec">
-<details id="server-patch-n3-semantics" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-patch-n3-semantics" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-patch-n3-semantics <a href="https://solidproject.org/TR/protocol#server-patch-n3-semantics" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-patch-n3-semantics" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-patch-n3-semantics <a href="https://solidproject.org/TR/protocol#server-patch-n3-semantics"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST process a patch resource against the target document as follows:</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST process a patch resource against the target document as follows:</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-delete-protect-root-container" class="spec">
-<details id="server-delete-protect-root-container" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-delete-protect-root-container" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-protect-root-container <a href="https://solidproject.org/TR/protocol#server-delete-protect-root-container" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-delete-protect-root-container" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-protect-root-container <a href="https://solidproject.org/TR/protocol#server-delete-protect-root-container"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a DELETE request targets storage’s root container or its associated ACL resource, the server MUST respond with the 405 status code.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a DELETE request targets storage’s root container or its associated ACL resource, the server MUST respond with the 405 status code.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-disallow-delete" class="spec">
-<details id="server-disallow-delete" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-disallow-delete" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-disallow-delete <a href="https://solidproject.org/TR/protocol#server-disallow-delete" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-disallow-delete" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-disallow-delete <a href="https://solidproject.org/TR/protocol#server-disallow-delete"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Server MUST exclude the DELETE method in the HTTP response header Allow in response to requests to these resources [RFC7231].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Server MUST exclude the DELETE method in the HTTP response header Allow in response to requests to these resources [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-delete-remove-containment" class="spec">
-<details id="server-delete-remove-containment" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-delete-remove-containment" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-remove-containment <a href="https://solidproject.org/TR/protocol#server-delete-remove-containment" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-delete-remove-containment" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-remove-containment <a href="https://solidproject.org/TR/protocol#server-delete-remove-containment"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a contained resource is deleted, the server MUST also remove the corresponding containment triple.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a contained resource is deleted, the server MUST also remove the corresponding containment triple.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2014,9 +1782,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -2027,68 +1795,56 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-delete-remove-auxiliary-resource" class="spec">
-<details id="server-delete-remove-auxiliary-resource" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-delete-remove-auxiliary-resource" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-remove-auxiliary-resource <a href="https://solidproject.org/TR/protocol#server-delete-remove-auxiliary-resource" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-delete-remove-auxiliary-resource" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-remove-auxiliary-resource <a href="https://solidproject.org/TR/protocol#server-delete-remove-auxiliary-resource"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a contained resource is deleted, the server MUST also delete the associated auxiliary resources (see the Auxiliary Resources section).</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a contained resource is deleted, the server MUST also delete the associated auxiliary resources (see the Auxiliary Resources section).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-delete-remove-empty-container" class="spec">
-<details id="server-delete-remove-empty-container" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-delete-remove-empty-container" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-remove-empty-container <a href="https://solidproject.org/TR/protocol#server-delete-remove-empty-container" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-delete-remove-empty-container" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-remove-empty-container <a href="https://solidproject.org/TR/protocol#server-delete-remove-empty-container"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a DELETE request targets a container, the server MUST delete the container if it contains no resources.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a DELETE request targets a container, the server MUST delete the container if it contains no resources.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-delete-protect-nonempty-container" class="spec">
-<details id="server-delete-protect-nonempty-container" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-delete-protect-nonempty-container" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-protect-nonempty-container <a href="https://solidproject.org/TR/protocol#server-delete-protect-nonempty-container" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec0_server-delete-protect-nonempty-container" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-delete-protect-nonempty-container <a href="https://solidproject.org/TR/protocol#server-delete-protect-nonempty-container"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">If the container contains resources, the server MUST respond with the 409 status code and response body describing the error.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>If the container contains resources, the server MUST respond with the 409 status code and response body describing the error.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2109,9 +1865,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -2122,24 +1878,20 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-representation-turtle-jsonld" class="spec">
-<details id="server-representation-turtle-jsonld" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-representation-turtle-jsonld" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-representation-turtle-jsonld <a href="https://solidproject.org/TR/protocol#server-representation-turtle-jsonld" class="ext"></a>
-    <span class="count">2</span>
+        <li class="server">
+<details id="spec0_server-representation-turtle-jsonld" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-representation-turtle-jsonld <a href="https://solidproject.org/TR/protocol#server-representation-turtle-jsonld"></a>
+    <span>2</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a server creates a resource on HTTP PUT, POST or PATCH requests such that the request’s representation data encodes an RDF document [RDF11-CONCEPTS] (as determined by the Content-Type header), the server MUST accept GET requests on this resource when the value of the Accept header requests a representation in text/turtle or application/ld+json [Turtle] [JSON-LD11].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a server creates a resource on HTTP PUT, POST or PATCH requests such that the request’s representation data encodes an RDF document [RDF11-CONCEPTS] (as determined by the Content-Type header), the server MUST accept GET requests on this resource when the value of the Accept header requests a representation in text/turtle or application/ld+json [Turtle] [JSON-LD11].</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2160,9 +1912,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -2178,9 +1930,9 @@ Approved
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -2191,284 +1943,236 @@ Approved
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-representation-write-redirect" class="spec">
-<details id="server-representation-write-redirect" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-representation-write-redirect" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-representation-write-redirect <a href="https://solidproject.org/TR/protocol#server-representation-write-redirect" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-representation-write-redirect" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-representation-write-redirect <a href="https://solidproject.org/TR/protocol#server-representation-write-redirect"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a PUT, POST, PATCH or DELETE method request targets a representation URL that is different than the resource URL, the server MUST respond with a 307 or 308 status code and Location header specifying the preferred URI reference.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a PUT, POST, PATCH or DELETE method request targets a representation URL that is different than the resource URL, the server MUST respond with a 307 or 308 status code and Location header specifying the preferred URI reference.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-ldn" class="spec">
-<details id="server-ldn" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-ldn" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-ldn <a href="https://solidproject.org/TR/protocol#server-ldn" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-ldn" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-ldn <a href="https://solidproject.org/TR/protocol#server-ldn"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A Solid server MUST conform to the LDN specification by implementing the Receiver parts to receive notifications and make Inbox contents available [LDN].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>A Solid server MUST conform to the LDN specification by implementing the Receiver parts to receive notifications and make Inbox contents available [LDN].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-ldn" class="spec">
-<details id="client-ldn" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-ldn" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-ldn <a href="https://solidproject.org/TR/protocol#client-ldn" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-ldn" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-ldn <a href="https://solidproject.org/TR/protocol#client-ldn"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A Solid client MUST conform to the LDN specification by implementing the Sender or Consumer parts to discover the location of a resource’s Inbox, and to send notifications to an Inbox or to retrieve the contents of an Inbox [LDN].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>A Solid client MUST conform to the LDN specification by implementing the Sender or Consumer parts to discover the location of a resource’s Inbox, and to send notifications to an Inbox or to retrieve the contents of an Inbox [LDN].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-websockets-api" class="spec">
-<details id="server-websockets-api" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-websockets-api" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-websockets-api <a href="https://solidproject.org/TR/protocol#server-websockets-api" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-websockets-api" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-websockets-api <a href="https://solidproject.org/TR/protocol#server-websockets-api"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD implement the Solid WebSockets API [SOLID-WEBSOCKETS-API].</dd></dl>
+<dd >SHOULD</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers SHOULD implement the Solid WebSockets API [SOLID-WEBSOCKETS-API].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#client-websockets-api" class="spec">
-<details id="client-websockets-api" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#client-websockets-api" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-websockets-api <a href="https://solidproject.org/TR/protocol#client-websockets-api" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec0_client-websockets-api" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-websockets-api <a href="https://solidproject.org/TR/protocol#client-websockets-api"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients SHOULD implement the Solid WebSockets API [SOLID-WEBSOCKETS-API].</dd></dl>
+<dd >SHOULD</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients SHOULD implement the Solid WebSockets API [SOLID-WEBSOCKETS-API].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-cors" class="spec">
-<details id="server-cors" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-cors" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors <a href="https://solidproject.org/TR/protocol#server-cors" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-cors" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors <a href="https://solidproject.org/TR/protocol#server-cors"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A server MUST implement the CORS protocol [FETCH] such that, to the extent possible, the browser allows Solid apps to send any request and combination of request headers to the server, and the Solid app can read any response and response headers received from the server. If the server wishes to block access to a resource, this MUST NOT happen via CORS but MUST instead be communicated to the Solid app in the browser through HTTP status codes such as 401, 403, or 404 [RFC7231].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>A server MUST implement the CORS protocol [FETCH] such that, to the extent possible, the browser allows Solid apps to send any request and combination of request headers to the server, and the Solid app can read any response and response headers received from the server. If the server wishes to block access to a resource, this MUST NOT happen via CORS but MUST instead be communicated to the Solid app in the browser through HTTP status codes such as 401, 403, or 404 [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-cors-access-control-headers" class="spec">
-<details id="server-cors-access-control-headers" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-cors-access-control-headers" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-access-control-headers <a href="https://solidproject.org/TR/protocol#server-cors-access-control-headers" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-cors-access-control-headers" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-access-control-headers <a href="https://solidproject.org/TR/protocol#server-cors-access-control-headers"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">whenever a server receives an HTTP request containing a valid Origin header [RFC6454], the server MUST respond with the appropriate Access-Control-* headers as specified in the CORS protocol [FETCH].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>whenever a server receives an HTTP request containing a valid Origin header [RFC6454], the server MUST respond with the appropriate Access-Control-* headers as specified in the CORS protocol [FETCH].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-cors-acao-vary" class="spec">
-<details id="server-cors-acao-vary" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-cors-acao-vary" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-acao-vary <a href="https://solidproject.org/TR/protocol#server-cors-acao-vary" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-cors-acao-vary" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-acao-vary <a href="https://solidproject.org/TR/protocol#server-cors-acao-vary"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">the server MUST set the Access-Control-Allow-Origin header to the valid Origin value from the request and list Origin in the Vary header value.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>the server MUST set the Access-Control-Allow-Origin header to the valid Origin value from the request and list Origin in the Vary header value.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-cors-aceh" class="spec">
-<details id="server-cors-aceh" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-cors-aceh" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-aceh <a href="https://solidproject.org/TR/protocol#server-cors-aceh" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-cors-aceh" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-aceh <a href="https://solidproject.org/TR/protocol#server-cors-aceh"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">The server MUST make all used response headers readable for the Solid app through Access-Control-Expose-Headers (with the possible exception of the Access-Control-* headers themselves).</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>The server MUST make all used response headers readable for the Solid app through Access-Control-Expose-Headers (with the possible exception of the Access-Control-* headers themselves).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-cors-options" class="spec">
-<details id="server-cors-options" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-cors-options" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-options <a href="https://solidproject.org/TR/protocol#server-cors-options" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-cors-options" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-options <a href="https://solidproject.org/TR/protocol#server-cors-options"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">A server MUST also support the HTTP OPTIONS method [RFC7231] such that it can respond appropriately to CORS preflight requests.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>A server MUST also support the HTTP OPTIONS method [RFC7231] such that it can respond appropriately to CORS preflight requests.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-cors-enumerate" class="spec">
-<details id="server-cors-enumerate" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-cors-enumerate" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-enumerate <a href="https://solidproject.org/TR/protocol#server-cors-enumerate" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-cors-enumerate" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-enumerate <a href="https://solidproject.org/TR/protocol#server-cors-enumerate"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">server SHOULD explicitly enumerate all used response headers under Access-Control-Expose-Headers rather than resorting to *, which does not cover all cases (such as credentials mode set to include).</dd></dl>
+<dd >SHOULD</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>server SHOULD explicitly enumerate all used response headers under Access-Control-Expose-Headers rather than resorting to *, which does not cover all cases (such as credentials mode set to include).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-cors-accept-acah" class="spec">
-<details id="server-cors-accept-acah" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-cors-accept-acah" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-accept-acah <a href="https://solidproject.org/TR/protocol#server-cors-accept-acah" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-cors-accept-acah" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-accept-acah <a href="https://solidproject.org/TR/protocol#server-cors-accept-acah"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#SHOULD">
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers SHOULD also explicitly list Accept under Access-Control-Allow-Headers</dd></dl>
+<dd >SHOULD</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers SHOULD also explicitly list Accept under Access-Control-Allow-Headers</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solidproject.org/TR/protocol#server-wac" class="spec">
-<details id="server-wac" rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol#server-wac" typeof="" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-wac <a href="https://solidproject.org/TR/protocol#server-wac" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec0_server-wac" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-wac <a href="https://solidproject.org/TR/protocol#server-wac"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST conform to the Web Access Control specification [WAC].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to the Web Access Control specification [WAC].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -2476,294 +2180,242 @@ MUST
       </ul>
     </details>
   </li>
-  <li rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/" class="spec">
+  <li rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/">
     <details id="">
-      <summary><b>Specification:</b> https://solid.github.io/web-access-control-spec/ <a href="https://solid.github.io/web-access-control-spec/" class="ext"></a>
-        <span class="count">22</span>
+      <summary><b>Specification:</b> https://solid.github.io/web-access-control-spec/ <a href="https://solid.github.io/web-access-control-spec/"></a>
+        <span>22</span>
       </summary>
       <ul>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#client-acl-uri" class="spec">
-<details id="client-acl-uri" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#client-acl-uri" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-acl-uri <a href="https://solid.github.io/web-access-control-spec/#client-acl-uri" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec1_client-acl-uri" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-acl-uri <a href="https://solid.github.io/web-access-control-spec/#client-acl-uri"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
-MUST NOT
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST NOT derive the URI of the ACL resource through string operations on the URI of the resource.</dd></dl>
+<dd >MUST NOT</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST NOT derive the URI of the ACL resource through string operations on the URI of the resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-get-acl-turtle" class="spec">
-<details id="server-get-acl-turtle" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-get-acl-turtle" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-get-acl-turtle <a href="https://solid.github.io/web-access-control-spec/#server-get-acl-turtle" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-get-acl-turtle" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-get-acl-turtle <a href="https://solid.github.io/web-access-control-spec/#server-get-acl-turtle"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST accept an HTTP GET and HEAD request targeting an ACL resource when the value of the Accept header requests a representation in text/turtle [TURTLE].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST accept an HTTP GET and HEAD request targeting an ACL resource when the value of the Accept header requests a representation in text/turtle [TURTLE].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-acl-without-representation" class="spec">
-<details id="server-acl-without-representation" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-acl-without-representation" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-acl-without-representation <a href="https://solid.github.io/web-access-control-spec/#server-acl-without-representation" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-acl-without-representation" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-acl-without-representation <a href="https://solid.github.io/web-access-control-spec/#server-acl-without-representation"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
-MUST NOT
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers who want a resource to inherit Authorizations (Effective ACL Resource) from a container resource  MUST NOT have a representation for the ACL resource that is associated with the resource.</dd></dl>
+<dd >MUST NOT</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers who want a resource to inherit Authorizations (Effective ACL Resource) from a container resource  MUST NOT have a representation for the ACL resource that is associated with the resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-get-acl-without-representation" class="spec">
-<details id="server-get-acl-without-representation" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-get-acl-without-representation" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-get-acl-without-representation <a href="https://solid.github.io/web-access-control-spec/#server-get-acl-without-representation" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-get-acl-without-representation" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-get-acl-without-representation <a href="https://solid.github.io/web-access-control-spec/#server-get-acl-without-representation"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When an authorized HTTP GET or HEAD request targets an ACL resource without an existing representation, the server MUST respond with the 404 status code as per [RFC7231].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When an authorized HTTP GET or HEAD request targets an ACL resource without an existing representation, the server MUST respond with the 404 status code as per [RFC7231].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-root-container-acl" class="spec">
-<details id="server-root-container-acl" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-root-container-acl" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-root-container-acl <a href="https://solid.github.io/web-access-control-spec/#server-root-container-acl" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-root-container-acl" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-root-container-acl <a href="https://solid.github.io/web-access-control-spec/#server-root-container-acl"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When an authorization HTTP GET or HEAD request targets root container’s ACL resource, the server MUST respond with a representation.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When an authorization HTTP GET or HEAD request targets root container’s ACL resource, the server MUST respond with a representation.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-root-container-acl-authorization-control" class="spec">
-<details id="server-root-container-acl-authorization-control" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-root-container-acl-authorization-control" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-root-container-acl-authorization-control <a href="https://solid.github.io/web-access-control-spec/#server-root-container-acl-authorization-control" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-root-container-acl-authorization-control" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-root-container-acl-authorization-control <a href="https://solid.github.io/web-access-control-spec/#server-root-container-acl-authorization-control"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">The ACL resource of the root container MUST include an Authorization allowing the acl:Control access privilege ( access mode).</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>The ACL resource of the root container MUST include an Authorization allowing the acl:Control access privilege ( access mode).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-read-operation" class="spec">
-<details id="server-read-operation" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-read-operation" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-read-operation <a href="https://solid.github.io/web-access-control-spec/#server-read-operation" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-read-operation" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-read-operation <a href="https://solid.github.io/web-access-control-spec/#server-read-operation"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When an operation requests to read a resource, the server MUST match an Authorization allowing the acl:Read access privilege on the resource.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When an operation requests to read a resource, the server MUST match an Authorization allowing the acl:Read access privilege on the resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-create-operation" class="spec">
-<details id="server-create-operation" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-create-operation" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-create-operation <a href="https://solid.github.io/web-access-control-spec/#server-create-operation" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-create-operation" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-create-operation <a href="https://solid.github.io/web-access-control-spec/#server-create-operation"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When an operation requests to create a resource as a member of a container resource, the server MUST match an Authorization allowing the acl:Append or acl:Write access privilege (as needed by the operation) on the resource to be created.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When an operation requests to create a resource as a member of a container resource, the server MUST match an Authorization allowing the acl:Append or acl:Write access privilege (as needed by the operation) on the resource to be created.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-update-operation" class="spec">
-<details id="server-update-operation" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-update-operation" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-update-operation <a href="https://solid.github.io/web-access-control-spec/#server-update-operation" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-update-operation" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-update-operation <a href="https://solid.github.io/web-access-control-spec/#server-update-operation"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When an operation requests to update a resource, the server MUST match an Authorization allowing the acl:Append or acl:Write access privilege on the resource.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When an operation requests to update a resource, the server MUST match an Authorization allowing the acl:Append or acl:Write access privilege on the resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-delete-operation" class="spec">
-<details id="server-delete-operation" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-delete-operation" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-delete-operation <a href="https://solid.github.io/web-access-control-spec/#server-delete-operation" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-delete-operation" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-delete-operation <a href="https://solid.github.io/web-access-control-spec/#server-delete-operation"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When an operation requests to delete a resource, the server MUST match Authorizations allowing the acl:Write access privilege on the resource and the containing container.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When an operation requests to delete a resource, the server MUST match Authorizations allowing the acl:Write access privilege on the resource and the containing container.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-control-operation" class="spec">
-<details id="server-control-operation" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-control-operation" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-control-operation <a href="https://solid.github.io/web-access-control-spec/#server-control-operation" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-control-operation" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-control-operation <a href="https://solid.github.io/web-access-control-spec/#server-control-operation"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When an operation requests to read and write an ACL resource, the server MUST match an Authorization allowing the acl:Control access privilege on the resource.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When an operation requests to read and write an ACL resource, the server MUST match an Authorization allowing the acl:Control access privilege on the resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-cors-acao-acah" class="spec">
-<details id="server-cors-acao-acah" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-cors-acao-acah" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-cors-acao-acah <a href="https://solid.github.io/web-access-control-spec/#server-cors-acao-acah" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-cors-acao-acah" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-cors-acao-acah <a href="https://solid.github.io/web-access-control-spec/#server-cors-acao-acah"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a server participates in the CORS protocol [FETCH] and authorization is granted to an HTTP request including the Origin header, the server MUST include the HTTP Access-Control-Allow-Origin and Access-Control-Allow-Headers headers in the response of the HTTP request.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a server participates in the CORS protocol [FETCH] and authorization is granted to an HTTP request including the Origin header, the server MUST include the HTTP Access-Control-Allow-Origin and Access-Control-Allow-Headers headers in the response of the HTTP request.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-wac-allow" class="spec">
-<details id="server-wac-allow" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-wac-allow" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-wac-allow <a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" class="ext"></a>
-    <span class="count">5</span>
+        <li class="server">
+<details id="spec1_server-wac-allow" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-wac-allow <a href="https://solid.github.io/web-access-control-spec/#server-wac-allow"></a>
+    <span>5</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST advertise client’s access privileges on a resource by including the WAC-Allow HTTP header (WAC-Allow) in the response of HTTP GET and HEAD requests.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST advertise client’s access privileges on a resource by including the WAC-Allow HTTP header (WAC-Allow) in the response of HTTP GET and HEAD requests.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2784,9 +2436,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -2802,9 +2454,9 @@ Approved
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -2820,9 +2472,9 @@ Approved
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -2838,9 +2490,9 @@ Approved
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -2856,9 +2508,9 @@ Approved
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -2869,155 +2521,127 @@ Approved
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#client-wac-allow" class="spec">
-<details id="client-wac-allow" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#client-wac-allow" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-wac-allow <a href="https://solid.github.io/web-access-control-spec/#client-wac-allow" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec1_client-wac-allow" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-wac-allow <a href="https://solid.github.io/web-access-control-spec/#client-wac-allow"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST discover access privileges on a resource by making an HTTP GET or HEAD request on the target resource, and checking the WAC-Allow header value for access parameters listing the allowed access modes per permission group (WAC-Allow).</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST discover access privileges on a resource by making an HTTP GET or HEAD request on the target resource, and checking the WAC-Allow header value for access parameters listing the allowed access modes per permission group (WAC-Allow).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow" class="spec">
-<details id="server-cors-aceh-wac-allow" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow <a href="https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-cors-aceh-wac-allow" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow <a href="https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a server participates in the CORS protocol [FETCH], the server MUST include WAC-Allow in the Access-Control-Expose-Headers field-value in the HTTP response.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a server participates in the CORS protocol [FETCH], the server MUST include WAC-Allow in the Access-Control-Expose-Headers field-value in the HTTP response.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing" class="spec">
-<details id="client-wac-allow-parsing" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing <a href="https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec1_client-wac-allow-parsing" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing <a href="https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Client parsing algorithms for WAC-Allow header field-values MUST incorporate error handling. When the received message fails to match an allowed pattern, clients MUST ignore the received WAC-Allow header-field. When unrecognised access parameters (such as permission groups or access modes) are found, clients MUST continue processing the access parameters as if those properties were not present.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Client parsing algorithms for WAC-Allow header field-values MUST incorporate error handling. When the received message fails to match an allowed pattern, clients MUST ignore the received WAC-Allow header-field. When unrecognised access parameters (such as permission groups or access modes) are found, clients MUST continue processing the access parameters as if those properties were not present.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-link-acl" class="spec">
-<details id="server-link-acl" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-link-acl" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-link-acl <a href="https://solid.github.io/web-access-control-spec/#server-link-acl" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-link-acl" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-link-acl <a href="https://solid.github.io/web-access-control-spec/#server-link-acl"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">When a server wants to enable applications to discover Authorizations associated with a given resource, the server MUST advertise the ACL resource that is associated with a resource by responding to an HTTP request including a Link header with the rel value of acl (acl Link Relation) and the ACL resource as link target [RFC8288].</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a server wants to enable applications to discover Authorizations associated with a given resource, the server MUST advertise the ACL resource that is associated with a resource by responding to an HTTP request including a Link header with the rel value of acl (acl Link Relation) and the ACL resource as link target [RFC8288].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#server-resource-acl-max" class="spec">
-<details id="server-resource-acl-max" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#server-resource-acl-max" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-resource-acl-max <a href="https://solid.github.io/web-access-control-spec/#server-resource-acl-max" class="ext"></a>
-    <span class="count">0</span>
+        <li class="server">
+<details id="spec1_server-resource-acl-max" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-resource-acl-max <a href="https://solid.github.io/web-access-control-spec/#server-resource-acl-max"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST-NOT">
-MUST NOT
-    </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Servers MUST NOT directly associate more than one ACL resource to a resource.</dd></dl>
+<dd >MUST NOT</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST NOT directly associate more than one ACL resource to a resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#client-link-acl" class="spec">
-<details id="client-link-acl" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#client-link-acl" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-link-acl <a href="https://solid.github.io/web-access-control-spec/#client-link-acl" class="ext"></a>
-    <span class="count">0</span>
+        <li class="client">
+<details id="spec1_client-link-acl" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-link-acl <a href="https://solid.github.io/web-access-control-spec/#client-link-acl"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Client">
-Client
-    </dd>
+<dd>Client</dd>
   </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
-  <dl><dt>Statement</dt><dd property="spec:statement">Clients MUST discover the ACL resource associated with a resource by making an HTTP request on the target URL, and checking the HTTP Link header with the rel parameter.</dd></dl>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST discover the ACL resource associated with a resource by making an HTTP request on the target URL, and checking the HTTP Link header with the rel parameter.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#access-modes" class="spec">
-<details id="access-modes" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#access-modes" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#access-modes <a href="https://solid.github.io/web-access-control-spec/#access-modes" class="ext"></a>
-    <span class="count">4</span>
+        <li class="server">
+<details id="spec1_access-modes" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#access-modes <a href="https://solid.github.io/web-access-control-spec/#access-modes"></a>
+    <span>4</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
+<dd >MUST</dd>
+      </dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -3028,24 +2652,6 @@ MUST
             </tr>
             </thead>
             <tbody>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted read access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
 <tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" typeof="td:TestCase">
   <td>
     <span property="dcterms:title">Bob can only read an RDF resource to which he is only granted read access</span>
@@ -3056,9 +2662,27 @@ Approved
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -3074,9 +2698,9 @@ Approved
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -3092,9 +2716,9 @@ Unreviewed
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -3105,23 +2729,19 @@ Approved
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#access-objects" class="spec">
-<details id="access-objects" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#access-objects" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#access-objects <a href="https://solid.github.io/web-access-control-spec/#access-objects" class="ext"></a>
-    <span class="count">4</span>
+        <li class="server">
+<details id="spec1_access-objects" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#access-objects <a href="https://solid.github.io/web-access-control-spec/#access-objects"></a>
+    <span>4</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
+<dd >MUST</dd>
+      </dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -3142,27 +2762,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob cannot read a container or children if he is not given any access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-none.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -3178,9 +2780,27 @@ Approved
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob cannot read a container or children if he is not given any access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-none.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
@@ -3196,9 +2816,9 @@ Approved
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">
-Unreviewed
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
     </dl>
 
   </td>
@@ -3209,23 +2829,19 @@ Unreviewed
 </details>
 
         </li>
-        <li rel="spec:requirement" resource="https://solid.github.io/web-access-control-spec/#authorization-evaluation-context" class="spec">
-<details id="authorization-evaluation-context" rel="dcterms:hasPart" resource="https://solid.github.io/web-access-control-spec/#authorization-evaluation-context" typeof="" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#authorization-evaluation-context <a href="https://solid.github.io/web-access-control-spec/#authorization-evaluation-context" class="ext"></a>
-    <span class="count">1</span>
+        <li class="server">
+<details id="spec1_authorization-evaluation-context" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#authorization-evaluation-context <a href="https://solid.github.io/web-access-control-spec/#authorization-evaluation-context"></a>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-    <dd rel="spec:requirementSubject" resource="http://www.w3.org/ns/spec#Server">
-Server
-          </dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-    <dd property="spec:requirementLevel" resource="http://www.w3.org/ns/spec#MUST">
-MUST
-          </dd>
-  </dl>
+<dd >MUST</dd>
+      </dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -3246,9 +2862,9 @@ MUST
   <td>
     <dl>
       <dt>Status</dt>
-      <dd><a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">
-Approved
-              </a></dd>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
     </dl>
 
   </td>
