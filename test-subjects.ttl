@@ -49,7 +49,7 @@
     doap:homepage <https://github.com/solid/community-server> ;
     doap:description "An open and modular implementation of the Solid specifications."@en ;
     doap:programming-language "TypeScript"@en ;
-    solid-test:skip "acp" .
+    solid-test:skip "acp", "http-redirect" .
 
 <css#test-subject-release>
     doap:name "CSS 2.0.1" ;

@@ -97,11 +97,11 @@ EOF
   # Assumption: You have cloned https://github.com/solid/community-server and built it using:
   # docker build --rm -f Dockerfile -t css:latest .
 
-  # Assumption: You have added server as a mapping of locahost in /etc/hosts
+  # Assumption: You have added 'server' as a mapping of localhost in /etc/hosts
 
   docker network create testnet
   docker run -d --name=server --network=testnet --env NODE_TLS_REJECT_UNAUTHORIZED=0 \
-    -v "$(pwd)"/config:/config -p 443:443 -it css:latest \
+    -v "$(pwd)"/config:/config -p 443:443 -it solidproject/community-server \
     -c /config/css-config.json --port=443 --baseUrl=https://server/
 
   until $(curl --output /dev/null --silent --head --fail -k https://server); do
