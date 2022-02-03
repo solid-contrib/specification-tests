@@ -127,6 +127,20 @@ manifest:post-target-not-found
   spec:testScript
     <https://github.com/solid/specification-tests/protocol/writing-resource/post-target-not-found.feature> .
 
+manifest:cors-simple-requests
+  a td:TestCase ;
+  spec:requirementReference sopr:server-cors ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/cors/simple-requests.feature> .
+
+manifest:cors-preflight-requests
+  a td:TestCase ;
+  spec:requirementReference sopr:server-cors ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/cors/preflight-requests.feature> .
+
 manifest:cors-access-control-headers
   a td:TestCase ;
   spec:requirementReference sopr:server-cors-access-control-headers ;

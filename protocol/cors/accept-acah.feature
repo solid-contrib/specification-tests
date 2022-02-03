@@ -33,8 +33,6 @@ Feature: Server should explicitly list Accept under Access-Control-Allow-Headers
     And header Origin = 'https://tester'
     And header Access-Control-Request-Method = 'GET'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type, Accept'
-    # The following header is irrelevant
-    And header Accept = 'text/turtle;q=0.8, application/rdf+xml;q=0.8, application/n-triples;q=0.8, application/n-quads;q=0.8, text/x-nquads;q=0.8, application/trig;q=0.8, text/n3;q=0.8, application/ld+json;q=0.8, application/x-binary-rdf;q=0.8, text/plain;q=0.7'
     When method OPTIONS
     Then match [200, 204] contains responseStatus
     And match response == ''
@@ -42,7 +40,8 @@ Feature: Server should explicitly list Accept under Access-Control-Allow-Headers
 
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('GET', testContainer.url)
-    And header Accept = 'text/turtle;q=0.8, application/rdf+xml;q=0.8, application/n-triples;q=0.8, application/n-quads;q=0.8, text/x-nquads;q=0.8, application/trig;q=0.8, text/n3;q=0.8, application/ld+json;q=0.8, application/x-binary-rdf;q=0.8, text/plain;q=0.7'
+    And header Accept = 'text/turtle;q=0.9, application/rdf+xml;q=0.8, application/n-triples;q=0.8, application/n-quads;q=0.8, text/x-nquads;q=0.8, application/trig;q=0.8, text/n3;q=0.8, application/ld+json;q=0.8, application/x-binary-rdf;q=0.8, text/plain;q=0.7'
     When method GET
     Then status 200
     And match response != ''
+    And match header Content-Type contains 'text/turtle'
