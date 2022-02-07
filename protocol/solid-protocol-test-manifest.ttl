@@ -132,47 +132,47 @@ manifest:cors-simple-requests
   spec:requirementReference sopr:server-cors ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/cors/simple-requests.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/cors/simple-requests.feature> .
 
 manifest:cors-preflight-requests
   a td:TestCase ;
   spec:requirementReference sopr:server-cors ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/cors/preflight-requests.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/cors/preflight-requests.feature> .
 
 manifest:cors-access-control-headers
   a td:TestCase ;
   spec:requirementReference sopr:server-cors-access-control-headers ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/cors/access-control-headers.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/cors/access-control-headers.feature> .
 
 manifest:cors-acao-vary
   a td:TestCase ;
   spec:requirementReference sopr:server-cors-acao-vary ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/cors/acao-vary.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/cors/acao-vary.feature> .
 
 manifest:cors-options
   a td:TestCase ;
   spec:requirementReference sopr:server-cors-options ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/cors/preflight.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/cors/preflight.feature> .
 
 manifest:cors-enumerate
   a td:TestCase ;
   spec:requirementReference sopr:server-cors-enumerate ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/cors/enumerate-headers.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/cors/enumerate-headers.feature> .
 
 manifest:cors-accept-acah
   a td:TestCase ;
   spec:requirementReference sopr:server-cors-accept-acah ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/protocol/cors/accept-acah.feature> .
+    <https://github.com/solid/specification-tests/blob/main/protocol/cors/accept-acah.feature> .
 
