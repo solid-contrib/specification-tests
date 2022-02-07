@@ -27,7 +27,7 @@ This repository contains the tests that can be executed by the
 [Solid Conformance Test Harness (CTH)](https://github.com/solid/conformance-test-harness). The best way to run the 
 harness is by using the [Docker image](https://hub.docker.com/r/solidproject/conformance-test-harness).
 
-The tests are written in a language called [KarateDSL](https://intuit.github.io/karate/). This is a simple 
+The tests are written in a language called [KarateDSL](https://karatelabs.github.io/karate/). This is a simple 
 Behaviour-Driven Development (BDD) testing language based on 
 [Gherkin](https://cucumber.io/docs/gherkin/) but which has been extended specifically for testing HTTP APIs. Further
 Solid-specific capabilities are added by the test harness. The difference to Cucumber's use of Gherkin is that this is
@@ -114,8 +114,8 @@ Just change the `target` option and create a `.env` file for the server as menti
 
 The following is a high level overview of KarateDSL, focused on the most common aspects required in these specification
 tests. For more detail please go to:
-* [KarateDSL](https://intuit.github.io/karate/)
-* [Syntax Guide](https://intuit.github.io/karate/#syntax-guide)
+* [KarateDSL](https://karatelabs.github.io/karate/)
+* [Syntax Guide](https://karatelabs.github.io/karate/#syntax-guide)
 
 ## Structure of a Test Case
 The basic structure of a KarateDSL test file is:
@@ -302,14 +302,14 @@ all the options that the code did not match!
 The important keywords for this are `match` and `assert`. They are very similar but generally `match` should be used as
 it is better at reporting errors than `assert`. The `match` keyword is very powerful. It has the ability to ignore parts
 of the data when matching and to apply fuzzy matching. The full details are available here:
-[Payload Assertions](https://intuit.github.io/karate/#payload-assertions).
+[Payload Assertions](https://karatelabs.github.io/karate/#payload-assertions).
 
 In their simplest forms, `match` and `assert` simply take a JavaScript expression that evaluates to a boolean:
 ```gherkin
 * match foo == bar && foo2 != 10
 ```
 The left-hand side can be a variable name, a JSON/XML path, a function call, or anything in parentheses which evaluates as
-JavaScript. The right-hand side can be any [Karate expression](https://intuit.github.io/karate/#karate-expressions).
+JavaScript. The right-hand side can be any [Karate expression](https://karatelabs.github.io/karate/#karate-expressions).
 Some of the important operators are outlined below.
 
 #### `contains`
@@ -371,11 +371,11 @@ Using the `responseStatus` variable as an alternative to `status` was mentioned 
 
 ## Karate Object
 Within a test case, you have access to the Karate object which has a number of useful methods described
-[here](https://intuit.github.io/karate/#the-karate-object). This includes methods to manipulate data, call functions
+[here](https://karatelabs.github.io/karate/#the-karate-object). This includes methods to manipulate data, call functions
 with a lock so they only run once, read from files, create loops, and handle async calling.
 
 ## Calling Functions
-See https://intuit.github.io/karate/#code-reuse--common-routines
+See https://karatelabs.github.io/karate/#code-reuse--common-routines
 
 Sometimes you may want to set up something in the `Background` section that is only done once for all scenarios whereas
 typically these steps are run for every `Scenario`. This can be achieved using `callonce`. This would be similar to the
