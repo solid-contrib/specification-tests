@@ -182,7 +182,7 @@
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd property="schema:identifier" lang="" xml:lang="">85849345-fca1-4df9-a86e-228ddbc96795</dd>
+  <dd property="schema:identifier" lang="" xml:lang="">f760f5f7-bb91-482c-bd86-bb418650c7d0</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -193,7 +193,7 @@
     <li><a href="https://solid.github.io/web-access-control-spec/" title="Specification link">https://solid.github.io/web-access-control-spec/</a></li>
   </ul>
 </section>
-<section about="https://github.com/solid/specification-tests/85849345-fca1-4df9-a86e-228ddbc96795#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid/specification-tests/f760f5f7-bb91-482c-bd86-bb418650c7d0#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
   <dl><dt>Description</dt><dd property="doap:description">Solid Specification Conformance Tests</dd></dl>
@@ -2378,6 +2378,479 @@
         <span>22</span>
       </summary>
       <ul>
+        <li class="server">
+<details id="spec1_server-wac-allow" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-wac-allow <a href="https://solid.github.io/web-access-control-spec/#server-wac-allow"></a>
+    <span>5</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST advertise client’s access privileges on a resource by including the WAC-Allow HTTP header (WAC-Allow) in the response of HTTP GET and HEAD requests.</dd></dl>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-header-exists" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-header-exists" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">The WAC-Allow header is advertised</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-header-exists">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/header-exists.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-indirect" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-indirect" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">The WAC-Allow header shows public access modes for a public agent when given indirect access via a container</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-indirect">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/public-access-indirect.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-direct" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-direct" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">The WAC-Allow header shows public access modes for a public agent when given direct access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-direct">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/public-access-direct.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-indirect" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-indirect" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">The WAC-Allow header shows user access modes for Bob when given indirect access via a container</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-indirect">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/user-access-indirect.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-direct" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-direct" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">The WAC-Allow header shows user access modes for Bob when given direct access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-direct">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/user-access-direct.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
+</details>
+
+        </li>
+        <li class="client">
+<details id="spec1_client-wac-allow" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-wac-allow <a href="https://solid.github.io/web-access-control-spec/#client-wac-allow"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Client</dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST discover access privileges on a resource by making an HTTP GET or HEAD request on the target resource, and checking the WAC-Allow header value for access parameters listing the allowed access modes per permission group (WAC-Allow).</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec1_server-cors-aceh-wac-allow" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow <a href="https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a server participates in the CORS protocol [FETCH], the server MUST include WAC-Allow in the Access-Control-Expose-Headers field-value in the HTTP response.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="client">
+<details id="spec1_client-wac-allow-parsing" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing <a href="https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Client</dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Client parsing algorithms for WAC-Allow header field-values MUST incorporate error handling. When the received message fails to match an allowed pattern, clients MUST ignore the received WAC-Allow header-field. When unrecognised access parameters (such as permission groups or access modes) are found, clients MUST continue processing the access parameters as if those properties were not present.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec1_access-modes" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#access-modes <a href="https://solid.github.io/web-access-control-spec/#access-modes"></a>
+    <span>4</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob can only read an RDF resource to which he is only granted read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-access-R.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-default-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-default-AWC" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted default read access via the parent</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-default-AWC">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-default-AWC.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-default-R" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-default-R" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob can only read an RDF resource to which he is only granted default read access via the parent</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-default-R">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-default-R.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec1_access-objects" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#access-objects <a href="https://solid.github.io/web-access-control-spec/#access-objects"></a>
+    <span>4</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to-default" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to-default" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob can read a container and its children if he is granted both direct and inheritable read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to-default">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-access-to-default.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob cannot read a container or children if he is not given any access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-none.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob cannot read a container or children if he is not given any access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-access-to.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-default" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-default" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Bob can only read child containers/resources of a container to which he is granted inheritable read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-default">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-default.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec1_authorization-evaluation-context" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#authorization-evaluation-context <a href="https://solid.github.io/web-access-control-spec/#authorization-evaluation-context"></a>
+    <span>1</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-acl-propagation" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-acl-propagation" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Inheritable ACL controls child resources</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-acl-propagation">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/acl-propagation.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#authorization-evaluation-context" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec1_server-link-acl" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-link-acl <a href="https://solid.github.io/web-access-control-spec/#server-link-acl"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>When a server wants to enable applications to discover Authorizations associated with a given resource, the server MUST advertise the ACL resource that is associated with a resource by responding to an HTTP request including a Link header with the rel value of acl (acl Link Relation) and the ACL resource as link target [RFC8288].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec1_server-resource-acl-max" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-resource-acl-max <a href="https://solid.github.io/web-access-control-spec/#server-resource-acl-max"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST NOT</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST NOT directly associate more than one ACL resource to a resource.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="client">
+<details id="spec1_client-link-acl" >
+  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-link-acl <a href="https://solid.github.io/web-access-control-spec/#client-link-acl"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Client</dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST discover the ACL resource associated with a resource by making an HTTP request on the target URL, and checking the HTTP Link header with the rel parameter.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
         <li class="client">
 <details id="spec1_client-acl-uri" >
   <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-acl-uri <a href="https://solid.github.io/web-access-control-spec/#client-acl-uri"></a>
@@ -2591,479 +3064,6 @@
       </dl>
   <dl><dt>Statement</dt><dd>When a server participates in the CORS protocol [FETCH] and authorization is granted to an HTTP request including the Origin header, the server MUST include the HTTP Access-Control-Allow-Origin and Access-Control-Allow-Headers headers in the response of the HTTP request.</dd></dl>
           <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec1_server-wac-allow" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-wac-allow <a href="https://solid.github.io/web-access-control-spec/#server-wac-allow"></a>
-    <span>5</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST advertise client’s access privileges on a resource by including the WAC-Allow HTTP header (WAC-Allow) in the response of HTTP GET and HEAD requests.</dd></dl>
-          <table>
-            <caption>Test cases</caption>
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Implemented</th>
-            </tr>
-            </thead>
-            <tbody>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-header-exists" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-header-exists" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">The WAC-Allow header is advertised</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-header-exists">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/header-exists.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-indirect" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-indirect" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">The WAC-Allow header shows public access modes for a public agent when given indirect access via a container</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-indirect">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/public-access-indirect.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-direct" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-direct" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">The WAC-Allow header shows public access modes for a public agent when given direct access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-public-access-direct">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/public-access-direct.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-indirect" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-indirect" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">The WAC-Allow header shows user access modes for Bob when given indirect access via a container</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-indirect">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/user-access-indirect.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-direct" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-direct" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">The WAC-Allow header shows user access modes for Bob when given direct access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#server-wac-allow-user-access-direct">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/user-access-direct.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#server-wac-allow" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-            </tbody>
-          </table>
-</details>
-
-        </li>
-        <li class="client">
-<details id="spec1_client-wac-allow" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-wac-allow <a href="https://solid.github.io/web-access-control-spec/#client-wac-allow"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Client</dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>Clients MUST discover access privileges on a resource by making an HTTP GET or HEAD request on the target resource, and checking the WAC-Allow header value for access parameters listing the allowed access modes per permission group (WAC-Allow).</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec1_server-cors-aceh-wac-allow" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow <a href="https://solid.github.io/web-access-control-spec/#server-cors-aceh-wac-allow"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>When a server participates in the CORS protocol [FETCH], the server MUST include WAC-Allow in the Access-Control-Expose-Headers field-value in the HTTP response.</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="client">
-<details id="spec1_client-wac-allow-parsing" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing <a href="https://solid.github.io/web-access-control-spec/#client-wac-allow-parsing"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Client</dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>Client parsing algorithms for WAC-Allow header field-values MUST incorporate error handling. When the received message fails to match an allowed pattern, clients MUST ignore the received WAC-Allow header-field. When unrecognised access parameters (such as permission groups or access modes) are found, clients MUST continue processing the access parameters as if those properties were not present.</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec1_server-link-acl" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-link-acl <a href="https://solid.github.io/web-access-control-spec/#server-link-acl"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>When a server wants to enable applications to discover Authorizations associated with a given resource, the server MUST advertise the ACL resource that is associated with a resource by responding to an HTTP request including a Link header with the rel value of acl (acl Link Relation) and the ACL resource as link target [RFC8288].</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec1_server-resource-acl-max" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-resource-acl-max <a href="https://solid.github.io/web-access-control-spec/#server-resource-acl-max"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST NOT</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST NOT directly associate more than one ACL resource to a resource.</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="client">
-<details id="spec1_client-link-acl" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#client-link-acl <a href="https://solid.github.io/web-access-control-spec/#client-link-acl"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Client</dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>Clients MUST discover the ACL resource associated with a resource by making an HTTP request on the target URL, and checking the HTTP Link header with the rel parameter.</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec1_access-modes" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#access-modes <a href="https://solid.github.io/web-access-control-spec/#access-modes"></a>
-    <span>4</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-          <table>
-            <caption>Test cases</caption>
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Implemented</th>
-            </tr>
-            </thead>
-            <tbody>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted read access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob can only read an RDF resource to which he is only granted read access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-access-R.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-default-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-default-AWC" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted default read access via the parent</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-default-AWC">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-default-AWC.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-default-R" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-default-R" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob can only read an RDF resource to which he is only granted default read access via the parent</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-default-R">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-default-R.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-            </tbody>
-          </table>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec1_access-objects" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#access-objects <a href="https://solid.github.io/web-access-control-spec/#access-objects"></a>
-    <span>4</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-          <table>
-            <caption>Test cases</caption>
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Implemented</th>
-            </tr>
-            </thead>
-            <tbody>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to-default" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to-default" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob can read a container and its children if he is granted both direct and inheritable read access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to-default">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-access-to-default.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob cannot read a container or children if he is not given any access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-access-to">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-access-to.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob cannot read a container or children if he is not given any access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-none">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-none.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-default" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-default" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob can only read child containers/resources of a container to which he is granted inheritable read access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#acl-object-default">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-default.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-objects" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-            </tbody>
-          </table>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec1_authorization-evaluation-context" >
-  <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#authorization-evaluation-context <a href="https://solid.github.io/web-access-control-spec/#authorization-evaluation-context"></a>
-    <span>1</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-          <table>
-            <caption>Test cases</caption>
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Implemented</th>
-            </tr>
-            </thead>
-            <tbody>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-acl-propagation" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-acl-propagation" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Inheritable ACL controls child resources</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-acl-propagation">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/acl-propagation.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#authorization-evaluation-context" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-            </tbody>
-          </table>
 </details>
 
         </li>
