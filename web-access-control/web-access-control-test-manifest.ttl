@@ -6,7 +6,7 @@ prefix td: <http://www.w3.org/2006/03/test-description#>
 prefix spec: <http://www.w3.org/ns/spec#>
 
 # Editor's draft (fully annotated)
-prefix wac: <https://solid.github.io/web-access-control-spec#>
+prefix wac: <https://solid.github.io/web-access-control-spec/#>
 
 # Published draft (not annotated)
 #prefix wac: <https://solidproject.org/TR/2021/wac-20210711#>
@@ -18,96 +18,96 @@ manifest:protected-operation-not-read-resource-access-AWC
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
 
 manifest:protected-operation-not-read-resource-default-AWC
   a td:TestCase ;
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
 
 manifest:protected-operation-read-resource-access-R
   a td:TestCase ;
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-access-R.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-access-R.feature> .
 
 manifest:protected-operation-read-resource-default-R
   a td:TestCase ;
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/read-resource-default-R.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-default-R.feature> .
 
 manifest:acl-object-none
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-none.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-none.feature> .
 
 manifest:acl-object-access-to
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-access-to.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-access-to.feature> .
 
 manifest:acl-object-default
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-default.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-default.feature> .
 
 manifest:acl-object-access-to-default
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/acl-object/container-access-to-default.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-access-to-default.feature> .
 
 manifest:protected-operation-acl-propagation
   a td:TestCase ;
   spec:requirementReference wac:authorization-evaluation-context ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/protected-operation/acl-propagation.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/acl-propagation.feature> .
 
 manifest:server-wac-allow-header-exists
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/wac-allow/header-exists.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/header-exists.feature> .
 
 manifest:server-wac-allow-user-access-direct
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/wac-allow/user-access-direct.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/user-access-direct.feature> .
 
 manifest:server-wac-allow-user-access-indirect
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/wac-allow/user-access-indirect.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/user-access-indirect.feature> .
 
 manifest:server-wac-allow-public-access-direct
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/wac-allow/public-access-direct.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/public-access-direct.feature> .
 
 manifest:server-wac-allow-public-access-indirect
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/web-access-control/wac-allow/public-access-indirect.feature> .
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/public-access-indirect.feature> .
 

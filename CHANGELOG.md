@@ -2,6 +2,7 @@
 
 ## Release 0.0.7
 * Test CORS support.
+* Change all github-related URIs to use accessible versions
 
 ## Release 0.0.6
 * Replace the test preconditions in the manifest files with tags in the test files and specify which tests to skip in

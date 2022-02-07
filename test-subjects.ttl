@@ -22,7 +22,6 @@
     solid-test:features "acp-legacy" .
 
 <ess#test-subject-release>
-    doap:name "ESS 1.1.6";
     doap:revision "1.1.6";
     doap:created "2021-09-11"^^xsd:date .
 
@@ -37,7 +36,6 @@
     solid-test:skip "acp" .
 
 <ess-wac#test-subject-release>
-    doap:name "ESS 1.1.6";
     doap:revision "1.1.6";
     doap:created "2021-09-11"^^xsd:date .
 
@@ -52,7 +50,6 @@
     solid-test:skip "acp", "http-redirect" .
 
 <css#test-subject-release>
-    doap:name "CSS 2.0.1" ;
     doap:revision "2.0.1" ;
     doap:created "2021-11-02"^^xsd:date .
 
@@ -67,9 +64,8 @@
     solid-test:skip "acp" .
 
 <nss#test-subject-release>
-    doap:name "NSS 5.6.16"@en ;
-    doap:revision "5.6.16"@en ;
-    doap:created "2021-11-12"^^xsd:date .
+    doap:revision "5.6.18"@en ;
+    doap:created "2022-01-01"^^xsd:date .
 
 <trinpod>
     a earl:Software, earl:TestSubject ;
@@ -83,6 +79,5 @@
     solid-test:skip "acp" .
 
 <trinpod#test-subject-release>
-    doap:name "TrinPod-Server"@en ;
-    doap:revision "2.3.3"@en ;
-    doap:created "2021-10-14"^^xsd:date .
+    doap:revision "2.3.197"@en ;
+    doap:created "2022-01-25"^^xsd:date .

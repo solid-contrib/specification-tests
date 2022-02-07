@@ -53,5 +53,5 @@ Feature: Bob can only read an RDF resource to which he is only granted read acce
     Then status 403
 
   Scenario: Bob cannot use an unknown method on the resource
-    * def response = clients.bob.sendAuthorized('DAHU', resource.url, null, null, 'HTTP_1_1')
-    Then assert response.status == 405
+    * def response = clients.bob.sendAuthorized('TRACE', resource.url, null, null, null)
+    Then match [400, 405, 501] contains response.status
