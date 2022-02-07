@@ -1,6 +1,7 @@
 # Solid Specification Conformance Tests
 
 ## Release 0.0.7
+* Test CORS support.
 * Change all github-related URIs to use accessible versions
 
 ## Release 0.0.6

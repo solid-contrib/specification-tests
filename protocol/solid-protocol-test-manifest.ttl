@@ -29,16 +29,16 @@ manifest:content-type-reject
 
 manifest:slash-semantics-exclude
   a td:TestCase ;
-    spec:requirementReference sopr:server-uri-trailing-slash-distinct ,
-    sopr:server-uri-redirect-differing ;
+  spec:requirementReference sopr:server-uri-trailing-slash-distinct ,
+  sopr:server-uri-redirect-differing ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/slash-semantics-exclude.feature> .
 
 manifest:authentication-header
   a td:TestCase ;
-    spec:requirementReference sopr:server-authentication,
-    sopr:server-unauthenticated ;
+  spec:requirementReference sopr:server-authentication,
+  sopr:server-unauthenticated ;
   td:reviewStatus td:approved ;
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/protocol/authentication/header.feature> .
@@ -73,28 +73,28 @@ manifest:writing-resource-containment
 
 manifest:describedby-unique
   a td:TestCase ;
-    spec:requirementReference sopr:server-description-resource-max ;
+  spec:requirementReference sopr:server-description-resource-max ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/protocol/resources/describedby-unique.feature> .
 
 manifest:method-not-allowed
   a td:TestCase ;
-    spec:requirementReference sopr:server-method-not-allowed ;
+  spec:requirementReference sopr:server-method-not-allowed ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/protocol/read-write-resource/method-not-allowed.feature> .
 
 manifest:post-uri-assignment
   a td:TestCase ;
-    spec:requirementReference sopr:server-post-uri-assignment ;
+  spec:requirementReference sopr:server-post-uri-assignment ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/protocol/read-write-resource/post-uri-assignment.feature> .
 
 manifest:slug-uri-assignment
   a td:TestCase ;
-    spec:requirementReference sopr:server-slug-uri-assignment ;
+  spec:requirementReference sopr:server-slug-uri-assignment ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/protocol/read-write-resource/post-uri-assignment-slug.feature> .
@@ -115,16 +115,64 @@ manifest:delete-protect-nonempty-container
 
 manifest:delete-remove-containment
   a td:TestCase ;
-    spec:requirementReference sopr:server-delete-remove-containment ;
+  spec:requirementReference sopr:server-delete-remove-containment ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/delete-remove-containment.feature> .
 
 manifest:post-target-not-found
   a td:TestCase ;
-    spec:requirementReference sopr:server-post-target-not-found ;
+  spec:requirementReference sopr:server-post-target-not-found ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/protocol/writing-resource/post-target-not-found.feature> .
 
+manifest:cors-simple-requests
+  a td:TestCase ;
+  spec:requirementReference sopr:server-cors ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/cors/simple-requests.feature> .
+
+manifest:cors-preflight-requests
+  a td:TestCase ;
+  spec:requirementReference sopr:server-cors ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/cors/preflight-requests.feature> .
+
+manifest:cors-access-control-headers
+  a td:TestCase ;
+  spec:requirementReference sopr:server-cors-access-control-headers ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/cors/access-control-headers.feature> .
+
+manifest:cors-acao-vary
+  a td:TestCase ;
+  spec:requirementReference sopr:server-cors-acao-vary ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/cors/acao-vary.feature> .
+
+manifest:cors-options
+  a td:TestCase ;
+  spec:requirementReference sopr:server-cors-options ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/cors/preflight.feature> .
+
+manifest:cors-enumerate
+  a td:TestCase ;
+  spec:requirementReference sopr:server-cors-enumerate ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/cors/enumerate-headers.feature> .
+
+manifest:cors-accept-acah
+  a td:TestCase ;
+  spec:requirementReference sopr:server-cors-accept-acah ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/cors/accept-acah.feature> .
 
