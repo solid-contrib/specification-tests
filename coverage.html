@@ -182,7 +182,7 @@
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd property="schema:identifier" lang="" xml:lang="">6abb82cf-8db8-48e8-9744-f05df20f7ca1</dd>
+  <dd property="schema:identifier" lang="" xml:lang="">85849345-fca1-4df9-a86e-228ddbc96795</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -193,7 +193,7 @@
     <li><a href="https://solid.github.io/web-access-control-spec/" title="Specification link">https://solid.github.io/web-access-control-spec/</a></li>
   </ul>
 </section>
-<section about="https://github.com/solid/specification-tests/6abb82cf-8db8-48e8-9744-f05df20f7ca1#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid/specification-tests/85849345-fca1-4df9-a86e-228ddbc96795#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
   <dl><dt>Description</dt><dd property="doap:description">Solid Specification Conformance Tests</dd></dl>
@@ -2036,7 +2036,7 @@
         <li class="server">
 <details id="spec0_server-cors" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors <a href="https://solidproject.org/TR/protocol#server-cors"></a>
-    <span>0</span>
+    <span>2</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -2047,14 +2047,61 @@
 <dd >MUST</dd>
       </dl>
   <dl><dt>Statement</dt><dd>A server MUST implement the CORS protocol [FETCH] such that, to the extent possible, the browser allows Solid apps to send any request and combination of request headers to the server, and the Solid app can read any response and response headers received from the server. If the server wishes to block access to a resource, this MUST NOT happen via CORS but MUST instead be communicated to the Solid app in the browser through HTTP status codes such as 401, 403, or 404 [RFC7231].</dd></dl>
-          <p>No test cases found.</p>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-simple-requests" about="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-simple-requests" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Server must implement the CORS protocol for simple requests</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-simple-requests">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/cors/simple-requests.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-cors" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-preflight-requests" about="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-preflight-requests" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Server must implement the CORS protocol for preflight requests</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-preflight-requests">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/cors/preflight-requests.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-cors" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
 </details>
 
         </li>
         <li class="server">
 <details id="spec0_server-cors-access-control-headers" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-access-control-headers <a href="https://solidproject.org/TR/protocol#server-cors-access-control-headers"></a>
-    <span>0</span>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -2065,14 +2112,43 @@
 <dd >MUST</dd>
       </dl>
   <dl><dt>Statement</dt><dd>whenever a server receives an HTTP request containing a valid Origin header [RFC6454], the server MUST respond with the appropriate Access-Control-* headers as specified in the CORS protocol [FETCH].</dd></dl>
-          <p>No test cases found.</p>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-access-control-headers" about="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-access-control-headers" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Server must respond to requests sending Origin with the appropriate Access-Control-* headers</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-access-control-headers">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/cors/access-control-headers.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-cors-access-control-headers" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
 </details>
 
         </li>
         <li class="server">
 <details id="spec0_server-cors-acao-vary" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-acao-vary <a href="https://solidproject.org/TR/protocol#server-cors-acao-vary"></a>
-    <span>0</span>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -2083,7 +2159,36 @@
 <dd >MUST</dd>
       </dl>
   <dl><dt>Statement</dt><dd>the server MUST set the Access-Control-Allow-Origin header to the valid Origin value from the request and list Origin in the Vary header value.</dd></dl>
-          <p>No test cases found.</p>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-acao-vary" about="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-acao-vary" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Server returns correct Access-Control-Allow-Origin and Vary headers</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-acao-vary">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/cors/acao-vary.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-cors-acao-vary" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
 </details>
 
         </li>
@@ -2108,7 +2213,7 @@
         <li class="server">
 <details id="spec0_server-cors-options" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-options <a href="https://solidproject.org/TR/protocol#server-cors-options"></a>
-    <span>0</span>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -2119,14 +2224,43 @@
 <dd >MUST</dd>
       </dl>
   <dl><dt>Statement</dt><dd>A server MUST also support the HTTP OPTIONS method [RFC7231] such that it can respond appropriately to CORS preflight requests.</dd></dl>
-          <p>No test cases found.</p>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-options" about="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-options" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Server must support HTTP OPTIONS for CORS preflight requests</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-options">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/cors/preflight.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-cors-options" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
 </details>
 
         </li>
         <li class="server">
 <details id="spec0_server-cors-enumerate" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-enumerate <a href="https://solidproject.org/TR/protocol#server-cors-enumerate"></a>
-    <span>0</span>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -2137,14 +2271,43 @@
 <dd >SHOULD</dd>
       </dl>
   <dl><dt>Statement</dt><dd>server SHOULD explicitly enumerate all used response headers under Access-Control-Expose-Headers rather than resorting to *, which does not cover all cases (such as credentials mode set to include).</dd></dl>
-          <p>No test cases found.</p>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-enumerate" about="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-enumerate" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Server should enumerate headers in Access-Control-Expose-Headers</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-enumerate">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/cors/enumerate-headers.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-cors-enumerate" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
 </details>
 
         </li>
         <li class="server">
 <details id="spec0_server-cors-accept-acah" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-cors-accept-acah <a href="https://solidproject.org/TR/protocol#server-cors-accept-acah"></a>
-    <span>0</span>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -2155,7 +2318,36 @@
 <dd >SHOULD</dd>
       </dl>
   <dl><dt>Statement</dt><dd>Servers SHOULD also explicitly list Accept under Access-Control-Allow-Headers</dd></dl>
-          <p>No test cases found.</p>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-accept-acah" about="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-accept-acah" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Server should explicitly list Accept under Access-Control-Allow-Headers</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#cors-accept-acah">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/protocol/cors/accept-acah.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-cors-accept-acah" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
 </details>
 
         </li>
@@ -2652,11 +2844,11 @@
             </tr>
             </thead>
             <tbody>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" typeof="td:TestCase">
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" typeof="td:TestCase">
   <td>
-    <span property="dcterms:title">Bob can only read an RDF resource to which he is only granted read access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-access-R.feature" rel="spec:testScript">source</a>]
+    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature" rel="spec:testScript">source</a>]
     [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
   </td>
   <td>
@@ -2670,11 +2862,11 @@
   </td>
   <td>✔</td>
 </tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" typeof="td:TestCase">
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" typeof="td:TestCase">
   <td>
-    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted read access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature" rel="spec:testScript">source</a>]
+    <span property="dcterms:title">Bob can only read an RDF resource to which he is only granted read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-access-R.feature" rel="spec:testScript">source</a>]
     [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
   </td>
   <td>
