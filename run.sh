@@ -94,9 +94,6 @@ EOF
     -keyout config/server.key \
     -subj "/C=US/ST=California/L=Los Angeles/O=Security/OU=IT Department/CN=server"
 
-  # Assumption: You have cloned https://github.com/solid/community-server and built it using:
-  # docker build --rm -f Dockerfile -t css:latest .
-
   # Assumption: You have added 'server' as a mapping of localhost in /etc/hosts
 
   docker network create testnet

@@ -13,34 +13,6 @@ prefix wac: <https://solid.github.io/web-access-control-spec/#>
 
 prefix manifest: <#>
 
-manifest:protected-operation-not-read-resource-access-AWC
-  a td:TestCase ;
-  spec:requirementReference wac:access-modes ;
-  td:reviewStatus td:approved ;
-  spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature> .
-
-manifest:protected-operation-not-read-resource-default-AWC
-  a td:TestCase ;
-  spec:requirementReference wac:access-modes ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-default-AWC.feature> .
-
-manifest:protected-operation-read-resource-access-R
-  a td:TestCase ;
-  spec:requirementReference wac:access-modes ;
-  td:reviewStatus td:approved ;
-  spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-access-R.feature> .
-
-manifest:protected-operation-read-resource-default-R
-  a td:TestCase ;
-  spec:requirementReference wac:access-modes ;
-  td:reviewStatus td:approved ;
-  spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-default-R.feature> .
-
 manifest:acl-object-none
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
@@ -75,6 +47,13 @@ manifest:protected-operation-acl-propagation
   td:reviewStatus td:approved ;
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/acl-propagation.feature> .
+
+manifest:protected-operation-write-without-read
+  a td:TestCase ;
+  spec:requirementReference wac:access-modes ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/write-without-read.feature> .
 
 manifest:server-wac-allow-header-exists
   a td:TestCase ;
@@ -111,3 +90,44 @@ manifest:server-wac-allow-public-access-indirect
   spec:testScript
     <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/public-access-indirect.feature> .
 
+manifest:read-access-bob
+  a td:TestCase ;
+  spec:requirementReference wac:server-read-operation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-access-bob.feature> .
+
+manifest:read-access-agent
+  a td:TestCase ;
+  spec:requirementReference wac:server-read-operation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-access-agent.feature> .
+
+manifest:read-access-public
+  a td:TestCase ;
+  spec:requirementReference wac:server-read-operation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-access-public.feature> .
+
+manifest:read-inherited-access-bob
+  a td:TestCase ;
+  spec:requirementReference wac:server-read-operation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-bob.feature> .
+
+manifest:read-inherited-access-agent
+  a td:TestCase ;
+  spec:requirementReference wac:server-read-operation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-agent.feature> .
+
+manifest:read-inherited-access-public
+  a td:TestCase ;
+  spec:requirementReference wac:server-read-operation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-public.feature> .
