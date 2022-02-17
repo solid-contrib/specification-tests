@@ -19,9 +19,9 @@ Feature: Public agents can read (and only that) a resource when granted read acc
         return { plain: plainResource, rdf: rdfResource, container: container }
       }
     """
-    # Create 3 test resources with read access for Bob
+    # Create 3 test resources with read access for public agents
     * def testsR = callonce createResources ['read']
-    # Create 3 test resources with append, write, control access for Bob
+    # Create 3 test resources with append, write, control access for public agents
     * def testsAWC = callonce createResources ['append', 'write', 'control']
 
   Scenario Outline: <agent> read a <type> resource (<method>) to which a public agent has <mode> access
@@ -103,10 +103,10 @@ Feature: Public agents can read (and only that) a resource when granted read acc
       | agent  | type      | mode | method | public! | status     |
       | Bob    | plain     | R    | PUT    | false   | [403]      |
       | Bob    | plain     | R    | POST   | false   | [403]      |
-      | Bob    | plain     | R    | PATCH  | false   | [403, 501] |
+      | Bob    | plain     | R    | PATCH  | false   | [403, 405] |
       | Public | plain     | R    | PUT    | true    | [401]      |
       | Public | plain     | R    | POST   | true    | [401]      |
-      | Public | plain     | R    | PATCH  | true    | [401, 501] |
+      | Public | plain     | R    | PATCH  | true    | [401, 405] |
 
   Scenario Outline: <agent> cannot <method> a <type> resource to which a public agent has <mode> access
     Given url tests<mode>[type].url
@@ -114,7 +114,10 @@ Feature: Public agents can read (and only that) a resource when granted read acc
     When method <method>
     Then status <status>
     Examples:
-      | agent | type      | mode | method | public! | status |
-      | Bob   | plain     | R    | DELETE | false   | 403    |
-      | Bob   | rdf       | R    | DELETE | false   | 403    |
-      | Bob   | container | R    | DELETE | false   | 403    |
+      | agent  | type      | mode | method | public! | status |
+      | Bob    | plain     | R    | DELETE | false   | 403    |
+      | Bob    | rdf       | R    | DELETE | false   | 403    |
+      | Bob    | container | R    | DELETE | false   | 403    |
+      | Public | plain     | R    | DELETE | true    | 401    |
+      | Public | rdf       | R    | DELETE | true    | 401    |
+      | Public | container | R    | DELETE | true    | 401    |
