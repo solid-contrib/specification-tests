@@ -75,8 +75,8 @@ Feature: Only authenticated agents can read (and only that) a resource when gran
   Scenario Outline: <agent> cannot <method> to a <type> resource to which an authenticated agent has inherited <mode> access
     Given url tests<mode>[type].url
     And headers authHeaders(method, tests<mode>[type].url, public)
-    And header Content-Type = 'application/sparql-update'
-    And request 'INSERT DATA { <> a <http://example.org/Foo> . }'
+    And header Content-Type = 'text/n3'
+    And request '@prefix solid: <http://www.w3.org/ns/solid/terms#>. _:insert a solid:InsertDeletePatch; solid:inserts { <> a <http://example.org#Foo> . }.'
     When method <method>
     Then status <status>
     Examples:
