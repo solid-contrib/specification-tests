@@ -1,18 +1,16 @@
 Feature: Public agents can read (and only that) a resource when granted inherited read access
+  # Grant public agents (setPublicAccess/setInheritablePublicAccess):
+  # - full access to the parent container (to ensure the tests are specific to the resource)
+  # - restricted access to the any contained resources via the parent
   Background: Create test resources with correct access modes
     * def authHeaders = (method, url, public) => !public ? clients.bob.getAuthHeaders(method, url) : {}
     * def createResources =
     """
       function (modes) {
         const testContainer = rootTestContainer.createContainer()
-        if (modes.includes('write')) {
-          testContainer.accessDataset = testContainer.accessDatasetBuilder
-            //.setPublicAccess(testContainer.url, webIds.bob, ['write'])
-            .setInheritablePublicAccess(testContainer.url, modes)
-            .build()
-        } else {
-          testContainer.accessDataset = testContainer.accessDatasetBuilder.setInheritablePublicAccess(testContainer.url, modes).build()
-        }
+        testContainer.accessDataset = testContainer.accessDatasetBuilder
+          .setPublicAccess(testContainer.url, ['read', 'write', 'append', 'control'])
+          .setInheritablePublicAccess(testContainer.url, modes).build()
         const plainResource = testContainer.createResource('.txt', 'Hello', 'text/plain')
         const rdfResource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')
         const container = testContainer.createContainer()
@@ -118,20 +116,3 @@ Feature: Public agents can read (and only that) a resource when granted inherite
       | Bob   | plain     | R    | DELETE | false   | 403    |
       | Bob   | rdf       | R    | DELETE | false   | 403    |
       | Bob   | container | R    | DELETE | false   | 403    |
-
-#  Scenario Outline: <agent> can <method> to the <type> but gets nothing back since they cannot read
-#    Given request '<> <http://www.w3.org/2000/01/rdf-schema#comment> "Bob replaced it." .'
-#    And headers clients.bob.getAuthHeaders('PUT', resource.url)
-#    And header Content-Type = 'text/turtle'
-#    When method PUT
-#    Then match <status> contains responseStatus
-#    Examples:
-#      | agent  | type      | mode | method | public! | status |
-#      | Bob    | rdf       | AWC  | PUT    | false   | [204, 205]    |
-#      | Bob    | container | AWC  | PUT    | false   | 403    |
-#      | Bob    | rdf       | AWC  | POST   | false   | 403    |
-#      | Bob    | container | AWC  | POST   | false   | 403    |
-#      | Public | rdf       | AWC  | PUT    | true    | 401    |
-#      | Public | container | AWC  | PUT    | true    | 401    |
-#      | Public | rdf       | AWC  | POST   | true    | 401    |
-#      | Public | container | AWC  | POST   | true    | 401    |

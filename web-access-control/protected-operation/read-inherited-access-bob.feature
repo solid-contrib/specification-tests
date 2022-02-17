@@ -1,18 +1,16 @@
 Feature: Only Bob can read (and only that) a resource when granted inherited read access
+  # Grant a specific agent (setAgentAccess/setInheritableAgentAccess):
+  # - full access to the parent container (to ensure the tests are specific to the resource)
+  # - restricted access to the any contained resources via the parent
   Background: Create test resources with correct access modes
     * def authHeaders = (method, url, public) => !public ? clients.bob.getAuthHeaders(method, url) : {}
     * def createResources =
     """
       function (modes) {
         const testContainer = rootTestContainer.createContainer()
-        if (modes.includes('write')) {
-          testContainer.accessDataset = testContainer.accessDatasetBuilder
-            //.setAgentAccess(testContainer.url, webIds.bob, ['write'])
-            .setInheritableAgentAccess(testContainer.url, webIds.bob, modes)
-            .build()
-        } else {
-          testContainer.accessDataset = testContainer.accessDatasetBuilder.setInheritableAgentAccess(testContainer.url, webIds.bob, modes).build()
-        }
+        testContainer.accessDataset = testContainer.accessDatasetBuilder
+          .setAgentAccess(testContainer.url, webIds.bob, ['read', 'write', 'append', 'control'])
+          .setInheritableAgentAccess(testContainer.url, webIds.bob, modes).build()
         const plainResource = testContainer.createResource('.txt', 'Hello', 'text/plain')
         const rdfResource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')
         const container = testContainer.createContainer()

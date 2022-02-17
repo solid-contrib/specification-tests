@@ -1,10 +1,15 @@
 Feature: Only authenticated agents can read (and only that) a resource when granted read access
+  # Grant authenticated agents (setAuthenticatedAccess):
+  # - full access to the parent container (to ensure the tests are specific to the resource)
+  # - restricted access to the test resources
   Background: Create test resources with correct access modes
     * def authHeaders = (method, url, public) => !public ? clients.bob.getAuthHeaders(method, url) : {}
     * def createResources =
     """
       function (modes) {
-        const testContainer = rootTestContainer.reserveContainer()
+        const testContainer = rootTestContainer.createContainer()
+        testContainer.accessDataset = testContainer.accessDatasetBuilder
+          .setAuthenticatedAccess(testContainer.url, ['read', 'write', 'append', 'control']).build()
         const plainResource = testContainer.createResource('.txt', 'Hello', 'text/plain')
         plainResource.accessDataset = plainResource.accessDatasetBuilder.setAuthenticatedAccess(plainResource.url, modes).build()
         const rdfResource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')

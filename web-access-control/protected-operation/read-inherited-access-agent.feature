@@ -1,18 +1,16 @@
 Feature: Only authenticated agents can read (and only that) a resource when granted inherited read access
+  # Grant authenticated agents (setAuthenticatedAccess/setInheritableAuthenticatedAccess):
+  # - full access to the parent container (to ensure the tests are specific to the resource)
+  # - restricted access to the any contained resources via the parent
   Background: Create test resources with correct access modes
     * def authHeaders = (method, url, public) => !public ? clients.bob.getAuthHeaders(method, url) : {}
     * def createResources =
     """
       function (modes) {
         const testContainer = rootTestContainer.createContainer()
-        if (modes.includes('write')) {
-          testContainer.accessDataset = testContainer.accessDatasetBuilder
-            //.setAuthenticatedAccess(testContainer.url, ['write'])
-            .setInheritableAuthenticatedAccess(testContainer.url, modes)
-            .build()
-        } else {
-          testContainer.accessDataset = testContainer.accessDatasetBuilder.setInheritableAuthenticatedAccess(testContainer.url, modes).build()
-        }
+        testContainer.accessDataset = testContainer.accessDatasetBuilder
+          .setAuthenticatedAccess(testContainer.url, ['read', 'write', 'append', 'control'])
+          .setInheritableAuthenticatedAccess(testContainer.url, modes).build()
         const plainResource = testContainer.createResource('.txt', 'Hello', 'text/plain')
         const rdfResource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')
         const container = testContainer.createContainer()
