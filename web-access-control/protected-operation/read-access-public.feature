@@ -100,13 +100,13 @@ Feature: Public agents can read (and only that) a resource when granted read acc
     When method <method>
     Then match <status> contains responseStatus
     Examples:
-      | agent  | type      | mode | method | public! | status     |
-      | Bob    | plain     | R    | PUT    | false   | [403]      |
-      | Bob    | plain     | R    | POST   | false   | [403]      |
-      | Bob    | plain     | R    | PATCH  | false   | [403, 405] |
-      | Public | plain     | R    | PUT    | true    | [401]      |
-      | Public | plain     | R    | POST   | true    | [401]      |
-      | Public | plain     | R    | PATCH  | true    | [401, 405] |
+      | agent  | type      | mode | method | public! | status          |
+      | Bob    | plain     | R    | PUT    | false   | [403]           |
+      | Bob    | plain     | R    | POST   | false   | [403]           |
+      | Bob    | plain     | R    | PATCH  | false   | [403, 405, 415] |
+      | Public | plain     | R    | PUT    | true    | [401]           |
+      | Public | plain     | R    | POST   | true    | [401]           |
+      | Public | plain     | R    | PATCH  | true    | [401, 405, 415] |
 
   Scenario Outline: <agent> cannot <method> a <type> resource to which a public agent has <mode> access
     Given url tests<mode>[type].url
