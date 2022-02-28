@@ -182,7 +182,7 @@
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd property="schema:identifier" lang="" xml:lang="">e2d76ca4-d087-45b3-9a89-2d5e60be6371</dd>
+  <dd property="schema:identifier" lang="" xml:lang="">f0baeef7-db6b-4418-bfff-c52fe5975169</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -195,7 +195,7 @@
     </ul>
   </div>
 </section>
-<section about="https://github.com/solid/specification-tests/e2d76ca4-d087-45b3-9a89-2d5e60be6371#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid/specification-tests/f0baeef7-db6b-4418-bfff-c52fe5975169#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <div datatype="rdf:HTML" property="dcterms:description">
     <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
@@ -2493,7 +2493,7 @@
         <li class="server">
 <details id="spec1_server-read-operation" >
   <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#server-read-operation <a href="https://solid.github.io/web-access-control-spec/#server-read-operation"></a>
-    <span>0</span>
+    <span>6</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -2504,7 +2504,126 @@
 <dd >MUST</dd>
       </dl>
   <dl><dt>Statement</dt><dd>When an operation requests to read a resource, the server MUST match an Authorization allowing the acl:Read access privilege on the resource.</dd></dl>
-          <p>No test cases found.</p>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-access-bob" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-access-bob" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Only Bob can read (and only that) a resource when granted read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-access-bob">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-access-bob.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-read-operation" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-access-public" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-access-public" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Public agents can read (and only that) a resource when granted read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-access-public">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-access-public.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-read-operation" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-inherited-access-bob" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-inherited-access-bob" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Only Bob can read (and only that) a resource when granted inherited read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-inherited-access-bob">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-bob.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-read-operation" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-inherited-access-agent" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-inherited-access-agent" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Only authenticated agents can read (and only that) a resource when granted inherited read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-inherited-access-agent">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-agent.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-read-operation" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-access-agent" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-access-agent" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Only authenticated agents can read (and only that) a resource when granted read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-access-agent">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-access-agent.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-read-operation" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-inherited-access-public" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-inherited-access-public" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Public agents can read (and only that) a resource when granted inherited read access</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#read-inherited-access-public">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-public.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solid.github.io/web-access-control-spec/#server-read-operation" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
 </details>
 
         </li>
@@ -2828,7 +2947,7 @@
         <li class="server">
 <details id="spec1_access-modes" >
   <summary><b>Requirement:</b> https://solid.github.io/web-access-control-spec/#access-modes <a href="https://solid.github.io/web-access-control-spec/#access-modes"></a>
-    <span>4</span>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -2848,47 +2967,11 @@
             </tr>
             </thead>
             <tbody>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC" typeof="td:TestCase">
+<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-write-without-read" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-write-without-read" typeof="td:TestCase">
   <td>
-    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted read access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-access-AWC">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-access-AWC.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob can only read an RDF resource to which he is only granted read access</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-access-R">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-access-R.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-default-AWC" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-default-AWC" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob cannot read an RDF resource to which he is not granted default read access via the parent</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-not-read-resource-default-AWC">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/not-read-resource-default-AWC.feature" rel="spec:testScript">source</a>]
+    <span property="dcterms:title">Bob cannot read an RDF resource even if he can write to it</span>
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-write-without-read">manifest</a>]
+    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/write-without-read.feature" rel="spec:testScript">source</a>]
     [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
   </td>
   <td>
@@ -2896,24 +2979,6 @@
       <dt>Status</dt>
       <dd>
 <a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-<tr id="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-default-R" about="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-default-R" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Bob can only read an RDF resource to which he is only granted default read access via the parent</span>
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl#protected-operation-read-resource-default-R">manifest</a>]
-    [<a href="https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-resource-default-R.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solid.github.io/web-access-control-spec/#access-modes" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
               </dd>
     </dl>
 
