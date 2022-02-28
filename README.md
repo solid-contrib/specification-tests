@@ -9,6 +9,7 @@
   - [HTTP related keywords](#http-related-keywords)
   - [Karate Object](#karate-object)
   - [Calling Functions](#calling-functions)
+  - [Data driven tests](#data-driven-tests)
   - [Comments](#comments)
 - [Test Harness Capabilities](#test-harness-capabilities)
   - [Global Variables](#global-variables)
@@ -393,6 +394,28 @@ difference between *BeforeEach* and *BeforeAll* in other testing frameworks. You
     * def something = callonce setupFn
 ```
 Although the `Background` is run for every `Scenario`, the function will only be called once.
+
+## Data driven tests
+When a group of tests are very similar it is good to use a `Scenario Outline` with `Examples` to set up tests on a data-
+driven basis. There is a good description of this here: https://github.com/karatelabs/karate#data-driven-tests and an
+example below.
+```gherkin
+Scenario Outline: Test status <status> with <method>
+  Given url 'https://httpbin.org/status/<status>'
+  When method <method>
+  Then status <status>
+  Examples:
+    | method | status |
+    | GET    | 200    |
+    | GET    | 300    |
+    | DELETE | 400    |
+```
+
+This runs 3 tests, replacing placeholders in the scenario name and throughout the test. This is a simple example and the
+documentation linked above shows more possibilities, including generating tests in a function call.
+
+*Note* If you are putting non-string data (e.g. a boolean or json) in a column then add `!` as a suffix to the column
+name to make Karate handle the values correctly.  
 
 ## Comments
 Comments in Karate test files are handled according to their position in the file. When they are added to reports this

@@ -28,11 +28,12 @@ setup_css() {
   mkdir -p config
   cat > ./config/css-config.json <<EOF
 {
-  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^2.0.0/components/context.jsonld",
+  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^3.0.0/components/context.jsonld",
   "import": [
     "files-scs:config/app/main/default.json",
     "files-scs:config/app/init/initialize-prefilled-root.json",
     "files-scs:config/app/setup/optional.json",
+    "files-scs:config/app/variables/default.json",
     "files-scs:config/http/handler/default.json",
     "files-scs:config/http/middleware/websockets.json",
     "files-scs:config/http/server-factory/websockets.json",
@@ -94,14 +95,11 @@ EOF
     -keyout config/server.key \
     -subj "/C=US/ST=California/L=Los Angeles/O=Security/OU=IT Department/CN=server"
 
-  # Assumption: You have cloned https://github.com/solid/community-server and built it using:
-  # docker build --rm -f Dockerfile -t css:latest .
-
   # Assumption: You have added 'server' as a mapping of localhost in /etc/hosts
 
   docker network create testnet
   docker run -d --name=server --network=testnet --env NODE_TLS_REJECT_UNAUTHORIZED=0 \
-    -v "$(pwd)"/config:/config -p 443:443 -it solidproject/community-server \
+    -v "$(pwd)"/config:/config -p 443:443 -it solidproject/community-server:3 \
     -c /config/css-config.json --port=443 --baseUrl=https://server/
 
   until $(curl --output /dev/null --silent --head --fail -k https://server); do

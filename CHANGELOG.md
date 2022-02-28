@@ -1,5 +1,9 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.9
+* Remove unused converted tests.
+* Add data driven tests for reading protected resources.
+
 ## Release 0.0.8
 * Test CORS support.
 
