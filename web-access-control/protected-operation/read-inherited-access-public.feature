@@ -48,7 +48,7 @@ Feature: Public agents can read (and only that) a resource when granted inherite
       | Public cannot | rdf       | AWC  | HEAD   | true    | 401    |
       | Public cannot | container | AWC  | HEAD   | true    | 401    |
 
-    @wac
+    @publicagent
     Examples:
       | agent         | type      | mode | method | public! | status |
       | Public can    | plain     | R    | GET    | true    | 200    |

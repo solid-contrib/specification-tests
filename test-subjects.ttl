@@ -18,7 +18,7 @@
     doap:homepage <https://inrupt.com/products/enterprise-solid-server> ;
     doap:description "A production-grade Solid server produced and supported by Inrupt."@en ;
     doap:programming-language "Java"@en ;
-    solid-test:skip "wac", "wac-allow-public" ;
+    solid-test:skip "wac", "wac-allow-public", "publicagent" ;
     solid-test:features "acp-legacy" .
 
 <ess#test-subject-release>
@@ -50,8 +50,8 @@
     solid-test:skip "acp", "http-redirect" .
 
 <css#test-subject-release>
-    doap:revision "2.0.1" ;
-    doap:created "2021-11-02"^^xsd:date .
+    doap:revision "3.0.0" ;
+    doap:created "2022-02-23"^^xsd:date .
 
 <nss>
     a earl:Software, earl:TestSubject ;
@@ -64,8 +64,8 @@
     solid-test:skip "acp" .
 
 <nss#test-subject-release>
-    doap:revision "5.6.18"@en ;
-    doap:created "2022-01-01"^^xsd:date .
+    doap:revision "5.6.20"@en ;
+    doap:created "2022-01-29"^^xsd:date .
 
 <trinpod>
     a earl:Software, earl:TestSubject ;
