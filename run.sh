@@ -165,7 +165,7 @@ fi
 # extract subject
 subject=$1
 outdir=$subject
-if [ -z ${envfile+x} ]
+if [ -z ${envfile} ]
 then
   envfile="${subject}.env"
 fi

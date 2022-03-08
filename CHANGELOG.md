@@ -1,5 +1,8 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.10
+* Add some initial comments for servers (in test-subjects.ttl) and requirements (in ./{spec}/requirement-comments.ttl).
+
 ## Release 0.0.9
 * Remove unused converted tests.
 * Add data driven tests for reading protected resources.
