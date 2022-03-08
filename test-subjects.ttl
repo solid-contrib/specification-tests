@@ -19,7 +19,9 @@
     doap:description "A production-grade Solid server produced and supported by Inrupt."@en ;
     doap:programming-language "Java"@en ;
     solid-test:skip "wac", "wac-allow-public", "publicagent" ;
-    solid-test:features "acp-legacy" .
+    solid-test:features "acp-legacy" ;
+    rdfs:comment "This version of ESS implements ACP for access control instead of WAC. Whilst it does not therefore conform to that aspect of the specification the access control tests are still run in order to assess the equivalent capabilities in this implementation."@en ;
+    rdfs:comment "Access for anonymous users is not supported nor required by Solid specifications so tests that depend on this are not run."@en.
 
 <ess#test-subject-release>
     doap:revision "1.1.6";
