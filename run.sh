@@ -174,7 +174,10 @@ shift
 echo "Running tests on $subject and reporting to $cwd/reports/$subject"
 
 dockerargs+=('-v' "$cwd/reports/$outdir:/reports" "--env-file=$envfile")
-harnessargs=('--output=/reports' "--target=https://github.com/solid/conformance-test-harness/$subject")
+harnessargs=('--output=/reports')
+if ! [[ "$*" == *"--target="* ]]; then
+  harnessargs+=("--target=https://github.com/solid/conformance-test-harness/$subject")
+fi
 
 # ensure report directory exists
 mkdir -p reports/$subject

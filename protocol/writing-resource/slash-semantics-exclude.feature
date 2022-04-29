@@ -17,7 +17,6 @@ Feature: With and without trailing slash cannot co-exist
     Given url resourceUrl
     And headers clients.alice.getAuthHeaders('GET', resourceUrl)
     When method GET
-    * print response
     Then match [301, 404, 410] contains responseStatus
 
     Given url resourceUrl
