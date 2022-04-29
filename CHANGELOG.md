@@ -1,5 +1,8 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.11
+* Moved repository to `solid-contrib` organization.
+
 ## Release 0.0.10
 * Add some initial comments for servers (in test-subjects.ttl) and requirements (in ./{spec}/requirement-comments.ttl).
 
