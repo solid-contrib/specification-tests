@@ -18,116 +18,116 @@ manifest:acl-object-none
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-none.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/acl-object/container-none.feature> .
 
 manifest:acl-object-access-to
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-access-to.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/acl-object/container-access-to.feature> .
 
 manifest:acl-object-default
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-default.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/acl-object/container-default.feature> .
 
 manifest:acl-object-access-to-default
   a td:TestCase ;
   spec:requirementReference wac:access-objects ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/acl-object/container-access-to-default.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/acl-object/container-access-to-default.feature> .
 
 manifest:protected-operation-acl-propagation
   a td:TestCase ;
   spec:requirementReference wac:authorization-evaluation-context ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/acl-propagation.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/acl-propagation.feature> .
 
 manifest:protected-operation-write-without-read
   a td:TestCase ;
   spec:requirementReference wac:access-modes ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/write-without-read.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/write-without-read.feature> .
 
 manifest:server-wac-allow-header-exists
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/header-exists.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/wac-allow/header-exists.feature> .
 
 manifest:server-wac-allow-user-access-direct
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/user-access-direct.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/wac-allow/user-access-direct.feature> .
 
 manifest:server-wac-allow-user-access-indirect
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/user-access-indirect.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/wac-allow/user-access-indirect.feature> .
 
 manifest:server-wac-allow-public-access-direct
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/public-access-direct.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/wac-allow/public-access-direct.feature> .
 
 manifest:server-wac-allow-public-access-indirect
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
   td:reviewStatus td:approved ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/wac-allow/public-access-indirect.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/wac-allow/public-access-indirect.feature> .
 
 manifest:read-access-bob
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-access-bob.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-access-bob.feature> .
 
 manifest:read-access-agent
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-access-agent.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-access-agent.feature> .
 
 manifest:read-access-public
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-access-public.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-access-public.feature> .
 
 manifest:read-inherited-access-bob
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-bob.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-bob.feature> .
 
 manifest:read-inherited-access-agent
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-agent.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-agent.feature> .
 
 manifest:read-inherited-access-public
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-public.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-public.feature> .

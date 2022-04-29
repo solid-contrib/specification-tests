@@ -3,25 +3,25 @@ sources:
   # Protocol spec & manifest
   # Ecosystem Proposal (Version 0.9.0 - https://solidproject.org/TR/2021/protocol-20211217)
   - https://solidproject.org/TR/protocol
-  - https://github.com/solid/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl
-  - https://github.com/solid/specification-tests/blob/main/protocol/requirement-comments.ttl
+  - https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl
+  - https://github.com/solid-contrib/specification-tests/blob/main/protocol/requirement-comments.ttl
 
   # WAC spec & manifest
   # Editor's draft (fully annotated)
   - https://solid.github.io/web-access-control-spec/
-  - https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl
-  - https://github.com/solid/specification-tests/blob/main/web-access-control/requirement-comments.ttl
+  - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl
+  - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/requirement-comments.ttl
 
   # Published draft (not annotated)
 #  - https://solidproject.org/TR/2021/wac-20210711
-#  - https://github.com/solid/specification-tests/blob/main/web-access-control/web-access-control-test-manifest-20210711.ttl
+#  - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/web-access-control-test-manifest-20210711.ttl
 
   # Link old tests to new spec temporarily
-  - https://github.com/solid/specification-tests/blob/main/web-access-control/wac-spec-additions.ttl
+  - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/wac-spec-additions.ttl
 
   # Include unlinked additional tests
-#  - https://github.com/solid/specification-tests/blob/main/protocol/converted.ttl
+#  - https://github.com/solid-contrib/specification-tests/blob/main/protocol/converted.ttl
 
 mappings:
-  - prefix: https://github.com/solid/specification-tests/blob/main
+  - prefix: https://github.com/solid-contrib/specification-tests/blob/main
     path: /data
