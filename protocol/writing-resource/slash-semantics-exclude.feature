@@ -10,6 +10,7 @@ Feature: With and without trailing slash cannot co-exist
     Given url childContainerUrl
     And headers clients.alice.getAuthHeaders('PUT', childContainerUrl)
     And header Content-Type = 'text/turtle'
+    And header Link = '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
     When method PUT
     Then assert responseStatus >= 200 && responseStatus < 300
 
@@ -22,7 +23,7 @@ Feature: With and without trailing slash cannot co-exist
     Given url resourceUrl
     And headers clients.alice.getAuthHeaders('PUT', resourceUrl)
     And header Content-Type = 'text/plain'
-    And request "Hello"
+    And request 'Hello'
     When method PUT
      # See https://www.rfc-editor.org/rfc/rfc7231.html#page-27 for why 409 or 415
     Then match [409, 415] contains responseStatus
@@ -33,7 +34,7 @@ Feature: With and without trailing slash cannot co-exist
     Given url resourceUrl
     And headers clients.alice.getAuthHeaders('PUT', resourceUrl)
     And header Content-Type = 'text/plain'
-    And request "Hello"
+    And request 'Hello'
     When method PUT
     Then assert responseStatus >= 200 && responseStatus < 300
 
@@ -47,6 +48,7 @@ Feature: With and without trailing slash cannot co-exist
     Given url childContainerUrl
     And headers clients.alice.getAuthHeaders('PUT', childContainerUrl)
     And header Content-Type = 'text/turtle'
+    And header Link = '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
     When method PUT
      # See https://www.rfc-editor.org/rfc/rfc7231.html#page-27 for why 409 or 415
     Then match [409, 415] contains responseStatus
