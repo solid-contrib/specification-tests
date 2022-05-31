@@ -85,6 +85,7 @@ manifest:method-not-allowed
   spec:testScript
     <https://github.com/solid-contrib/specification-tests/blob/main/protocol/read-write-resource/method-not-allowed.feature> .
 
+
 manifest:post-uri-assignment
   a td:TestCase ;
   spec:requirementReference sopr:server-post-uri-assignment ;
@@ -175,4 +176,12 @@ manifest:cors-accept-acah
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid-contrib/specification-tests/blob/main/protocol/cors/accept-acah.feature> .
+
+manifest:read-method-support
+  a td:TestCase ;
+  spec:requirementReference sopr:server-safe-methods ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid/specification-tests/protocol/read-write-resource/read-method-support.feature> .
+
 
