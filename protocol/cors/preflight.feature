@@ -14,7 +14,6 @@ Feature: Server must support HTTP OPTIONS for CORS preflight requests
     And match header Access-Control-Allow-Methods contains 'POST'
     And match header Access-Control-Allow-Headers contains 'X-CUSTOM'
     And match header Access-Control-Allow-Headers contains 'Content-Type'
-    And match header Access-Control-Allow-Credentials == 'true'
     # We should check the list of headers exposed but what is the required list
     And match header Access-Control-Expose-Headers != null
     And match response == ''
@@ -39,7 +38,6 @@ Feature: Server must support HTTP OPTIONS for CORS preflight requests
     And match header Access-Control-Allow-Methods contains 'POST'
     And match header Access-Control-Allow-Headers contains 'X-CUSTOM'
     And match header Access-Control-Allow-Headers contains 'Content-Type'
-    And match header Access-Control-Allow-Credentials == 'true'
     # We should check the list of headers exposed but what is the required list
     And match header Access-Control-Expose-Headers != null
     And match response == ''

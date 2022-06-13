@@ -15,7 +15,6 @@ Feature: Server must implement the CORS protocol for simple requests
     When method <method>
     Then match <statuses> contains responseStatus
     And match header Access-Control-Allow-Origin == 'https://tester'
-    And match header Access-Control-Allow-Credentials == 'true'
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     And match header Vary contains 'Origin'
@@ -33,7 +32,6 @@ Feature: Server must implement the CORS protocol for simple requests
     When method <method>
     Then match <statuses> contains responseStatus
     And match header Access-Control-Allow-Origin == 'https://tester'
-    And match header Access-Control-Allow-Credentials == 'true'
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     And match header Vary contains 'Origin'
@@ -51,7 +49,6 @@ Feature: Server must implement the CORS protocol for simple requests
     When method <method>
     Then match <statuses> contains responseStatus
     And match header Access-Control-Allow-Origin == 'https://tester'
-    And match header Access-Control-Allow-Credentials == 'true'
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     And match header Vary contains 'Origin'
@@ -70,7 +67,6 @@ Feature: Server must implement the CORS protocol for simple requests
     When method <method>
     Then match <statuses> contains responseStatus
     And match header Access-Control-Allow-Origin == 'https://tester'
-    And match header Access-Control-Allow-Credentials == 'true'
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     And match header Vary contains 'Origin'
