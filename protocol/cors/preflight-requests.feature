@@ -31,13 +31,14 @@ Feature: Server must implement the CORS protocol for preflight requests
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     # Check Content-Type on GET request only
-    And <check>
-    And match header Vary contains 'Origin'
+    And <checkContentType>
+    # Check Vary on GET/HEAD requests only
+    And <checkVary>
     Examples:
-      | method | body            | statuses             | check                                            |
-      | GET    | def ignore = 1  | [200]                | match header Content-Type contains 'text/turtle' |
-      | HEAD   | def ignore = 1  | [200]                | def ignore = 1                                   |
-      | POST   | request "Hello" | [200, 201, 204, 205] | def ignore = 1                                   |
+      | method | body            |  | statuses             | checkContentType                                 | checkVary                           |
+      | GET    | def ignore = 1  |  | [200]                | match header Content-Type contains 'text/turtle' | match header Vary contains 'Origin' |
+      | HEAD   | def ignore = 1  |  | [200]                | def ignore = 1                                   | match header Vary contains 'Origin' |
+      | POST   | request "Hello" |  | [200, 201, 204, 205] | def ignore = 1                                   | def ignore = 1                      |
 
   @http-redirect
   Scenario: OPTIONS request returns headers for pre-flight check after redirect from http

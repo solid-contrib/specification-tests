@@ -17,7 +17,6 @@ Feature: Server must implement the CORS protocol for simple requests
     And match header Access-Control-Allow-Origin == 'https://tester'
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
-    And match header Vary contains 'Origin'
     Examples:
       | method | headers!                       | body            | statuses |
       | GET    | {Accept: 'text/turtle'}        | def ignore = 1  | [401]    |
@@ -34,7 +33,6 @@ Feature: Server must implement the CORS protocol for simple requests
     And match header Access-Control-Allow-Origin == 'https://tester'
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
-    And match header Vary contains 'Origin'
     Examples:
       | method | headers!                       | body            | statuses |
       | GET    | {Accept: 'text/plain'}         | def ignore = 1  | [401]    |
@@ -51,12 +49,13 @@ Feature: Server must implement the CORS protocol for simple requests
     And match header Access-Control-Allow-Origin == 'https://tester'
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
-    And match header Vary contains 'Origin'
+    # Check Vary on GET/HEAD requests only
+    And <checkVary>
     Examples:
-      | method | headers!                       | body            | statuses             |
-      | GET    | {Accept: 'text/turtle'}        | def ignore = 1  | [200]                |
-      | HEAD   | {}                             | def ignore = 1  | [200]                |
-      | POST   | {'Content-Type': 'text/plain'} | request "Hello" | [200, 201, 204, 205] |
+      | method | headers!                       | body            | statuses             | checkVary                           |
+      | GET    | {Accept: 'text/turtle'}        | def ignore = 1  | [200]                | match header Vary contains 'Origin' |
+      | HEAD   | {}                             | def ignore = 1  | [200]                | match header Vary contains 'Origin' |
+      | POST   | {'Content-Type': 'text/plain'} | request "Hello" | [200, 201, 204, 205] | def ignore = 1                      |
 
   Scenario Outline: Requests resource with credentials: <method> request returns access control headers
     Given url resource.url
