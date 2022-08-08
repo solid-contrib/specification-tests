@@ -12,62 +12,47 @@
 
 <ess>
     a earl:Software, earl:TestSubject ;
-    doap:name "Enterprise Solid Server (ACP version)"@en ;
+    doap:name "Enterprise Solid Server"@en ;
     doap:release <ess#test-subject-release> ;
     doap:developer <https://inrupt.com/profile/card/#us> ;
     doap:homepage <https://inrupt.com/products/enterprise-solid-server> ;
     doap:description "A production-grade Solid server produced and supported by Inrupt."@en ;
     doap:programming-language "Java"@en ;
     solid-test:skip "wac", "wac-allow-public", "publicagent" ;
-    solid-test:features "acp-legacy" ;
     rdfs:comment "This version of ESS implements ACP for access control instead of WAC. Whilst it does not therefore conform to that aspect of the specification the access control tests are still run in order to assess the equivalent capabilities in this implementation."@en ;
     rdfs:comment "Access for anonymous users is not supported nor required by Solid specifications so tests that depend on this are not run."@en.
 
 <ess#test-subject-release>
-    doap:revision "1.1.6";
-    doap:created "2021-09-11"^^xsd:date .
-
-<ess-wac>
-    a earl:Software, earl:TestSubject ;
-    doap:name "Enterprise Solid Server (Web Access Control version)"@en ;
-    doap:release <ess-wac#test-subject-release> ;
-    doap:developer <https://inrupt.com/profile/card/#us> ;
-    doap:homepage <https://inrupt.com/products/enterprise-solid-server> ;
-    doap:description "A production-grade Solid server produced and supported by Inrupt."@en ;
-    doap:programming-language "Java"@en ;
-    solid-test:skip "acp" .
-
-<ess-wac#test-subject-release>
-    doap:revision "1.1.6";
-    doap:created "2021-09-11"^^xsd:date .
+    doap:revision "2.0";
+    doap:created "2022-06-07"^^xsd:date .
 
 <css>
     a earl:Software, earl:TestSubject ;
     doap:name "Community Solid Server"@en ;
     doap:release <css#test-subject-release> ;
-    doap:developer <https://github.com/solid> ;
-    doap:homepage <https://github.com/solid/community-server> ;
+    doap:developer <https://solidproject.org> ;
+    doap:homepage <https://github.com/CommunitySolidServer/CommunitySolidServer> ;
     doap:description "An open and modular implementation of the Solid specifications."@en ;
     doap:programming-language "TypeScript"@en ;
     solid-test:skip "acp", "http-redirect" .
 
 <css#test-subject-release>
-    doap:revision "3.0.0" ;
-    doap:created "2022-02-23"^^xsd:date .
+    doap:revision "5.0.0" ;
+    doap:created "2022-08-08"^^xsd:date .
 
 <nss>
     a earl:Software, earl:TestSubject ;
     doap:name "Node Solid Server"@en ;
     doap:release <nss#test-subject-release> ;
-    doap:developer <https://github.com/solid> ;
-    doap:homepage <https://github.com/solid/node-solid-server> ;
+    doap:developer <https://solidproject.org> ;
+    doap:homepage <https://github.com/nodeSolidServer/node-solid-server> ;
     doap:description "Solid server on top of the file-system in NodeJS."@en ;
     doap:programming-language "JavaScript"@en ;
     solid-test:skip "acp" .
 
 <nss#test-subject-release>
-    doap:revision "5.6.20"@en ;
-    doap:created "2022-01-29"^^xsd:date .
+    doap:revision "5.7.1"@en ;
+    doap:created "2022-03-23"^^xsd:date .
 
 <trinpod>
     a earl:Software, earl:TestSubject ;

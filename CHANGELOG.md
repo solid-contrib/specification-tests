@@ -3,6 +3,7 @@
 ## Release 0.0.12
 * Use harness API to test sending requests without a content type header.
 * Ensure container created correctly on slash semantic tests.
+* Update default test subjects for latest releases.
 
 ## Release 0.0.11
 * Moved repository to `solid-contrib` organization.
