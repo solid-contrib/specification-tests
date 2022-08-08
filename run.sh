@@ -28,7 +28,7 @@ setup_css() {
   mkdir -p config
   cat > ./config/css-config.json <<EOF
 {
-  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^3.0.0/components/context.jsonld",
+  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^4.0.0/components/context.jsonld",
   "import": [
     "files-scs:config/app/main/default.json",
     "files-scs:config/app/init/initialize-prefilled-root.json",
@@ -64,12 +64,54 @@ setup_css() {
   "@graph": [
     {
       "comment": [
-        "An example of what a config could look like if HTTPS is required.",
+        "Adds CLI options --httpsKey and --httpsCert and uses those to start an HTTPS server.",
         "The http/server-factory import above has been omitted since that feature is set below."
       ]
     },
     {
-      "comment": "The key/cert values should be replaces with paths to the correct files. The 'options' block can be removed if not needed.",
+      "@id": "urn:solid-server-app-setup:default:CliExtractor",
+      "@type": "YargsCliExtractor",
+      "extendedParameters": {
+        "httpsKey": {
+          "demandOption": true,
+          "requiresArg": true,
+          "type": "string",
+          "describe": "File path to the HTTPS key."
+        },
+        "httpsCert": {
+          "demandOption": true,
+          "requiresArg": true,
+          "type": "string",
+          "describe": "File path to the HTTPS certificate."
+        }
+      }
+    },
+    {
+      "comment": "Adds resolvers to assign the CLI values to the Components.js variables.",
+      "@id": "urn:solid-server-app-setup:default:SettingsResolver",
+      "@type": "CombinedSettingsResolver",
+      "resolvers": [
+        {
+          "CombinedSettingsResolver:_resolvers_key": "urn:solid-server:custom:variable:httpsKey",
+          "CombinedSettingsResolver:_resolvers_value": {
+            "@type": "KeyExtractor",
+            "key": "httpsKey"
+          }
+        },
+        {
+          "CombinedSettingsResolver:_resolvers_key": "urn:solid-server:custom:variable:httpsCert",
+          "CombinedSettingsResolver:_resolvers_value": {
+            "@type": "KeyExtractor",
+            "key": "httpsCert"
+          }
+        }
+      ]
+    },
+    {
+      "comment": [
+        "Creates an HTTPS server with the settings provided via the command line.",
+        "Replaces the example import from config/http/server-factory.https-example.json."
+      ],
       "@id": "urn:solid-server:default:ServerFactory",
       "@type": "WebSocketServerFactory",
       "baseServerFactory": {
@@ -78,8 +120,14 @@ setup_css() {
         "handler": { "@id": "urn:solid-server:default:HttpHandler" },
         "options_showStackTrace": { "@id": "urn:solid-server:default:variable:showStackTrace" },
         "options_https": true,
-        "options_key": "/config/server.key",
-        "options_cert": "/config/server.cert"
+        "options_key": {
+          "@id": "urn:solid-server:custom:variable:httpsKey",
+          "@type": "Variable"
+        },
+        "options_cert": {
+          "@id": "urn:solid-server:custom:variable:httpsCert",
+          "@type": "Variable"
+        }
       },
       "webSocketHandler": {
         "@type": "UnsecureWebSocketsProtocol",
@@ -91,16 +139,19 @@ setup_css() {
 EOF
 
   openssl req -new -x509 -days 365 -nodes \
-    -out config/server.cert \
-    -keyout config/server.key \
+    -out certs/server.cert \
+    -keyout certs/server.key \
     -subj "/C=US/ST=California/L=Los Angeles/O=Security/OU=IT Department/CN=server"
 
   # Assumption: You have added 'server' as a mapping of localhost in /etc/hosts
 
   docker network create testnet
   docker run -d --name=server --network=testnet --env NODE_TLS_REJECT_UNAUTHORIZED=0 \
-    -v "$(pwd)"/config:/config -p 443:443 -it solidproject/community-server:3 \
-    -c /config/css-config.json --port=443 --baseUrl=https://server/
+    -v "$(pwd)"/config:/config \
+    -v "$(pwd)"/certs:/certs -p 443:443 -it solidproject/community-server:4 \
+    -c /config/css-config.json \
+    --httpsKey=/certs/server.key --httpsCert=/certs/server.cert \
+    --port=443 --baseUrl=https://server/
 
   until $(curl --output /dev/null --silent --head --fail -k https://server); do
     printf '.'

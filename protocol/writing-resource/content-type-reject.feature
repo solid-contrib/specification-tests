@@ -1,32 +1,19 @@
 Feature: Server MUST reject write requests without Content-Type
 
   Background: Set up clients and paths
-    * def testContainer = rootTestContainer.reserveContainer()
-    * def resource = testContainer.reserveResource('.ttl')
+    * def testContainer = rootTestContainer.createContainer()
 
   Scenario: Server rejects PUT requests without Content-Type
-    Given url resource.url
-    And headers clients.alice.getAuthHeaders('PUT', resource.url)
-    And header Content-Type = ''
-    And request "<> a <#Something> ."
-    When method PUT
-    Then status 400
+    * def resource = testContainer.reserveResource('.ttl')
+    * def response = clients.alice.sendAuthorized('PUT', resource.url, '<> a <#Something> .', null, null)
+    Then assert response.status == 400
 
   Scenario: Server rejects POST requests without Content-Type
-    * def containerUrl = testContainer.url
-    Given url containerUrl
-    And headers clients.alice.getAuthHeaders('POST', containerUrl)
-    And header Content-Type = ''
-    And request "<> a <#Something> ."
-    When method POST
-    Then status 400
+    * def response = clients.alice.sendAuthorized('POST', testContainer.url, '<> a <#Something> .', null, null)
+    Then assert response.status == 400
 
   Scenario: Server rejects PATCH requests without Content-Type
-    Given url resource.url
-    And headers clients.alice.getAuthHeaders('PATCH', resource.url)
-    And header Content-Type = ''
-    And request "INSERT DATA { <> a <#Something> . }"
-    When method PATCH
-    Then status 400
-
-
+    * def resource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')
+    * def patch = '@prefix solid: <http://www.w3.org/ns/solid/terms#>. _:insert a solid:InsertDeletePatch; solid:inserts { <> a <http://example.org#Foo> . }.'
+    * def response = clients.alice.sendAuthorized('PATCH', resource.url, patch, null, null)
+    Then assert response.status == 400
