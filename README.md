@@ -471,7 +471,7 @@ The test harness makes some variables available to all tests:
 ## Helper Functions
 
 ### RDF Model Support
-KarateDSL 'natively' supports JSON and XML but sadly it does not yet support RDF. As a result you will need a library
+KarateDSL 'natively' supports JSON and XML, but sadly it does not yet support RDF. As a result you will need a library
 to parse RDF documents and query them.
 
 #### `iri(iri)`
@@ -541,6 +541,10 @@ information highlighting the differences.
 Designed for use with container contents, this function extracts any objects that match the pattern
 `<url> ldp:contains <object>` where `<url> a ldp:BasicContainer` and returns them as a list of strings.
 * Returns a list of URLs.
+
+#### `asTriples()`
+Convert the model to triples.
+* Returns a string.
 
 #### `subjects(predicate, object)`
 Returns a list of subjects matching the predicate and object.
