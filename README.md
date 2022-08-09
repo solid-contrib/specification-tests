@@ -358,15 +358,17 @@ The headers are available as `responseHeaders`. However, this can be tricky to u
 in the form `Map<String, List<String>>`, and it preserves the case of the returned header names even though they should
 be treated as case insensitive. Because of this, there is a shortcut `header` which matches the header name 
 case-insensitively and matches any value of that key. In the example below, the first 3 are equivalent but the 4th
-fails:
+fails. There is a new function which helps with this problem as the last example shows:
 ```gherkin
 * match header Content-Type contains 'text/turtle'
 * match header content-type contains 'text/turtle'
-* responseHeaders['Content-Type'][0] contains 'text/turtle'
-* responseHeaders['content-type'][0] contains 'text/turtle'  # fails as responseHeaders['content-type'] returns null
+* match responseHeaders['Content-Type'][0] contains 'text/turtle'
+* match responseHeaders['content-type'][0] contains 'text/turtle'  # fails as responseHeaders['content-type'] returns null
+* match karate.response.header('content-type') contains 'text/turtle'
 ```
 Note that it is safer to use `contains` instead of `==` in this case since the header value may contain an encoding
 element such as `; charset=UTF-8`.
+You can also get an array of all the values of a header with `karate.response.headerValues()`.
 
 Using the `responseStatus` variable as an alternative to `status` was mentioned earlier.
 

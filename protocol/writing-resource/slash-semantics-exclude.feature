@@ -60,7 +60,7 @@ Feature: With and without trailing slash cannot co-exist
     And header Link = '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
     When method POST
     Then assert responseStatus >= 200 && responseStatus < 300
-    And def childContainerUrl = responseHeaders['Location'][0]
+    And def childContainerUrl = karate.response.headerValues('location')[0]
     And assert childContainerUrl.endsWith('/')
 
     # confirm there is no non-container resource with the same URI
@@ -87,7 +87,7 @@ Feature: With and without trailing slash cannot co-exist
     And request 'Hello'
     When method POST
     # this should either succeed (without using the slug) or fail as a conflict
-    Then assert (responseStatus >= 200 && responseStatus < 300 && responseHeaders['Location'][0] != resourceUrl) || [409, 415].includes(responseStatus)
+    Then assert (responseStatus >= 200 && responseStatus < 300 && karate.response.headerValues('location')[0] != resourceUrl) || [409, 415].includes(responseStatus)
 
   Scenario: POST resource, then try container with same name
     Given url testContainer.url
@@ -96,7 +96,7 @@ Feature: With and without trailing slash cannot co-exist
     And request 'Hello'
     When method POST
     Then assert responseStatus >= 200 && responseStatus < 300
-    And def resourceUrl = responseHeaders['Location'][0]
+    And def resourceUrl = karate.response.headerValues('location')[0]
     And assert !resourceUrl.endsWith('/')
 
     # confirm there is no container with the same URI
@@ -122,6 +122,6 @@ Feature: With and without trailing slash cannot co-exist
     And header Link = '<http://www.w3.org/ns/ldp#BasicContainer>; rel="type"'
     When method POST
     # this should either succeed (without using the slug) or fail as a conflict
-    Then assert (responseStatus >= 200 && responseStatus < 300 && responseHeaders['Location'][0] != resourceUrl + '/') || [409, 415].includes(responseStatus)
+    Then assert (responseStatus >= 200 && responseStatus < 300 && karate.response.headerValues('location')[0] != resourceUrl + '/') || [409, 415].includes(responseStatus)
 
 # TODO: Evil test to check various suffices.
