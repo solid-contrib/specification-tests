@@ -4,6 +4,7 @@
 * Use harness API to test sending requests without a content type header.
 * Ensure container created correctly on slash semantic tests.
 * Update default test subjects for latest releases.
+* For tests posting to a non-existent target, 405 is a valid response if target is not a container.
 
 ## Release 0.0.11
 * Moved repository to `solid-contrib` organization.
