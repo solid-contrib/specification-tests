@@ -9,14 +9,16 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       function (modes) {
         const testContainer = rootTestContainer.createContainer()
         testContainer.accessDataset = testContainer.accessDatasetBuilder
-          .setAgentAccess(testContainer.url, webIds.bob, ['read', 'write', 'append', 'control']).build()
+          .setAgentAccess(testContainer.url, webIds.bob, ['read', 'write', 'append', 'control'])
+          .setInheritableAgentAccess(testContainer.url, webIds.bob, modes).build()
         const plainResource = testContainer.createResource('.txt', 'Hello', 'text/plain')
         plainResource.accessDataset = plainResource.accessDatasetBuilder.setAgentAccess(plainResource.url, webIds.bob, modes).build()
+        const fictiveResource = testContainer.reserveResource('.txt')
         const rdfResource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')
         rdfResource.accessDataset = rdfResource.accessDatasetBuilder.setAgentAccess(rdfResource.url, webIds.bob, modes).build()
         const container = testContainer.createContainer()
         container.accessDataset = container.accessDatasetBuilder.setAgentAccess(container.url, webIds.bob, modes).build()
-        return { plain: plainResource, rdf: rdfResource, container: container }
+        return { plain: plainResource, fictive: fictiveResource, rdf: rdfResource, container: container }
       }
     """
     # Create 3 test resources with read access for Bob
@@ -32,27 +34,35 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     Examples:
       | agent         | type      | mode | method | public! | status |
       | Bob can       | plain     | R    | GET    | false   | 200    |
+      | Bob can       | fictive   | R    | GET    | false   | 404    |
       | Bob can       | rdf       | R    | GET    | false   | 200    |
       | Bob can       | container | R    | GET    | false   | 200    |
       | Bob can       | plain     | R    | HEAD   | false   | 200    |
+      | Bob can       | fictive   | R    | HEAD   | false   | 404    |
       | Bob can       | rdf       | R    | HEAD   | false   | 200    |
       | Bob can       | container | R    | HEAD   | false   | 200    |
       | Public cannot | plain     | R    | GET    | true    | 401    |
+      | Public cannot | fictive   | R    | GET    | true    | 401    |
       | Public cannot | rdf       | R    | GET    | true    | 401    |
       | Public cannot | container | R    | GET    | true    | 401    |
       | Public cannot | plain     | R    | HEAD   | true    | 401    |
+      | Public cannot | fictive   | R    | HEAD   | true    | 401    |
       | Public cannot | rdf       | R    | HEAD   | true    | 401    |
       | Public cannot | container | R    | HEAD   | true    | 401    |
       | Bob cannot    | plain     | AWC  | GET    | false   | 403    |
+      | Bob cannot    | fictive   | AWC  | GET    | false   | 403    |
       | Bob cannot    | rdf       | AWC  | GET    | false   | 403    |
       | Bob cannot    | container | AWC  | GET    | false   | 403    |
       | Bob cannot    | plain     | AWC  | HEAD   | false   | 403    |
+      | Bob cannot    | fictive   | AWC  | HEAD   | false   | 403    |
       | Bob cannot    | rdf       | AWC  | HEAD   | false   | 403    |
       | Bob cannot    | container | AWC  | HEAD   | false   | 403    |
       | Public cannot | plain     | AWC  | GET    | true    | 401    |
+      | Public cannot | fictive   | AWC  | GET    | true    | 401    |
       | Public cannot | rdf       | AWC  | GET    | true    | 401    |
       | Public cannot | container | AWC  | GET    | true    | 401    |
       | Public cannot | plain     | AWC  | HEAD   | true    | 401    |
+      | Public cannot | fictive   | AWC  | HEAD   | true    | 401    |
       | Public cannot | rdf       | AWC  | HEAD   | true    | 401    |
       | Public cannot | container | AWC  | HEAD   | true    | 401    |
 
@@ -66,12 +76,16 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     Examples:
       | agent  | type      | mode | method | public! | status |
       | Bob    | rdf       | R    | PUT    | false   | 403    |
+      | Bob    | fictive   | R    | PUT    | false   | 403    |
       | Bob    | container | R    | PUT    | false   | 403    |
       | Bob    | rdf       | R    | POST   | false   | 403    |
+      | Bob    | fictive   | R    | POST   | false   | 404    |
       | Bob    | container | R    | POST   | false   | 403    |
       | Public | rdf       | R    | PUT    | true    | 401    |
+      | Public | fictive   | R    | PUT    | true    | 401    |
       | Public | container | R    | PUT    | true    | 401    |
       | Public | rdf       | R    | POST   | true    | 401    |
+      | Public | fictive   | R    | POST   | true    | 401    |
       | Public | container | R    | POST   | true    | 401    |
 
   Scenario Outline: <agent> cannot <method> to a <type> resource to which Bob has <mode> access
@@ -84,8 +98,10 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     Examples:
       | agent  | type      | mode | method | public! | status |
       | Bob    | rdf       | R    | PATCH  | false   | 403    |
+      | Bob    | fictive   | R    | PATCH  | false   | 403    |
       | Bob    | container | R    | PATCH  | false   | 403    |
       | Public | rdf       | R    | PATCH  | true    | 401    |
+      | Public | fictive   | R    | PATCH  | true    | 401    |
       | Public | container | R    | PATCH  | true    | 401    |
 
   Scenario Outline: <agent> cannot <method> to a <type> resource to which Bob has <mode> access
@@ -100,9 +116,15 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       | Bob    | plain     | R    | PUT    | false   | [403]           |
       | Bob    | plain     | R    | POST   | false   | [403]           |
       | Bob    | plain     | R    | PATCH  | false   | [403, 405, 415] |
+      | Bob    | fictive   | R    | PUT    | false   | [403]           |
+      | Bob    | fictive   | R    | POST   | false   | [404]           |
+      | Bob    | fictive   | R    | PATCH  | false   | [403, 405, 415] |
       | Public | plain     | R    | PUT    | true    | [401]           |
       | Public | plain     | R    | POST   | true    | [401]           |
       | Public | plain     | R    | PATCH  | true    | [401, 405, 415] |
+      | Public | fictive   | R    | PUT    | true    | [401]           |
+      | Public | fictive   | R    | POST   | true    | [401]           |
+      | Public | fictive   | R    | PATCH  | true    | [401, 405, 415] |
 
   Scenario Outline: <agent> cannot <method> a <type> resource to which Bob has <mode> access
     Given url tests<mode>[type].url
@@ -112,8 +134,10 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     Examples:
       | agent  | type      | mode | method | public! | status |
       | Bob    | plain     | R    | DELETE | false   | 403    |
+      | Bob    | fictive   | R    | DELETE | false   | 404    |
       | Bob    | rdf       | R    | DELETE | false   | 403    |
       | Bob    | container | R    | DELETE | false   | 403    |
       | Public | plain     | R    | DELETE | true    | 401    |
+      | Public | fictive   | R    | DELETE | true    | 401    |
       | Public | rdf       | R    | DELETE | true    | 401    |
       | Public | container | R    | DELETE | true    | 401    |
