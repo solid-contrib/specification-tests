@@ -1,0 +1,67 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix td: <http://www.w3.org/2006/03/test-description#>
+prefix spec: <http://www.w3.org/ns/spec#>
+
+# Notifications Proposal
+prefix sono: <https://solid.github.io/notifications/protocol#>
+
+prefix manifest: <#>
+
+manifest:notifications-discovery-serialization
+  a td:TestCase ;
+  spec:requirementReference sono:discovery-serialization ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/protocol/serialization.feature> .
+
+manifest:notifications-subscription-resource-safe-methods
+  a td:TestCase ;
+  spec:requirementReference sono:server-subscription-resource-safe-methods ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/protocol/subscription-safe-methods.feature> .
+
+manifest:notifications-subscription-creation
+  a td:TestCase ;
+  spec:requirementReference sono:server-subscription-creation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/protocol/subscription-creation.feature> .
+
+manifest:notifications-subscription-context
+  a td:TestCase ;
+  spec:requirementReference sono:server-subscription-context-value ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/protocol/subscription-context.feature> .
+
+manifest:notifications-subscription-type
+  a td:TestCase ;
+  spec:requirementReference sono:server-subscription-type-value ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/protocol/subscription-type.feature> .
+
+manifest:notifications-subscription-topic
+  a td:TestCase ;
+  spec:requirementReference sono:server-subscription-topic-value ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/protocol/subscription-topic.feature> .
+
+manifest:notifications-subscription-access-controls
+  a td:TestCase ;
+  spec:requirementReference sono:server-subscription-access-controls ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/access/subscription-access-controls.feature> .
+
+manifest:notifications-subscription-access-read
+  a td:TestCase ;
+  spec:requirementReference sono:server-subscription-access-read ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/access/subscription-read-required.feature> .

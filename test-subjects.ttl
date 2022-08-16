@@ -18,7 +18,7 @@
     doap:homepage <https://inrupt.com/products/enterprise-solid-server> ;
     doap:description "A production-grade Solid server produced and supported by Inrupt."@en ;
     doap:programming-language "Java"@en ;
-    solid-test:skip "wac", "wac-allow-public", "publicagent" ;
+    solid-test:skip "wac", "wac-allow-public", "publicagent", "notifications" ;
     rdfs:comment "This version of ESS implements ACP for access control instead of WAC. Whilst it does not therefore conform to that aspect of the specification the access control tests are still run in order to assess the equivalent capabilities in this implementation."@en ;
     rdfs:comment "Access for anonymous users is not supported nor required by Solid specifications so tests that depend on this are not run."@en.
 
@@ -34,7 +34,7 @@
     doap:homepage <https://github.com/CommunitySolidServer/CommunitySolidServer> ;
     doap:description "An open and modular implementation of the Solid specifications."@en ;
     doap:programming-language "TypeScript"@en ;
-    solid-test:skip "acp", "http-redirect" .
+    solid-test:skip "acp", "http-redirect", "notifications" .
 
 <css#test-subject-release>
     doap:revision "5.0.0" ;
@@ -48,7 +48,7 @@
     doap:homepage <https://github.com/nodeSolidServer/node-solid-server> ;
     doap:description "Solid server on top of the file-system in NodeJS."@en ;
     doap:programming-language "JavaScript"@en ;
-    solid-test:skip "acp" .
+    solid-test:skip "acp", "notifications" .
 
 <nss#test-subject-release>
     doap:revision "5.7.1"@en ;
@@ -63,7 +63,7 @@
     doap:description
         "TrinPod™ is an Industrial strength Solid Pod with conceptual computing through Trinity AI Capable of handling a massive amount of data."@en ;
     doap:programming-language "Common Lisp"@en ;
-    solid-test:skip "acp" .
+    solid-test:skip "acp", "notifications" .
 
 <trinpod#test-subject-release>
     doap:revision "2.3.197"@en ;
