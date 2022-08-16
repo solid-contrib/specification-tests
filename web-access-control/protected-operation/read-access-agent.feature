@@ -1,143 +1,261 @@
 Feature: Only authenticated agents can read (and only that) a resource when granted read access
   # Grant authenticated agents (setAuthenticatedAccess):
-  # - full access to the parent container (to ensure the tests are specific to the resource)
-  # - restricted access to the test resources
+  # - restricted access or no access to the parent container
+  # - restricted access to the test resources, or inherited access for fictive resources
   Background: Create test resources with correct access modes
-    * def authHeaders = (method, url, public) => !public ? clients.bob.getAuthHeaders(method, url) : {}
-    * def createResources =
+    * def authHeaders =
     """
-      function (modes) {
-        const testContainer = rootTestContainer.createContainer()
-        testContainer.accessDataset = testContainer.accessDatasetBuilder
-          .setAuthenticatedAccess(testContainer.url, ['read', 'write', 'append', 'control'])
-          .setInheritableAuthenticatedAccess(testContainer.url, modes).build()
-        const plainResource = testContainer.createResource('.txt', 'Hello', 'text/plain')
-        plainResource.accessDataset = plainResource.accessDatasetBuilder.setAuthenticatedAccess(plainResource.url, modes).build()
-        const fictiveResource = testContainer.reserveResource('.txt')
-        const rdfResource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')
-        rdfResource.accessDataset = rdfResource.accessDatasetBuilder.setAuthenticatedAccess(rdfResource.url, modes).build()
-        const container = testContainer.createContainer()
-        container.accessDataset = container.accessDatasetBuilder.setAuthenticatedAccess(container.url, modes).build()
-        return { plain: plainResource, fictive: fictiveResource, rdf: rdfResource, container: container }
+      function (method, url, agent) {
+        const agentLowerCase = agent.toLowerCase()
+        return agentLowerCase != 'public' ? clients[agentLowerCase].getAuthHeaders(method, url) : {}
       }
     """
-    # Create 3 test resources with read access for authenticated agents
-    * def testsR = callonce createResources ['read']
-    # Create 3 test resources with append, write, control access for authenticated agents
-    * def testsAWC = callonce createResources ['append', 'write', 'control']
+    * def resourcePermissions =
+    """
+      function (modes) {
+        if (modes && modes != 'inherited' && modes != 'no') {
+          return Object.entries({ R: 'read', W: 'write', A: 'append', C: 'control' })
+            .filter(([mode, permission]) => modes.includes(mode))
+            .map(([mode, permission]) => permission)
+        }
+        return undefined
+      }
+    """
+    * def resourceEntry =
+    """
+      function (container, type) {
+        switch (type) {
+          case 'plain':
+            return container.createResource('.txt', 'Hello', 'text/plain')
+          case 'fictive':
+            return container.reserveResource('.txt')
+          case 'rdf':
+            return container.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')
+          case 'container':
+            return container.createContainer()
+          default:
+            return undefined
+        }
+      }
+    """
+    * def createResource =
+    """
+      function (containerModes, resourceModes, resourceType, accessMode) {
 
-  Scenario Outline: <agent> read a <type> resource (<method>) to which an authenticated agent has <mode> access
-    Given url tests<mode>[type].url
-    And headers authHeaders(method, tests<mode>[type].url, public)
+        const testContainerPermissions = resourcePermissions(containerModes == 'all' ? 'RWAC' : containerModes)
+        const testResourcePermissions = resourcePermissions(resourceModes)
+
+        const testContainerInheritablePermissions = resourceModes == 'inherited'
+          ? testContainerPermissions
+          : resourceType == 'fictive'
+          ? testResourcePermissions
+          : undefined
+
+        const testContainer = rootTestContainer.createContainer()
+        const testResource = resourceEntry(testContainer, resourceType)
+
+        testContainer.accessDataset = testContainer.accessDatasetBuilder
+          .setAuthenticatedAccess(testContainer.url, testContainerPermissions)
+          .setInheritableAuthenticatedAccess(testContainer.url, testContainerInheritablePermissions)
+          .build()
+
+        if (resourceType != 'fictive' && resourceModes != 'inherited') {
+          testResource.accessDataset = testResource.accessDatasetBuilder
+            .setAuthenticatedAccess(testResource.url, testResourcePermissions)
+            .build()
+        }
+
+        return testResource
+      }
+    """
+
+  Scenario Outline: <agent> <result> read a <type> resource (<method>), when an authenticated agent has <container> access to the container and <resource> access to the resource
+    * def testResource = createResource(container, resource, type)
+    Given url testResource.url
+    And headers authHeaders(method, testResource.url, agent)
     When method <method>
     Then status <status>
     Examples:
-      | agent         | type      | mode | method | public! | status |
-      | Bob can       | plain     | R    | GET    | false   | 200    |
-      | Bob can       | fictive   | R    | GET    | false   | 404    |
-      | Bob can       | rdf       | R    | GET    | false   | 200    |
-      | Bob can       | container | R    | GET    | false   | 200    |
-      | Bob can       | plain     | R    | HEAD   | false   | 200    |
-      | Bob can       | fictive   | R    | HEAD   | false   | 404    |
-      | Bob can       | rdf       | R    | HEAD   | false   | 200    |
-      | Bob can       | container | R    | HEAD   | false   | 200    |
-      | Public cannot | plain     | R    | GET    | true    | 401    |
-      | Public cannot | fictive   | R    | GET    | true    | 401    |
-      | Public cannot | rdf       | R    | GET    | true    | 401    |
-      | Public cannot | container | R    | GET    | true    | 401    |
-      | Public cannot | plain     | R    | HEAD   | true    | 401    |
-      | Public cannot | fictive   | R    | HEAD   | true    | 401    |
-      | Public cannot | rdf       | R    | HEAD   | true    | 401    |
-      | Public cannot | container | R    | HEAD   | true    | 401    |
-      | Bob cannot    | plain     | AWC  | GET    | false   | 403    |
-      | Bob cannot    | fictive   | AWC  | GET    | false   | 403    |
-      | Bob cannot    | rdf       | AWC  | GET    | false   | 403    |
-      | Bob cannot    | container | AWC  | GET    | false   | 403    |
-      | Bob cannot    | plain     | AWC  | HEAD   | false   | 403    |
-      | Bob cannot    | fictive   | AWC  | HEAD   | false   | 403    |
-      | Bob cannot    | rdf       | AWC  | HEAD   | false   | 403    |
-      | Bob cannot    | container | AWC  | HEAD   | false   | 403    |
-      | Public cannot | plain     | AWC  | GET    | true    | 401    |
-      | Public cannot | fictive   | AWC  | GET    | true    | 401    |
-      | Public cannot | rdf       | AWC  | GET    | true    | 401    |
-      | Public cannot | container | AWC  | GET    | true    | 401    |
-      | Public cannot | plain     | AWC  | HEAD   | true    | 401    |
-      | Public cannot | fictive   | AWC  | HEAD   | true    | 401    |
-      | Public cannot | rdf       | AWC  | HEAD   | true    | 401    |
-      | Public cannot | container | AWC  | HEAD   | true    | 401    |
+      | agent  | result | method  | type      | container | resource  | status |
+      | Bob    | can    | GET     | plain     | no        | R         | 200    |
+      | Bob    | can    | GET     | plain     | R         | inherited | 200    |
+      | Bob    | can    | GET     | fictive   | no        | R         | 404    |
+      | Bob    | can    | GET     | fictive   | R         | inherited | 404    |
+      | Bob    | can    | GET     | rdf       | no        | R         | 200    |
+      | Bob    | can    | GET     | rdf       | R         | inherited | 200    |
+      | Bob    | can    | GET     | container | no        | R         | 200    |
+      | Bob    | can    | GET     | container | R         | inherited | 200    |
+      | Bob    | can    | HEAD    | plain     | no        | R         | 200    |
+      | Bob    | can    | HEAD    | plain     | R         | inherited | 200    |
+      | Bob    | can    | HEAD    | fictive   | no        | R         | 404    |
+      | Bob    | can    | HEAD    | fictive   | R         | inherited | 404    |
+      | Bob    | can    | HEAD    | rdf       | no        | R         | 200    |
+      | Bob    | can    | HEAD    | rdf       | R         | inherited | 200    |
+      | Bob    | can    | HEAD    | container | no        | R         | 200    |
+      | Bob    | can    | HEAD    | container | R         | inherited | 200    |
+      | Public | cannot | GET     | plain     | no        | R         | 401    |
+      | Public | cannot | GET     | plain     | R         | inherited | 401    |
+      | Public | cannot | GET     | fictive   | no        | R         | 401    |
+      | Public | cannot | GET     | fictive   | R         | inherited | 401    |
+      | Public | cannot | GET     | rdf       | no        | R         | 401    |
+      | Public | cannot | GET     | rdf       | R         | inherited | 401    |
+      | Public | cannot | GET     | container | no        | R         | 401    |
+      | Public | cannot | GET     | container | R         | inherited | 401    |
+      | Public | cannot | HEAD    | plain     | no        | R         | 401    |
+      | Public | cannot | HEAD    | plain     | R         | inherited | 401    |
+      | Public | cannot | HEAD    | fictive   | no        | R         | 401    |
+      | Public | cannot | HEAD    | fictive   | R         | inherited | 401    |
+      | Public | cannot | HEAD    | rdf       | no        | R         | 401    |
+      | Public | cannot | HEAD    | rdf       | R         | inherited | 401    |
+      | Public | cannot | HEAD    | container | no        | R         | 401    |
+      | Public | cannot | HEAD    | container | R         | inherited | 401    |
+      | Bob    | cannot | GET     | plain     | no        | AWC       | 403    |
+      | Bob    | cannot | GET     | plain     | AWC       | inherited | 403    |
+      | Bob    | cannot | GET     | fictive   | no        | AWC       | 403    |
+      | Bob    | cannot | GET     | fictive   | AWC       | inherited | 403    |
+      | Bob    | cannot | GET     | rdf       | no        | AWC       | 403    |
+      | Bob    | cannot | GET     | rdf       | AWC       | inherited | 403    |
+      | Bob    | cannot | GET     | container | no        | AWC       | 403    |
+      | Bob    | cannot | GET     | container | AWC       | inherited | 403    |
+      | Bob    | cannot | HEAD    | plain     | no        | AWC       | 403    |
+      | Bob    | cannot | HEAD    | plain     | AWC       | inherited | 403    |
+      | Bob    | cannot | HEAD    | fictive   | no        | AWC       | 403    |
+      | Bob    | cannot | HEAD    | fictive   | AWC       | inherited | 403    |
+      | Bob    | cannot | HEAD    | rdf       | no        | AWC       | 403    |
+      | Bob    | cannot | HEAD    | rdf       | AWC       | inherited | 403    |
+      | Bob    | cannot | HEAD    | container | no        | AWC       | 403    |
+      | Bob    | cannot | HEAD    | container | AWC       | inherited | 403    |
+      | Public | cannot | GET     | plain     | no        | AWC       | 401    |
+      | Public | cannot | GET     | plain     | AWC       | inherited | 401    |
+      | Public | cannot | GET     | fictive   | no        | AWC       | 401    |
+      | Public | cannot | GET     | fictive   | AWC       | inherited | 401    |
+      | Public | cannot | GET     | rdf       | no        | AWC       | 401    |
+      | Public | cannot | GET     | rdf       | AWC       | inherited | 401    |
+      | Public | cannot | GET     | container | no        | AWC       | 401    |
+      | Public | cannot | GET     | container | AWC       | inherited | 401    |
+      | Public | cannot | HEAD    | plain     | no        | AWC       | 401    |
+      | Public | cannot | HEAD    | plain     | AWC       | inherited | 401    |
+      | Public | cannot | HEAD    | fictive   | no        | AWC       | 401    |
+      | Public | cannot | HEAD    | fictive   | AWC       | inherited | 401    |
+      | Public | cannot | HEAD    | rdf       | no        | AWC       | 401    |
+      | Public | cannot | HEAD    | rdf       | AWC       | inherited | 401    |
+      | Public | cannot | HEAD    | container | no        | AWC       | 401    |
+      | Public | cannot | HEAD    | container | AWC       | inherited | 401    |
 
-  Scenario Outline: <agent> cannot <method> to a <type> resource to which an authenticated agent has <mode> access
-    Given url tests<mode>[type].url
-    And headers authHeaders(method, tests<mode>[type].url, public)
+  Scenario Outline: <agent> <result> <method> to a <type> resource, when an authenticated agent has <container> access to the container and <resource> access to the resource
+    * def testResource = createResource(container, resource, type)
+    Given url testResource.url
+    And headers authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/turtle'
     And request '@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. <> rdfs:comment "Bob added this.".'
     When method <method>
     Then status <status>
     Examples:
-      | agent  | type      | mode | method | public! | status |
-      | Bob    | rdf       | R    | PUT    | false   | 403    |
-      | Bob    | fictive   | R    | PUT    | false   | 403    |
-      | Bob    | container | R    | PUT    | false   | 403    |
-      | Bob    | rdf       | R    | POST   | false   | 403    |
-      | Bob    | fictive   | R    | POST   | false   | 404    |
-      | Bob    | container | R    | POST   | false   | 403    |
-      | Public | rdf       | R    | PUT    | true    | 401    |
-      | Public | fictive   | R    | PUT    | true    | 401    |
-      | Public | container | R    | PUT    | true    | 401    |
-      | Public | rdf       | R    | POST   | true    | 401    |
-      | Public | fictive   | R    | POST   | true    | 401    |
-      | Public | container | R    | POST   | true    | 401    |
+      | agent  | result | method | type      | container | resource  | status |
+      | Bob    | cannot | PUT    | rdf       | no        | R         | 403    |
+      | Bob    | cannot | PUT    | rdf       | R         | inherited | 403    |
+      | Bob    | cannot | PUT    | fictive   | no        | R         | 403    |
+      | Bob    | cannot | PUT    | fictive   | R         | inherited | 403    |
+      | Bob    | cannot | PUT    | container | no        | R         | 403    |
+      | Bob    | cannot | PUT    | container | R         | inherited | 403    |
+      | Bob    | cannot | POST   | rdf       | no        | R         | 403    |
+      | Bob    | cannot | POST   | rdf       | R         | inherited | 403    |
+      | Bob    | cannot | POST   | fictive   | no        | R         | 404    |
+      | Bob    | cannot | POST   | fictive   | R         | inherited | 404    |
+      | Bob    | cannot | POST   | container | no        | R         | 403    |
+      | Bob    | cannot | POST   | container | R         | inherited | 403    |
+      | Public | cannot | PUT    | rdf       | no        | R         | 401    |
+      | Public | cannot | PUT    | rdf       | R         | inherited | 401    |
+      | Public | cannot | PUT    | fictive   | no        | R         | 401    |
+      | Public | cannot | PUT    | fictive   | R         | inherited | 401    |
+      | Public | cannot | PUT    | container | no        | R         | 401    |
+      | Public | cannot | PUT    | container | R         | inherited | 401    |
+      | Public | cannot | POST   | rdf       | no        | R         | 401    |
+      | Public | cannot | POST   | rdf       | R         | inherited | 401    |
+      | Public | cannot | POST   | fictive   | no        | R         | 401    |
+      | Public | cannot | POST   | fictive   | R         | inherited | 401    |
+      | Public | cannot | POST   | container | no        | R         | 401    |
+      | Public | cannot | POST   | container | R         | inherited | 401    |
 
-  Scenario Outline: <agent> cannot <method> to a <type> resource to which an authenticated agent has <mode> access
-    Given url tests<mode>[type].url
-    And headers authHeaders(method, tests<mode>[type].url, public)
+  Scenario Outline: <agent> <result> <method> to a <type> resource, when an authenticated agent has <container> access to the container and <resource> access to the resource
+    * def testResource = createResource(container, resource, type)
+    Given url testResource.url
+    And headers authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/n3'
     And request '@prefix solid: <http://www.w3.org/ns/solid/terms#>. _:insert a solid:InsertDeletePatch; solid:inserts { <> a <http://example.org#Foo> . }.'
     When method <method>
     Then status <status>
     Examples:
-      | agent  | type      | mode | method | public! | status |
-      | Bob    | rdf       | R    | PATCH  | false   | 403    |
-      | Bob    | fictive   | R    | PATCH  | false   | 403    |
-      | Bob    | container | R    | PATCH  | false   | 403    |
-      | Public | rdf       | R    | PATCH  | true    | 401    |
-      | Public | fictive   | R    | PATCH  | true    | 401    |
-      | Public | container | R    | PATCH  | true    | 401    |
+      | agent  | result | method | type      | container | resource  | status |
+      | Bob    | cannot | PATCH  | rdf       | no        | R         | 403    |
+      | Bob    | cannot | PATCH  | rdf       | R         | inherited | 403    |
+      | Bob    | cannot | PATCH  | fictive   | no        | R         | 403    |
+      | Bob    | cannot | PATCH  | fictive   | R         | inherited | 403    |
+      | Bob    | cannot | PATCH  | container | no        | R         | 403    |
+      | Bob    | cannot | PATCH  | container | R         | inherited | 403    |
+      | Public | cannot | PATCH  | rdf       | no        | R         | 401    |
+      | Public | cannot | PATCH  | rdf       | R         | inherited | 401    |
+      | Public | cannot | PATCH  | fictive   | no        | R         | 401    |
+      | Public | cannot | PATCH  | fictive   | R         | inherited | 401    |
+      | Public | cannot | PATCH  | container | no        | R         | 401    |
+      | Public | cannot | PATCH  | container | R         | inherited | 401    |
 
-  Scenario Outline: <agent> cannot <method> to a <type> resource to which an authenticated agent has <mode> access
-    Given url tests<mode>[type].url
-    And headers authHeaders(method, tests<mode>[type].url, public)
+  Scenario Outline: <agent> <result> <method> to a <type> resource, when an authenticated agent has <container> access to the container and <resource> access to the resource
+    * def testResource = createResource(container, resource, type)
+    Given url testResource.url
+    And headers authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/plain'
     And request "Bob's text"
     When method <method>
     Then match <status> contains responseStatus
     Examples:
-      | agent  | type      | mode | method | public! | status          |
-      | Bob    | plain     | R    | PUT    | false   | [403]           |
-      | Bob    | plain     | R    | POST   | false   | [403]           |
-      | Bob    | plain     | R    | PATCH  | false   | [403, 405, 415] |
-      | Bob    | fictive   | R    | PUT    | false   | [403]           |
-      | Bob    | fictive   | R    | POST   | false   | [404]           |
-      | Bob    | fictive   | R    | PATCH  | false   | [403, 405, 415] |
-      | Public | plain     | R    | PUT    | true    | [401]           |
-      | Public | plain     | R    | POST   | true    | [401]           |
-      | Public | plain     | R    | PATCH  | true    | [401, 405, 415] |
-      | Public | fictive   | R    | PUT    | true    | [401]           |
-      | Public | fictive   | R    | POST   | true    | [401]           |
-      | Public | fictive   | R    | PATCH  | true    | [401, 405, 415] |
+      | agent  | result | method | type      | container | resource  | status          |
+      | Bob    | cannot | PUT    | plain     | no        | R         | [403]           |
+      | Bob    | cannot | PUT    | plain     | R         | inherited | [403]           |
+      | Bob    | cannot | PUT    | fictive   | no        | R         | [403]           |
+      | Bob    | cannot | PUT    | fictive   | R         | inherited | [403]           |
+      | Bob    | cannot | POST   | plain     | no        | R         | [403]           |
+      | Bob    | cannot | POST   | plain     | R         | inherited | [403]           |
+      | Bob    | cannot | POST   | fictive   | no        | R         | [404]           |
+      | Bob    | cannot | POST   | fictive   | R         | inherited | [404]           |
+      | Bob    | cannot | PATCH  | plain     | no        | R         | [403, 405, 415] |
+      | Bob    | cannot | PATCH  | plain     | R         | inherited | [403, 405, 415] |
+      | Bob    | cannot | PATCH  | fictive   | no        | R         | [403, 405, 415] |
+      | Bob    | cannot | PATCH  | fictive   | R         | inherited | [403, 405, 415] |
+      | Public | cannot | PUT    | plain     | no        | R         | [401]           |
+      | Public | cannot | PUT    | plain     | R         | inherited | [401]           |
+      | Public | cannot | PUT    | fictive   | no        | R         | [401]           |
+      | Public | cannot | PUT    | fictive   | R         | inherited | [401]           |
+      | Public | cannot | POST   | plain     | no        | R         | [401]           |
+      | Public | cannot | POST   | plain     | R         | inherited | [401]           |
+      | Public | cannot | POST   | fictive   | no        | R         | [401]           |
+      | Public | cannot | POST   | fictive   | R         | inherited | [401]           |
+      | Public | cannot | PATCH  | plain     | no        | R         | [401, 405, 415] |
+      | Public | cannot | PATCH  | plain     | R         | inherited | [401, 405, 415] |
+      | Public | cannot | PATCH  | fictive   | no        | R         | [401, 405, 415] |
+      | Public | cannot | PATCH  | fictive   | R         | inherited | [401, 405, 415] |
 
-  Scenario Outline: <agent> cannot <method> a <type> resource to which an authenticated agent has <mode> access
-    Given url tests<mode>[type].url
-    And headers authHeaders(method, tests<mode>[type].url, public)
+  Scenario Outline: <agent> <result> <method> a <type> resource, when an authenticated agent has <container> access to the container and <resource> access to the resource
+    * def testResource = createResource(container, resource, type)
+    Given url testResource.url
+    And headers authHeaders(method, testResource.url, agent)
     When method <method>
     Then status <status>
     Examples:
-      | agent  | type      | mode | method | public! | status |
-      | Bob    | plain     | R    | DELETE | false   | 403    |
-      | Bob    | fictive   | R    | DELETE | false   | 404    |
-      | Bob    | rdf       | R    | DELETE | false   | 403    |
-      | Bob    | container | R    | DELETE | false   | 403    |
-      | Public | plain     | R    | DELETE | true    | 401    |
-      | Public | fictive   | R    | DELETE | true    | 401    |
-      | Public | rdf       | R    | DELETE | true    | 401    |
-      | Public | container | R    | DELETE | true    | 401    |
+      | agent  | result | method | type      | container | resource  | status |
+      | Bob    | cannot | DELETE | plain     | no        | R         | 403    |
+      | Bob    | cannot | DELETE | plain     | R         | inherited | 403    |
+      | Bob    | cannot | DELETE | fictive   | no        | R         | 404    |
+      | Bob    | cannot | DELETE | fictive   | R         | inherited | 404    |
+      | Bob    | cannot | DELETE | rdf       | no        | R         | 403    |
+      | Bob    | cannot | DELETE | rdf       | R         | inherited | 403    |
+      | Bob    | cannot | DELETE | container | no        | R         | 403    |
+      | Bob    | cannot | DELETE | container | R         | inherited | 403    |
+      | Public | cannot | DELETE | plain     | no        | R         | 401    |
+      | Public | cannot | DELETE | plain     | R         | inherited | 401    |
+      | Public | cannot | DELETE | fictive   | no        | R         | 401    |
+      | Public | cannot | DELETE | fictive   | R         | inherited | 401    |
+      | Public | cannot | DELETE | rdf       | no        | R         | 401    |
+      | Public | cannot | DELETE | rdf       | R         | inherited | 401    |
+      | Public | cannot | DELETE | container | no        | R         | 401    |
+      | Public | cannot | DELETE | container | R         | inherited | 401    |
