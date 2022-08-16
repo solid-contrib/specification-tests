@@ -90,27 +90,6 @@ manifest:server-wac-allow-public-access-indirect
   spec:testScript
     <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/wac-allow/public-access-indirect.feature> .
 
-manifest:access-permissions-agent
-  a td:TestCase ;
-  spec:requirementReference wac:server-read-operation ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/access-permissions-agent.feature> .
-
-manifest:access-permissions-bob
-  a td:TestCase ;
-  spec:requirementReference wac:server-read-operation ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/access-permissions-bob.feature> .
-
-manifest:access-permissions-public
-  a td:TestCase ;
-  spec:requirementReference wac:server-read-operation ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/access-permissions-public.feature> .
-
 manifest:read-access-bob
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
@@ -131,24 +110,3 @@ manifest:read-access-public
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-access-public.feature> .
-
-manifest:read-inherited-access-bob
-  a td:TestCase ;
-  spec:requirementReference wac:server-read-operation ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-bob.feature> .
-
-manifest:read-inherited-access-agent
-  a td:TestCase ;
-  spec:requirementReference wac:server-read-operation ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-agent.feature> .
-
-manifest:read-inherited-access-public
-  a td:TestCase ;
-  spec:requirementReference wac:server-read-operation ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-public.feature> .
