@@ -274,6 +274,16 @@ And request { name: 'Billie', color: 'black' }
 And request karate.readAsString('../fixtures/example.ttl')
 ```
 
+Since Karate has special handling of JSON you need to be careful when passing JSON which includes local variables in the
+request. You can either use `#()` to embed an expression or wrap the whole JSON object in `()` so that it is treated as
+Javascript and not processed by Karate. Also be aware that when sending JSON-LD you need to wrap any keywords in quotes.
+Both of the following approaches will work but the first is preferred as it is more obvious:
+```gherkin
+* def url = 'http://localhost/test'
+And request {@context: ['https://www.w3.org/ns/solid/notification/v1'], type: 'WebSocketSubscription2021', topic: '#(url)'}
+And request ({'@context': ['https://www.w3.org/ns/solid/notification/v1'], type: 'WebSocketSubscription2021', topic: url})
+```
+
 ### Sending the request
 The HTTP request is sent when you use the `method` keyword and a specific method. You would normally use this in
 conjunction with the `When` keyword:
@@ -375,6 +385,17 @@ Within a test case, you have access to the Karate object which has a number of u
 [here](https://karatelabs.github.io/karate/#the-karate-object). This includes methods to manipulate data, call functions
 with a lock so they only run once, read from files, create loops, and handle async calling.
 
+You can also access additional environment values using `karate.properties['OPTION']` where the values are defined in
+your environment files using `JAVA_TOOL_OPTIONS`. For example:
+```shell
+JAVA_TOOL_OPTIONS=-Dproperty1=value1 -Dproperty2=value2
+```
+You should confirm the value is set before tests continue:
+```gherkin
+* def externalProperty = karate.properties['property1']
+* match externalProperty == '#notnull'
+```
+
 ## Calling Functions
 See https://karatelabs.github.io/karate/#code-reuse--common-routines
 
@@ -466,7 +487,7 @@ The test harness makes some variables available to all tests:
   `bob`. One of these clients will need to be passed to any newly created `SolidContainer` or `SolidResource` - The user
   names are the key (e.g., `clients.alice`).
 * `webIds` - An object containing the webIds of the 2 users. These are needed when setting up ACLs (e.g., `webIds.alice`).
-* `RDF`, `XSD`, `LDP`, `ACL`, `FOAF`, `ACP` - Namespaces for use when constructing IRIs. 
+* `RDF`, `XSD`, `LDP`, `ACL`, `FOAF`, `ACP`, `SOLID`, `NOTIFY`, `PROV`, `AS` - Namespaces for use when constructing IRIs.
 
 ## Helper Functions
 
