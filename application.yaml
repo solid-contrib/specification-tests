@@ -12,6 +12,13 @@ sources:
   - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl
   - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/requirement-comments.ttl
 
+  # Notifications spec & manifest
+  # Editor's draft (fully annotated)
+  - https://solid.github.io/notifications/protocol
+  - https://github.com/solid-contrib/specification-tests/blob/main/notifications/notifications-test-manifest.ttl
+  - https://solidproject.org/TR/websocket-subscription-2021
+  - https://github.com/solid-contrib/specification-tests/blob/main/notifications/websocket-test-manifest.ttl
+
   # Published draft (not annotated)
 #  - https://solidproject.org/TR/2021/wac-20210711
 #  - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/web-access-control-test-manifest-20210711.ttl

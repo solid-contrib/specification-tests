@@ -1,0 +1,33 @@
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix dcterms: <http://purl.org/dc/terms/>
+prefix td: <http://www.w3.org/2006/03/test-description#>
+prefix spec: <http://www.w3.org/ns/spec#>
+
+# Notifications Proposal
+prefix sows: <https://solidproject.org/TR/websocket-subscription-2021#>
+
+prefix manifest: <#>
+
+manifest:websocket-source
+  a td:TestCase ;
+  spec:requirementReference sows:websocketsubscription2021-source-wss ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/websocket/websocket-source.feature> .
+
+manifest:websocket-type
+  a td:TestCase ;
+  spec:requirementReference sows:client-subscription-type ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/websocket/websocket-type.feature> .
+
+manifest:websocket-topic
+  a td:TestCase ;
+  spec:requirementReference sows:client-subscription-feature ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/notifications/websocket/websocket-topic.feature> .
+
