@@ -50,7 +50,7 @@ Feature: Server must implement the CORS protocol for preflight requests
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type'
     When method OPTIONS
     Then match [301, 308] contains responseStatus
-    * def location = responseHeaders['Location'][0]
+    * def location = karate.response.headerValues('location')[0]
 
     Given url location
     And header Origin = 'https://tester'
