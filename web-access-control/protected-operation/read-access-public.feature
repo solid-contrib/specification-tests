@@ -40,7 +40,7 @@ Feature: Public agents can read (and only that) a resource when granted read acc
     """
     * def createResource =
     """
-      function (containerModes, resourceModes, resourceType, accessMode) {
+      function (containerModes, resourceModes, resourceType) {
 
         const testContainerPermissions = resourcePermissions(containerModes == 'all' ? 'RWAC' : containerModes)
         const testResourcePermissions = resourcePermissions(resourceModes)
@@ -89,34 +89,6 @@ Feature: Public agents can read (and only that) a resource when granted read acc
       | Bob    | can    | HEAD    | rdf       | R         | inherited | 200    |
       | Bob    | can    | HEAD    | container | no        | R         | 200    |
       | Bob    | can    | HEAD    | container | R         | inherited | 200    |
-      | Bob    | cannot | GET     | plain     | no        | AWC       | 403    |
-      | Bob    | cannot | GET     | plain     | AWC       | inherited | 403    |
-      | Bob    | cannot | GET     | fictive   | AWC       | inherited | 403    |
-      | Bob    | cannot | GET     | rdf       | no        | AWC       | 403    |
-      | Bob    | cannot | GET     | rdf       | AWC       | inherited | 403    |
-      | Bob    | cannot | GET     | container | no        | AWC       | 403    |
-      | Bob    | cannot | GET     | container | AWC       | inherited | 403    |
-      | Bob    | cannot | HEAD    | plain     | no        | AWC       | 403    |
-      | Bob    | cannot | HEAD    | plain     | AWC       | inherited | 403    |
-      | Bob    | cannot | HEAD    | fictive   | AWC       | inherited | 403    |
-      | Bob    | cannot | HEAD    | rdf       | no        | AWC       | 403    |
-      | Bob    | cannot | HEAD    | rdf       | AWC       | inherited | 403    |
-      | Bob    | cannot | HEAD    | container | no        | AWC       | 403    |
-      | Bob    | cannot | HEAD    | container | AWC       | inherited | 403    |
-      | Public | cannot | GET     | plain     | no        | AWC       | 401    |
-      | Public | cannot | GET     | plain     | AWC       | inherited | 401    |
-      | Public | cannot | GET     | fictive   | AWC       | inherited | 401    |
-      | Public | cannot | GET     | rdf       | no        | AWC       | 401    |
-      | Public | cannot | GET     | rdf       | AWC       | inherited | 401    |
-      | Public | cannot | GET     | container | no        | AWC       | 401    |
-      | Public | cannot | GET     | container | AWC       | inherited | 401    |
-      | Public | cannot | HEAD    | plain     | no        | AWC       | 401    |
-      | Public | cannot | HEAD    | plain     | AWC       | inherited | 401    |
-      | Public | cannot | HEAD    | fictive   | AWC       | inherited | 401    |
-      | Public | cannot | HEAD    | rdf       | no        | AWC       | 401    |
-      | Public | cannot | HEAD    | rdf       | AWC       | inherited | 401    |
-      | Public | cannot | HEAD    | container | no        | AWC       | 401    |
-      | Public | cannot | HEAD    | container | AWC       | inherited | 401    |
 
     @publicagent
     Examples:
