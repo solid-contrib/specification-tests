@@ -89,6 +89,20 @@ Feature: Only authenticated agents can read (and only that) a resource when gran
       | Bob    | can    | HEAD    | rdf       | R         | inherited | 200    |
       | Bob    | can    | HEAD    | container | no        | R         | 200    |
       | Bob    | can    | HEAD    | container | R         | inherited | 200    |
+      | Public | cannot | GET     | plain     | no        | R         | 401    |
+      | Public | cannot | GET     | plain     | R         | inherited | 401    |
+      | Public | cannot | GET     | fictive   | R         | inherited | 401    |
+      | Public | cannot | GET     | rdf       | no        | R         | 401    |
+      | Public | cannot | GET     | rdf       | R         | inherited | 401    |
+      | Public | cannot | GET     | container | no        | R         | 401    |
+      | Public | cannot | GET     | container | R         | inherited | 401    |
+      | Public | cannot | HEAD    | plain     | no        | R         | 401    |
+      | Public | cannot | HEAD    | plain     | R         | inherited | 401    |
+      | Public | cannot | HEAD    | fictive   | R         | inherited | 401    |
+      | Public | cannot | HEAD    | rdf       | no        | R         | 401    |
+      | Public | cannot | HEAD    | rdf       | R         | inherited | 401    |
+      | Public | cannot | HEAD    | container | no        | R         | 401    |
+      | Public | cannot | HEAD    | container | R         | inherited | 401    |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when an authenticated agent has <container> access to the container and <resource> access to the resource
     * def testResource = createResource(container, resource, type)
