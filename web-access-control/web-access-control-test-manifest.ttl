@@ -110,3 +110,24 @@ manifest:read-access-public
   td:reviewStatus td:unreviewed ;
   spec:testScript
     <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-access-public.feature> .
+
+manifest:write-access-agent
+  a td:TestCase ;
+  spec:requirementReference wac:server-read-operation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/write-access-agent.feature> .
+
+manifest:write-access-bob
+  a td:TestCase ;
+  spec:requirementReference wac:server-read-operation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/write-access-bob.feature> .
+
+manifest:write-access-public
+  a td:TestCase ;
+  spec:requirementReference wac:server-read-operation ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/write-access-public.feature> .

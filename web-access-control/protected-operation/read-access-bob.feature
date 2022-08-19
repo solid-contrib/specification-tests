@@ -40,7 +40,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     """
     * def createResource =
     """
-      function (containerModes, resourceModes, resourceType, accessMode) {
+      function (containerModes, resourceModes, resourceType, agent) {
 
         const agentWebId = webIds.bob
         const testContainerPermissions = resourcePermissions(containerModes == 'all' ? 'RWAC' : containerModes)
@@ -69,7 +69,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     """
 
   Scenario Outline: <agent> <result> read a <type> resource (<method>), when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = createResource(container, resource, type)
+    * def testResource = createResource(container, resource, type, agent)
     Given url testResource.url
     And headers authHeaders(method, testResource.url, agent)
     When method <method>
@@ -104,37 +104,9 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       | Public | cannot | HEAD    | rdf       | R         | inherited | 401    |
       | Public | cannot | HEAD    | container | no        | R         | 401    |
       | Public | cannot | HEAD    | container | R         | inherited | 401    |
-      | Bob    | cannot | GET     | plain     | no        | AWC       | 403    |
-      | Bob    | cannot | GET     | plain     | AWC       | inherited | 403    |
-      | Bob    | cannot | GET     | fictive   | AWC       | inherited | 403    |
-      | Bob    | cannot | GET     | rdf       | no        | AWC       | 403    |
-      | Bob    | cannot | GET     | rdf       | AWC       | inherited | 403    |
-      | Bob    | cannot | GET     | container | no        | AWC       | 403    |
-      | Bob    | cannot | GET     | container | AWC       | inherited | 403    |
-      | Bob    | cannot | HEAD    | plain     | no        | AWC       | 403    |
-      | Bob    | cannot | HEAD    | plain     | AWC       | inherited | 403    |
-      | Bob    | cannot | HEAD    | fictive   | AWC       | inherited | 403    |
-      | Bob    | cannot | HEAD    | rdf       | no        | AWC       | 403    |
-      | Bob    | cannot | HEAD    | rdf       | AWC       | inherited | 403    |
-      | Bob    | cannot | HEAD    | container | no        | AWC       | 403    |
-      | Bob    | cannot | HEAD    | container | AWC       | inherited | 403    |
-      | Public | cannot | GET     | plain     | no        | AWC       | 401    |
-      | Public | cannot | GET     | plain     | AWC       | inherited | 401    |
-      | Public | cannot | GET     | fictive   | AWC       | inherited | 401    |
-      | Public | cannot | GET     | rdf       | no        | AWC       | 401    |
-      | Public | cannot | GET     | rdf       | AWC       | inherited | 401    |
-      | Public | cannot | GET     | container | no        | AWC       | 401    |
-      | Public | cannot | GET     | container | AWC       | inherited | 401    |
-      | Public | cannot | HEAD    | plain     | no        | AWC       | 401    |
-      | Public | cannot | HEAD    | plain     | AWC       | inherited | 401    |
-      | Public | cannot | HEAD    | fictive   | AWC       | inherited | 401    |
-      | Public | cannot | HEAD    | rdf       | no        | AWC       | 401    |
-      | Public | cannot | HEAD    | rdf       | AWC       | inherited | 401    |
-      | Public | cannot | HEAD    | container | no        | AWC       | 401    |
-      | Public | cannot | HEAD    | container | AWC       | inherited | 401    |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = createResource(container, resource, type)
+    * def testResource = createResource(container, resource, type, agent)
     Given url testResource.url
     And headers authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/turtle'
@@ -165,7 +137,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       | Public | cannot | POST   | container | R         | inherited | 401    |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = createResource(container, resource, type)
+    * def testResource = createResource(container, resource, type, agent)
     Given url testResource.url
     And headers authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/n3'
@@ -186,7 +158,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       | Public | cannot | PATCH  | container | R         | inherited | 401    |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = createResource(container, resource, type)
+    * def testResource = createResource(container, resource, type, agent)
     Given url testResource.url
     And headers authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/plain'
@@ -215,7 +187,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       | Public | cannot | PATCH  | fictive   | R         | inherited | [401, 405, 415] |
 
   Scenario Outline: <agent> <result> <method> a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = createResource(container, resource, type)
+    * def testResource = createResource(container, resource, type, agent)
     Given url testResource.url
     And headers authHeaders(method, testResource.url, agent)
     When method <method>
