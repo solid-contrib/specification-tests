@@ -69,7 +69,7 @@ Use the script with the `-d` option to use the local tests:
 ./run.sh -d . css
 ```
 ## Creating a script for a CI workflow
-If you just want to run tests against a single test subject, for examnple in a CI workflow, you can create a script such
+If you just want to run tests against a single test subject, for example in a CI workflow, you can create a script such
 as this one which will run the tests embedded in the latest published CTH image:
 ```shell
 #!/bin/bash

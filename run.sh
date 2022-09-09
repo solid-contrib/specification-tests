@@ -135,6 +135,8 @@ while getopts "lhd:e:" arg; do
     e)
       envfile="${OPTARG}"
       ;;
+    *)
+      ;;
   esac
 done
 
