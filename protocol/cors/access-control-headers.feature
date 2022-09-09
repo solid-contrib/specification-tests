@@ -15,7 +15,6 @@ Feature: Server must respond to requests sending Origin with the appropriate Acc
     When method <method>
     Then match <statuses> contains responseStatus
     And match header Access-Control-Allow-Origin == 'https://tester'
-    And match header Access-Control-Allow-Credentials == 'true'
     Examples:
       | method | headers!                       | body            | statuses |
       | GET    | {Accept: 'text/turtle'}        | def ignore = 1  | [401]    |
@@ -31,7 +30,6 @@ Feature: Server must respond to requests sending Origin with the appropriate Acc
     When method <method>
     Then match <statuses> contains responseStatus
     And match header Access-Control-Allow-Origin == 'https://tester'
-    And match header Access-Control-Allow-Credentials == 'true'
     Examples:
       | method | headers!                       | body            | statuses             |
       | GET    | {Accept: 'text/turtle'}        | def ignore = 1  | [200]                |
