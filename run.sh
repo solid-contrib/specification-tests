@@ -99,7 +99,9 @@ EOF
 stop_css() {
   echo 'Stopping CSS'
   docker stop server
+  echo 'Stopped CSS'
   docker rm server
+  echo 'Removed CSS'
   docker network rm testnet
 }
 
