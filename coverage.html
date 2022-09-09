@@ -182,7 +182,7 @@
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd property="schema:identifier" lang="" xml:lang="">cf835228-8346-433d-b611-a0f50a39657d</dd>
+  <dd property="schema:identifier" lang="" xml:lang="">d97df263-fc3f-4f0e-ac05-a1dda81f13c4</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -195,7 +195,7 @@
     </ul>
   </div>
 </section>
-<section about="https://github.com/solid-contrib/specification-tests/cf835228-8346-433d-b611-a0f50a39657d#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid-contrib/specification-tests/d97df263-fc3f-4f0e-ac05-a1dda81f13c4#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <div datatype="rdf:HTML" property="dcterms:description">
     <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
@@ -1236,7 +1236,7 @@
         <li class="server">
 <details id="spec0_server-safe-methods" about="https://solidproject.org/TR/protocol#server-safe-methods" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-safe-methods <a href="https://solidproject.org/TR/protocol#server-safe-methods"></a>
-    <span>0</span>
+    <span>1</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -1247,7 +1247,36 @@
 <dd >MUST</dd>
       </dl>
   <dl><dt>Statement</dt><dd>Servers MUST support the HTTP GET, HEAD and OPTIONS methods [RFC7231] for clients to read resources or to determine communication options.</dd></dl>
-          <p>No test cases found.</p>
+          <table>
+            <caption>Test cases</caption>
+            <thead>
+            <tr>
+              <th>Title</th>
+              <th>Details</th>
+              <th>Implemented</th>
+            </tr>
+            </thead>
+            <tbody>
+<tr id="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#read-method-support" about="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#read-method-support" typeof="td:TestCase">
+  <td>
+    <span property="dcterms:title">Servers MUST support GET, HEAD and OPTIONS</span>
+    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#read-method-support">manifest</a>]
+    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/read-write-resource/read-method-support.feature" rel="spec:testScript">source</a>]
+    [<a href="https://solidproject.org/TR/protocol#server-safe-methods" rel="spec:requirementReference">requirement</a>]
+  </td>
+  <td>
+    <dl>
+      <dt>Status</dt>
+      <dd>
+<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
+              </dd>
+    </dl>
+
+  </td>
+  <td>✔</td>
+</tr>
+            </tbody>
+          </table>
 </details>
 
         </li>
