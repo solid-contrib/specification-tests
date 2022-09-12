@@ -1,32 +1,35 @@
 Feature: The WAC-Allow header shows user access modes for Bob when given indirect access via a container
 
   Background: Create test resources giving Bob different access modes
-    * table testModes
-      | test | modes | check |
-      | 'read' | ['read'] | 'only' |
-      | 'read/control' | ['read', 'control'] | 'only' |
-      | 'read/write' | ['read', 'write'] | '' |
-      | 'read/append' | ['read', 'append'] | 'only' |
-      | 'read/write/append' | ['read', 'write', 'append'] | 'only' |
-
+    * def modesList = [['read'], ['read', 'control'], ['read', 'write'], ['read', 'append'], ['read', 'write', 'append']]
     * def setup =
     """
       function() {
         const resources = {}
-        for (const row of testModes) {
+        for (const modes of modesList) {
           const testContainer = rootTestContainer.createContainer();
           const access = testContainer.accessDatasetBuilder
-                .setInheritableAgentAccess(testContainer.url, webIds.bob, row.modes)
+                .setInheritableAgentAccess(testContainer.url, webIds.bob, modes)
                 .build();
           testContainer.accessDataset = access;
           const resource = testContainer.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle');
-          resources[row.test] = resource;
+          resources[modes.join('/')] = resource;
         }
         return resources;
       }
     """
     * def resources = callonce setup
     * def resource = resources['read']
+
+  @setup
+  Scenario: Define test cases
+    * table testModes
+      | test                | modes                       | check  |
+      | 'read'              | ['read']                    | 'only' |
+      | 'read/control'      | ['read', 'control']         | 'only' |
+      | 'read/write'        | ['read', 'write']           | ''     |
+      | 'read/append'       | ['read', 'append']          | 'only' |
+      | 'read/write/append' | ['read', 'write', 'append'] | 'only' |
 
   Scenario: There is no acl on the resource that references Bob
     Given url resource.aclUrl
@@ -75,7 +78,7 @@ Feature: The WAC-Allow header shows user access modes for Bob when given indirec
     And match result.user contains <check> <modes>
     And match result.public == []
     Examples:
-      | testModes |
+      | karate.setup().testModes |
 
   Scenario Outline: Bob calls HEAD on a resource with <test> access and the header shows <test> access for user
     Given url resources['<test>'].url
@@ -87,4 +90,4 @@ Feature: The WAC-Allow header shows user access modes for Bob when given indirec
     And match result.user contains <check> <modes>
     And match result.public == []
     Examples:
-      | testModes |
+      | karate.setup().testModes |
