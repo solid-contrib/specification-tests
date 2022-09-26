@@ -71,7 +71,7 @@ setup_css() {
 }
 EOF
 
-  mkdir -p certs:q
+  mkdir -p certs
 
   openssl req -new -x509 -days 365 -nodes \
     -out certs/server.cert \
