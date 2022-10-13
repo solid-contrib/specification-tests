@@ -53,16 +53,16 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     Then status <readStatus>
 
     Examples:
-      | agent  | result | method  | type      | container | resource  | writeStatus     | readStatus |
-      | Public | can    | PUT     | rdf       | no        | W         | [201, 204, 205] | 401        |
-      | Public | can    | PUT     | rdf       | W         | inherited | [201, 204, 205] | 401        |
-      | Public | can    | PUT     | plain     | no        | W         | [201, 204, 205] | 401        |
-      | Public | can    | PUT     | plain     | W         | inherited | [201, 204, 205] | 401        |
-      | Public | can    | PUT     | fictive   | W         | inherited | [201, 204, 205] | 401        |
-      | Public | can    | POST    | container | no        | W         | [201, 204, 205] | 401        |
-      | Public | can    | POST    | container | W         | inherited | [201, 204, 205] | 401        |
-      | Public | can    | POST    | container | no        | A         | [201, 204, 205] | 401        |
-      | Public | can    | POST    | container | A         | inherited | [201, 204, 205] | 401        |
+      | agent  | result | method | type      | container | resource  | writeStatus          | readStatus |
+      | Public | can    | PUT    | rdf       | no        | W         | [200, 201, 204, 205] | 401        |
+      | Public | can    | PUT    | rdf       | W         | inherited | [200, 201, 204, 205] | 401        |
+      | Public | can    | PUT    | plain     | no        | W         | [200, 201, 204, 205] | 401        |
+      | Public | can    | PUT    | plain     | W         | inherited | [200, 201, 204, 205] | 401        |
+      | Public | can    | PUT    | fictive   | W         | inherited | [201]                | 401        |
+      | Public | can    | POST   | container | no        | W         | [200, 201, 204, 205] | 401        |
+      | Public | can    | POST   | container | W         | inherited | [200, 201, 204, 205] | 401        |
+      | Public | can    | POST   | container | no        | A         | [200, 201, 204, 205] | 401        |
+      | Public | can    | POST   | container | A         | inherited | [200, 201, 204, 205] | 401        |
 
   @publicagent
   Scenario Outline: <agent> <result> <method> to a <type> resource, when a public agent has <container> access to the container and <resource> access to the resource
@@ -81,16 +81,16 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     Then status <readStatus>
 
     Examples:
-      | agent  | result | method | type      | container | resource  | writeStatus     | readStatus |
-      | Public | can    | PATCH  | rdf       | no        | W         | [201, 204, 205] | 401        |
-      | Public | can    | PATCH  | rdf       | W         | inherited | [201, 204, 205] | 401        |
-      | Public | can    | PATCH  | fictive   | W         | inherited | [201, 204, 205] | 401        |
-      | Public | can    | PATCH  | rdf       | no        | A         | [201, 204, 205] | 401        |
-      | Public | can    | PATCH  | rdf       | A         | inherited | [201, 204, 205] | 401        |
-      | Public | can    | PATCH  | fictive   | A         | inherited | [201, 204, 205] | 401        |
-      | Public | cannot | PATCH  | rdf       | no        | C         | [401]           | 401        |
-      | Public | cannot | PATCH  | rdf       | C         | inherited | [401]           | 401        |
-      | Public | cannot | PATCH  | fictive   | C         | inherited | [401]           | 401        |
+      | agent  | result | method | type    | container | resource  | writeStatus          | readStatus |
+      | Public | can    | PATCH  | rdf     | no        | W         | [200, 201, 204, 205] | 401        |
+      | Public | can    | PATCH  | rdf     | W         | inherited | [200, 201, 204, 205] | 401        |
+      | Public | can    | PATCH  | fictive | W         | inherited | [200, 201, 204, 205] | 401        |
+      | Public | can    | PATCH  | rdf     | no        | A         | [200, 201, 204, 205] | 401        |
+      | Public | can    | PATCH  | rdf     | A         | inherited | [200, 201, 204, 205] | 401        |
+      | Public | can    | PATCH  | fictive | A         | inherited | [200, 201, 204, 205] | 401        |
+      | Public | cannot | PATCH  | rdf     | no        | C         | [401]                | 401        |
+      | Public | cannot | PATCH  | rdf     | C         | inherited | [401]                | 401        |
+      | Public | cannot | PATCH  | fictive | C         | inherited | [401]                | 401        |
 
   @publicagent
   Scenario Outline: <agent> <result> <method> a <type> resource, when a public agent has <container> access to the container and <resource> access to the resource

@@ -69,23 +69,23 @@ Feature: Only Bob can write (and only that) a resource when granted write access
     Then status <readStatus>
 
     Examples:
-      | agent  | result | method  | type      | container | resource  | writeStatus     | readStatus |
-      | Bob    | can    | PUT     | rdf       | no        | W         | [201, 204, 205] | 403        |
-      | Bob    | can    | PUT     | rdf       | W         | inherited | [201, 204, 205] | 403        |
-      | Bob    | can    | PUT     | plain     | no        | W         | [201, 204, 205] | 403        |
-      | Bob    | can    | PUT     | plain     | W         | inherited | [201, 204, 205] | 403        |
-      | Bob    | can    | PUT     | fictive   | W         | inherited | [201, 204, 205] | 403        |
-      | Bob    | can    | POST    | container | no        | W         | [201, 204, 205] | 403        |
-      | Bob    | can    | POST    | container | W         | inherited | [201, 204, 205] | 403        |
-      | Bob    | can    | POST    | container | no        | A         | [201, 204, 205] | 403        |
-      | Bob    | can    | POST    | container | A         | inherited | [201, 204, 205] | 403        |
-      | Public | cannot | PUT     | rdf       | no        | WAC       | [401]           | 401        |
-      | Public | cannot | PUT     | rdf       | WAC       | inherited | [401]           | 401        |
-      | Public | cannot | PUT     | plain     | no        | WAC       | [401]           | 401        |
-      | Public | cannot | PUT     | plain     | WAC       | inherited | [401]           | 401        |
-      | Public | cannot | PUT     | fictive   | WAC       | inherited | [401]           | 401        |
-      | Public | cannot | POST    | container | no        | WAC       | [401]           | 401        |
-      | Public | cannot | POST    | container | WAC       | inherited | [401]           | 401        |
+      | agent  | result | method | type      | container | resource  | writeStatus          | readStatus |
+      | Bob    | can    | PUT    | rdf       | no        | W         | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | PUT    | rdf       | W         | inherited | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | PUT    | plain     | no        | W         | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | PUT    | plain     | W         | inherited | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | PUT    | fictive   | W         | inherited | [201]                | 403        |
+      | Bob    | can    | POST   | container | no        | W         | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | POST   | container | W         | inherited | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | POST   | container | no        | A         | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | POST   | container | A         | inherited | [200, 201, 204, 205] | 403        |
+      | Public | cannot | PUT    | rdf       | no        | WAC       | [401]                | 401        |
+      | Public | cannot | PUT    | rdf       | WAC       | inherited | [401]                | 401        |
+      | Public | cannot | PUT    | plain     | no        | WAC       | [401]                | 401        |
+      | Public | cannot | PUT    | plain     | WAC       | inherited | [401]                | 401        |
+      | Public | cannot | PUT    | fictive   | WAC       | inherited | [401]                | 401        |
+      | Public | cannot | POST   | container | no        | WAC       | [401]                | 401        |
+      | Public | cannot | POST   | container | WAC       | inherited | [401]                | 401        |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
     * def testResource = utils.createResource(container, resource, type, 'agent', webIds.bob)
@@ -105,19 +105,19 @@ Feature: Only Bob can write (and only that) a resource when granted write access
     Then status <readStatus>
 
     Examples:
-      | agent  | result | method | type      | container | resource  | writeStatus     | readStatus |
-      | Bob    | can    | PATCH  | rdf       | no        | W         | [201, 204, 205] | 403        |
-      | Bob    | can    | PATCH  | rdf       | W         | inherited | [201, 204, 205] | 403        |
-      | Bob    | can    | PATCH  | fictive   | W         | inherited | [201, 204, 205] | 403        |
-      | Bob    | can    | PATCH  | rdf       | no        | A         | [201, 204, 205] | 403        |
-      | Bob    | can    | PATCH  | rdf       | A         | inherited | [201, 204, 205] | 403        |
-      | Bob    | can    | PATCH  | fictive   | A         | inherited | [201, 204, 205] | 403        |
-      | Bob    | cannot | PATCH  | rdf       | no        | C         | [403]           | 403        |
-      | Bob    | cannot | PATCH  | rdf       | C         | inherited | [403]           | 403        |
-      | Bob    | cannot | PATCH  | fictive   | C         | inherited | [403]           | 403        |
-      | Public | cannot | PATCH  | rdf       | no        | WAC       | [401]           | 401        |
-      | Public | cannot | PATCH  | rdf       | WAC       | inherited | [401]           | 401        |
-      | Public | cannot | PATCH  | fictive   | WAC       | inherited | [401]           | 401        |
+      | agent  | result | method | type    | container | resource  | writeStatus          | readStatus |
+      | Bob    | can    | PATCH  | rdf     | no        | W         | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | PATCH  | rdf     | W         | inherited | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | PATCH  | fictive | W         | inherited | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | PATCH  | rdf     | no        | A         | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | PATCH  | rdf     | A         | inherited | [200, 201, 204, 205] | 403        |
+      | Bob    | can    | PATCH  | fictive | A         | inherited | [200, 201, 204, 205] | 403        |
+      | Bob    | cannot | PATCH  | rdf     | no        | C         | [403]                | 403        |
+      | Bob    | cannot | PATCH  | rdf     | C         | inherited | [403]                | 403        |
+      | Bob    | cannot | PATCH  | fictive | C         | inherited | [403]                | 403        |
+      | Public | cannot | PATCH  | rdf     | no        | WAC       | [401]                | 401        |
+      | Public | cannot | PATCH  | rdf     | WAC       | inherited | [401]                | 401        |
+      | Public | cannot | PATCH  | fictive | WAC       | inherited | [401]                | 401        |
 
   Scenario Outline: <agent> <result> <method> a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
     * def testResource = utils.createResource(container, resource, type, 'agent', webIds.bob)

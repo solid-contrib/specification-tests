@@ -48,13 +48,6 @@ manifest:protected-operation-acl-propagation
   spec:testScript
     <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/acl-propagation.feature> .
 
-manifest:protected-operation-write-without-read
-  a td:TestCase ;
-  spec:requirementReference wac:access-modes ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/write-without-read.feature> .
-
 manifest:server-wac-allow-header-exists
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
