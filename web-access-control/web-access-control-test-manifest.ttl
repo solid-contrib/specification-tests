@@ -48,13 +48,6 @@ manifest:protected-operation-acl-propagation
   spec:testScript
     <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/acl-propagation.feature> .
 
-manifest:protected-operation-write-without-read
-  a td:TestCase ;
-  spec:requirementReference wac:access-modes ;
-  td:reviewStatus td:unreviewed ;
-  spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/write-without-read.feature> .
-
 manifest:server-wac-allow-header-exists
   a td:TestCase ;
   spec:requirementReference wac:server-wac-allow ;
@@ -111,23 +104,23 @@ manifest:read-access-public
   spec:testScript
     <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-access-public.feature> .
 
-manifest:read-inherited-access-bob
+manifest:write-access-agent
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-bob.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/write-access-agent.feature> .
 
-manifest:read-inherited-access-agent
+manifest:write-access-bob
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-agent.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/write-access-bob.feature> .
 
-manifest:read-inherited-access-public
+manifest:write-access-public
   a td:TestCase ;
   spec:requirementReference wac:server-read-operation ;
   td:reviewStatus td:unreviewed ;
   spec:testScript
-    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/read-inherited-access-public.feature> .
+    <https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/protected-operation/write-access-public.feature> .
