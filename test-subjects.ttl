@@ -18,7 +18,7 @@
     doap:homepage <https://inrupt.com/products/enterprise-solid-server> ;
     doap:description "A production-grade Solid server produced and supported by Inrupt."@en ;
     doap:programming-language "Java"@en ;
-    solid-test:skip "wac", "wac-allow-public", "publicagent" ;
+    solid-test:skip "wac", "wac-allow-public" ;
     rdfs:comment "This version of ESS implements ACP for access control instead of WAC. Whilst it does not therefore conform to that aspect of the specification the access control tests are still run in order to assess the equivalent capabilities in this implementation."@en ;
     rdfs:comment "Access for anonymous users is not supported nor required by Solid specifications so tests that depend on this are not run."@en.
 
@@ -51,8 +51,8 @@
     solid-test:skip "acp" .
 
 <nss#test-subject-release>
-    doap:revision "5.7.1"@en ;
-    doap:created "2022-03-23"^^xsd:date .
+    doap:revision "5.7.3"@en ;
+    doap:created "2022-09-22"^^xsd:date .
 
 <trinpod>
     a earl:Software, earl:TestSubject ;
