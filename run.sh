@@ -15,10 +15,11 @@
 
 display_usage() {
   cat << EOF
-Usage: ./run.sh [-d testdir] [-l] [-e <envfile>] <subject> [args]
+Usage: ./run.sh [-d testdir] [-l] [-e <envfile>] [-t <list>] <subject> [args]
   -d <testdir> Use local development version of tests in specified location
   -l           Use local docker image of test harness (called testharness)
   -e <envfile> Use this env file instead of <subject>.env
+  -t <file>    Tolerate failures of the scenarios in this file
   <subject>    The short name of the test subject
   [args]       Other arguments passed to the test harness
 EOF
@@ -113,17 +114,18 @@ setup_config() {
 # if no arguments supplied, display usage
 if [ $# -lt 1 ]
 then
-	display_usage
-	exit 1
+  display_usage
+  exit 1
 fi
 
 dockerimage='solidproject/conformance-test-harness'
 dockerargs=('-i' '--rm')
 cwd=$(pwd)
+harnessargs=('--output=/reports')
 
 # parse options
 # the 'target' directory is used by Karate for it's own format reports which can be helpful in development
-while getopts "lhd:e:" arg; do
+while getopts "lhd:e:t:" arg; do
   case $arg in
     d)
       testDir="$(cd "${OPTARG}" && pwd)"
@@ -139,6 +141,10 @@ while getopts "lhd:e:" arg; do
     e)
       envfile="${OPTARG}"
       ;;
+    t)
+      dockerargs+=('-v' "$cwd/${OPTARG}:/app/target/tolerable-failures.txt")
+      harnessargs+=('--tolerable-failures=/app/target/tolerable-failures.txt')
+      ;;
     *)
       ;;
   esac
@@ -149,8 +155,8 @@ shift $((OPTIND-1))
 # check there is at least a subject argument
 if [ $# -lt 1 ]
 then
-	display_usage
-	exit 1
+  display_usage
+  exit 1
 fi
 
 # extract subject
@@ -165,7 +171,6 @@ shift
 echo "Running tests on $subject and reporting to $cwd/reports/$subject"
 
 dockerargs+=('-v' "$cwd/reports/$outdir:/reports" "--env-file=$envfile")
-harnessargs=('--output=/reports')
 if ! [[ "$*" == *"--target="* ]]; then
   harnessargs+=("--target=https://github.com/solid/conformance-test-harness/$subject")
 fi
@@ -176,7 +181,7 @@ mkdir -p reports/$subject
 # optionally start CSS
 if [ $subject == "css" ]
 then
-	setup_css
+  setup_css
   dockerargs+=('--network=testnet')
 fi
 
@@ -194,7 +199,7 @@ echo "Exit code: $exit_code"
 # optionally stop CSS
 if [ $subject == "css" ]
 then
-	stop_css
+  stop_css
 fi
 
 exit "$exit_code"
