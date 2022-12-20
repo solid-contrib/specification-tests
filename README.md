@@ -79,18 +79,15 @@ mkdir -p config reports
 cat > ./config/application.yaml <<EOF
 subjects: /data/test-subjects.ttl
 sources:
-  # Protocol specification & manifest
-  # Editor's draft (fully annotated)
+  # Protocol specification & manifest (latest published version)
   - https://solidproject.org/TR/protocol
   - https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl
 
-  # WAC specification & manifest
-  # Editor's draft (fully annotated)
-  - https://solid.github.io/web-access-control-spec
+  # WAC specification & manifest (latest published version)
+  - https://solidproject.org/TR/wac
   - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl
 
-  # Published draft (not annotated)
-  # This is an example of how you could run tests for a specific version of the specification 
+  # This is an example of how you could run tests for a specific version of a specification 
 #  - https://solidproject.org/TR/2021/wac-20210711
 #  - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/web-access-control-test-manifest-20210711.ttl
 
