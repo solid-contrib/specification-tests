@@ -5,11 +5,8 @@ prefix dcterms: <http://purl.org/dc/terms/>
 prefix td: <http://www.w3.org/2006/03/test-description#>
 prefix spec: <http://www.w3.org/ns/spec#>
 
-# Editor's draft (fully annotated)
-prefix wac: <https://solid.github.io/web-access-control-spec/#>
-
-# Published draft (not annotated)
-#prefix wac: <https://solidproject.org/TR/2021/wac-20210711#>
+# Published draft (fully annotated)
+prefix wac: <https://solidproject.org/TR/wac#>
 
 prefix manifest: <#>
 

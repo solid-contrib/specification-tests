@@ -7,8 +7,8 @@ sources:
   - https://github.com/solid-contrib/specification-tests/blob/main/protocol/requirement-comments.ttl
 
   # WAC spec & manifest
-  # Editor's draft (fully annotated)
-  - https://solid.github.io/web-access-control-spec/
+  # Candidate recommendation (Version 1.0.0-cr.1)
+  - https://solidproject.org/TR/wac
   - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/web-access-control-test-manifest.ttl
   - https://github.com/solid-contrib/specification-tests/blob/main/web-access-control/requirement-comments.ttl
 

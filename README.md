@@ -771,8 +771,8 @@ Does this resource have the `pim:Storage` link header identifying it as a storag
 
 #### `getAccessDatasetBuilder()` or read-only property `accessDatasetBuilder`
 There are currently 2 access control implementations supported by the test harness:
-* [Web Access Control (WAC)](https://solid.github.io/web-access-control-spec)
-* [Access Control Policies (ACP)](https://github.com/solid/authorization-panel/tree/main/proposals/acp) - emerging
+* [Web Access Control (WAC)](https://solidproject.org/TR/wac)
+* [Access Control Policies (ACP)](https://solid.github.io/authorization-panel/acp-specification)
 
 Get an object that can build a set of access control statements in a WAC/ACP agnostic way. The object is initialized
 by adding owner access for the specified owner (not applicable in ACP mode).
