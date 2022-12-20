@@ -5,8 +5,11 @@ prefix dcterms: <http://purl.org/dc/terms/>
 prefix td: <http://www.w3.org/2006/03/test-description#>
 prefix spec: <http://www.w3.org/ns/spec#>
 
-# Ecosystem Proposal
+# Latest published version
 prefix sopr: <https://solidproject.org/TR/protocol#>
+
+# Editor's draft
+#prefix sopr: <https://solidproject.org/ED/protocol#>
 
 # Published version 0.9.0
 #prefix sopr: <https://solidproject.org/TR/2021/protocol-20211217#>

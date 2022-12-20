@@ -1,7 +1,7 @@
 # Solid Specification Conformance Tests
 
 ## Release 0.0.16
-* Set default WAC spec to the published version at https://solidproject.org/TR/wac.
+* Set default WAC spec to the latest published version at https://solidproject.org/TR/wac.
 
 ## Release 0.0.15
 * Add access control tests for reading non-existing resources and improve tests in this area. 
