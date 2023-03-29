@@ -90,6 +90,7 @@ EOF
     --httpsKey=/certs/server.key --httpsCert=/certs/server.cert \
     --port=443 --baseUrl=https://server/
 
+  echo 'Please wait while CSS is starting up'
   until $(curl --output /dev/null --silent --head --fail -k https://server); do
     printf '.'
     sleep 1
