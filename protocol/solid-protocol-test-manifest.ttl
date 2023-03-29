@@ -60,6 +60,13 @@ manifest:content-negotiation-jsonld
   spec:testScript
     <https://github.com/solid-contrib/specification-tests/blob/main/protocol/content-negotiation/content-negotiation-jsonld.feature> .
 
+manifest:content-negotiation-named-graphs
+  a td:TestCase ;
+  spec:requirementReference sopr:server-representation-turtle-jsonld ;
+  td:reviewStatus td:unreviewed ;
+  spec:testScript
+    <https://github.com/solid-contrib/specification-tests/blob/main/protocol/content-negotiation/content-negotiation-named-graphs.feature> .
+
 manifest:uri-assignment
   a td:TestCase ;
   spec:requirementReference sopr:server-put-patch-uri-assignment ;
