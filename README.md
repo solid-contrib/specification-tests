@@ -46,6 +46,11 @@ tests available locally.
 For each test subject you want to test, create a `{subject}.env` file in this directory according to the instructions
 [here](https://hub.docker.com/r/solidproject/conformance-test-harness).
 
+If you are testing a local server, add the following line to your `/etc/hosts` file rather than use `http://localhost`:
+```
+127.0.0.1       server
+```
+
 To see the usage instructions:
 ```shell
 ./run.sh
