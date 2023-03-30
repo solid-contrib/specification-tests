@@ -4,6 +4,6 @@
   "@type": "ex:Graph",
   "@graph": {
     "@id": "ex:naughty",
-     "@type": "ex:Trial"
+    "@type": "ex:Trial"
   }
 }
