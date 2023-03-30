@@ -182,7 +182,7 @@
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd property="schema:identifier" lang="" xml:lang="">d6768e04-f2eb-449f-b992-64893c805e46</dd>
+  <dd property="schema:identifier" lang="" xml:lang="">b9c60c69-b150-4534-a610-4f8cdf10b1de</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -195,7 +195,7 @@
     </ul>
   </div>
 </section>
-<section about="https://github.com/solid-contrib/specification-tests/d6768e04-f2eb-449f-b992-64893c805e46#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid-contrib/specification-tests/b9c60c69-b150-4534-a610-4f8cdf10b1de#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <div datatype="rdf:HTML" property="dcterms:description">
     <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
@@ -224,7 +224,7 @@
   <li rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol">
     <details id="protocol">
       <summary><b>Specification:</b> https://solidproject.org/TR/protocol <a href="https://solidproject.org/TR/protocol"></a>
-        <span>81</span>
+        <span>87</span>
       </summary>
       <ul>
         <li class="server">
@@ -678,7 +678,8 @@
       </dl>
   <dl>
     <dt>Requirement level</dt>
-  </dl>
+<dd >MUST NOT</dd>
+      </dl>
   <dl><dt>Statement</dt><dd>If two URIs differ only in the trailing slash, and the server has associated a resource with one of them, then the other URI MUST NOT correspond to another resource.</dd></dl>
           <table>
             <caption>Test cases</caption>
@@ -791,7 +792,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST provide one or more storages (pim:Storage) – a space of URIs in which data can be accessed. A storage is the root container for all of its contained resources (see Resource Containment).</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST provide one or more storages. The storage resource (pim:Storage) is the root container for all of its contained resources (see Resource Containment).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -827,7 +828,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers exposing the storage resource MUST advertise by including the HTTP Link header with rel=&quot;type&quot; targeting http://www.w3.org/ns/pim/space#Storage when responding to storage’s request URI.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST advertise the storage resource by including the HTTP Link header with rel=&quot;type&quot; targeting http://www.w3.org/ns/pim/space#Storage when responding to storage’s request URI.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -873,6 +874,42 @@
   <dl>
     <dt>Requirement level</dt>
   </dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec0_server-storage-description" about="https://solidproject.org/TR/protocol#server-storage-description" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage-description <a href="https://solidproject.org/TR/protocol#server-storage-description"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST include the Link header with rel=&quot;http://www.w3.org/ns/solid/terms#storageDescription&quot; targeting the URI of the storage description resource in the response of HTTP GET, HEAD and OPTIONS requests targeting a resource in a storage.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec0_server-storage-description-resource" about="https://solidproject.org/TR/protocol#server-storage-description-resource" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-storage-description-resource <a href="https://solidproject.org/TR/protocol#server-storage-description-resource"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST include statements about the storage as part of the storage description resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -949,6 +986,42 @@
 </details>
 
         </li>
+        <li class="server">
+<details id="spec0_server-auxiliary-resources-management" about="https://solidproject.org/TR/protocol#server-auxiliary-resources-management" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-auxiliary-resources-management <a href="https://solidproject.org/TR/protocol#server-auxiliary-resources-management"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST support auxiliary resources defined by this specification and manage the association between a subject resource and auxiliary resources.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec0_server-link-auxiliary-type" about="https://solidproject.org/TR/protocol#server-link-auxiliary-type" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-link-auxiliary-type <a href="https://solidproject.org/TR/protocol#server-link-auxiliary-type"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST advertise auxiliary resources associated with a subject resource by responding to HEAD and GET requests by including the HTTP Link header with the rel parameter [RFC8288].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
         <li class="">
 <details id="spec0_client-link-auxiliary-type" about="https://solidproject.org/TR/protocol#client-link-auxiliary-type" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-link-auxiliary-type <a href="https://solidproject.org/TR/protocol#client-link-auxiliary-type"></a>
@@ -975,7 +1048,8 @@
       </dl>
   <dl>
     <dt>Requirement level</dt>
-  </dl>
+<dd >MUST NOT</dd>
+      </dl>
   <dl><dt>Statement</dt><dd>Servers MUST NOT directly associate more than one description resource to a subject resource.</dd></dl>
           <table>
             <caption>Test cases</caption>
@@ -1291,7 +1365,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST indicate their support for HTTP Methods by responding to HTTP GET and HEAD requests for the target resource with the HTTP Method tokens in the HTTP response header Allow.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST indicate the HTTP methods supported by the target resource by generating an Allow header field in successful responses.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1338,25 +1412,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST indicate supported media types in the HTTP Accept-Patch [RFC5789], Accept-Post [LDP] and Accept-Put [The Accept-Put Response Header] response headers that correspond to acceptable HTTP methods listed in Allow header value in response to HTTP GET and HEAD requests.</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec0_server-options-asterisk-accept-headers" about="https://solidproject.org/TR/protocol#server-options-asterisk-accept-headers" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-options-asterisk-accept-headers <a href="https://solidproject.org/TR/protocol#server-options-asterisk-accept-headers"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MAY</dd>
-  </dl>
-  <dl><dt>Statement</dt><dd>Servers MAY include the HTTP Accept-Patch, Accept-Post and Accept-Put headers in the response of a OPTIONS * request.</dd></dl>
+  <dl><dt>Statement</dt><dd>When responding to authorized requests, servers MUST indicate supported media types in the HTTP Accept-Patch [RFC5789], Accept-Post [LDP] and Accept-Put [The Accept-Put Response Header] response headers that correspond to acceptable HTTP methods listed in Allow header value in response to HTTP GET, HEAD and OPTIONS requests.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1556,7 +1612,8 @@
       </dl>
   <dl>
     <dt>Requirement level</dt>
-  </dl>
+<dd >MUST NOT</dd>
+      </dl>
   <dl><dt>Statement</dt><dd>Servers MUST NOT allow HTTP PUT or PATCH on a container to update its containment triples; if the server receives such a request, it MUST respond with a 409 status code.</dd></dl>
           <p>No test cases found.</p>
 </details>
@@ -1573,7 +1630,8 @@
       </dl>
   <dl>
     <dt>Requirement level</dt>
-  </dl>
+<dd >MUST NOT</dd>
+      </dl>
   <dl><dt>Statement</dt><dd>Servers MUST NOT allow HTTP POST, PUT and PATCH to update a container’s resource metadata statements; if the server receives such a request, it MUST respond with a 409 status code.</dd></dl>
           <p>No test cases found.</p>
 </details>
@@ -2017,8 +2075,8 @@
 
         </li>
         <li class="server">
-<details id="spec0_server-websockets-api" about="https://solidproject.org/TR/protocol#server-websockets-api" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-websockets-api <a href="https://solidproject.org/TR/protocol#server-websockets-api"></a>
+<details id="spec0_server-notifications-protocol-resource-server" about="https://solidproject.org/TR/protocol#server-notifications-protocol-resource-server" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-notifications-protocol-resource-server <a href="https://solidproject.org/TR/protocol#server-notifications-protocol-resource-server"></a>
     <span>0</span>
   </summary>
   <dl>
@@ -2027,27 +2085,63 @@
       </dl>
   <dl>
     <dt>Requirement level</dt>
-<dd >SHOULD</dd>
+<dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers SHOULD implement the Solid WebSockets API [SOLID-WEBSOCKETS-API].</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to the Solid Notifications Protocol [SOLID-NOTIFICATIONS-PROTOCOL] by implementing the Resource Server to enable clients to discover subscription resources and notification channels available to a given resource or storage.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
-        <li class="client">
-<details id="spec0_client-websockets-api" about="https://solidproject.org/TR/protocol#client-websockets-api" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-websockets-api <a href="https://solidproject.org/TR/protocol#client-websockets-api"></a>
+        <li class="server">
+<details id="spec0_server-notifications-protocol-subscription-server" about="https://solidproject.org/TR/protocol#server-notifications-protocol-subscription-server" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-notifications-protocol-subscription-server <a href="https://solidproject.org/TR/protocol#server-notifications-protocol-subscription-server"></a>
     <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
-<dd>Client</dd>
-  </dl>
+<dd>Server</dd>
+      </dl>
   <dl>
     <dt>Requirement level</dt>
-<dd >SHOULD</dd>
+<dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Clients SHOULD implement the Solid WebSockets API [SOLID-WEBSOCKETS-API].</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to the Solid Notifications Protocol [SOLID-NOTIFICATIONS-PROTOCOL] by implementing the Subscription Server to process and produce instructions for subscription requests.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec0_server-notifications-protocol-notification-sender" about="https://solidproject.org/TR/protocol#server-notifications-protocol-notification-sender" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-notifications-protocol-notification-sender <a href="https://solidproject.org/TR/protocol#server-notifications-protocol-notification-sender"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to the Solid Notifications Protocol [SOLID-NOTIFICATIONS-PROTOCOL] by implementing the Notification Sender to produce and send messages to a Notification Receiver.</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec0_server-notifications-protocol-notification-receiver" about="https://solidproject.org/TR/protocol#server-notifications-protocol-notification-receiver" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-notifications-protocol-notification-receiver <a href="https://solidproject.org/TR/protocol#server-notifications-protocol-notification-receiver"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to the Solid Notifications Protocol [SOLID-NOTIFICATIONS-PROTOCOL] by implementing the Notification Receiver to receive and process messages that conform to a notification channel type.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -2289,7 +2383,7 @@
     <dt>Requirement level</dt>
 <dd >SHOULD</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>server SHOULD explicitly enumerate all used response headers under Access-Control-Expose-Headers rather than resorting to *, which does not cover all cases (such as credentials mode set to include).</dd></dl>
+  <dl><dt>Statement</dt><dd>servers SHOULD explicitly enumerate all used response headers under Access-Control-Expose-Headers rather than resorting to *, which does not cover all cases (such as credentials mode set to include).</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2371,8 +2465,8 @@
 
         </li>
         <li class="server">
-<details id="spec0_server-wac" about="https://solidproject.org/TR/protocol#server-wac" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-wac <a href="https://solidproject.org/TR/protocol#server-wac"></a>
+<details id="spec0_server-wac-acp" about="https://solidproject.org/TR/protocol#server-wac-acp" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-wac-acp <a href="https://solidproject.org/TR/protocol#server-wac-acp"></a>
     <span>0</span>
   </summary>
   <dl>
@@ -2383,15 +2477,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST conform to the Web Access Control specification [WAC].</dd></dl>
-  <dl>
-    <dt>Additional comments</dt>
-    <dd>
-      <ul>
-        <li property="rdfs:comment">Publicly accessible versions of ESS implement ACP for access control in place of WAC.</li>
-      </ul>
-    </dd>
-  </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to either or both Web Access Control [WAC] and Access Control Policy [ACP] specifications.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -2410,6 +2496,24 @@
 <dd >MUST</dd>
       </dl>
   <dl><dt>Statement</dt><dd>Clients MUST conform to the Web Access Control specification [WAC].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="client">
+<details id="spec0_client-acp" about="https://solidproject.org/TR/protocol#client-acp" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-acp <a href="https://solidproject.org/TR/protocol#client-acp"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Client</dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Clients MUST conform to the Access Control Policy specification [ACP].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -2452,7 +2556,8 @@
       </dl>
   <dl>
     <dt>Requirement level</dt>
-  </dl>
+<dd >MUST NOT</dd>
+      </dl>
   <dl><dt>Statement</dt><dd>Servers MUST NOT directly associate more than one ACL resource to a resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
@@ -2487,7 +2592,8 @@
   </dl>
   <dl>
     <dt>Requirement level</dt>
-  </dl>
+<dd >MUST NOT</dd>
+      </dl>
   <dl><dt>Statement</dt><dd>Clients MUST NOT derive the URI of the ACL resource through string operations on the URI of the resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
@@ -2522,7 +2628,8 @@
       </dl>
   <dl>
     <dt>Requirement level</dt>
-  </dl>
+<dd >MUST NOT</dd>
+      </dl>
   <dl><dt>Statement</dt><dd>Servers who want a resource to inherit Authorizations (Effective ACL Resource) from a container resource  MUST NOT have a representation for the ACL resource that is associated with the resource.</dd></dl>
           <p>No test cases found.</p>
 </details>
