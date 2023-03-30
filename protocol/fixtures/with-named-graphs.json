@@ -1,0 +1,9 @@
+{
+  "@context": { "ex": "http://example.org/ns/" },
+  "@id": "ex:test",
+  "@type": "ex:Graph",
+  "@graph": {
+    "@id": "ex:naughty",
+    "@type": "ex:Trial"
+  }
+}
