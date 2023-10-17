@@ -17,7 +17,7 @@ Feature: RDF documents containing named graphs can be stored and retrieved
 
   @ignore
   Scenario: Alice can GET the JSON-LD with named graph as TTL
-    # This expected response is disputed - since TTL doesn't support Quads, the RDF spec suggests:
+    # The expected response is disputed - since TTL doesn't support Quads, the RDF spec suggests:
     # "If an RDF dataset is returned and the consumer is expecting an RDF graph, the consumer is expected to use the RDF dataset's default graph."
     # https://github.com/solid-contrib/specification-tests/pull/101#issuecomment-1491711705
     Given header Accept = 'text/turtle'
