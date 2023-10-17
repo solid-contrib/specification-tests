@@ -15,7 +15,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     * def utils = callonce read('common.feature') ({resources, subject: 'authenticated'})
 
   Scenario Outline: <agent> <result> read a <type> resource (<method>), when an authenticated agent has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     When method <method>

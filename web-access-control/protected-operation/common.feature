@@ -9,17 +9,6 @@ Scenario:
         return agentLowerCase !== 'public' ? clients[agentLowerCase].getAuthHeaders(method, url) : {}
       }
     """
-  * def resourcePermissions =
-    """
-      function (modes) {
-        if (modes && modes !== 'inherited' && modes !== 'no') {
-          return Object.entries({ R: 'read', W: 'write', A: 'append', C: 'control' })
-            .filter(([mode, permission]) => modes.includes(mode))
-            .map(([mode, permission]) => permission)
-        }
-        return undefined
-      }
-    """
   * def getRequestData =
     """
       function (type) {
@@ -45,26 +34,34 @@ Scenario:
         }
       }
     """
-  * def resourceEntry =
-    """
-      function (container, type) {
-        switch (type) {
-          case 'plain':
-            return container.createResource('.txt', 'Hello', 'text/plain')
-          case 'fictive':
-            return container.reserveResource('.txt')
-          case 'rdf':
-            return container.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')
-          case 'container':
-            return container.createContainer()
-          default:
-            return undefined
-        }
-      }
-    """
   * def createResource =
     """
       function (containerModes, resourceModes, resourceType, subject, agent) {
+        // define local functions so they are accessible when called from other contexts
+        resourcePermissions = (modes) => {
+          if (modes && modes !== 'inherited' && modes !== 'no') {
+            return Object.entries({ R: 'read', W: 'write', A: 'append', C: 'control' })
+              .filter(([mode, permission]) => modes.includes(mode))
+              .map(([mode, permission]) => permission)
+          }
+          return undefined
+        }
+
+        resourceEntry = (container, type) => {
+          switch (type) {
+            case 'plain':
+              return container.createResource('.txt', 'Hello', 'text/plain')
+            case 'fictive':
+              return container.reserveResource('.txt')
+            case 'rdf':
+              return container.createResource('.ttl', karate.readAsString('../fixtures/example.ttl'), 'text/turtle')
+            case 'container':
+              return container.createContainer()
+            default:
+              return undefined
+          }
+        }
+
         const testContainerPermissions = resourcePermissions(containerModes)
         const testResourcePermissions = resourcePermissions(resourceModes)
         const testContainerInheritablePermissions = resourceModes === 'inherited'
@@ -115,5 +112,5 @@ Scenario:
         return testResource
       }
     """
-  * def getResource = (container, resource, type) => testResources[`${container}:${resource}:${type}`]
+  * def getResourceKey = (container, resource, type) => `${container}:${resource}:${type}`
   * def testResources = resources.reduce((map, t) => { map[`${t.container}:${t.resource}:${t.type}`] = createResource(t.container, t.resource, t.type, subject, agent); return map;}, {})

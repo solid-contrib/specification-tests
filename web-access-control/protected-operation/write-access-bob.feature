@@ -15,7 +15,7 @@ Feature: Only Bob can write (and only that) a resource when granted write access
     * def utils = callonce read('common.feature') ({resources, subject: 'agent', agent: webIds.bob})
 
   Scenario Outline: <agent> <result> read a <type> resource (<method>), when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     When method <method>
