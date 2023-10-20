@@ -15,7 +15,7 @@ Feature: Public agents can read (and only that) a resource when granted read acc
     * def utils = callonce read('common.feature') ({resources, subject: 'public'})
 
   Scenario Outline: <agent> <result> read a <type> resource (<method>), when a public agent has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     When method <method>
@@ -56,7 +56,7 @@ Feature: Public agents can read (and only that) a resource when granted read acc
       | Public | can    | HEAD    | container | R         | inherited | 200    |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when a public agent has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/turtle'
@@ -87,7 +87,7 @@ Feature: Public agents can read (and only that) a resource when granted read acc
       | Public | cannot | POST   | container | R         | inherited | [401]      |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when a public agent has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/n3'
@@ -108,7 +108,7 @@ Feature: Public agents can read (and only that) a resource when granted read acc
       | Public | cannot | PATCH  | container | R         | inherited | 401    |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when a public agent has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/plain'
@@ -137,7 +137,7 @@ Feature: Public agents can read (and only that) a resource when granted read acc
       | Public | cannot | PATCH  | fictive | R         | inherited | [401, 405, 415] |
 
   Scenario Outline: <agent> <result> <method> a <type> resource, when a public agent has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     When method <method>

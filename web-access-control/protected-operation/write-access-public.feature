@@ -15,7 +15,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     * def utils = callonce read('common.feature') ({resources, subject: 'public'})
 
   Scenario Outline: <agent> <result> read a <type> resource (<method>), when a public agent has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     When method <method>
     Then status <status>

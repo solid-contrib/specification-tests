@@ -15,7 +15,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     * def utils = callonce read('common.feature') ({resources, subject: 'agent', agent: webIds.bob})
 
   Scenario Outline: <agent> <result> read a <type> resource (<method>), when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     When method <method>
@@ -52,7 +52,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       | Public | cannot | HEAD    | container | R         | inherited | 401    |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/turtle'
@@ -83,7 +83,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       | Public | cannot | POST   | container | R         | inherited | [401]      |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/n3'
@@ -104,7 +104,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       | Public | cannot | PATCH  | container | R         | inherited | 401    |
 
   Scenario Outline: <agent> <result> <method> to a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/plain'
@@ -133,7 +133,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
       | Public | cannot | PATCH  | fictive | R         | inherited | [401, 405, 415] |
 
   Scenario Outline: <agent> <result> <method> a <type> resource, when Bob has <container> access to the container and <resource> access to the resource
-    * def testResource = utils.getResource(container, resource, type)
+    * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
     When method <method>
