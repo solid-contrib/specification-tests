@@ -1,5 +1,9 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.17
+* Fix use of functions from shared features to new Karate version.
+* Add tests for the ability to store an RDF document with named graphs (quads) in it.
+
 ## Release 0.0.16
 * Set default WAC spec to the latest published version at https://solidproject.org/TR/wac.
 
