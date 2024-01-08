@@ -73,6 +73,12 @@ Use the script with the `-d` option to use the local tests:
 ```shell
 ./run.sh -d . css
 ```
+
+## Tips for CSS
+For testing CSS, the run script has the ability to register test accounts on a fresh server installation. It depends on 
+node 18+ being available. It calls `clientCredentials.js` to add the required client ids and secrets to a temporary env
+file.
+
 ## Creating a script for a CI workflow
 If you just want to run tests against a single test subject, for example in a CI workflow, you can create a script such
 as this one which will run the tests embedded in the latest published CTH image:
