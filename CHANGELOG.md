@@ -1,5 +1,9 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.18
+* Update run.sh to support CSS 7.
+* Resolve location headers against base URL before using them in case they are relative.
+
 ## Release 0.0.17
 * Fix use of functions from shared features to new Karate version.
 * Add tests for the ability to store an RDF document with named graphs (quads) in it.
