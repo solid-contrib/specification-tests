@@ -29,22 +29,22 @@ setup_css() {
   mkdir -p config
   cat > ./config/css-config.json <<EOF
 {
-  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^5.0.0/components/context.jsonld",
+  "@context": "https://linkedsoftwaredependencies.org/bundles/npm/@solid/community-server/^7.0.0/components/context.jsonld",
   "import": [
+    "css:config/app/init/static-root.json",
     "css:config/app/main/default.json",
-    "css:config/app/init/initialize-prefilled-root.json",
-    "css:config/app/setup/optional.json",
     "css:config/app/variables/default.json",
     "css:config/http/handler/default.json",
-    "css:config/http/middleware/websockets.json",
-    "css:config/http/server-factory/https-websockets.json",
+    "css:config/http/middleware/default.json",
+    "css:config/http/notifications/all.json",
+    "css:config/http/server-factory/https.json",
     "css:config/http/static/default.json",
     "css:config/identity/access/public.json",
     "css:config/identity/email/default.json",
     "css:config/identity/handler/default.json",
+    "css:config/identity/oidc/default.json",
     "css:config/identity/ownership/token.json",
     "css:config/identity/pod/static.json",
-    "css:config/identity/registration/enabled.json",
     "css:config/ldp/authentication/dpop-bearer.json",
     "css:config/ldp/authorization/webacl.json",
     "css:config/ldp/handler/default.json",
@@ -53,6 +53,7 @@ setup_css() {
     "css:config/ldp/modes/default.json",
     "css:config/storage/backend/memory.json",
     "css:config/storage/key-value/resource-store.json",
+    "css:config/storage/location/pod.json",
     "css:config/storage/middleware/default.json",
     "css:config/util/auxiliary/acl.json",
     "css:config/util/identifiers/suffix.json",
@@ -62,13 +63,6 @@ setup_css() {
     "css:config/util/resource-locker/memory.json",
     "css:config/util/variables/default.json"
   ],
-  "@graph": [
-    {
-      "comment": [
-        "Adds CLI options --httpsKey and --httpsCert and uses those to start an HTTPS server."
-      ]
-    },
-  ]
 }
 EOF
 
@@ -85,7 +79,7 @@ EOF
   docker run -d --name=server --network=testnet --env NODE_TLS_REJECT_UNAUTHORIZED=0 \
     -v "$(pwd)"/config:/config \
     -v "$(pwd)"/certs:/certs \
-    -p 443:443 -it solidproject/community-server:5 \
+    -p 443:443 -it solidproject/community-server:7 \
     -c /config/css-config.json \
     --httpsKey=/certs/server.key --httpsCert=/certs/server.cert \
     --port=443 --baseUrl=https://server/
@@ -96,6 +90,10 @@ EOF
     sleep 1
   done
   echo 'CSS is running'
+
+  echo 'Creating client credentials'
+  cp css.env css-creds.env
+  NODE_TLS_REJECT_UNAUTHORIZED=0 node createCredentials.js https://server >> css-creds.env
 }
 
 stop_css() {
@@ -171,7 +169,7 @@ shift
 
 echo "Running tests on $subject and reporting to $cwd/reports/$subject"
 
-dockerargs+=('-v' "$cwd/reports/$outdir:/reports" "--env-file=$envfile")
+dockerargs+=('-v' "$cwd/reports/$outdir:/reports")
 if ! [[ "$*" == *"--target="* ]]; then
   harnessargs+=("--target=https://github.com/solid/conformance-test-harness/$subject")
 fi
@@ -183,7 +181,10 @@ mkdir -p reports/$subject
 if [ $subject == "css" ]
 then
   setup_css
-  dockerargs+=('--network=testnet')
+  dockerargs+=('--env-file=css-creds.env' '--network=testnet')
+  harnessargs+=('--skip-teardown')
+else
+  dockerargs+=('--env-file=$envfile')
 fi
 
 # optionally pull published CTH image
