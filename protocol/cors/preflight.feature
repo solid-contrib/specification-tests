@@ -26,7 +26,7 @@ Feature: Server must support HTTP OPTIONS for CORS preflight requests
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type'
     When method OPTIONS
     Then match [301, 308] contains responseStatus
-    * def location = karate.response.headerValues('location')[0]
+    * def location = resolveUri(testContainer.url, karate.response.headerValues('location')[0])
 
     Given url location
     And header Origin = 'https://tester'

@@ -184,7 +184,7 @@ then
   dockerargs+=('--env-file=css-creds.env' '--network=testnet')
   harnessargs+=('--skip-teardown')
 else
-  dockerargs+=('--env-file=$envfile')
+  dockerargs+=("--env-file=$envfile")
 fi
 
 # optionally pull published CTH image
