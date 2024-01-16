@@ -9,12 +9,12 @@ Feature: Server must implement the CORS protocol for simple requests
 
   Scenario Outline: Simple container request: <method> request returns access control headers
     Given url testContainer.url
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And headers <headers>
     * <body>
     When method <method>
     Then match <statuses> contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     Examples:
@@ -25,12 +25,12 @@ Feature: Server must implement the CORS protocol for simple requests
 
   Scenario Outline: Simple resource request: <method> request returns access control headers
     Given url resource.url
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And headers <headers>
     * <body>
     When method <method>
     Then match <statuses> contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     Examples:
@@ -41,12 +41,12 @@ Feature: Server must implement the CORS protocol for simple requests
   Scenario Outline: Requests container with credentials: <method> request returns access control headers
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('<method>', testContainer.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And headers <headers>
     * <body>
     When method <method>
     Then match <statuses> contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     # Check Vary on GET/HEAD requests only
@@ -60,12 +60,12 @@ Feature: Server must implement the CORS protocol for simple requests
   Scenario Outline: Requests resource with credentials: <method> request returns access control headers
     Given url resource.url
     And headers clients.alice.getAuthHeaders('<method>', resource.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And headers <headers>
     * <body>
     When method <method>
     Then match <statuses> contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     And match header Vary contains 'Origin'

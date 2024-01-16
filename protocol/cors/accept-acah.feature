@@ -8,7 +8,7 @@ Feature: Server should explicitly list Accept under Access-Control-Allow-Headers
   Scenario: OPTIONS request doesn't return Accept in Access-Control-Allow-Headers for GET pre-flight if not requested
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('OPTIONS', testContainer.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Access-Control-Request-Method = 'GET'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type'
     When method OPTIONS
@@ -19,7 +19,7 @@ Feature: Server should explicitly list Accept under Access-Control-Allow-Headers
   Scenario: OPTIONS request returns Accept in Access-Control-Allow-Headers for POST pre-flight
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('OPTIONS', testContainer.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Access-Control-Request-Method = 'POST'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type, Accept'
     When method OPTIONS
@@ -30,7 +30,7 @@ Feature: Server should explicitly list Accept under Access-Control-Allow-Headers
   Scenario: OPTIONS request returns Accept in Access-Control-Allow-Headers for GET pre-flight with long Accept
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('OPTIONS', testContainer.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Access-Control-Request-Method = 'GET'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type, Accept'
     When method OPTIONS

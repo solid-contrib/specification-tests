@@ -9,12 +9,12 @@ Feature: Server must respond to requests sending Origin with the appropriate Acc
 
   Scenario Outline: Simple request: <method> request returns access control headers
     Given url testContainer.url
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And headers <headers>
     * <body>
     When method <method>
     Then match <statuses> contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     Examples:
       | method | headers!                       | body            | statuses |
       | GET    | {Accept: 'text/turtle'}        | def ignore = 1  | [401]    |
@@ -24,12 +24,12 @@ Feature: Server must respond to requests sending Origin with the appropriate Acc
   Scenario Outline: Requests with credentials: <method> request returns access control headers
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('<method>', testContainer.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And headers <headers>
     * <body>
     When method <method>
     Then match <statuses> contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     Examples:
       | method | headers!                       | body            | statuses             |
       | GET    | {Accept: 'text/turtle'}        | def ignore = 1  | [200]                |

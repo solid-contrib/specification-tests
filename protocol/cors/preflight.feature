@@ -5,12 +5,12 @@ Feature: Server must support HTTP OPTIONS for CORS preflight requests
 
   Scenario: OPTIONS request returns headers for pre-flight check
     Given url testContainer.url
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Access-Control-Request-Method = 'POST'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type'
     When method OPTIONS
     Then match [200, 204] contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     And match header Access-Control-Allow-Methods contains 'POST'
     And match header Access-Control-Allow-Headers contains 'X-CUSTOM'
     And match header Access-Control-Allow-Headers contains 'Content-Type'
@@ -21,7 +21,7 @@ Feature: Server must support HTTP OPTIONS for CORS preflight requests
   @http-redirect
   Scenario: OPTIONS request returns headers for pre-flight check after redirect from http
     Given url testContainer.url.replace(/^https:/, 'http:')
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Access-Control-Request-Method = 'POST'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type'
     When method OPTIONS
@@ -29,12 +29,12 @@ Feature: Server must support HTTP OPTIONS for CORS preflight requests
     * def location = resolveUri(testContainer.url, karate.response.headerValues('location')[0])
 
     Given url location
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Access-Control-Request-Method = 'POST'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type'
     When method OPTIONS
     Then match [200, 204] contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     And match header Access-Control-Allow-Methods contains 'POST'
     And match header Access-Control-Allow-Headers contains 'X-CUSTOM'
     And match header Access-Control-Allow-Headers contains 'Content-Type'
