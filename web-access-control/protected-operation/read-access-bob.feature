@@ -57,7 +57,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/turtle'
     And request '@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. <> rdfs:comment "Bob added this.".'
-    And retry until match <status> contains responseStatus
+    And retry until utils.includesExpectedStatus(responseStatus, <status>)
     When method <method>
     Examples:
       | agent  | result | method | type      | container | resource  | status     |
@@ -109,7 +109,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/plain'
     And request "Bob's text"
-    And retry until match <status> contains responseStatus
+    And retry until utils.includesExpectedStatus(responseStatus, <status>)
     When method <method>
     Examples:
       | agent  | result | method | type    | container | resource  | status          |
@@ -136,7 +136,7 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
-    And retry until match <status> contains responseStatus
+    And retry until utils.includesExpectedStatus(responseStatus, <status>)
     When method <method>
     Examples:
       | agent  | result | method | type      | container | resource  | status     |
