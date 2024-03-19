@@ -58,7 +58,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = requestData.contentType
     And request requestData.requestBody
-    And retry until <writeStatus> contains responseStatus
+    And retry until match <writeStatus> contains responseStatus
     When method <method>
     # Server may return payload with information about the operation e.g. "Created" so check it hasn't leaked the data which was PUT
     And string responseString = response
@@ -94,7 +94,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = requestData.contentType
     And request requestData.requestBody
-    And retry until <writeStatus> contains responseStatus
+    And retry until match <writeStatus> contains responseStatus
     When method <method>
     # Server may return payload with information about the operation e.g. "Created" so check it hasn't leaked the data which was PUT
     And string responseString = response
@@ -123,7 +123,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     * def testResource = utils.createResource(container, resource, type, 'authenticated')
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
-    And retry until <status> contains responseStatus
+    And retry until match <status> contains responseStatus
     When method <method>
     Examples:
       | agent  | result | method | type      | container | resource  | status               |
