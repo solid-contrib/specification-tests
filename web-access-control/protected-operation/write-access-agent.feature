@@ -154,4 +154,5 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
       | Public | cannot | DELETE | fictive   | WAC       | inherited | [401]                |
       | Public | cannot | DELETE | rdf       | no        | WAC       | [401]                |
       | Public | cannot | DELETE | rdf       | WAC       | inherited | [401]                |
-      | Public | cannot | DELETE | container | no        | WAC       | [401]
+      | Public | cannot | DELETE | container | no        | WAC       | [401]                |
+      | Public | cannot | DELETE | container | WAC       | inherited | [401]                |
