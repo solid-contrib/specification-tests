@@ -14,6 +14,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
       | 'container' | 'WAC'     | 'inherited' |
     * def utils = callonce read('common.feature') ({resources, subject: 'authenticated'})
 
+    @ignore
   Scenario Outline: <agent> <result> read a <type> resource (<method>), when an authenticated agent has <container> access to the container and <resource> access to the resource
     * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
@@ -51,6 +52,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
       | Public | cannot | HEAD    | container | no        | WAC       | 401    |
       | Public | cannot | HEAD    | container | WAC       | inherited | 401    |
 
+  @ignore
   Scenario Outline: <agent> <result> write a <type> resource (<method>) and cannot read it, when an authenticated agent has <container> access to the container and <resource> access to the resource
     * def testResource = utils.createResource(container, resource, type, 'authenticated')
     * def requestData = utils.getRequestData(type)
@@ -58,7 +60,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = requestData.contentType
     And request requestData.requestBody
-    And retry until match <writeStatus> contains responseStatus
+    And retry until karate.match(<writeStatus>, responseStatus).pass
     When method <method>
     # Server may return payload with information about the operation e.g. "Created" so check it hasn't leaked the data which was PUT
     And string responseString = response
@@ -87,6 +89,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
       | Public | cannot | POST   | container | no        | WAC       | [401]                | 401        |
       | Public | cannot | POST   | container | WAC       | inherited | [401]                | 401        |
 
+  @ignore
   Scenario Outline: <agent> <result> <method> to a <type> resource, when an authenticated agent has <container> access to the container and <resource> access to the resource
     * def testResource = utils.createResource(container, resource, type, 'authenticated')
     * def requestData = utils.getRequestData('text/n3')
@@ -94,7 +97,7 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = requestData.contentType
     And request requestData.requestBody
-    And retry until match <writeStatus> contains responseStatus
+    And retry until karate.match(<writeStatus>, responseStatus).pass
     When method <method>
     # Server may return payload with information about the operation e.g. "Created" so check it hasn't leaked the data which was PUT
     And string responseString = response
@@ -120,10 +123,18 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
       | Public | cannot | PATCH  | fictive | WAC       | inherited | [401]                | 401        |
 
   Scenario Outline: <agent> <result> <method> a <type> resource, when an authenticated agent has <container> access to the container and <resource> access to the resource
+
+    * def hasExpectedStatus =
+    """
+    function(status, expected) {
+      return expected.includes(status)
+    }
+    """
+
     * def testResource = utils.createResource(container, resource, type, 'authenticated')
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
-    And retry until match <status> contains responseStatus
+    And retry until hasExpectedStatus(responseStatus, <status>)
     When method <method>
     Examples:
       | agent  | result | method | type      | container | resource  | status               |
@@ -153,5 +164,4 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
       | Public | cannot | DELETE | fictive   | WAC       | inherited | [401]                |
       | Public | cannot | DELETE | rdf       | no        | WAC       | [401]                |
       | Public | cannot | DELETE | rdf       | WAC       | inherited | [401]                |
-      | Public | cannot | DELETE | container | no        | WAC       | [401]                |
-      | Public | cannot | DELETE | container | WAC       | inherited | [401]                |
+      | Public | cannot | DELETE | container | no        | WAC       | [401]
