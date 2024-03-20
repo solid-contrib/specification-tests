@@ -9,6 +9,12 @@ Scenario:
         return agentLowerCase !== 'public' ? clients[agentLowerCase].getAuthHeaders(method, url) : {}
       }
     """
+  * def includesExpectedStatus =
+    """
+      function (actual, expected) {
+        return expected.includes(actual);
+      }
+    """
   * def getRequestData =
     """
       function (type) {

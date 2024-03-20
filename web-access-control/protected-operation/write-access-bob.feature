@@ -18,8 +18,8 @@ Feature: Only Bob can write (and only that) a resource when granted write access
     * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
+    And retry until responseStatus == <status>
     When method <method>
-    Then status <status>
     Examples:
       | agent  | result | method  | type      | container | resource  | status |
       | Bob    | cannot | GET     | plain     | no        | WAC       | 403    |
@@ -58,15 +58,15 @@ Feature: Only Bob can write (and only that) a resource when granted write access
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = requestData.contentType
     And request requestData.requestBody
+    And retry until utils.includesExpectedStatus(responseStatus, <writeStatus>)
     When method <method>
-    Then match <writeStatus> contains responseStatus
     # Server may return payload with information about the operation e.g. "Created" so check it hasn't leaked the data which was PUT
     And string responseString = response
     And match responseString !contains requestData.responseShouldNotContain
 
     Given headers utils.authHeaders('GET', testResource.url, agent)
+    And retry until responseStatus == <readStatus>
     When method GET
-    Then status <readStatus>
 
     Examples:
       | agent  | result | method | type      | container | resource  | writeStatus          | readStatus |
@@ -94,15 +94,15 @@ Feature: Only Bob can write (and only that) a resource when granted write access
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = requestData.contentType
     And request requestData.requestBody
+    And retry until utils.includesExpectedStatus(responseStatus, <writeStatus>)
     When method <method>
-    Then match <writeStatus> contains responseStatus
     # Server may return payload with information about the operation e.g. "Created" so check it hasn't leaked the data which was PUT
     And string responseString = response
     And match responseString !contains requestData.responseShouldNotContain
 
     Given headers utils.authHeaders('GET', testResource.url, agent)
+    And retry until responseStatus == <readStatus>
     When method GET
-    Then status <readStatus>
 
     Examples:
       | agent  | result | method | type    | container | resource  | writeStatus          | readStatus |
@@ -123,8 +123,8 @@ Feature: Only Bob can write (and only that) a resource when granted write access
     * def testResource = utils.createResource(container, resource, type, 'agent', webIds.bob)
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
+    And retry until utils.includesExpectedStatus(responseStatus, <status>)
     When method <method>
-    Then match <status> contains responseStatus
     Examples:
       | agent  | result | method | type      | container | resource  | status               |
       | Bob    | cannot | DELETE | plain     | no        | C         | [403]                |

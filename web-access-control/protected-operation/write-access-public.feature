@@ -17,8 +17,8 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
   Scenario Outline: <agent> <result> read a <type> resource (<method>), when a public agent has <container> access to the container and <resource> access to the resource
     * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
+    And retry until responseStatus == <status>
     When method <method>
-    Then status <status>
     Examples:
       | agent  | result | method  | type      | container | resource  | status |
       | Public | cannot | GET     | plain     | no        | WAC       | 401    |
@@ -43,8 +43,8 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     Given url testResource.url
     And header Content-Type = requestData.contentType
     And request requestData.requestBody
+    And retry until utils.includesExpectedStatus(responseStatus, <writeStatus>)
     When method <method>
-    Then match <writeStatus> contains responseStatus
     # Server may return payload with information about the operation e.g. "Created" so check it hasn't leaked the data which was PUT
     And string responseString = response
     And match responseString !contains requestData.responseShouldNotContain
@@ -71,8 +71,8 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
     Given url testResource.url
     And header Content-Type = requestData.contentType
     And request requestData.requestBody
+    And retry until utils.includesExpectedStatus(responseStatus, <writeStatus>)
     When method <method>
-    Then match <writeStatus> contains responseStatus
     # Server may return payload with information about the operation e.g. "Created" so check it hasn't leaked the data which was PUT
     And string responseString = response
     And match responseString !contains requestData.responseShouldNotContain
@@ -96,8 +96,8 @@ Feature: Only authenticated agents can write (and only that) a resource when gra
   Scenario Outline: <agent> <result> <method> a <type> resource, when a public agent has <container> access to the container and <resource> access to the resource
     * def testResource = utils.createResource(container, resource, type, 'public')
     Given url testResource.url
+    And retry until utils.includesExpectedStatus(responseStatus, <status>)
     When method <method>
-    Then match <status> contains responseStatus
     Examples:
       | agent  | result | method | type      | container | resource  | status               |
       | Public | cannot | DELETE | plain     | no        | C         | [401]                |

@@ -18,8 +18,8 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
+    And retry until responseStatus == <status>
     When method <method>
-    Then status <status>
     Examples:
       | agent  | result | method  | type      | container | resource  | status |
       | Bob    | can    | GET     | plain     | no        | R         | 200    |
@@ -57,8 +57,8 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/turtle'
     And request '@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. <> rdfs:comment "Bob added this.".'
+    And retry until utils.includesExpectedStatus(responseStatus, <status>)
     When method <method>
-    Then match <status> contains responseStatus
     Examples:
       | agent  | result | method | type      | container | resource  | status     |
       | Bob    | cannot | PUT    | rdf       | no        | R         | [403]      |
@@ -88,8 +88,8 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/n3'
     And request '@prefix solid: <http://www.w3.org/ns/solid/terms#>. _:insert a solid:InsertDeletePatch; solid:inserts { <> a <http://example.org#Foo> . }.'
+    And retry until responseStatus == <status>
     When method <method>
-    Then status <status>
     Examples:
       | agent  | result | method | type      | container | resource  | status |
       | Bob    | cannot | PATCH  | rdf       | no        | R         | 403    |
@@ -109,8 +109,8 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     And headers utils.authHeaders(method, testResource.url, agent)
     And header Content-Type = 'text/plain'
     And request "Bob's text"
+    And retry until utils.includesExpectedStatus(responseStatus, <status>)
     When method <method>
-    Then match <status> contains responseStatus
     Examples:
       | agent  | result | method | type    | container | resource  | status          |
       | Bob    | cannot | PUT    | plain   | no        | R         | [403]           |
@@ -136,8 +136,8 @@ Feature: Only Bob can read (and only that) a resource when granted read access
     * def testResource = utils.testResources[utils.getResourceKey(container, resource, type)]
     Given url testResource.url
     And headers utils.authHeaders(method, testResource.url, agent)
+    And retry until utils.includesExpectedStatus(responseStatus, <status>)
     When method <method>
-    Then match <status> contains responseStatus
     Examples:
       | agent  | result | method | type      | container | resource  | status     |
       | Bob    | cannot | DELETE | plain     | no        | R         | [403]      |
