@@ -1,5 +1,10 @@
 # Solid Specification Conformance Tests
 
+## Release 0.0.19
+* Set the origin in CORS tests from config so that it uses the same one.
+* Cast response to string when checking HEAD requests in CORS.
+* Add retries to authorization tests to allow for servers which propagate access policies asynchronously.
+
 ## Release 0.0.18
 * Update run.sh to support CSS 7.
 * Resolve location headers against base URL before using them in case they are relative.

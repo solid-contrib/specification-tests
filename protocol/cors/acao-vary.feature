@@ -7,10 +7,11 @@ Feature: Server returns correct Access-Control-Allow-Origin and Vary headers
   Scenario Outline: Access-Control-Allow-Origin header is set to correct origin for <method> on container
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('<method>', testContainer.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     When method <method>
     Then match <statuses> contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
+    * string response = response
     And match response <check>
     Examples:
       | method  | statuses   | check |
@@ -21,10 +22,11 @@ Feature: Server returns correct Access-Control-Allow-Origin and Vary headers
   Scenario Outline: Vary header includes Origin for <method> on container
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('<method>', testContainer.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     When method <method>
     Then match <statuses> contains responseStatus
     And match header Vary contains 'Origin'
+    * string response = response
     And match response <check>
     Examples:
       | method  | statuses   | check |
@@ -35,10 +37,11 @@ Feature: Server returns correct Access-Control-Allow-Origin and Vary headers
   Scenario Outline: Access-Control-Allow-Origin header is set to correct origin for <method> on resource
     Given url resource.url
     And headers clients.alice.getAuthHeaders('<method>', resource.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     When method <method>
     Then match <statuses> contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
+    * string response = response
     And match response <check>
     Examples:
       | method  | statuses   | check      |
@@ -49,10 +52,11 @@ Feature: Server returns correct Access-Control-Allow-Origin and Vary headers
   Scenario Outline: Vary header includes Origin for <method> on resource
     Given url resource.url
     And headers clients.alice.getAuthHeaders('<method>', resource.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     When method <method>
     Then match <statuses> contains responseStatus
     And match header Vary contains 'Origin'
+    * string response = response
     And match response <check>
     Examples:
       | method  | statuses   | check      |

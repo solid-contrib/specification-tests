@@ -7,7 +7,7 @@ Feature: Server should enumerate headers in Access-Control-Expose-Headers
   Scenario: Access-Control-Expose-Headers is present but not *
     Given url testContainer.url
     And headers clients.alice.getAuthHeaders('GET', testContainer.url)
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Accept = 'text/turtle'
     When method GET
     Then status 200

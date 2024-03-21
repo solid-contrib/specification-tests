@@ -23,8 +23,8 @@
     rdfs:comment "Access for anonymous users is not supported nor required by Solid specifications so tests that depend on this are not run."@en.
 
 <ess#test-subject-release>
-    doap:revision "2.1";
-    doap:created "2023-03-28"^^xsd:date .
+    doap:revision "2.2";
+    doap:created "2024-03-19"^^xsd:date .
 
 <css>
     a earl:Software, earl:TestSubject ;
@@ -37,8 +37,8 @@
     solid-test:skip "acp", "http-redirect" .
 
 <css#test-subject-release>
-    doap:revision "7.0.3" ;
-    doap:created "2024-01-05"^^xsd:date .
+    doap:revision "7.0.4" ;
+    doap:created "2024-02-07"^^xsd:date .
 
 <nss>
     a earl:Software, earl:TestSubject ;
@@ -51,8 +51,8 @@
     solid-test:skip "acp" .
 
 <nss#test-subject-release>
-    doap:revision "5.7.7"@en ;
-    doap:created "2023-03-17"^^xsd:date .
+    doap:revision "5.7.9"@en ;
+    doap:created "2024-03-08"^^xsd:date .
 
 <trinpod>
     a earl:Software, earl:TestSubject ;

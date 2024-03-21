@@ -6,12 +6,12 @@ Feature: Server must implement the CORS protocol for preflight requests
 
   Scenario Outline: Pre-flight CORS request for <method> request
     Given url testContainer.url
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Access-Control-Request-Method = '<method>'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type, Accept'
     When method OPTIONS
     Then match [200, 204] contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     And match header Access-Control-Allow-Methods contains '<method>'
     And match header Access-Control-Allow-Headers contains 'X-CUSTOM'
     And match header Access-Control-Allow-Headers contains 'Content-Type'
@@ -20,14 +20,14 @@ Feature: Server must implement the CORS protocol for preflight requests
     And match response == ''
 
     Given url testContainer.url
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And headers clients.alice.getAuthHeaders('<method>', testContainer.url)
     # Demonstrates the case where a long Accept header is allowed
     And header Accept = 'text/turtle;q=0.9, application/rdf+xml;q=0.8, application/n-triples;q=0.8, application/n-quads;q=0.8, text/x-nquads;q=0.8, application/trig;q=0.8, text/n3;q=0.8, application/ld+json;q=0.8, application/x-binary-rdf;q=0.8, text/plain;q=0.7'
     * <body>
     When method <method>
     Then match <statuses> contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     And match header Access-Control-Expose-Headers != null
     And match header Access-Control-Expose-Headers != '*'
     # Check Content-Type on GET request only
@@ -44,7 +44,7 @@ Feature: Server must implement the CORS protocol for preflight requests
   Scenario: OPTIONS request returns headers for pre-flight check after redirect from http
     * configure followRedirects = false
     Given url testContainer.url.replace(/^https:/, 'http:')
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Access-Control-Request-Method = 'POST'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type'
     When method OPTIONS
@@ -52,12 +52,12 @@ Feature: Server must implement the CORS protocol for preflight requests
     * def location = resolveUri(testContainer.url, karate.response.headerValues('location')[0])
 
     Given url location
-    And header Origin = 'https://tester'
+    And header Origin = config.origin
     And header Access-Control-Request-Method = 'POST'
     And header Access-Control-Request-Headers = 'X-CUSTOM, Content-Type'
     When method OPTIONS
     Then match [200, 204] contains responseStatus
-    And match header Access-Control-Allow-Origin == 'https://tester'
+    And match header Access-Control-Allow-Origin == config.origin
     And match header Access-Control-Allow-Methods contains 'POST'
     And match header Access-Control-Allow-Headers contains 'X-CUSTOM'
     And match header Access-Control-Allow-Headers contains 'Content-Type'
