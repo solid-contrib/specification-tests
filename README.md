@@ -1265,12 +1265,12 @@ prefix wac: <https://solidproject.org/TR/2021/wac-20210711#>
 .
 
 wac:access-modes
-  spec:requirementSubject spec:Server ;
+  spec:requirementSubject wac:Server ;
   spec:requirementLevel spec:MUST ;
   spec:statement "text of the requirement"@en .
 
 wac:access-objects
-  spec:requirementSubject spec:Server ;
+  spec:requirementSubject wac:Server ;
   spec:requirementLevel spec:MUST ;
   spec:statement "text of the requirement"@en .
 ```
