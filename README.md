@@ -1255,24 +1255,23 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix doap: <http://usefulinc.com/ns/doap#>
 prefix spec: <http://www.w3.org/ns/spec#>
 
-prefix wac: <https://solidproject.org/TR/2021/wac-20210711#>
+prefix sopr: <https://solidproject.org/TR/2024/protocol-20240512#>
 
-<https://solidproject.org/TR/2021/wac-20210711>
+<https://solidproject.org/TR/2024/protocol-20240512>
   a doap:Specification ;
   spec:requirement
-        wac:access-modes ,
-        wac:access-objects
-.
+    sopr:server-content-type-includes ,
+    sopr:client-content-type-includes .
 
-wac:access-modes
-  spec:requirementSubject wac:Server ;
+sopr:server-content-type-includes
+  spec:requirementSubject sopr:Server ;
   spec:requirementLevel spec:MUST ;
-  spec:statement "text of the requirement"@en .
+  spec:statement "Server MUST generate a Content-Type header field in a message that contains content."@en .
 
-wac:access-objects
-  spec:requirementSubject wac:Server ;
+sopr:client-content-type-includes
+  spec:requirementSubject sopr:Client ;
   spec:requirementLevel spec:MUST ;
-  spec:statement "text of the requirement"@en .
+  spec:statement "Clients MUST use the Content-Type HTTP header field in PUT, POST, and PATCH requests that contain content [RFC9110]."@en .
 ```
 
 The specification vocab used above is under development, but the latest version is at
