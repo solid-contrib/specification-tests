@@ -182,7 +182,7 @@
 
 <dl id="document-identifier">
   <dt>Identifier</dt>
-  <dd property="schema:identifier" lang="" xml:lang="">ea87fd81-4617-4c67-bcee-1aacffbb52ba</dd>
+  <dd property="schema:identifier" lang="" xml:lang="">985ede1b-a924-49f3-bb43-614a561525c4</dd>
 </dl>
 
 <div datatype="rdf:HTML" property="dcterms:description">
@@ -195,7 +195,7 @@
     </ul>
   </div>
 </section>
-<section about="https://github.com/solid-contrib/specification-tests/ea87fd81-4617-4c67-bcee-1aacffbb52ba#tests" id="tests" typeof="doap:Project">
+<section about="https://github.com/solid-contrib/specification-tests/985ede1b-a924-49f3-bb43-614a561525c4#tests" id="tests" typeof="doap:Project">
   <h2>Test suite</h2>
   <div datatype="rdf:HTML" property="dcterms:description">
     <dl><dt>Name</dt><dd property="doap:name" lang="" xml:lang="">Specification Tests</dd></dl>
@@ -224,9 +224,45 @@
   <li rel="dcterms:hasPart" resource="https://solidproject.org/TR/protocol">
     <details id="protocol">
       <summary><b>Specification:</b> https://solidproject.org/TR/protocol <a href="https://solidproject.org/TR/protocol"></a>
-        <span>87</span>
+        <span>80</span>
       </summary>
       <ul>
+        <li class="server">
+<details id="spec0_server-http" about="https://solidproject.org/TR/protocol#server-http" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-http <a href="https://solidproject.org/TR/protocol#server-http"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to HTTP Semantics [RFC9110].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="server">
+<details id="spec0_server-caching" about="https://solidproject.org/TR/protocol#server-caching" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-caching <a href="https://solidproject.org/TR/protocol#server-caching"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >SHOULD</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Servers SHOULD conform to HTTP Caching [RFC9111].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
         <li class="server">
 <details id="spec0_server-http-11" about="https://solidproject.org/TR/protocol#server-http-11" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-http-11 <a href="https://solidproject.org/TR/protocol#server-http-11"></a>
@@ -240,7 +276,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST conform to HTTP/1.1 Message Syntax and Routing [RFC7230] and HTTP/1.1 Semantics and Content [RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST conform to HTTP/1.1 [RFC9112].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -258,7 +294,7 @@
     <dt>Requirement level</dt>
 <dd >SHOULD</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers SHOULD conform to HTTP/2 [RFC7540].</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers SHOULD conform to HTTP/2 [RFC9113].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -294,138 +330,8 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>When both http and https URI schemes are supported, the server MUST redirect all http URIs to their https counterparts using a response with a 301 status code and a Location header.</dd></dl>
+  <dl><dt>Statement</dt><dd>When both http and https URI schemes are supported, the server MUST redirect all http URIs to their https counterparts using a response with a 301 status code and a Location header field.</dd></dl>
           <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec0_server-conditional-requests" about="https://solidproject.org/TR/protocol#server-conditional-requests" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-conditional-requests <a href="https://solidproject.org/TR/protocol#server-conditional-requests"></a>
-    <span>1</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST conform to HTTP/1.1 Conditional Requests [RFC7232].</dd></dl>
-          <table>
-            <caption>Test cases</caption>
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Implemented</th>
-            </tr>
-            </thead>
-            <tbody>
-<tr id="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#if-none-match-asterisk" about="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#if-none-match-asterisk" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Create: PUT Turtle resources to container with If-None-Match: * headers.</span>
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#if-none-match-asterisk">manifest</a>]
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/writing-resource/if-none-match-asterisk.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solidproject.org/TR/protocol#server-conditional-requests" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-            </tbody>
-          </table>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec0_server-caching" about="https://solidproject.org/TR/protocol#server-caching" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-caching <a href="https://solidproject.org/TR/protocol#server-caching"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >SHOULD</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>Servers SHOULD conform to HTTP/1.1 Caching [RFC7234].</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec0_server-range-requests" about="https://solidproject.org/TR/protocol#server-range-requests" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-range-requests <a href="https://solidproject.org/TR/protocol#server-range-requests"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MAY</dd>
-  </dl>
-  <dl><dt>Statement</dt><dd>Servers MAY conform to HTTP/1.1 Range Requests [RFC7233].</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec0_server-authentication" about="https://solidproject.org/TR/protocol#server-authentication" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-authentication <a href="https://solidproject.org/TR/protocol#server-authentication"></a>
-    <span>1</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST conform to HTTP/1.1 Authentication [RFC7235].</dd></dl>
-          <table>
-            <caption>Test cases</caption>
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Implemented</th>
-            </tr>
-            </thead>
-            <tbody>
-<tr id="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#authentication-header" about="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#authentication-header" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Test that unauthenticated users get the correct response</span>
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#authentication-header">manifest</a>]
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/authentication/header.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solidproject.org/TR/protocol#server-authentication" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#approved" rel="td:reviewStatus">Approved</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-            </tbody>
-          </table>
 </details>
 
         </li>
@@ -477,9 +383,9 @@
 
         </li>
         <li class="server">
-<details id="spec0_server-content-type" about="https://solidproject.org/TR/protocol#server-content-type" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-content-type <a href="https://solidproject.org/TR/protocol#server-content-type"></a>
-    <span>1</span>
+<details id="spec0_server-content-type-includes" about="https://solidproject.org/TR/protocol#server-content-type-includes" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-content-type-includes <a href="https://solidproject.org/TR/protocol#server-content-type-includes"></a>
+    <span>0</span>
   </summary>
   <dl>
     <dt>Requirement subject</dt>
@@ -489,43 +395,32 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Server MUST reject PUT, POST and PATCH requests without the Content-Type header with a status code of 400.</dd></dl>
-          <table>
-            <caption>Test cases</caption>
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Implemented</th>
-            </tr>
-            </thead>
-            <tbody>
-<tr id="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#content-type-reject" about="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#content-type-reject" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Server MUST reject write requests without Content-Type</span>
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#content-type-reject">manifest</a>]
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/writing-resource/content-type-reject.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solidproject.org/TR/protocol#server-content-type" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
-              </dd>
-    </dl>
+  <dl><dt>Statement</dt><dd>Server MUST generate a Content-Type header field in a message that contains content.</dd></dl>
+          <p>No test cases found.</p>
+</details>
 
-  </td>
-  <td>✔</td>
-</tr>
-            </tbody>
-          </table>
+        </li>
+        <li class="server">
+<details id="spec0_server-content-type-missing" about="https://solidproject.org/TR/protocol#server-content-type-missing" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-content-type-missing <a href="https://solidproject.org/TR/protocol#server-content-type-missing"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Server</dd>
+      </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MUST</dd>
+      </dl>
+  <dl><dt>Statement</dt><dd>Server MUST reject PUT, POST, and PATCH requests that contain content but lack the Content-Type header field, with a status code of 400.</dd></dl>
+          <p>No test cases found.</p>
 </details>
 
         </li>
         <li class="client">
-<details id="spec0_client-http-11" about="https://solidproject.org/TR/protocol#client-http-11" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-http-11 <a href="https://solidproject.org/TR/protocol#client-http-11"></a>
+<details id="spec0_client-http" about="https://solidproject.org/TR/protocol#client-http" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-http <a href="https://solidproject.org/TR/protocol#client-http"></a>
     <span>0</span>
   </summary>
   <dl>
@@ -536,43 +431,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Clients MUST conform to HTTP/1.1 Message Syntax and Routing [RFC7230] and HTTP/1.1 Semantics and Content [RFC7231].</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="client">
-<details id="spec0_client-http-2" about="https://solidproject.org/TR/protocol#client-http-2" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-http-2 <a href="https://solidproject.org/TR/protocol#client-http-2"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Client</dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MAY</dd>
-  </dl>
-  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP/2 [RFC7540].</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="client">
-<details id="spec0_client-conditional-requests" about="https://solidproject.org/TR/protocol#client-conditional-requests" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-conditional-requests <a href="https://solidproject.org/TR/protocol#client-conditional-requests"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Client</dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MAY</dd>
-  </dl>
-  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP/1.1 Conditional Requests [RFC7232].</dd></dl>
+  <dl><dt>Statement</dt><dd>Clients MUST conform to HTTP Semantics [RFC9110].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -590,32 +449,14 @@
     <dt>Requirement level</dt>
 <dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP/1.1 Caching [RFC7234].</dd></dl>
+  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP Caching [RFC9111].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
         </li>
         <li class="client">
-<details id="spec0_client-range-requests" about="https://solidproject.org/TR/protocol#client-range-requests" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-range-requests <a href="https://solidproject.org/TR/protocol#client-range-requests"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Client</dd>
-  </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MAY</dd>
-  </dl>
-  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP/1.1 Range Requests [RFC7233].</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="client">
-<details id="spec0_client-authentication" about="https://solidproject.org/TR/protocol#client-authentication" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-authentication <a href="https://solidproject.org/TR/protocol#client-authentication"></a>
+<details id="spec0_client-http-11" about="https://solidproject.org/TR/protocol#client-http-11" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-http-11 <a href="https://solidproject.org/TR/protocol#client-http-11"></a>
     <span>0</span>
   </summary>
   <dl>
@@ -626,7 +467,25 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Clients MUST conform to HTTP/1.1 Authentication [RFC7235] if it needs to access resources requiring authentication (see WebID).</dd></dl>
+  <dl><dt>Statement</dt><dd>Clients MUST conform to HTTP/1.1 [RFC9112].</dd></dl>
+          <p>No test cases found.</p>
+</details>
+
+        </li>
+        <li class="client">
+<details id="spec0_client-http-2" about="https://solidproject.org/TR/protocol#client-http-2" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-http-2 <a href="https://solidproject.org/TR/protocol#client-http-2"></a>
+    <span>0</span>
+  </summary>
+  <dl>
+    <dt>Requirement subject</dt>
+<dd>Client</dd>
+  </dl>
+  <dl>
+    <dt>Requirement level</dt>
+<dd >MAY</dd>
+  </dl>
+  <dl><dt>Statement</dt><dd>Clients MAY conform to HTTP/2 [RFC9113].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -650,8 +509,8 @@
 
         </li>
         <li class="client">
-<details id="spec0_client-content-type" about="https://solidproject.org/TR/protocol#client-content-type" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-content-type <a href="https://solidproject.org/TR/protocol#client-content-type"></a>
+<details id="spec0_client-content-type-includes" about="https://solidproject.org/TR/protocol#client-content-type-includes" >
+  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#client-content-type-includes <a href="https://solidproject.org/TR/protocol#client-content-type-includes"></a>
     <span>0</span>
   </summary>
   <dl>
@@ -662,7 +521,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Clients MUST use the Content-Type HTTP header in PUT, POST and PATCH requests [RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd>Clients MUST use the Content-Type HTTP header field in PUT, POST, and PATCH requests that contain content [RFC9110].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -828,7 +687,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST advertise the storage resource by including the HTTP Link header with rel=&quot;type&quot; targeting http://www.w3.org/ns/pim/space#Storage when responding to storage’s request URI.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST advertise the storage resource by including the HTTP Link header field with rel=&quot;type&quot; targeting http://www.w3.org/ns/pim/space#Storage when responding to storage’s request URI.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -891,7 +750,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST include the Link header with rel=&quot;http://www.w3.org/ns/solid/terms#storageDescription&quot; targeting the URI of the storage description resource in the response of HTTP GET, HEAD and OPTIONS requests targeting a resource in a storage.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST include the Link header field with rel=&quot;http://www.w3.org/ns/solid/terms#storageDescription&quot; targeting the URI of the storage description resource in the response of HTTP GET, HEAD and OPTIONS requests targeting a resource in a storage.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -945,7 +804,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>When a server wants to advertise the owner of a storage, the server MUST include the Link header with rel=&quot;http://www.w3.org/ns/solid/terms#owner&quot; targeting the URI of the owner in the response of HTTP HEAD or GET requests targeting the root container.</dd></dl>
+  <dl><dt>Statement</dt><dd>When a server wants to advertise the owner of a storage, the server MUST include the Link header field with rel=&quot;http://www.w3.org/ns/solid/terms#owner&quot; targeting the URI of the owner in the response of HTTP HEAD or GET requests targeting the root container.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1017,7 +876,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST advertise auxiliary resources associated with a subject resource by responding to HEAD and GET requests by including the HTTP Link header with the rel parameter [RFC8288].</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST advertise auxiliary resources associated with a subject resource by responding to HEAD and GET requests by including the HTTP Link header field with the rel parameter [RFC8288].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1165,53 +1024,6 @@
 
         </li>
         <li class="server">
-<details id="spec0_server-put-patch-uri-assignment" about="https://solidproject.org/TR/protocol#server-put-patch-uri-assignment" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-put-patch-uri-assignment <a href="https://solidproject.org/TR/protocol#server-put-patch-uri-assignment"></a>
-    <span>1</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>When a successful PUT or PATCH request creates a resource, the server MUST use the effective request URI to assign the URI to that resource.</dd></dl>
-          <table>
-            <caption>Test cases</caption>
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Implemented</th>
-            </tr>
-            </thead>
-            <tbody>
-<tr id="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#uri-assignment" about="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#uri-assignment" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Server assigns URI based on effective request URI</span>
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#uri-assignment">manifest</a>]
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/writing-resource/uri-assignment.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solidproject.org/TR/protocol#server-put-patch-uri-assignment" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-            </tbody>
-          </table>
-</details>
-
-        </li>
-        <li class="server">
 <details id="spec0_server-post-uri-assignment" about="https://solidproject.org/TR/protocol#server-post-uri-assignment" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-uri-assignment <a href="https://solidproject.org/TR/protocol#server-post-uri-assignment"></a>
     <span>1</span>
@@ -1259,53 +1071,6 @@
 
         </li>
         <li class="server">
-<details id="spec0_server-slug-uri-assignment" about="https://solidproject.org/TR/protocol#server-slug-uri-assignment" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-slug-uri-assignment <a href="https://solidproject.org/TR/protocol#server-slug-uri-assignment"></a>
-    <span>1</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MAY</dd>
-  </dl>
-  <dl><dt>Statement</dt><dd>Servers MAY allow clients to suggest the URI of a resource created through POST, using the HTTP Slug header as defined in [RFC5023].</dd></dl>
-          <table>
-            <caption>Test cases</caption>
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Details</th>
-              <th>Implemented</th>
-            </tr>
-            </thead>
-            <tbody>
-<tr id="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#slug-uri-assignment" about="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#slug-uri-assignment" typeof="td:TestCase">
-  <td>
-    <span property="dcterms:title">Assignment of URIs for POST requests with Slug</span>
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/solid-protocol-test-manifest.ttl#slug-uri-assignment">manifest</a>]
-    [<a href="https://github.com/solid-contrib/specification-tests/blob/main/protocol/read-write-resource/post-uri-assignment-slug.feature" rel="spec:testScript">source</a>]
-    [<a href="https://solidproject.org/TR/protocol#server-slug-uri-assignment" rel="spec:requirementReference">requirement</a>]
-  </td>
-  <td>
-    <dl>
-      <dt>Status</dt>
-      <dd>
-<a href="http://www.w3.org/2006/03/test-description#unreviewed" rel="td:reviewStatus">Unreviewed</a>
-              </dd>
-    </dl>
-
-  </td>
-  <td>✔</td>
-</tr>
-            </tbody>
-          </table>
-</details>
-
-        </li>
-        <li class="server">
 <details id="spec0_server-safe-methods" about="https://solidproject.org/TR/protocol#server-safe-methods" >
   <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-safe-methods <a href="https://solidproject.org/TR/protocol#server-safe-methods"></a>
     <span>1</span>
@@ -1318,7 +1083,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST support the HTTP GET, HEAD and OPTIONS methods [RFC7231] for clients to read resources or to determine communication options.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST support the HTTP GET, HEAD and OPTIONS methods [RFC9110] for clients to read resources or to determine communication options.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -1412,7 +1177,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>When responding to authorized requests, servers MUST indicate supported media types in the HTTP Accept-Patch [RFC5789], Accept-Post [LDP] and Accept-Put [The Accept-Put Response Header] response headers that correspond to acceptable HTTP methods listed in Allow header value in response to HTTP GET, HEAD and OPTIONS requests.</dd></dl>
+  <dl><dt>Statement</dt><dd>When responding to authorized requests, servers MUST indicate supported media types in the HTTP Accept-Patch [RFC5789], Accept-Post [LDP] and Accept-Put [The Accept-Put Response Header] response header fields that correspond to acceptable HTTP methods listed in Allow header field value in response to HTTP GET, HEAD and OPTIONS requests.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1477,7 +1242,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST allow creating new resources with a POST request to URI path ending /.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST allow creation of new resources by a POST request to a URI path ending with /.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1495,25 +1260,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST create a resource with URI path ending /{id} in container /.</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec0_server-post-container-create-container" about="https://solidproject.org/TR/protocol#server-post-container-create-container" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-container-create-container <a href="https://solidproject.org/TR/protocol#server-post-container-create-container"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST create a container with URI path ending /{id}/ in container / for requests including the HTTP Link header with rel=&quot;type&quot; targeting a valid LDP container type.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST create resources with URI paths ending with /{id} in container /.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1578,25 +1325,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>When a PUT or PATCH method request targets an auxiliary resource, the server MUST create or update it.</dd></dl>
-          <p>No test cases found.</p>
-</details>
-
-        </li>
-        <li class="server">
-<details id="spec0_server-post-slug-auxiliary-resource" about="https://solidproject.org/TR/protocol#server-post-slug-auxiliary-resource" >
-  <summary><b>Requirement:</b> https://solidproject.org/TR/protocol#server-post-slug-auxiliary-resource <a href="https://solidproject.org/TR/protocol#server-post-slug-auxiliary-resource"></a>
-    <span>0</span>
-  </summary>
-  <dl>
-    <dt>Requirement subject</dt>
-<dd>Server</dd>
-      </dl>
-  <dl>
-    <dt>Requirement level</dt>
-<dd >MUST</dd>
-      </dl>
-  <dl><dt>Statement</dt><dd>When a POST method request with the Slug header targets an auxiliary resource, the server MUST respond with the 403 status code and response body describing the error.</dd></dl>
+  <dl><dt>Statement</dt><dd>When a PUT or PATCH request targets an auxiliary resource, the server MUST create or update it.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1650,7 +1379,7 @@
     <dt>Requirement level</dt>
 <dd >MAY</dd>
   </dl>
-  <dl><dt>Statement</dt><dd>Servers MAY use the HTTP ETag header with a strong validator for RDF bearing representations in order to encourage clients to opt-in to using the If-Match header in their requests.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MAY use the HTTP ETag header field with a strong validator for RDF bearing representations in order to encourage clients to opt-in to using the If-Match header field in their requests.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1686,7 +1415,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Servers MUST indicate support of N3 Patch by listing text/n3 as a value of the Accept-Patch header [RFC5789] of relevant responses.</dd></dl>
+  <dl><dt>Statement</dt><dd>Servers MUST indicate support of N3 Patch by listing text/n3 as a field value of the Accept-Patch header field [RFC5789] of relevant responses.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1812,7 +1541,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>Server MUST exclude the DELETE method in the HTTP response header Allow in response to requests to these resources [RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd>Server MUST exclude the DELETE method in the field value of the Allow header field, in response to requests to these resources [RFC9110].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -1960,7 +1689,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>When a server creates a resource on HTTP PUT, POST or PATCH requests such that the request’s representation data encodes an RDF document [RDF11-CONCEPTS] (as determined by the Content-Type header), the server MUST accept GET requests on this resource when the value of the Accept header requests a representation in text/turtle or application/ld+json [Turtle] [JSON-LD11].</dd></dl>
+  <dl><dt>Statement</dt><dd>When a server creates an RDF source [RDF11-CONCEPTS] on HTTP PUT, POST, or PATCH requests, the server MUST satisfy GET requests on this resource when the field value of the Accept header field requests a representation in text/turtle or application/ld+json [Turtle] [JSON-LD11].</dd></dl>
   <dl>
     <dt>Additional comments</dt>
     <dd>
@@ -2051,7 +1780,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>When a PUT, POST, PATCH or DELETE method request targets a representation URL that is different than the resource URL, the server MUST respond with a 307 or 308 status code and Location header specifying the preferred URI reference.</dd></dl>
+  <dl><dt>Statement</dt><dd>When a PUT, POST, PATCH or DELETE method request targets a representation URL that is different than the resource URL, the server MUST respond with a 307 or 308 status code and Location header field specifying the preferred URI reference.</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -2177,7 +1906,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>A server MUST implement the CORS protocol [FETCH] such that, to the extent possible, the browser allows Solid apps to send any request and combination of request headers to the server, and the Solid app can read any response and response headers received from the server. If the server wishes to block access to a resource, this MUST NOT happen via CORS but MUST instead be communicated to the Solid app in the browser through HTTP status codes such as 401, 403, or 404 [RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd>A server MUST implement the CORS protocol [FETCH] such that, to the extent possible, the browser allows Solid apps to send any request and combination of request headers to the server, and the Solid app can read any response and response headers received from the server. If the server wishes to block access to a resource, this MUST NOT happen via CORS but MUST instead be communicated to the Solid app in the browser through HTTP status codes such as 401, 403, or 404 [RFC9110].</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2242,7 +1971,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>whenever a server receives an HTTP request containing a valid Origin header [RFC6454], the server MUST respond with the appropriate Access-Control-* headers as specified in the CORS protocol [FETCH].</dd></dl>
+  <dl><dt>Statement</dt><dd>whenever a server receives an HTTP request containing a valid Origin header [RFC6454], the server MUST respond with the appropriate Access-Control-* header fields as specified in the CORS protocol [FETCH].</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2289,7 +2018,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>the server MUST set the Access-Control-Allow-Origin header to the valid Origin value from the request and list Origin in the Vary header value.</dd></dl>
+  <dl><dt>Statement</dt><dd>the server MUST set the Access-Control-Allow-Origin header field value to the valid Origin header field value from the request and list Origin in the Vary header field value.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2336,7 +2065,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>The server MUST make all used response headers readable for the Solid app through Access-Control-Expose-Headers (with the possible exception of the Access-Control-* headers themselves).</dd></dl>
+  <dl><dt>Statement</dt><dd>The server MUST make all used response headers readable for the Solid app through Access-Control-Expose-Headers (with the possible exception of the Access-Control-* header fields themselves).</dd></dl>
           <p>No test cases found.</p>
 </details>
 
@@ -2354,7 +2083,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>A server MUST also support the HTTP OPTIONS method [RFC7231] such that it can respond appropriately to CORS preflight requests.</dd></dl>
+  <dl><dt>Statement</dt><dd>A server MUST also support the HTTP OPTIONS method [RFC9110] such that it can respond appropriately to CORS preflight requests.</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2401,7 +2130,7 @@
     <dt>Requirement level</dt>
 <dd >SHOULD</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>servers SHOULD explicitly enumerate all used response headers under Access-Control-Expose-Headers rather than resorting to *, which does not cover all cases (such as credentials mode set to include).</dd></dl>
+  <dl><dt>Statement</dt><dd>servers SHOULD explicitly enumerate all used response header fields under Access-Control-Expose-Headers rather than resorting to *, which does not cover all cases (such as credentials mode set to include).</dd></dl>
           <table>
             <caption>Test cases</caption>
             <thead>
@@ -2666,7 +2395,7 @@
     <dt>Requirement level</dt>
 <dd >MUST</dd>
       </dl>
-  <dl><dt>Statement</dt><dd>When an authorized HTTP GET or HEAD request targets an ACL resource without an existing representation, the server MUST respond with the 404 status code as per [RFC7231].</dd></dl>
+  <dl><dt>Statement</dt><dd>When an authorized HTTP GET or HEAD request targets an ACL resource without an existing representation, the server MUST respond with the 404 status code as per [RFC9110].</dd></dl>
           <p>No test cases found.</p>
 </details>
 
