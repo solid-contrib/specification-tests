@@ -118,7 +118,7 @@ then
 fi
 
 dockerimage='solidproject/conformance-test-harness'
-dockerargs=('-i' '--rm')
+dockerargs=('-i' '--rm' '--user' "$(id -u):$(id -g)")
 cwd=$(pwd)
 harnessargs=('--output=/reports')
 
@@ -174,8 +174,9 @@ if ! [[ "$*" == *"--target="* ]]; then
   harnessargs+=("--target=https://github.com/solid/conformance-test-harness/$subject")
 fi
 
-# ensure report directory exists
+# ensure report and target directories exist
 mkdir -p reports/$subject
+mkdir -p target
 
 # optionally start CSS
 if [ $subject == "css" ]
